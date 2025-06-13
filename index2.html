@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para minha Bianca 💕</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .heart-float {
+            position: fixed;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; transform: scale(1); }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(0); opacity: 0; }
+        }
+        
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #d63384;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .love-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            padding: 2rem;
+            margin: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideIn 1s ease-out forwards;
+        }
+        
+        .love-card:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+        
+        .love-card:nth-child(odd) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .nickname {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin: 0.25rem;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nickname:hover {
+            transform: scale(1.1) rotate(2deg);
+        }
+        
+        .love-message {
+            font-size: 1.2rem;
+            color: #6c5ce7;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+        
+        .heart-big {
+            font-size: 3rem;
+            color: #fd79a8;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin: 1rem;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .interactive-btn {
+            background: linear-gradient(45deg, #fd79a8, #fdcb6e);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .interactive-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .surprise-message {
+            display: none;
+            background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 1.5rem;
+            color: #ffd700;
+            animation: sparkle 2s ease-out forwards;
+            z-index: 1000;
+        }
+        
+        @keyframes sparkle {
+            0% { opacity: 1; transform: scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1) rotate(180deg); }
+            100% { opacity: 0; transform: scale(0) rotate(360deg); }
+        }
+        
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid #ff6b9d;
+            margin: 2rem auto;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            animation: rotate 10s linear infinite;
+        }
+        
+        .declaration-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,182,193,0.1));
+            border: 2px solid #ff69b4;
+            box-shadow: 0 15px 35px rgba(255,105,180,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .declaration-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        }
+        
+        .declaration-text {
+            position: relative;
+            z-index: 2;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.2rem;
+                margin: 1rem 0;
+                line-height: 1.2;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .love-card {
+                margin: 0.5rem 0;
+                padding: 1.5rem 1rem;
+            }
+            
+            .declaration-card h2 {
+                font-size: 1.8rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .love-message {
+                font-size: 1rem;
+                line-height: 1.5;
+                margin: 0.8rem 0;
+            }
+            
+            .declaration-text .love-message {
+                font-size: 1.1rem !important;
+                text-align: left;
+                margin: 1rem 0;
+            }
+            
+            .heart-big {
+                font-size: 2.5rem;
+                margin: 0.5rem;
+            }
+            
+            .photo-frame {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+                margin: 1rem auto;
+            }
+            
+            .nickname {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+                margin: 0.2rem;
+                display: inline-block;
+            }
+            
+            .interactive-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+                margin: 0.5rem;
+                width: 80%;
+                max-width: 300px;
+            }
+            
+            .surprise-message {
+                padding: 1.5rem 1rem;
+                margin: 1rem 0;
+                font-size: 1rem;
+            }
+            
+            .surprise-message h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.8rem;
+                padding: 0 10px;
+            }
+            
+            .love-card {
+                padding: 1rem;
+                margin: 0.3rem 0;
+            }
+            
+            .declaration-card h2 {
+                font-size: 1.5rem !important;
+            }
+            
+            .love-message {
+                font-size: 0.95rem;
+            }
+            
+            .declaration-text .love-message {
+                font-size: 1rem !important;
+            }
+            
+            .heart-big {
+                font-size: 2rem;
+            }
+            
+            .photo-frame {
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
+            }
+            
+            .nickname {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.85rem;
+                margin: 0.15rem;
+            }
+            
+            .interactive-btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.95rem;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">💕 Para minha amada Bianca 💕</h1>
+        
+        <div class="love-card">
+            <div class="photo-frame">
+                💝
+            </div>
+            <h2>Meus apelidos carinhosos para você:</h2>
+            <div>
+                <span class="nickname">Bianca</span>
+                <span class="nickname">Bi</span>
+                <span class="nickname">Bibi</span>
+                <span class="nickname">Mo</span>
+                <span class="nickname">Mozi</span>
+            </div>
+        </div>
+        
+        <div class="love-card">
+            <div class="heart-big">💖</div>
+            <p class="love-message">
+                <strong>"Antes de você, eu não sabia que existia um amor que aquece a alma só de pensar na pessoa."</strong><br><br>
+                Bianca, você chegou na minha vida como um presente que eu nem sabia que precisava. 
+                Cada dia ao seu lado me ensina uma nova forma de amar, de ser feliz, de ver beleza no mundo.
+            </p>
+        </div>
+        
+        <div class="love-card">
+            <div class="heart-big">🌟</div>
+            <p class="love-message">
+                <strong>"Sua risada é o som mais lindo que existe, e quando você sorri, o mundo inteiro para para admirar."</strong><br><br>
+                Não importa se estou tendo o pior dos dias - basta você aparecer com aquele sorriso seu 
+                para tudo ficar no lugar. Você tem esse poder mágico de transformar qualquer momento comum em algo extraordinário.
+            </p>
+        </div>
+        
+        <div class="love-card">
+            <div class="heart-big">🦋</div>
+            <p class="love-message">
+                <strong>"Com você descobri que o amor verdadeiro não é só sentir borboletas no estômago - é ter certeza de que encontrei minha casa."</strong><br><br>
+                Você não é só a pessoa que eu amo. Você é meu refúgio, minha paz, minha alegria diária. 
+                É a pessoa com quem eu quero dividir todos os pequenos momentos que fazem a vida valer a pena.
+            </p>
+        </div>
+        
+        <div class="love-card">
+            <div class="heart-big">✨</div>
+            <p class="love-message">
+                <strong>"Eu te amo de um jeito que nem eu sabia que era possível amar alguém."</strong><br><br>
+                Te amo quando você acorda bagunçada, quando você ri das próprias piadas, quando você fica brava por coisas bobas. 
+                Te amo nos seus momentos mais bonitos e também nos mais simples. Te amo por inteira, sem exceções.
+            </p>
+        </div>
+        
+        <div class="love-card declaration-card">
+    <div class="heart-big">💍</div>
+    <h2 style="font-family: 'Dancing Script', cursive; color: #d63384; font-size: 2.5rem; margin-bottom: 1rem;">
+        De Coração Aberto... Pra Você
+    </h2>
+    <div class="declaration-text">
+        <p class="love-message" style="font-size: 1.3rem; color: #2d3436; font-weight: 400;">
+            <strong>Bianca... meu amor, minha paz, minha vida...</strong>
+        </p>
+        <p class="love-message" style="color: #2d3436;">
+            Durante tanto tempo eu guardei essas palavras só pra mim... esperando aquele tal "momento certo" que nunca chegava. 
+            Mas hoje eu entendi: o momento perfeito é esse… agora… porque o que eu sinto não cabe mais no peito.
+        </p>
+        <p class="love-message" style="color: #d63384; font-size: 1.4rem; font-weight: bold; text-align: center; margin: 2rem 0;">
+            💕 EU TE AMO, BIANCA! 💕
+        </p>
+        <p class="love-message" style="color: #2d3436;">
+            <strong>"Te amo de um jeito que nem imaginava ser possível antes de te ter na minha vida."</strong><br><br>
+            Te amo pelo seu olhar que me faz sentir único, pelo teu sorriso que ilumina meus dias e pelo jeito carinhoso que só você tem.  
+            Te amo porque você transforma qualquer lugar em lar… só por estar lá.  
+            Porque teu coração é enorme… e teu amor me alcança mesmo nos meus dias mais difíceis.
+        </p>
+        <p class="love-message" style="color: #2d3436;">
+            <strong>"Você fez minha vida ganhar cor, sentido e um novo jeito de sonhar."</strong><br><br>
+            Com você aprendi que amar é dividir alegrias e segurar a mão nos momentos de medo.  
+            É rir junto das coisas mais bobas, é fazer planos e mudar tudo se for preciso... só pra continuar ao seu lado.  
+            É saber que encontrei em você… minha pessoa no mundo.
+        </p>
+        <p class="love-message" style="color: #2d3436;">
+            Bi... Bibi... Mo... Mozi...  
+            Você é muito mais que o amor da minha vida...  
+            Você é minha confidente, minha parceira de todas as horas, minha melhor amiga,  
+            o abraço que eu procuro sem pensar... e o sorriso que eu quero ver todos os dias.
+        </p>
+        <p class="love-message" style="color: #d63384; font-weight: 600; font-size: 1.2rem; text-align: center; background: rgba(255,182,193,0.2); padding: 1rem; border-radius: 15px; margin: 2rem 0;">
+            <strong>"Mesmo com tudo oque ocorreu na sua família, tu confiou em mim o suficiente para me deixar se seu namorado, por esses e outros motivos que eu te amo MUITO amor"
+            </strong><br><br>
+            💍 Eu escolho você… hoje, amanhã e em todos os dias que ainda virão! 💍
+        </p>
+    </div>
+</div>
+
+                </p>
+            </div>
+        </div>
+
+        <button class="interactive-btn" onclick="showSurprise()">
+            Clique aqui para uma surpresa! ✨
+        </button>
+        
+        <div id="surprise" class="surprise-message">
+            <h3>💕 PARA VOCÊ, BIANCA! 💕</h3>
+            <p style="font-size: 1.1rem; line-height: 1.6;">
+                <strong>"Se alguém me perguntasse qual é o meu lugar favorito no mundo, eu responderia: ao seu lado."</strong><br><br>
+                
+                Obrigado(a) por existir exatamente como você é. Obrigado(a) por me deixar te amar desse jeito, 
+                com toda a intensidade que meu coração consegue sentir. Obrigado(a) por ser minha inspiração diária para ser uma pessoa melhor.<br><br>
+                
+                <strong>Você é perfeita do seu jeitinho, e eu sou a pessoa mais sortuda do mundo por poder chamar você de "minha"!</strong><br><br>
+                
+                🌟 Para sempre e sempre sua! 🌟
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Criar corações flutuantes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart-float';
+            heart.innerHTML = Math.random() > 0.5 ? '💕' : '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 3 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+        
+        // Criar corações a cada 2 segundos
+        setInterval(createHeart, 2000);
+        
+        // Função para mostrar a surpresa
+        function showSurprise() {
+            const surprise = document.getElementById('surprise');
+            surprise.style.display = 'block';
+            
+            // Criar efeito de sparkles
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createSparkle();
+                }, i * 100);
+            }
+        }
+        
+        // Criar efeito sparkle
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 2000);
+        }
+        
+        // Efeito de clique nos apelidos
+        document.querySelectorAll('.nickname').forEach(nickname => {
+            nickname.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2) rotate(' + (Math.random() * 20 - 10) + 'deg)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                }, 300);
+                
+                // Criar sparkle no clique
+                createSparkle();
+            });
+        });
+        
+        // Animação inicial de entrada
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.love-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animation = `slideIn 1s ease-out forwards`;
+                }, index * 200);
+            });
+        });
+        
+        // Efeito parallax suave no mouse (apenas para desktop)
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', function(e) {
+                const cards = document.querySelectorAll('.love-card');
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                cards.forEach((card, index) => {
+                    const speed = (index + 1) * 0.5;
+                    card.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+                });
+            });
+        }
+    </script>
+</body>
+</html>
