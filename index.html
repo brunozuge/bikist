@@ -3,669 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para minha Bianca 💕</title>
+    <title>Xingamentos Educados para Bi/Bibi/Bianca/Mo</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            color: white;
             overflow-x: hidden;
-            position: relative;
         }
-        
-        /* Fundo animado com partículas */
-        .background-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: radial-gradient(circle at 20% 50%, #1a1a2e 0%, #16213e 25%, #0f0f0f 50%);
-        }
-        
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #ff6b9d;
-            border-radius: 50%;
-            animation: float-particles 20s linear infinite;
-            opacity: 0;
-        }
-        
-        @keyframes float-particles {
-            0% { 
-                transform: translateY(100vh) translateX(0); 
-                opacity: 0; 
-            }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { 
-                transform: translateY(-10vh) translateX(100px); 
-                opacity: 0; 
-            }
-        }
-        
-        /* Efeito de luzes aurora */
-        .aurora {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(45deg, 
-                transparent 30%, 
-                rgba(255, 107, 157, 0.1) 50%, 
-                rgba(138, 43, 226, 0.1) 70%, 
-                transparent 90%);
-            animation: aurora-shift 15s ease-in-out infinite;
-        }
-        
-        @keyframes aurora-shift {
-            0%, 100% { 
-                transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(1);
-                opacity: 0.3;
-            }
-            50% { 
-                transform: translateX(50%) translateY(50%) rotate(180deg) scale(1.2);
-                opacity: 0.7;
-            }
-        }
-        
+
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 10;
-        }
-        
-        .main-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
+            padding: 2rem;
             text-align: center;
-            margin: 2rem 0 4rem 0;
-            background: linear-gradient(135deg, #ff6b9d, #ffffff, #a8e6cf);
-            background-size: 300% 300%;
+        }
+
+        .header {
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-text 8s ease infinite;
-            text-shadow: 0 0 30px rgba(255, 107, 157, 0.5);
+            animation: gradientShift 3s ease-in-out infinite alternate;
         }
-        
-        @keyframes gradient-text {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
         }
-        
-        .love-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        .main-content {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .xingo-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 3rem;
-            margin: 3rem 0;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(50px);
-            opacity: 0;
-            animation: card-entrance 1s ease-out forwards;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.8s ease-out;
         }
-        
-        .love-card:nth-child(even) { animation-delay: 0.2s; }
-        .love-card:nth-child(odd) { animation-delay: 0.4s; }
-        
-        @keyframes card-entrance {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+
+        .xingo-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-        
-        .love-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.1), 
-                transparent);
-            transition: left 0.5s ease;
+
+        .xingo-text {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
-        
-        .love-card:hover::before {
-            left: 100%;
+
+        .xingo-description {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-style: italic;
         }
-        
-        .love-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 107, 157, 0.3);
-            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.2);
+
+        .generator-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 2rem;
         }
-        
-        .photo-frame {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #ff6b9d;
-            margin: 0 auto 2rem auto;
-            background: linear-gradient(135deg, #ff6b9d, #a8e6cf);
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #feca57, #ff6b6b);
+        }
+
+        .generated-xingo {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            animation: pulse-glow 3s ease-in-out infinite;
         }
-        
-        @keyframes pulse-glow {
-            0%, 100% { 
-                box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 0 40px rgba(255, 107, 157, 0.8);
-                transform: scale(1.05);
-            }
+
+        .footer {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 2rem;
         }
-        
-        .nickname {
-            display: inline-block;
-            background: rgba(255, 107, 157, 0.2);
-            border: 1px solid rgba(255, 107, 157, 0.4);
-            color: #ff6b9d;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 500;
-            margin: 0.5rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nickname::before {
-            content: '';
+
+        .floating-emoji {
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .nickname:hover::before {
-            left: 100%;
-        }
-        
-        .nickname:hover {
-            transform: translateY(-3px) scale(1.05);
-            background: rgba(255, 107, 157, 0.3);
-            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
-        }
-        
-        .love-message {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
-            margin: 1.5rem 0;
-            font-weight: 300;
-        }
-        
-        .love-message strong {
-            color: #ff6b9d;
-            font-weight: 600;
-            font-size: 1.15rem;
-        }
-        
-        .heart-big {
-            font-size: 4rem;
-            text-align: center;
-            margin: 2rem 0;
-            animation: heart-float 4s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.6));
-        }
-        
-        @keyframes heart-float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(2deg); }
-            75% { transform: translateY(-5px) rotate(-2deg); }
-        }
-        
-        .declaration-card {
-            background: linear-gradient(135deg, 
-                rgba(255, 107, 157, 0.15) 0%, 
-                rgba(168, 230, 207, 0.1) 50%, 
-                rgba(255, 107, 157, 0.15) 100%);
-            border: 2px solid rgba(255, 107, 157, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .declaration-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                transparent 0deg,
-                rgba(255, 107, 157, 0.1) 45deg,
-                rgba(168, 230, 207, 0.1) 90deg,
-                transparent 135deg,
-                rgba(255, 107, 157, 0.1) 225deg,
-                transparent 270deg
-            );
-            animation: rotate-gradient 10s linear infinite;
-            z-index: -1;
-        }
-        
-        @keyframes rotate-gradient {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .declaration-text {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .declaration-card h2 {
-            font-family: 'Playfair Display', serif;
-            color: #ff6b9d;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
-        }
-        
-        .interactive-btn {
-            background: linear-gradient(45deg, #ff6b9d, #a8e6cf);
-            border: none;
-            color: white;
-            padding: 1.2rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            margin: 2rem auto;
-            display: block;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
-        }
-        
-        .interactive-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .interactive-btn:hover::before {
-            left: 100%;
-        }
-        
-        .interactive-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 50px rgba(255, 107, 157, 0.5);
-        }
-        
-        .surprise-message {
-            display: none;
-            background: linear-gradient(135deg, 
-                rgba(138, 43, 226, 0.2), 
-                rgba(255, 107, 157, 0.2));
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 107, 157, 0.3);
-            color: white;
-            padding: 3rem;
-            border-radius: 20px;
-            margin: 3rem 0;
-            animation: surprise-entrance 1s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        @keyframes surprise-entrance {
-            from { 
-                opacity: 0; 
-                transform: scale(0.8) rotateY(90deg);
-            }
-            to { 
-                opacity: 1; 
-                transform: scale(1) rotateY(0deg);
-            }
-        }
-        
-        .sparkle {
-            position: fixed;
-            pointer-events: none;
             font-size: 2rem;
-            color: #ffd700;
-            animation: sparkle-burst 2s ease-out forwards;
-            z-index: 1000;
-            filter: drop-shadow(0 0 10px #ffd700);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
         }
-        
-        @keyframes sparkle-burst {
-            0% { 
-                opacity: 1; 
-                transform: scale(0) rotate(0deg);
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
             }
-            50% { 
-                opacity: 1; 
-                transform: scale(1.5) rotate(180deg);
-            }
-            100% { 
-                opacity: 0; 
-                transform: scale(0) rotate(360deg);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-        
-        /* Responsividade */
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .name-selector {
+            margin-bottom: 2rem;
+        }
+
+        .name-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            color: white;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .name-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.1);
+        }
+
         @media (max-width: 768px) {
-            .main-title {
-                font-size: 2.5rem;
-                margin: 1rem 0 2rem 0;
+            .title {
+                font-size: 2rem;
             }
-            
             .container {
-                padding: 20px 15px;
-            }
-            
-            .love-card {
-                padding: 2rem 1.5rem;
-                margin: 2rem 0;
-            }
-            
-            .declaration-card h2 {
-                font-size: 2rem;
-            }
-            
-            .love-message {
-                font-size: 1rem;
-                line-height: 1.6;
-            }
-            
-            .heart-big {
-                font-size: 3rem;
-            }
-            
-            .photo-frame {
-                width: 100px;
-                height: 100px;
-                font-size: 2.5rem;
-            }
-            
-            .nickname {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.9rem;
-                margin: 0.3rem;
-            }
-            
-            .interactive-btn {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-                width: 90%;
-                max-width: 300px;
-            }
-            
-            .surprise-message {
-                padding: 2rem 1.5rem;
-                margin: 2rem 0;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 2rem;
-                padding: 0 10px;
-            }
-            
-            .love-card {
-                padding: 1.5rem 1rem;
-                margin: 1.5rem 0;
-            }
-            
-            .declaration-card h2 {
-                font-size: 1.8rem;
-            }
-            
-            .love-message {
-                font-size: 0.95rem;
-            }
-            
-            .heart-big {
-                font-size: 2.5rem;
-            }
-            
-            .photo-frame {
-                width: 80px;
-                height: 80px;
-                font-size: 2rem;
+                padding: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="background-particles"></div>
-    <div class="aurora"></div>
-    
+    <div class="floating-emoji" style="top: 10%; left: 10%;">😊</div>
+    <div class="floating-emoji" style="top: 20%; right: 15%; animation-delay: -2s;">😄</div>
+    <div class="floating-emoji" style="bottom: 20%; left: 20%; animation-delay: -4s;">😆</div>
+    <div class="floating-emoji" style="bottom: 10%; right: 10%; animation-delay: -1s;">😂</div>
+
     <div class="container">
-        <h1 class="main-title">💕 Para minha amada Bianca 💕</h1>
-        
-        <div class="love-card">
-            <div class="photo-frame">
-                💝
-            </div>
-            <h2>Meus apelidos carinhosos para você:</h2>
-            <div>
-                <span class="nickname">Bianca</span>
-                <span class="nickname">Bi</span>
-                <span class="nickname">Bibi</span>
-                <span class="nickname">Mo</span>
-                <span class="nickname">Mozi</span>
-            </div>
+        <div class="header">
+            <h1 class="title">Xingamentos Educados</h1>
+            <p class="subtitle">Para Bi, Bibi, Bianca e Mo - Com muito carinho e elegância! 💝</p>
         </div>
-        
-        <div class="love-card">
-            <div class="heart-big">💖</div>
-            <p class="love-message">
-                <strong>"Antes de você, eu não sabia que existia um amor que aquece a alma só de pensar na pessoa."</strong><br><br>
-                Bianca, você chegou na minha vida como um presente que eu nem sabia que precisava. 
-                Cada dia ao seu lado me ensina uma nova forma de amar, de ser feliz, de ver beleza no mundo.
-            </p>
-        </div>
-        
-        <div class="love-card">
-            <div class="heart-big">🌟</div>
-            <p class="love-message">
-                <strong>"Sua risada é o som mais lindo que existe, e quando você sorri, o mundo inteiro para para admirar."</strong><br><br>
-                Não importa se estou tendo o pior dos dias - basta você aparecer com aquele sorriso seu 
-                para tudo ficar no lugar. Você tem esse poder mágico de transformar qualquer momento comum em algo extraordinário.
-            </p>
-        </div>
-        
-        <div class="love-card">
-            <div class="heart-big">🦋</div>
-            <p class="love-message">
-                <strong>"Com você descobri que o amor verdadeiro não é só sentir borboletas no estômago - é ter certeza de que encontrei minha casa."</strong><br><br>
-                Você não é só a pessoa que eu amo. Você é meu refúgio, minha paz, minha alegria diária. 
-                É a pessoa com quem eu quero dividir todos os pequenos momentos que fazem a vida valer a pena.
-            </p>
-        </div>
-        
-        <div class="love-card">
-            <div class="heart-big">✨</div>
-            <p class="love-message">
-                <strong>"Eu te amo de um jeito que nem eu sabia que era possível amar alguém."</strong><br><br>
-                Te amo quando você acorda bagunçada, quando você ri das próprias piadas, quando você fica brava por coisas bobas. 
-                Te amo nos seus momentos mais bonitos e também nos mais simples. Te amo por inteira, sem exceções.
-            </p>
-        </div>
-        
-        <div class="love-card declaration-card">
-            <div class="heart-big">💍</div>
-            <h2 style="font-family: 'Playfair Display', serif; color: #ff6b9d; font-size: 2.5rem; margin-bottom: 1rem;">
-             <h2 style="font-family: 'Dancing Script', cursive; color: #d63384; font-size: 2.5rem; margin-bottom: 1rem;"> De Coração Aberto… Pra Você </h2> <div class="declaration-text"> <p class="love-message" style="font-size: 1.3rem; color: rgba(255, 255, 255, 0.95); font-weight: 400;"> <strong>Bianca… meu amor, minha calma, meu tudo…</strong> </p> <p class="love-message" style="color: rgba(255, 255, 255, 0.9);"> Faz tempo que eu carrego essas palavras dentro de mim… esperando aquele “momento certo” que eu achava que existia. Mas hoje eu entendi que o momento certo é quando o sentimento transborda… e é isso que tá acontecendo agora. Eu não consigo mais guardar só pra mim o quanto eu te amo. </p> <p class="love-message" style="color: #ff6b9d; font-size: 1.4rem; font-weight: bold; text-align: center; margin: 2rem 0;"> 💕 EU TE AMO, BIANCA! 💕 </p> <p class="love-message" style="color: rgba(255, 255, 255, 0.9);"> <strong>"Te amo de um jeito que eu nem sabia que era possível antes de você entrar na minha vida."</strong><br><br> Te amo pelo teu olhar, que sempre me traz paz… pelo teu sorriso, que muda meu dia em segundos… e pelo teu jeito, que é só teu, e que faz meu coração disparar só de lembrar de você. Te amo porque estar perto de você transforma tudo… qualquer lugar vira o melhor lugar do mundo só por você estar lá. Porque teu carinho me alcança mesmo nos dias mais difíceis, e teu amor me faz querer ser alguém melhor… por você e pra você. </p> <p class="love-message" style="color: rgba(255, 255, 255, 0.9);"> <strong>"Você fez minha vida ganhar cor, sentido e um novo jeito de sonhar."</strong><br><br> Com você eu entendi que amar é dividir os melhores momentos… mas também segurar a mão quando o mundo parece difícil. É rir das coisas mais bobas, é fazer planos, mudar de ideia e recomeçar… só pra continuar ao seu lado. É saber que encontrei em você… a minha pessoa. </p> <p class="love-message" style="color: rgba(255, 255, 255, 0.9);"> Bi… Bibi… Mo… Mozi… Você é muito mais do que o amor da minha vida… Você é minha parceira, minha confidente, minha melhor amiga, o abraço que eu procuro quando preciso de paz… e o sorriso que eu quero ver todos os dias, pra sempre. </p> <p class="love-message" style="color: #ff6b9d; font-weight: 600; font-size: 1.2rem; text-align: center; background: rgba(255, 107, 157, 0.1); padding: 1rem; border-radius: 15px; margin: 2rem 0; border: 1px solid rgba(255, 107, 157, 0.3);"> <strong>"Mesmo com tudo o que você passou na sua família… você ainda teve coragem de confiar em mim. De abrir espaço no teu coração pra que eu pudesse ser teu namorado. E é por isso, e por tantos outros motivos que talvez eu nunca consiga descrever por completo… que eu te amo tanto, de um jeito gigante, que só cresce a cada dia."</strong><br><br>
-💍 Eu escolho você… hoje, amanhã e todos os dias que ainda estão por vir. 💍
 
-</p> </div>
-                </p>
+        <div class="name-selector">
+            <button class="name-btn active" onclick="selectName('Bi')">Bi</button>
+            <button class="name-btn" onclick="selectName('Bibi')">Bibi</button>
+            <button class="name-btn" onclick="selectName('Bianca')">Bianca</button>
+            <button class="name-btn" onclick="selectName('Mo')">Mo</button>
+        </div>
+
+        <div class="main-content">
+            <div class="xingo-card" onclick="playXingo(this)">
+                <div class="xingo-text">Você é uma pessoa de refinado mau gosto! 🎭</div>
+                <div class="xingo-description">Um insulto elegante e sofisticado</div>
+            </div>
+
+            <div class="xingo-card" onclick="playXingo(this)">
+                <div class="xingo-text">Que pessoa tremendamente adorável você é! 🌹</div>
+                <div class="xingo-description">Ironia pura com carinho</div>
+            </div>
+
+            <div class="xingo-card" onclick="playXingo(this)">
+                <div class="xingo-text">Você tem uma capacidade impressionante de ser única! ✨</div>
+                <div class="xingo-description">Backhanded compliment clássico</div>
+            </div>
+
+            <div class="xingo-card" onclick="playXingo(this)">
+                <div class="xingo-text">Que criatura absolutamente peculiar! 🦄</div>
+                <div class="xingo-description">Xingamento poético e criativo</div>
             </div>
         </div>
 
-        <button class="interactive-btn" onclick="showSurprise()">
-            Clique aqui para uma surpresa! ✨
-        </button>
-        
-        <div id="surprise" class="surprise-message">
-            <h3>💕 PARA VOCÊ, BIANCA! 💕</h3>
-            <p style="font-size: 1.1rem; line-height: 1.6;">
-   Eu te amo de um jeito que é difícil explicar. Não é só aquela coisa de sentir saudade, de querer estar perto... é mais do que isso. É olhar pra você e ter certeza de que é com você que eu quero tudo. Os dias bons, os dias difíceis, as risadas sem sentido, os abraços demorados e até os silêncios confortáveis. Tudo faz sentido com você.<br><br>
+        <div class="generator-section">
+            <h3 style="margin-bottom: 1rem;">Gerador de Xingamentos Personalizados</h3>
+            <button class="btn" onclick="generateXingo()">Gerar Novo Xingamento Educado</button>
+            <div class="generated-xingo" id="generatedXingo">
+                Clique no botão para gerar um xingamento educado!
+            </div>
+        </div>
 
-Obrigado por ser você, com todas as suas manias, com esse jeito que só você tem... um jeito que me encanta mais a cada dia. Obrigado por me deixar fazer parte da tua vida, por confiar em mim e por deixar que eu te ame tanto assim.<br><br>
-
-<strong>Você é perfeita do seu jeitinho. E eu sou, de verdade, a pessoa mais feliz e grata por poder te chamar de minha.</strong><br><br>
-
-❤️ Pra sempre, com todo o meu amor. ❤️
-
-
-            </p>
+        <div class="footer">
+            <p>🎭</p>
         </div>
     </div>
 
     <script>
-        // Criar partículas flutuantes
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.animationDelay = Math.random() * 5 + 's';
-            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        let selectedName = 'Bi';
+        
+        const xingoTemplates = [
+            "Você é uma pessoa de elegância questionável, {nome}!",
+            "Que ser humano absolutamente singular você é, {nome}!",
+            "{nome}, você tem um talento natural para ser excepcional!",
+            "Minha cara {nome}, você é uma obra de arte... abstrata!",
+            "Querida {nome}, você é tão especial quanto um unicórnio!",
+            "{nome}, você possui uma personalidade verdadeiramente única!",
+            "Você é uma pessoa de gostos muito... interessantes, {nome}!",
+            "{nome}, você tem uma forma muito criativa de ver o mundo!",
+            "Que pessoa tremendamente original você é, {nome}!",
+            "{nome}, você é como um livro... que poucos conseguem entender!",
+            "Minha querida {nome}, você é uma raridade da natureza!",
+            "{nome}, você tem um charme todo seu... muito seu mesmo!",
+            "Que criatura absolutamente fascinante você é, {nome}!",
+            "{nome}, você é como uma obra de arte moderna!",
+            "Você tem uma personalidade tão rica, {nome}... em complexidade!"
+        ];
+
+        function selectName(name) {
+            selectedName = name;
+            document.querySelectorAll('.name-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function generateXingo() {
+            const template = xingoTemplates[Math.floor(Math.random() * xingoTemplates.length)];
+            const xingo = template.replace('{nome}', selectedName);
             
-            // Diferentes cores de partículas
-            const colors = ['#ff6b9d', '#a8e6cf', '#ffffff', '#ffd700'];
-            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-            
-            document.querySelector('.background-particles').appendChild(particle);
+            const element = document.getElementById('generatedXingo');
+            element.style.opacity = '0';
+            element.style.transform = 'scale(0.8)';
             
             setTimeout(() => {
-                particle.remove();
-            }, 25000);
+                element.textContent = xingo;
+                element.style.opacity = '1';
+                element.style.transform = 'scale(1)';
+                element.style.transition = 'all 0.5s ease';
+            }, 200);
         }
-        
-        // Criar partículas continuamente
-        setInterval(createParticle, 800);
-        
-        // Função para mostrar a surpresa
-        function showSurprise() {
-            const surprise = document.getElementById('surprise');
-            surprise.style.display = 'block';
-            
-            // Criar explosão de sparkles
-            for (let i = 0; i < 30; i++) {
-                setTimeout(() => {
-                    createSparkle();
-                }, i * 50);
-            }
-        }
-        
-        // Criar efeito sparkle melhorado
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            const sparkleTypes = ['✨', '⭐', '💫', '🌟'];
-            sparkle.innerHTML = sparkleTypes[Math.floor(Math.random() * sparkleTypes.length)];
-            sparkle.style.left = Math.random() * window.innerWidth + 'px';
-            sparkle.style.top = Math.random() * window.innerHeight + 'px';
-            document.body.appendChild(sparkle);
-            
+
+        function playXingo(card) {
+            card.style.transform = 'scale(0.95)';
             setTimeout(() => {
-                sparkle.remove();
-            }, 2000);
-        }
-        
-        // Efeito aprimorado nos apelidos
-        document.querySelectorAll('.nickname').forEach(nickname => {
-            nickname.addEventListener('click', function() {
-                this.style.transform = 'scale(1.15) rotate(' + (Math.random() * 10 - 5) + 'deg)';
-                
-                // Criar múltiplos sparkles
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => createSparkle(), i * 100);
-                }
-                
-                setTimeout(() => {
-                    this.style.transform = 'scale(1) rotate(0deg)';
-                }, 400);
-            });
-        });
-        
-        // Animação de entrada sequencial
-        window.addEventListener('load', function() {
-            const cards = document.querySelectorAll('.love-card');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.animation = `card-entrance 1s cubic-bezier(0.4, 0, 0.2, 1) forwards`;
-                }, index * 300);
-            });
-        });
-        
-        // Efeito parallax suave otimizado
-        if (window.innerWidth > 768) {
-            let ticking = false;
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            }, 100);
             
-            function updateParallax(e) {
-                const x = (e.clientX / window.innerWidth - 0.5) * 2;
-                const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            // Adiciona um efeito de "sparkle"
+            createSparkles(card);
+        }
+
+        function createSparkles(element) {
+            for (let i = 0; i < 5; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = '✨';
+                sparkle.style.position = 'absolute';
+                sparkle.style.left = Math.random() * element.offsetWidth + 'px';
+                sparkle.style.top = Math.random() * element.offsetHeight + 'px';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.animation = 'float 1s ease-out forwards';
+                sparkle.style.zIndex = '1000';
                 
-                const cards = document.querySelectorAll('.love-card');
-                cards.forEach((card, index) => {
-                    const speed = (index + 1) * 0.3;
-                    card.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-                });
+                element.style.position = 'relative';
+                element.appendChild(sparkle);
                 
-                ticking = false;
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.parentNode.removeChild(sparkle);
+                    }
+                }, 1000);
             }
-            
-            document.addEventListener('mousemove', function(e) {
-                if (!ticking) {
-                    requestAnimationFrame(() => updateParallax(e));
-                    ticking = true;
-                }
-            });
         }
-        
-        // Inicializar partículas imediatamente
-        for (let i = 0; i < 20; i++) {
-            setTimeout(createParticle, i * 200);
-        }
+
+        // Adiciona interação com teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                generateXingo();
+            }
+        });
     </script>
 </body>
 </html>
