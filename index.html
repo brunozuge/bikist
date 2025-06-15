@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xingamentos Educados para Bi/Bibi/Bianca/Mo</title>
+    <title>Butzke Veículos - Sua Concessionária de Confiança</title>
     <style>
         * {
             margin: 0;
@@ -12,143 +12,245 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            text-align: center;
-        }
-
+        /* Header */
         .header {
-            margin-bottom: 3rem;
-            animation: fadeInDown 1s ease-out;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
-        .title {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-            background-size: 400% 400%;
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease-in-out infinite alternate;
+            background-clip: text;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-style: italic;
-        }
-
-        .main-content {
-            display: grid;
+        .nav-menu {
+            display: flex;
+            list-style: none;
             gap: 2rem;
-            margin-bottom: 3rem;
         }
 
-        .xingo-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .xingo-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .xingo-text {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .xingo-description {
-            font-size: 1rem;
-            opacity: 0.8;
-            font-style: italic;
-        }
-
-        .generator-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+        .nav-menu a {
             color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
+            text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #feca57, #ff6b6b);
+        .nav-menu a:hover {
+            background: rgba(255, 107, 53, 0.2);
+            transform: translateY(-2px);
         }
 
-        .generated-xingo {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            min-height: 60px;
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        .footer {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            margin-top: 2rem;
-        }
-
-        .floating-emoji {
+        .hero::before {
+            content: '';
             position: absolute;
-            font-size: 2rem;
-            animation: float 6s ease-in-out infinite;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 20s ease-in-out infinite;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
         }
 
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Vehicle Grid */
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .vehicle-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .vehicle-image {
+            height: 250px;
+            background: linear-gradient(45deg, #ff9a56, #ffad56);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vehicle-image::before {
+            content: '🚗';
+            font-size: 4rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .vehicle-info {
+            padding: 2rem;
+        }
+
+        .vehicle-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .vehicle-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -160,192 +262,303 @@
             }
         }
 
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 100% 50%;
-            }
-        }
-
         @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-            }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
-        .name-selector {
-            margin-bottom: 2rem;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        .name-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            color: white;
-            margin: 0 0.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .name-btn.active {
-            background: rgba(255, 255, 255, 0.4);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: scale(1.1);
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            .title {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section h2 {
                 font-size: 2rem;
             }
-            .container {
-                padding: 1rem;
+            
+            .vehicle-grid {
+                grid-template-columns: 1fr;
             }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 1001;
         }
     </style>
 </head>
 <body>
-    <div class="floating-emoji" style="top: 10%; left: 10%;">😊</div>
-    <div class="floating-emoji" style="top: 20%; right: 15%; animation-delay: -2s;">😄</div>
-    <div class="floating-emoji" style="bottom: 20%; left: 20%; animation-delay: -4s;">😆</div>
-    <div class="floating-emoji" style="bottom: 10%; right: 10%; animation-delay: -1s;">😂</div>
-
-    <div class="container">
-        <div class="header">
-            <h1 class="title">Xingamentos Educados</h1>
-            <p class="subtitle">Para Bi, Bibi, Bianca e Mo - Com muito carinho e elegância! 💝</p>
+    <div class="scroll-indicator"></div>
+    
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">Butzke Veículos</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#veiculos">Veículos</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="name-selector">
-            <button class="name-btn active" onclick="selectName('Bi')">Bi</button>
-            <button class="name-btn" onclick="selectName('Bibi')">Bibi</button>
-            <button class="name-btn" onclick="selectName('Bianca')">Bianca</button>
-            <button class="name-btn" onclick="selectName('Mo')">Mo</button>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Butzke Veículos</h1>
+            <p>Sua concessionária de confiança há mais de 20 anos</p>
+            <a href="#veiculos" class="cta-button">Ver Veículos</a>
         </div>
+    </section>
 
-        <div class="main-content">
-            <div class="xingo-card" onclick="playXingo(this)">
-                <div class="xingo-text">Você é uma pessoa de refinado mau gosto! 🎭</div>
-                <div class="xingo-description">Um insulto elegante e sofisticado</div>
+    <section id="veiculos" class="section">
+        <h2>Nossos Veículos</h2>
+        <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 2rem;">
+            Encontre o carro perfeito para você com qualidade garantida
+        </p>
+        
+        <div class="vehicle-grid">
+            <div class="vehicle-card" data-vehicle="sedan">
+                <div class="vehicle-image"></div>
+                <div class="vehicle-info">
+                    <h3>Sedan Executivo</h3>
+                    <p>Conforto e elegância para o dia a dia. Baixa quilometragem, revisado.</p>
+                    <div class="price">R$ 45.900</div>
+                </div>
             </div>
-
-            <div class="xingo-card" onclick="playXingo(this)">
-                <div class="xingo-text">Que pessoa tremendamente adorável você é! 🌹</div>
-                <div class="xingo-description">Ironia pura com carinho</div>
+            
+            <div class="vehicle-card" data-vehicle="suv">
+                <div class="vehicle-image"></div>
+                <div class="vehicle-info">
+                    <h3>SUV Premium</h3>
+                    <p>Espaço e segurança para toda a família. Único dono, impecável.</p>
+                    <div class="price">R$ 78.500</div>
+                </div>
             </div>
-
-            <div class="xingo-card" onclick="playXingo(this)">
-                <div class="xingo-text">Você tem uma capacidade impressionante de ser única! ✨</div>
-                <div class="xingo-description">Backhanded compliment clássico</div>
+            
+            <div class="vehicle-card" data-vehicle="hatch">
+                <div class="vehicle-image"></div>
+                <div class="vehicle-info">
+                    <h3>Hatch Econômico</h3>
+                    <p>Perfeito para a cidade. Baixo consumo e fácil estacionamento.</p>
+                    <div class="price">R$ 32.900</div>
+                </div>
             </div>
-
-            <div class="xingo-card" onclick="playXingo(this)">
-                <div class="xingo-text">Que criatura absolutamente peculiar! 🦄</div>
-                <div class="xingo-description">Xingamento poético e criativo</div>
+            
+            <div class="vehicle-card" data-vehicle="pickup">
+                <div class="vehicle-image"></div>
+                <div class="vehicle-info">
+                    <h3>Pickup Robusta</h3>
+                    <p>Para trabalho e aventura. Motor potente, carroceria resistente.</p>
+                    <div class="price">R$ 65.900</div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="generator-section">
-            <h3 style="margin-bottom: 1rem;">Gerador de Xingamentos Personalizados</h3>
-            <button class="btn" onclick="generateXingo()">Gerar Novo Xingamento Educado</button>
-            <div class="generated-xingo" id="generatedXingo">
-                Clique no botão para gerar um xingamento educado!
+    <section id="sobre" class="section">
+        <h2>Sobre a Butzke</h2>
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">
+                Há mais de duas décadas no mercado automotivo, a Butzke Veículos se consolidou como referência 
+                em qualidade e confiança na venda de veículos seminovos e usados.
+            </p>
+            <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
+                Nossa missão é conectar pessoas aos seus sonhos sobre rodas, oferecendo veículos revisados, 
+                com procedência garantida e o melhor atendimento da região.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: #ff6b35;">20+</div>
+                    <div style="font-weight: bold;">Anos de Experiência</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: #ff6b35;">1000+</div>
+                    <div style="font-weight: bold;">Veículos Vendidos</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; color: #ff6b35;">100%</div>
+                    <div style="font-weight: bold;">Satisfação Garantida</div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="footer">
-            <p>🎭</p>
+    <section id="contato" class="contact section">
+        <h2>Entre em Contato</h2>
+        <p style="font-size: 1.2rem; opacity: 0.9;">
+            Estamos prontos para ajudar você a encontrar o veículo ideal
+        </p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="contact-icon">📱</div>
+                <h3>Telefone</h3>
+                <p>(51) 3456-7890</p>
+                <p>(51) 99876-5432</p>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">📧</div>
+                <h3>E-mail</h3>
+                <p>contato@butzkveiculos.com.br</p>
+                <p>vendas@butzkveiculos.com.br</p>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <h3>Endereço</h3>
+                <p>Rua das Palmeiras, 123</p>
+                <p>Centro - Candelária/RS</p>
+            </div>
+            
+            <div class="contact-item">
+                <div class="contact-icon">🕒</div>
+                <h3>Horário</h3>
+                <p>Segunda a Sexta: 8h às 18h</p>
+                <p>Sábado: 8h às 12h</p>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Butzke Veículos. Todos os direitos reservados.</p>
+        <p>Sua concessionária de confiança em Candelária/RS</p>
+    </footer>
 
     <script>
-        let selectedName = 'Bi';
-        
-        const xingoTemplates = [
-            "Você é uma pessoa de elegância questionável, {nome}!",
-            "Que ser humano absolutamente singular você é, {nome}!",
-            "{nome}, você tem um talento natural para ser excepcional!",
-            "Minha cara {nome}, você é uma obra de arte... abstrata!",
-            "Querida {nome}, você é tão especial quanto um unicórnio!",
-            "{nome}, você possui uma personalidade verdadeiramente única!",
-            "Você é uma pessoa de gostos muito... interessantes, {nome}!",
-            "{nome}, você tem uma forma muito criativa de ver o mundo!",
-            "Que pessoa tremendamente original você é, {nome}!",
-            "{nome}, você é como um livro... que poucos conseguem entender!",
-            "Minha querida {nome}, você é uma raridade da natureza!",
-            "{nome}, você tem um charme todo seu... muito seu mesmo!",
-            "Que criatura absolutamente fascinante você é, {nome}!",
-            "{nome}, você é como uma obra de arte moderna!",
-            "Você tem uma personalidade tão rica, {nome}... em complexidade!"
-        ];
-
-        function selectName(name) {
-            selectedName = name;
-            document.querySelectorAll('.name-btn').forEach(btn => {
-                btn.classList.remove('active');
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
-            event.target.classList.add('active');
-        }
+        });
 
-        function generateXingo() {
-            const template = xingoTemplates[Math.floor(Math.random() * xingoTemplates.length)];
-            const xingo = template.replace('{nome}', selectedName);
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollProgress = (scrollTop / scrollHeight) * 100;
             
-            const element = document.getElementById('generatedXingo');
-            element.style.opacity = '0';
-            element.style.transform = 'scale(0.8)';
-            
-            setTimeout(() => {
-                element.textContent = xingo;
-                element.style.opacity = '1';
-                element.style.transform = 'scale(1)';
-                element.style.transition = 'all 0.5s ease';
-            }, 200);
-        }
+            document.querySelector('.scroll-indicator').style.transform = `scaleX(${scrollProgress / 100})`;
+        });
 
-        function playXingo(card) {
-            card.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                card.style.transform = 'translateY(-10px) scale(1.02)';
-            }, 100);
-            
-            // Adiciona um efeito de "sparkle"
-            createSparkles(card);
-        }
-
-        function createSparkles(element) {
-            for (let i = 0; i < 5; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.innerHTML = '✨';
-                sparkle.style.position = 'absolute';
-                sparkle.style.left = Math.random() * element.offsetWidth + 'px';
-                sparkle.style.top = Math.random() * element.offsetHeight + 'px';
-                sparkle.style.pointerEvents = 'none';
-                sparkle.style.animation = 'float 1s ease-out forwards';
-                sparkle.style.zIndex = '1000';
-                
-                element.style.position = 'relative';
-                element.appendChild(sparkle);
-                
-                setTimeout(() => {
-                    if (sparkle.parentNode) {
-                        sparkle.parentNode.removeChild(sparkle);
-                    }
-                }, 1000);
-            }
-        }
-
-        // Adiciona interação com teclado
-        document.addEventListener('keydown', function(e) {
-            if (e.key === ' ' || e.key === 'Enter') {
-                generateXingo();
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(26, 26, 46, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)';
+                header.style.backdropFilter = 'blur(10px)';
             }
         });
+
+        // Vehicle card interactions
+        document.querySelectorAll('.vehicle-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const vehicle = this.dataset.vehicle;
+                const vehicleName = this.querySelector('h3').textContent;
+                const price = this.querySelector('.price').textContent;
+                
+                alert(`Interessado no ${vehicleName}?\n\nPreço: ${price}\n\nEntre em contato conosco para mais informações!`);
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
+        });
+
+        // Vehicle cards staggered animation
+        document.querySelectorAll('.vehicle-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease-out ${index * 0.1}s`;
+            observer.observe(card);
+        });
+
+        // Add some dynamic content loading simulation
+        setTimeout(() => {
+            const cards = document.querySelectorAll('.vehicle-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        }, 500);
+
+        // Contact form interaction (placeholder)
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const title = this.querySelector('h3').textContent;
+                if (title === 'Telefone') {
+                    alert('Ligue agora: (51) 3456-7890');
+                } else if (title === 'E-mail') {
+                    alert('Envie um e-mail: contato@butzkveiculos.com.br');
+                } else if (title === 'Endereço') {
+                    alert('Visite nossa loja: Rua das Palmeiras, 123 - Centro, Candelária/RS');
+                }
+            });
+        });
+
+        // Add floating animation to hero icons
+        setInterval(() => {
+            document.querySelectorAll('.vehicle-image::before').forEach(icon => {
+                // This is handled by CSS animations
+            });
+        }, 3000);
+
+        console.log('Butzke Veículos - Site carregado com sucesso! 🚗');
     </script>
 </body>
 </html>
