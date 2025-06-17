@@ -825,9 +825,7 @@
             // Remove active class from all screens
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
-        </script>
-</body>
-</html>
+            });
             
             // Remove active class from all screen buttons
             document.querySelectorAll('.screen-btn').forEach(btn => {
@@ -853,101 +851,4 @@
             if (activeScreen === 'home') {
                 document.querySelector('.nav-item[onclick="showScreen(\'home\')"]').classList.add('active');
             } else if (activeScreen === 'search') {
-                document.querySelector('.nav-item[onclick="showScreen(\'search\')"]').classList.add('active');
-            } else if (activeScreen === 'profile') {
-                document.querySelector('.nav-item[onclick="showScreen(\'profile\')"]').classList.add('active');
-            }
-        }
-
-        // Adicionar interatividade aos elementos
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animações de hover para cards
-            const cards = document.querySelectorAll('.medicine-card, .action-card, .profile-option');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.02)';
-                });
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                });
-            });
-
-            // Funcionalidade de busca simulada
-            const searchInputs = document.querySelectorAll('.search-bar input');
-            searchInputs.forEach(input => {
-                input.addEventListener('input', function() {
-                    if (this.value.length > 2) {
-                        // Simular carregamento de resultados
-                        console.log('Buscando por: ' + this.value);
-                    }
-                });
-            });
-
-            // Notificações simuladas
-            setTimeout(() => {
-                showNotification('💊 Lembrete: Hora do medicamento!');
-            }, 3000);
-        });
-
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: linear-gradient(135deg, #4facfe, #00f2fe);
-                color: white;
-                padding: 15px 20px;
-                border-radius: 12px;
-                box-shadow: 0 4px 20px rgba(79, 172, 254, 0.4);
-                z-index: 10000;
-                animation: slideIn 0.5s ease-out;
-                max-width: 300px;
-                font-weight: 500;
-            `;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-
-            // Adicionar estilo de animação
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
-
-            setTimeout(() => {
-                notification.style.animation = 'slideIn 0.5s ease-out reverse';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 500);
-            }, 4000);
-        }
-
-        // Simular funcionalidades do app
-        function addToFavorites() {
-            showNotification('💝 Medicamento adicionado aos favoritos!');
-        }
-
-        function setReminder() {
-            showNotification('⏰ Lembrete configurado com sucesso!');
-        }
-
-        function checkInteractions() {
-            showNotification('⚠️ Verificando interações medicamentosas...');
-        }
-
-        // Adicionar eventos aos botões
-        document.addEventListener('click', function(e) {
-            if (e.target.textContent.includes('Favoritos')) {
-                addToFavorites();
-            } else if (e.target.textContent.includes('Lembretes')) {
-                setReminder();
-            } else if (e.target.textContent.includes('Interações')) {
-                checkInteractions();
-            } else if (e.target.textContent.includes('Emergência')) {
-                showNotification('🚨 Conectando com central de emergência...');
-            }
-        });
+                document.querySelector('.nav-item[onclick="showScreen(\'search\')
