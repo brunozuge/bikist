@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xingamentos Educados para Bi/Bibi/Bianca/Mo</title>
+    <title>MediApp - Seu Guia de Medicamentos</title>
     <style>
         * {
             margin: 0;
@@ -12,341 +12,942 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: white;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .header {
-            margin-bottom: 3rem;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        .title {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease-in-out infinite alternate;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-style: italic;
-        }
-
-        .main-content {
-            display: grid;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .xingo-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .xingo-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .xingo-text {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .xingo-description {
-            font-size: 1rem;
-            opacity: 0.8;
-            font-style: italic;
-        }
-
-        .generator-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #feca57, #ff6b6b);
-        }
-
-        .generated-xingo {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
-        .footer {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            margin-top: 2rem;
+        .phone-container {
+            width: 375px;
+            height: 812px;
+            background: #000;
+            border-radius: 40px;
+            padding: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .floating-emoji {
-            position: absolute;
-            font-size: 2rem;
-            animation: float 6s ease-in-out infinite;
-            pointer-events: none;
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            display: none;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .screen.active {
+            display: flex;
+            flex-direction: column;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 100% 50%;
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-            }
-        }
-
-        .name-selector {
-            margin-bottom: 2rem;
-        }
-
-        .name-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
+        .status-bar {
+            height: 44px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
             color: white;
-            margin: 0 0.5rem;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .search-bar {
+            background: white;
+            border-radius: 25px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .search-icon {
+            color: #666;
+            font-size: 18px;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .action-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .name-btn.active {
-            background: rgba(255, 255, 255, 0.4);
-            border-color: rgba(255, 255, 255, 0.6);
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .action-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card-blue { color: #4facfe; }
+        .card-green { color: #43e97b; }
+        .card-orange { color: #fa709a; }
+        .card-purple { color: #a855f7; }
+
+        .action-card h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .action-card p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .recent-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .medicine-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .medicine-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        .medicine-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .medicine-info h4 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .medicine-info p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .bottom-nav {
+            height: 80px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .nav-item:not(.active) {
+            color: #666;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .screen-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            display: flex;
+            gap: 5px;
+        }
+
+        .screen-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .screen-btn.active {
+            background: #4facfe;
+            color: white;
+        }
+
+        .med-detail-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .med-detail-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 15px;
+        }
+
+        .detail-section {
+            background: white;
+            margin: 15px 0;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .detail-section h3 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 10px 0;
+        }
+
+        .dosage-info {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .interaction-item {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 15px;
+        }
+
+        .profile-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px;
+            background: white;
+            margin: 8px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .profile-option:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .option-icon {
+            width: 40px;
+            height: 40px;
+            background: #f3f4f6;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .emergency-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .floating-add {
+            position: absolute;
+            bottom: 100px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .floating-add:hover {
             transform: scale(1.1);
         }
 
-        @media (max-width: 768px) {
-            .title {
-                font-size: 2rem;
-            }
-            .container {
-                padding: 1rem;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .medicine-card, .action-card, .detail-section {
+            animation: fadeIn 0.5s ease-out forwards;
         }
     </style>
 </head>
 <body>
-    <div class="floating-emoji" style="top: 10%; left: 10%;">😊</div>
-    <div class="floating-emoji" style="top: 20%; right: 15%; animation-delay: -2s;">😄</div>
-    <div class="floating-emoji" style="bottom: 20%; left: 20%; animation-delay: -4s;">😆</div>
-    <div class="floating-emoji" style="bottom: 10%; right: 10%; animation-delay: -1s;">😂</div>
-
-    <div class="container">
-        <div class="header">
-            <h1 class="title">Xingamentos Educados</h1>
-            <p class="subtitle">Para Bi, Bibi, Bianca e Mo - Com muito carinho e elegância! 💝</p>
+    <div class="phone-container">
+        <!-- Controles de Navegação -->
+        <div class="screen-controls">
+            <button class="screen-btn active" onclick="showScreen('home')">Home</button>
+            <button class="screen-btn" onclick="showScreen('search')">Busca</button>
+            <button class="screen-btn" onclick="showScreen('detail')">Detalhes</button>
+            <button class="screen-btn" onclick="showScreen('profile')">Perfil</button>
         </div>
 
-        <div class="name-selector">
-            <button class="name-btn active" onclick="selectName('Bi')">Bi</button>
-            <button class="name-btn" onclick="selectName('Bibi')">Bibi</button>
-            <button class="name-btn" onclick="selectName('Bianca')">Bianca</button>
-            <button class="name-btn" onclick="selectName('Mo')">Mo</button>
+        <!-- Tela Inicial -->
+        <div class="screen active" id="home-screen">
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>MediApp</span>
+                <span>🔋 100%</span>
+            </div>
+            
+            <div class="header">
+                <h1>MediApp</h1>
+                <p>Seu guia completo de medicamentos</p>
+            </div>
+
+            <div class="content">
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Buscar medicamento...">
+                </div>
+
+                <div class="quick-actions">
+                    <div class="action-card" onclick="showScreen('search')">
+                        <span class="action-icon card-blue">💊</span>
+                        <h3>Buscar Remédio</h3>
+                        <p>Encontre informações detalhadas</p>
+                    </div>
+                    <div class="action-card">
+                        <span class="action-icon card-green">📋</span>
+                        <h3>Meus Remédios</h3>
+                        <p>Lista personalizada</p>
+                    </div>
+                    <div class="action-card">
+                        <span class="action-icon card-orange">⚠️</span>
+                        <h3>Interações</h3>
+                        <p>Verificar compatibilidade</p>
+                    </div>
+                    <div class="action-card">
+                        <span class="action-icon card-purple">⏰</span>
+                        <h3>Lembretes</h3>
+                        <p>Horários de medicação</p>
+                    </div>
+                </div>
+
+                <div class="recent-section">
+                    <h2 class="section-title">
+                        <span>📈</span>
+                        Recentes
+                    </h2>
+                    <div class="medicine-card" onclick="showScreen('detail')">
+                        <div class="medicine-icon">💊</div>
+                        <div class="medicine-info">
+                            <h4>Paracetamol 500mg</h4>
+                            <p>Analgésico • Última consulta: hoje</p>
+                        </div>
+                    </div>
+                    <div class="medicine-card">
+                        <div class="medicine-icon">🩹</div>
+                        <div class="medicine-info">
+                            <h4>Ibuprofeno 400mg</h4>
+                            <p>Anti-inflamatório • Ontem</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="emergency-btn">
+                    <span>🚨</span>
+                    Central de Emergência
+                </button>
+            </div>
+
+            <div class="bottom-nav">
+                <div class="nav-item active" onclick="showScreen('home')">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Início</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('search')">
+                    <div class="nav-icon">🔍</div>
+                    <div class="nav-label">Buscar</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">💝</div>
+                    <div class="nav-label">Favoritos</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('profile')">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Perfil</div>
+                </div>
+            </div>
         </div>
 
-        <div class="main-content">
-            <div class="xingo-card" onclick="playXingo(this)">
-                <div class="xingo-text">Você é uma pessoa de refinado mau gosto! 🎭</div>
-                <div class="xingo-description">Um insulto elegante e sofisticado</div>
+        <!-- Tela de Busca -->
+        <div class="screen" id="search-screen">
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>Buscar</span>
+                <span>🔋 100%</span>
+            </div>
+            
+            <div class="header">
+                <button class="back-btn" onclick="showScreen('home')">←</button>
+                <h1>Buscar Medicamentos</h1>
+                <p>Encontre informações completas</p>
             </div>
 
-            <div class="xingo-card" onclick="playXingo(this)">
-                <div class="xingo-text">Que pessoa tremendamente adorável você é! 🌹</div>
-                <div class="xingo-description">Ironia pura com carinho</div>
+            <div class="content">
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" placeholder="Digite o nome do medicamento..." value="Para">
+                </div>
+
+                <div class="recent-section">
+                    <h2 class="section-title">
+                        <span>🎯</span>
+                        Resultados da Busca
+                    </h2>
+                    <div class="medicine-card" onclick="showScreen('detail')">
+                        <div class="medicine-icon">💊</div>
+                        <div class="medicine-info">
+                            <h4>Paracetamol 500mg</h4>
+                            <p>Analgésico e antipirético</p>
+                        </div>
+                    </div>
+                    <div class="medicine-card">
+                        <div class="medicine-icon">💊</div>
+                        <div class="medicine-info">
+                            <h4>Paracetamol 750mg</h4>
+                            <p>Analgésico de ação prolongada</p>
+                        </div>
+                    </div>
+                    <div class="medicine-card">
+                        <div class="medicine-icon">💉</div>
+                        <div class="medicine-info">
+                            <h4>Paracetamol Gotas</h4>
+                            <p>Solução oral pediátrica</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-section">
+                    <h2 class="section-title">
+                        <span>🔥</span>
+                        Mais Buscados
+                    </h2>
+                    <div class="medicine-card">
+                        <div class="medicine-icon">🩹</div>
+                        <div class="medicine-info">
+                            <h4>Ibuprofeno</h4>
+                            <p>Anti-inflamatório</p>
+                        </div>
+                    </div>
+                    <div class="medicine-card">
+                        <div class="medicine-icon">💊</div>
+                        <div class="medicine-info">
+                            <h4>Dipirona</h4>
+                            <p>Analgésico e antipirético</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="xingo-card" onclick="playXingo(this)">
-                <div class="xingo-text">Você tem uma capacidade impressionante de ser única! ✨</div>
-                <div class="xingo-description">Backhanded compliment clássico</div>
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('home')">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Início</div>
+                </div>
+                <div class="nav-item active">
+                    <div class="nav-icon">🔍</div>
+                    <div class="nav-label">Buscar</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">💝</div>
+                    <div class="nav-label">Favoritos</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('profile')">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Perfil</div>
+                </div>
             </div>
 
-            <div class="xingo-card" onclick="playXingo(this)">
-                <div class="xingo-text">Que criatura absolutamente peculiar! 🦄</div>
-                <div class="xingo-description">Xingamento poético e criativo</div>
+            <button class="floating-add">+</button>
+        </div>
+
+        <!-- Tela de Detalhes do Medicamento -->
+        <div class="screen" id="detail-screen">
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>Detalhes</span>
+                <span>🔋 100%</span>
+            </div>
+            
+            <div class="med-detail-header">
+                <button class="back-btn" onclick="showScreen('search')">←</button>
+                <div class="med-detail-icon">💊</div>
+                <h1>Paracetamol 500mg</h1>
+                <p>Analgésico e Antipirético</p>
+            </div>
+
+            <div class="content">
+                <div class="detail-section">
+                    <h3><span>ℹ️</span> Informações Gerais</h3>
+                    <p><strong>Nome Genérico:</strong> Paracetamol</p>
+                    <p><strong>Laboratório:</strong> EMS, Medley, Neo Química</p>
+                    <p><strong>Registro ANVISA:</strong> 123.456.789</p>
+                    <p><strong>Receita:</strong> Medicamento isento de prescrição</p>
+                </div>
+
+                <div class="detail-section">
+                    <h3><span>🎯</span> Para que serve</h3>
+                    <p>O paracetamol é indicado para o tratamento de dores leves a moderadas e febre. É eficaz no alívio de dores de cabeça, dores musculares, dores nas costas e redução da febre.</p>
+                </div>
+
+                <div class="dosage-info">
+                    <h3><span>💊</span> Como tomar</h3>
+                    <p><strong>Adultos:</strong> 1 comprimido (500mg) a cada 6 horas</p>
+                    <p><strong>Dose máxima:</strong> 4g por dia (8 comprimidos)</p>
+                    <p><strong>Duração:</strong> Máximo 5 dias consecutivos</p>
+                </div>
+
+                <div class="warning-box">
+                    <h3><span>⚠️</span> Atenção</h3>
+                    <p>• Não exceder a dose recomendada<br>
+                    • Evitar o uso com álcool<br>
+                    • Consulte um médico se os sintomas persistirem</p>
+                </div>
+
+                <div class="detail-section">
+                    <h3><span>🚫</span> Contraindicações</h3>
+                    <div class="interaction-item">
+                        <strong>Alergia ao paracetamol</strong><br>
+                        <small>Reações alérgicas podem ser graves</small>
+                    </div>
+                    <div class="interaction-item">
+                        <strong>Doenças hepáticas graves</strong><br>
+                        <small>Pode agravar problemas no fígado</small>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <h3><span>🤝</span> Interações Medicamentosas</h3>
+                    <div class="interaction-item">
+                        <strong>Varfarina</strong> - Pode potencializar efeito anticoagulante
+                    </div>
+                    <div class="interaction-item">
+                        <strong>Álcool</strong> - Aumenta risco de lesão hepática
+                    </div>
+                </div>
+
+                <button class="emergency-btn">
+                    <span>💝</span>
+                    Adicionar aos Favoritos
+                </button>
+            </div>
+
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('home')">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Início</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('search')">
+                    <div class="nav-icon">🔍</div>
+                    <div class="nav-label">Buscar</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">💝</div>
+                    <div class="nav-label">Favoritos</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('profile')">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Perfil</div>
+                </div>
             </div>
         </div>
 
-        <div class="generator-section">
-            <h3 style="margin-bottom: 1rem;">Gerador de Xingamentos Personalizados</h3>
-            <button class="btn" onclick="generateXingo()">Gerar Novo Xingamento Educado</button>
-            <div class="generated-xingo" id="generatedXingo">
-                Clique no botão para gerar um xingamento educado!
+        <!-- Tela de Perfil -->
+        <div class="screen" id="profile-screen">
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>Perfil</span>
+                <span>🔋 100%</span>
             </div>
-        </div>
+            
+            <div class="profile-header">
+                <div class="profile-avatar">👤</div>
+                <h1>João Silva</h1>
+                <p>Usuário desde Janeiro 2024</p>
+            </div>
 
-        <div class="footer">
-            <p>🎭 Site criado com humor e carinho - Para diversão entre amigos! 🎭</p>
-            <p>Lembre-se: palavras têm poder, use-as com sabedoria e amor! 💜</p>
+            <div class="content">
+                <div class="profile-option">
+                    <div class="option-icon">📋</div>
+                    <div>
+                        <h4>Meus Medicamentos</h4>
+                        <p>12 medicamentos salvos</p>
+                    </div>
+                </div>
+
+                <div class="profile-option">
+                    <div class="option-icon">⏰</div>
+                    <div>
+                        <h4>Lembretes</h4>
+                        <p>3 lembretes ativos</p>
+                    </div>
+                </div>
+
+                <div class="profile-option">
+                    <div class="option-icon">📊</div>
+                    <div>
+                        <h4>Histórico</h4>
+                        <p>Ver medicamentos consultados</p>
+                    </div>
+                </div>
+
+                <div class="profile-option">
+                    <div class="option-icon">⚙️</div>
+                    <div>
+                        <h4>Configurações</h4>
+                        <p>Personalizar aplicativo</p>
+                    </div>
+                </div>
+
+                <div class="profile-option">
+                    <div class="option-icon">🩺</div>
+                    <div>
+                        <h4>Dados de Saúde</h4>
+                        <p>Alergias e condições médicas</p>
+                    </div>
+                </div>
+
+                <div class="profile-option">
+                    <div class="option-icon">📞</div>
+                    <div>
+                        <h4>Suporte</h4>
+                        <p>Ajuda e contato</p>
+                    </div>
+                </div>
+
+                <div class="profile-option">
+                    <div class="option-icon">🔒</div>
+                    <div>
+                        <h4>Privacidade</h4>
+                        <p>Políticas e termos de uso</p>
+                    </div>
+                </div>
+
+                <button class="emergency-btn" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                    <span>👨‍⚕️</span>
+                    Falar com Farmacêutico
+                </button>
+            </div>
+
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('home')">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">Início</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('search')">
+                    <div class="nav-icon">🔍</div>
+                    <div class="nav-label">Buscar</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">💝</div>
+                    <div class="nav-label">Favoritos</div>
+                </div>
+                <div class="nav-item active">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">Perfil</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        let selectedName = 'Bi';
-        
-        const xingoTemplates = [
-            "Você é uma pessoa de elegância questionável, {nome}!",
-            "Que ser humano absolutamente singular você é, {nome}!",
-            "{nome}, você tem um talento natural para ser excepcional!",
-            "Minha cara {nome}, você é uma obra de arte... abstrata!",
-            "Querida {nome}, você é tão especial quanto um unicórnio!",
-            "{nome}, você possui uma personalidade verdadeiramente única!",
-            "Você é uma pessoa de gostos muito... interessantes, {nome}!",
-            "{nome}, você tem uma forma muito criativa de ver o mundo!",
-            "Que pessoa tremendamente original você é, {nome}!",
-            "{nome}, você é como um livro... que poucos conseguem entender!",
-            "Minha querida {nome}, você é uma raridade da natureza!",
-            "{nome}, você tem um charme todo seu... muito seu mesmo!",
-            "Que criatura absolutamente fascinante você é, {nome}!",
-            "{nome}, você é como uma obra de arte moderna!",
-            "Você tem uma personalidade tão rica, {nome}... em complexidade!"
-        ];
-
-        function selectName(name) {
-            selectedName = name;
-            document.querySelectorAll('.name-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-
-        function generateXingo() {
-            const template = xingoTemplates[Math.floor(Math.random() * xingoTemplates.length)];
-            const xingo = template.replace('{nome}', selectedName);
-            
-            const element = document.getElementById('generatedXingo');
-            element.style.opacity = '0';
-            element.style.transform = 'scale(0.8)';
-            
-            setTimeout(() => {
-                element.textContent = xingo;
-                element.style.opacity = '1';
-                element.style.transform = 'scale(1)';
-                element.style.transition = 'all 0.5s ease';
-            }, 200);
-        }
-
-        function playXingo(card) {
-            card.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                card.style.transform = 'translateY(-10px) scale(1.02)';
-            }, 100);
-            
-            // Adiciona um efeito de "sparkle"
-            createSparkles(card);
-        }
-
-        function createSparkles(element) {
-            for (let i = 0; i < 5; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.innerHTML = '✨';
-                sparkle.style.position = 'absolute';
-                sparkle.style.left = Math.random() * element.offsetWidth + 'px';
-                sparkle.style.top = Math.random() * element.offsetHeight + 'px';
-                sparkle.style.pointerEvents = 'none';
-                sparkle.style.animation = 'float 1s ease-out forwards';
-                sparkle.style.zIndex = '1000';
-                
-                element.style.position = 'relative';
-                element.appendChild(sparkle);
-                
-                setTimeout(() => {
-                    if (sparkle.parentNode) {
-                        sparkle.parentNode.removeChild(sparkle);
-                    }
-                }, 1000);
-            }
-        }
-
-        // Adiciona interação com teclado
-        document.addEventListener('keydown', function(e) {
-            if (e.key === ' ' || e.key === 'Enter') {
-                generateXingo();
-            }
-        });
-    </script>
+        function showScreen(screenName) {
+            // Remove active class from all screens
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+        </script>
 </body>
 </html>
+            
+            // Remove active class from all screen buttons
+            document.querySelectorAll('.screen-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show the selected screen
+            document.getElementById(screenName + '-screen').classList.add('active');
+            
+            // Update active button
+            event.target.classList.add('active');
+            
+            // Update bottom navigation
+            updateBottomNav(screenName);
+        }
+
+        function updateBottomNav(activeScreen) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to corresponding nav item
+            if (activeScreen === 'home') {
+                document.querySelector('.nav-item[onclick="showScreen(\'home\')"]').classList.add('active');
+            } else if (activeScreen === 'search') {
+                document.querySelector('.nav-item[onclick="showScreen(\'search\')"]').classList.add('active');
+            } else if (activeScreen === 'profile') {
+                document.querySelector('.nav-item[onclick="showScreen(\'profile\')"]').classList.add('active');
+            }
+        }
+
+        // Adicionar interatividade aos elementos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animações de hover para cards
+            const cards = document.querySelectorAll('.medicine-card, .action-card, .profile-option');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // Funcionalidade de busca simulada
+            const searchInputs = document.querySelectorAll('.search-bar input');
+            searchInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    if (this.value.length > 2) {
+                        // Simular carregamento de resultados
+                        console.log('Buscando por: ' + this.value);
+                    }
+                });
+            });
+
+            // Notificações simuladas
+            setTimeout(() => {
+                showNotification('💊 Lembrete: Hora do medicamento!');
+            }, 3000);
+        });
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #4facfe, #00f2fe);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(79, 172, 254, 0.4);
+                z-index: 10000;
+                animation: slideIn 0.5s ease-out;
+                max-width: 300px;
+                font-weight: 500;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            // Adicionar estilo de animação
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.5s ease-out reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 4000);
+        }
+
+        // Simular funcionalidades do app
+        function addToFavorites() {
+            showNotification('💝 Medicamento adicionado aos favoritos!');
+        }
+
+        function setReminder() {
+            showNotification('⏰ Lembrete configurado com sucesso!');
+        }
+
+        function checkInteractions() {
+            showNotification('⚠️ Verificando interações medicamentosas...');
+        }
+
+        // Adicionar eventos aos botões
+        document.addEventListener('click', function(e) {
+            if (e.target.textContent.includes('Favoritos')) {
+                addToFavorites();
+            } else if (e.target.textContent.includes('Lembretes')) {
+                setReminder();
+            } else if (e.target.textContent.includes('Interações')) {
+                checkInteractions();
+            } else if (e.target.textContent.includes('Emergência')) {
+                showNotification('🚨 Conectando com central de emergência...');
+            }
+        });
