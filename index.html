@@ -852,3 +852,208 @@
                 document.querySelector('.nav-item[onclick="showScreen(\'home\')"]').classList.add('active');
             } else if (activeScreen === 'search') {
                 document.querySelector('.nav-item[onclick="showScreen(\'search\')
+function showScreen(screenName) {
+    // Remove active class from all screens
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+    
+    // Remove active class from all screen buttons
+    document.querySelectorAll('.screen-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Show the selected screen
+    document.getElementById(screenName + '-screen').classList.add('active');
+    
+    // Update active button
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
+    
+    // Update bottom navigation
+    updateBottomNav(screenName);
+}
+
+function updateBottomNav(activeScreen) {
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Add active class to corresponding nav item
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    switch(activeScreen) {
+        case 'home':
+            navItems.forEach(item => {
+                if (item.onclick && item.onclick.toString().includes('home')) {
+                    item.classList.add('active');
+                }
+            });
+            break;
+        case 'search':
+            navItems.forEach(item => {
+                if (item.onclick && item.onclick.toString().includes('search')) {
+                    item.classList.add('active');
+                }
+            });
+            break;
+        case 'profile':
+            navItems.forEach(item => {
+                if (item.onclick && item.onclick.toString().includes('profile')) {
+                    item.classList.add('active');
+                }
+            });
+            break;
+        default:
+            // Keep current active state for other screens
+            break;
+    }
+}
+
+// Função para buscar medicamentos
+function searchMedicine() {
+    const searchInput = document.querySelector('.search-bar input');
+    const searchTerm = searchInput.value.toLowerCase();
+    
+    if (searchTerm.length > 0) {
+        // Simula busca e vai para tela de busca
+        showScreen('search');
+        // Atualiza o campo de busca na tela de busca
+        setTimeout(() => {
+            const searchScreenInput = document.querySelector('#search-screen .search-bar input');
+            if (searchScreenInput) {
+                searchScreenInput.value = searchTerm;
+            }
+        }, 100);
+    }
+}
+
+// Função para adicionar aos favoritos
+function addToFavorites(medicineName) {
+    // Simula adição aos favoritos
+    alert(`${medicineName} foi adicionado aos seus favoritos!`);
+}
+
+// Função para emergência
+function callEmergency() {
+    if (confirm('Deseja ligar para o serviço de emergência (192 - SAMU)?')) {
+        // Em um app real, isso faria uma chamada
+        alert('Conectando com o SAMU...');
+    }
+}
+
+// Função para falar com farmacêutico
+function callPharmacist() {
+    alert('Conectando você com um farmacêutico disponível...');
+}
+
+// Event listeners para interações
+document.addEventListener('DOMContentLoaded', function() {
+    // Adicionar event listeners para busca
+    const searchInputs = document.querySelectorAll('.search-bar input');
+    searchInputs.forEach(input => {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchMedicine();
+            }
+        });
+    });
+    
+    // Event listener para botão de emergência
+    const emergencyButtons = document.querySelectorAll('.emergency-btn');
+    emergencyButtons.forEach(btn => {
+        if (btn.textContent.includes('Emergência')) {
+            btn.addEventListener('click', callEmergency);
+        } else if (btn.textContent.includes('Farmacêutico')) {
+            btn.addEventListener('click', callPharmacist);
+        } else if (btn.textContent.includes('Favoritos')) {
+            btn.addEventListener('click', () => addToFavorites('Paracetamol 500mg'));
+        }
+    });
+    
+    // Animações suaves para cards
+    const cards = document.querySelectorAll('.medicine-card, .action-card, .profile-option');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+    
+    // Floating action button
+    const floatingAdd = document.querySelector('.floating-add');
+    if (floatingAdd) {
+        floatingAdd.addEventListener('click', function() {
+            alert('Função para adicionar novo medicamento em desenvolvimento!');
+        });
+    }
+    
+    // Atualizar horário na status bar
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('pt-BR', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        document.querySelectorAll('.status-bar span:first-child').forEach(span => {
+            span.textContent = timeString;
+        });
+    }
+    
+    // Atualizar horário a cada minuto
+    updateTime();
+    setInterval(updateTime, 60000);
+    
+    // Função para simular loading
+    function showLoading(duration = 1000) {
+        const loadingDiv = document.createElement('div');
+        loadingDiv.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 9999;
+            font-size: 16px;
+        `;
+        loadingDiv.textContent = 'Carregando...';
+        document.body.appendChild(loadingDiv);
+        
+        setTimeout(() => {
+            document.body.removeChild(loadingDiv);
+        }, duration);
+    }
+    
+    // Adicionar loading nas transições de tela
+    const originalShowScreen = window.showScreen;
+    window.showScreen = function(screenName) {
+        showLoading(500);
+        setTimeout(() => {
+            originalShowScreen(screenName);
+        }, 200);
+    };
+});
+
+// Função para vibração (se suportado pelo dispositivo)
+function vibrate(pattern = [100]) {
+    if ('vibrate' in navigator) {
+        navigator.vibrate(pattern);
+    }
+}
+
+// Adicionar vibração aos cliques importantes
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('emergency-btn') || 
+        e.target.classList.contains('floating-add') ||
+        e.target.classList.contains('action-card')) {
+        vibrate([50]);
+    }
+});</script>
