@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediApp - Seu Guia de Medicamentos</title>
+    <title>MediApp - Seus Medicamentos</title>
     <style>
         * {
             margin: 0;
@@ -14,81 +14,67 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 20px;
+            align-items: center;
+            overflow: hidden;
         }
 
         .phone-container {
-            width: 375px;
-            height: 812px;
+            width: 350px;
+            height: 700px;
             background: #000;
-            border-radius: 40px;
-            padding: 8px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             position: relative;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 20px;
             overflow: hidden;
+            position: relative;
         }
 
         .screen {
+            display: none;
             width: 100%;
             height: 100%;
-            background: #f8f9fa;
-            border-radius: 32px;
-            overflow: hidden;
-            position: relative;
-            display: none;
+            flex-direction: column;
         }
 
         .screen.active {
             display: flex;
-            flex-direction: column;
-        }
-
-        .status-bar {
-            height: 44px;
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
         }
 
         .header {
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .header h1 {
-            font-size: 24px;
-            margin-bottom: 5px;
+            font-size: 20px;
+            font-weight: 600;
         }
 
-        .header p {
-            opacity: 0.9;
-            font-size: 14px;
-        }
-
-        .back-btn {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 20px;
+        .header-icon {
+            width: 24px;
+            height: 24px;
             cursor: pointer;
-            font-size: 18px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .content {
@@ -97,965 +83,620 @@
             padding: 20px;
         }
 
-        .search-bar {
-            background: white;
-            border-radius: 25px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        .bottom-nav {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            height: 70px;
         }
 
-        .search-bar input {
+        .nav-item {
             flex: 1;
-            border: none;
-            outline: none;
-            font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #999;
         }
 
-        .search-icon {
-            color: #666;
-            font-size: 18px;
+        .nav-item.active {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+            font-size: 20px;
+        }
+
+        .nav-text {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Home Screen */
+        .welcome-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
         }
 
         .quick-actions {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .action-card {
             background: white;
-            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .action-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        /* Search Screen */
+        .search-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .med-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .action-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        .med-card:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .action-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .card-blue { color: #4facfe; }
-        .card-green { color: #43e97b; }
-        .card-orange { color: #fa709a; }
-        .card-purple { color: #a855f7; }
-
-        .action-card h3 {
-            font-size: 16px;
+        .med-name {
+            font-weight: 600;
             color: #333;
             margin-bottom: 5px;
         }
 
-        .action-card p {
-            font-size: 12px;
+        .med-info {
             color: #666;
+            font-size: 14px;
         }
 
-        .recent-section {
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .medicine-card {
-            background: white;
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .medicine-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-        }
-
-        .medicine-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, #ff6b6b, #ffa726);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-        }
-
-        .medicine-info h4 {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 2px;
-        }
-
-        .medicine-info p {
-            font-size: 12px;
-            color: #666;
-        }
-
-        .bottom-nav {
-            height: 80px;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-top: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-item.active {
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-        }
-
-        .nav-item:not(.active) {
-            color: #666;
-        }
-
-        .nav-icon {
-            font-size: 24px;
-            margin-bottom: 4px;
-        }
-
-        .nav-label {
-            font-size: 11px;
-            font-weight: 500;
-        }
-
-        .screen-controls {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
-            display: flex;
-            gap: 5px;
-        }
-
-        .screen-btn {
-            background: rgba(255,255,255,0.9);
-            border: none;
-            padding: 8px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .screen-btn.active {
-            background: #4facfe;
-            color: white;
-        }
-
-        .med-detail-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .med-detail-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            margin: 0 auto 15px;
-        }
-
-        .detail-section {
-            background: white;
-            margin: 15px 0;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-        }
-
-        .detail-section h3 {
-            color: #333;
-            font-size: 18px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .warning-box {
-            background: linear-gradient(135deg, #ff6b6b, #ffa726);
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            margin: 10px 0;
-        }
-
-        .dosage-info {
-            background: #f0f9ff;
-            border: 2px solid #0ea5e9;
-            border-radius: 12px;
-            padding: 15px;
-            margin: 10px 0;
-        }
-
-        .interaction-item {
-            background: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 8px;
-        }
-
+        /* Profile Screen */
         .profile-header {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            color: white;
-            padding: 40px 20px;
             text-align: center;
+            margin-bottom: 30px;
         }
 
         .profile-avatar {
-            width: 100px;
-            height: 100px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            color: white;
+            font-size: 32px;
             margin: 0 auto 15px;
         }
 
+        .profile-options {
+            list-style: none;
+        }
+
         .profile-option {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 18px;
-            background: white;
-            margin: 8px 0;
-            border-radius: 12px;
-            cursor: pointer;
+            justify-content: space-between;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .profile-option:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: #f8f9ff;
         }
 
-        .option-icon {
-            width: 40px;
-            height: 40px;
-            background: #f3f4f6;
-            border-radius: 10px;
+        /* Medication Detail */
+        .med-detail-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .med-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .med-subtitle {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .info-section {
+            margin-bottom: 20px;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            justify-content: center;
+        }
+
+        .info-title::before {
+            content: '•';
+            color: #667eea;
             font-size: 20px;
+            margin-right: 10px;
         }
 
-        .emergency-btn {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            color: white;
+        .info-text {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .back-btn {
+            background: none;
             border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
+            color: white;
+            font-size: 20px;
             cursor: pointer;
-            margin: 20px 0;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.3);
         }
 
-        .floating-add {
-            position: absolute;
-            bottom: 100px;
-            right: 20px;
+        /* Reminders Screen */
+        .reminder-card {
+            background: white;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .reminder-time {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .add-btn {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-            border: none;
-            border-radius: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            border: none;
+            border-radius: 50%;
             font-size: 24px;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .floating-add:hover {
-            transform: scale(1.1);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .medicine-card, .action-card, .detail-section {
-            animation: fadeIn 0.5s ease-out forwards;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
     </style>
 </head>
 <body>
     <div class="phone-container">
-        <!-- Controles de Navegação -->
-        <div class="screen-controls">
-            <button class="screen-btn active" onclick="showScreen('home')">Home</button>
-            <button class="screen-btn" onclick="showScreen('search')">Busca</button>
-            <button class="screen-btn" onclick="showScreen('detail')">Detalhes</button>
-            <button class="screen-btn" onclick="showScreen('profile')">Perfil</button>
-        </div>
-
-        <!-- Tela Inicial -->
-        <div class="screen active" id="home-screen">
-            <div class="status-bar">
-                <span>9:41</span>
-                <span>MediApp</span>
-                <span>🔋 100%</span>
-            </div>
-            
-            <div class="header">
-                <h1>MediApp</h1>
-                <p>Seu guia completo de medicamentos</p>
-            </div>
-
-            <div class="content">
-                <div class="search-bar">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" placeholder="Buscar medicamento...">
+        <div class="phone-screen">
+            <!-- Home Screen -->
+            <div class="screen active" id="home">
+                <div class="header">
+                    <h1>MediApp</h1>
+                    <div class="header-icon">⚙️</div>
                 </div>
-
-                <div class="quick-actions">
-                    <div class="action-card" onclick="showScreen('search')">
-                        <span class="action-icon card-blue">💊</span>
-                        <h3>Buscar Remédio</h3>
-                        <p>Encontre informações detalhadas</p>
+                <div class="content">
+                    <div class="welcome-card">
+                        <h2>Olá, João!</h2>
+                        <p>Gerencie seus medicamentos de forma inteligente</p>
                     </div>
-                    <div class="action-card">
-                        <span class="action-icon card-green">📋</span>
-                        <h3>Meus Remédios</h3>
-                        <p>Lista personalizada</p>
-                    </div>
-                    <div class="action-card">
-                        <span class="action-icon card-orange">⚠️</span>
-                        <h3>Interações</h3>
-                        <p>Verificar compatibilidade</p>
-                    </div>
-                    <div class="action-card">
-                        <span class="action-icon card-purple">⏰</span>
-                        <h3>Lembretes</h3>
-                        <p>Horários de medicação</p>
-                    </div>
-                </div>
-
-                <div class="recent-section">
-                    <h2 class="section-title">
-                        <span>📈</span>
-                        Recentes
-                    </h2>
-                    <div class="medicine-card" onclick="showScreen('detail')">
-                        <div class="medicine-icon">💊</div>
-                        <div class="medicine-info">
-                            <h4>Paracetamol 500mg</h4>
-                            <p>Analgésico • Última consulta: hoje</p>
+                    <div class="quick-actions">
+                        <div class="action-card" onclick="showScreen('search')">
+                            <div class="action-icon">🔍</div>
+                            <h3>Buscar</h3>
+                            <p>Medicamentos</p>
+                        </div>
+                        <div class="action-card" onclick="showScreen('reminders')">
+                            <div class="action-icon">⏰</div>
+                            <h3>Lembretes</h3>
+                            <p>Horários</p>
+                        </div>
+                        <div class="action-card" onclick="showMedicationDetail('Paracetamol')">
+                            <div class="action-icon">💊</div>
+                            <h3>Meus</h3>
+                            <p>Medicamentos</p>
+                        </div>
+                        <div class="action-card" onclick="showScreen('profile')">
+                            <div class="action-icon">👤</div>
+                            <h3>Perfil</h3>
+                            <p>Configurações</p>
                         </div>
                     </div>
-                    <div class="medicine-card">
-                        <div class="medicine-icon">🩹</div>
-                        <div class="medicine-info">
-                            <h4>Ibuprofeno 400mg</h4>
-                            <p>Anti-inflamatório • Ontem</p>
+                    <div class="info-section">
+                        <h3>Próximos Lembretes</h3>
+                        <div class="reminder-card">
+                            <div class="reminder-time">14:00</div>
+                            <div>Paracetamol 500mg</div>
                         </div>
                     </div>
                 </div>
-
-                <button class="emergency-btn">
-                    <span>🚨</span>
-                    Central de Emergência
-                </button>
-            </div>
-
-            <div class="bottom-nav">
-                <div class="nav-item active" onclick="showScreen('home')">
-                    <div class="nav-icon">🏠</div>
-                    <div class="nav-label">Início</div>
-                </div>
-                <div class="nav-item" onclick="showScreen('search')">
-                    <div class="nav-icon">🔍</div>
-                    <div class="nav-label">Buscar</div>
-                </div>
-                <div class="nav-item">
-                    <div class="nav-icon">💝</div>
-                    <div class="nav-label">Favoritos</div>
-                </div>
-                <div class="nav-item" onclick="showScreen('profile')">
-                    <div class="nav-icon">👤</div>
-                    <div class="nav-label">Perfil</div>
+                <div class="bottom-nav">
+                    <div class="nav-item active" onclick="showScreen('home')">
+                        <div class="nav-icon">🏠</div>
+                        <div class="nav-text">Início</div>
+                    </div>
+                    <div class="nav-item" onclick="showScreen('search')">
+                        <div class="nav-icon">🔍</div>
+                        <div class="nav-text">Buscar</div>
+                    </div>
+                    <div class="nav-item" onclick="showScreen('reminders')">
+                        <div class="nav-icon">⏰</div>
+                        <div class="nav-text">Lembretes</div>
+                    </div>
+                    <div class="nav-item" onclick="showScreen('profile')">
+                        <div class="nav-icon">👤</div>
+                        <div class="nav-text">Perfil</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Tela de Busca -->
-        <div class="screen" id="search-screen">
-            <div class="status-bar">
-                <span>9:41</span>
-                <span>Buscar</span>
-                <span>🔋 100%</span>
-            </div>
-            
-            <div class="header">
-                <button class="back-btn" onclick="showScreen('home')">←</button>
-                <h1>Buscar Medicamentos</h1>
-                <p>Encontre informações completas</p>
-            </div>
-
-            <div class="content">
-                <div class="search-bar">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" placeholder="Digite o nome do medicamento..." value="Para">
+            <!-- Search Screen -->
+            <div class="screen" id="search">
+                <div class="header">
+                    <h1>Buscar Medicamentos</h1>
+                    <div class="header-icon">🔍</div>
                 </div>
+                <div class="content">
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Digite o nome do medicamento...">
+                        <button class="search-btn">🔍</button>
+                    </div>
+                    <div class="med-card" onclick="showMedicationDetail('Paracetamol')">
+                        <div class="med-name">Paracetamol 500mg</div>
+                        <div class="med-info">Analgésico e antitérmico • Comprimido</div>
+                    </div>
+                    <div class="med-card" onclick="showMedicationDetail('Ibuprofeno')">
+                        <div class="med-name">Ibuprofeno 600mg</div>
+                        <div class="med-info">Anti-inflamatório • Comprimido</div>
+                    </div>
+                    <div class="med-card" onclick="showMedicationDetail('Amoxicilina')">
+                        <div class="med-name">Amoxicilina 500mg</div>
+                        <div class="med-info">Antibiótico • Cápsula</div>
+                    </div>
+                </div>
+                <div class="bottom-nav">
+                    <div class="nav-item" onclick="showScreen('home')">
+                        <div class="nav-icon">🏠</div>
+                        <div class="nav-text">Início</div>
+                    </div>
+                    <div class="nav-item active" onclick="showScreen('search')">
+                        <div class="nav-icon">🔍</div>
+                        <div class="nav-text">Buscar</div>
+                    </div>
+                    <div class="nav-item" onclick="showScreen('reminders')">
+                        <div class="nav-icon">⏰</div>
+                        <div class="nav-text">Lembretes</div>
+                    </div>
+                    <div class="nav-item" onclick="showScreen('profile')">
+                        <div class="nav-icon">👤</div>
+                        <div class="nav-text">Perfil</div>
+                    </div>
+                </div>
+            </div>
 
-                <div class="recent-section">
-                    <h2 class="section-title">
-                        <span>🎯</span>
-                        Resultados da Busca
-                    </h2>
-                    <div class="medicine-card" onclick="showScreen('detail')">
-                        <div class="medicine-icon">💊</div>
-                        <div class="medicine-info">
-                            <h4>Paracetamol 500mg</h4>
-                            <p>Analgésico e antipirético</p>
+            <!-- Reminders Screen -->
+            <div class="screen" id="reminders">
+                <div class="header">
+                    <h1>Meus Lembretes</h1>
+                    <div class="header-icon">⏰</div>
+                </div>
+                <div class="content">
+                    <div class="reminder-card">
+                        <div class="reminder-time">08:00</div>
+                        <div>Paracetamol 500mg</div>
+                        <div class="med-info">Tomar 1 comprimido</div>
+                    </div>
+                    <div class="reminder-card">
+                        <div class="reminder-time">14:00</div>
+                        <div>Paracetamol 500mg</div>
+                        <div class="med-info">Tomar 1 comprimido</div>
+                    </div>
+                    <div class="reminder-card">
+                        <div class="reminder-time">20:00</div>
+                        <div>Ibuprofeno 600mg</div>
+                        <div class="med-info">Tomar 1 comprimido após refeição</div>
+                    </div>
+                </div>
+                <button class="add-btn">+</button>
+                <div class="bottom-nav">
+                    <div class="nav-item" onclick="showScreen('home')">
+                        <div class="nav-icon">🏠</div>
+                        <div class="nav-text">Início</div>
+                    </div>
+                    <div class="nav-item" onclick="showScreen('search')">
+                        <div class="nav-icon">🔍</div>
+                        <div class="nav-text">Buscar</div>
+                    </div>
+                    <div class="nav-item active" onclick="showScreen('reminders')">
+                        <div class="nav-icon">⏰</div>
+                        <div class="nav-text">Lembretes</div>
+                    </div>
+                    <div class="nav-item" onclick="showScreen('profile')">
+                        <div class="nav-icon">👤</div>
+                        <div class="nav-text">Perfil</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Screen -->
+            <div class="screen" id="profile">
+                <div class="header">
+                    <h1>Meu Perfil</h1>
+                    <div class="header-icon">👤</div>
+                </div>
+                <div class="content">
+                    <div class="profile-header">
+                        <div class="profile-avatar">J</div>
+                        <h2>João Silva</h2>
+                        <p>joao.silva@email.com</p>
+                    </div>
+                    <ul class="profile-options">
+                        <li class="profile-option">
+                            <span>📊 Histórico Médico</span>
+                            <span>></span>
+                        </li>
+                        <li class="profile-option">
+                            <span>🔔 Configurar Notificações</span>
+                            <span>></span>
+                        </li>
+                        <li class="profile-option">
+                            <span>🏥 Médicos e Especialistas</span>
+                            <span>></span>
+                        </li>
+                        <li class="profile-option">
+                            <span>📱 Configurações do App</span>
+                            <span>></span>
+                        </li>
+                        <li class="profile-option">
+                            <span>❓ Ajuda e Suporte</span>
+                            <span>></span>
+                        </li>
+                        <li class="profile-option">
+                            <span>🚪 Sair</span>
+                            <span>></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bottom-nav">
+                    <div class="nav-item" onclick="showScreen('home')">
+                        <div class="nav-icon">🏠</div>
+                        <div class="nav-text">Início</div>
+                    </div>
+                    <div class="nav-item" onclick="showScreen('search')">
+                        <div class="nav-icon">🔍</div>
+                        <div class="nav-text">Buscar</div>
+                    </div>
+                    <div class="nav-item" onclick="showScreen('reminders')">
+                        <div class="nav-icon">⏰</div>
+                        <div class="nav-text">Lembretes</div>
+                    </div>
+                    <div class="nav-item active" onclick="showScreen('profile')">
+                        <div class="nav-icon">👤</div>
+                        <div class="nav-text">Perfil</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medication Detail Screen -->
+            <div class="screen" id="medication-detail">
+                <div class="header">
+                    <button class="back-btn" onclick="showScreen('search')">←</button>
+                    <h1 id="med-detail-title">Paracetamol</h1>
+                    <div class="header-icon">💊</div>
+                </div>
+                <div class="content">
+                    <div class="med-detail-card">
+                        <div class="med-title" id="detail-name">Paracetamol 500mg</div>
+                        <div class="med-subtitle">Analgésico e Antitérmico</div>
+                        
+                        <div class="info-section">
+                            <div class="info-title">Para que serve</div>
+                            <div class="info-text">Indicado para o tratamento de dores leves a moderadas e febre. Eficaz contra dor de cabeça, dores musculares e articulares.</div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-title">Como usar</div>
+                            <div class="info-text">Adultos: 1 comprimido a cada 6 horas. Máximo de 4 comprimidos por dia. Tomar com água, preferencialmente após as refeições.</div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-title">Contraindicações</div>
+                            <div class="info-text">Hipersensibilidade ao paracetamol. Insuficiência hepática grave. Uso com álcool deve ser evitado.</div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-title">Efeitos Colaterais</div>
+                            <div class="info-text">Raros: náuseas, vômitos, reações alérgicas. Em caso de overdose: danos ao fígado.</div>
+                        </div>
+
+                        <div class="info-section">
+                            <div class="info-title">Preço Médio</div>
+                            <div class="info-text">R$ 3,50 - R$ 8,00 (genérico)<br>R$ 8,00 - R$ 15,00 (marca)</div>
                         </div>
                     </div>
-                    <div class="medicine-card">
-                        <div class="medicine-icon">💊</div>
-                        <div class="medicine-info">
-                            <h4>Paracetamol 750mg</h4>
-                            <p>Analgésico de ação prolongada</p>
-                        </div>
-                    </div>
-                    <div class="medicine-card">
-                        <div class="medicine-icon">💉</div>
-                        <div class="medicine-info">
-                            <h4>Paracetamol Gotas</h4>
-                            <p>Solução oral pediátrica</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="recent-section">
-                    <h2 class="section-title">
-                        <span>🔥</span>
-                        Mais Buscados
-                    </h2>
-                    <div class="medicine-card">
-                        <div class="medicine-icon">🩹</div>
-                        <div class="medicine-info">
-                            <h4>Ibuprofeno</h4>
-                            <p>Anti-inflamatório</p>
-                        </div>
-                    </div>
-                    <div class="medicine-card">
-                        <div class="medicine-icon">💊</div>
-                        <div class="medicine-info">
-                            <h4>Dipirona</h4>
-                            <p>Analgésico e antipirético</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bottom-nav">
-                <div class="nav-item" onclick="showScreen('home')">
-                    <div class="nav-icon">🏠</div>
-                    <div class="nav-label">Início</div>
-                </div>
-                <div class="nav-item active">
-                    <div class="nav-icon">🔍</div>
-                    <div class="nav-label">Buscar</div>
-                </div>
-                <div class="nav-item">
-                    <div class="nav-icon">💝</div>
-                    <div class="nav-label">Favoritos</div>
-                </div>
-                <div class="nav-item" onclick="showScreen('profile')">
-                    <div class="nav-icon">👤</div>
-                    <div class="nav-label">Perfil</div>
-                </div>
-            </div>
-
-            <button class="floating-add">+</button>
-        </div>
-
-        <!-- Tela de Detalhes do Medicamento -->
-        <div class="screen" id="detail-screen">
-            <div class="status-bar">
-                <span>9:41</span>
-                <span>Detalhes</span>
-                <span>🔋 100%</span>
-            </div>
-            
-            <div class="med-detail-header">
-                <button class="back-btn" onclick="showScreen('search')">←</button>
-                <div class="med-detail-icon">💊</div>
-                <h1>Paracetamol 500mg</h1>
-                <p>Analgésico e Antipirético</p>
-            </div>
-
-            <div class="content">
-                <div class="detail-section">
-                    <h3><span>ℹ️</span> Informações Gerais</h3>
-                    <p><strong>Nome Genérico:</strong> Paracetamol</p>
-                    <p><strong>Laboratório:</strong> EMS, Medley, Neo Química</p>
-                    <p><strong>Registro ANVISA:</strong> 123.456.789</p>
-                    <p><strong>Receita:</strong> Medicamento isento de prescrição</p>
-                </div>
-
-                <div class="detail-section">
-                    <h3><span>🎯</span> Para que serve</h3>
-                    <p>O paracetamol é indicado para o tratamento de dores leves a moderadas e febre. É eficaz no alívio de dores de cabeça, dores musculares, dores nas costas e redução da febre.</p>
-                </div>
-
-                <div class="dosage-info">
-                    <h3><span>💊</span> Como tomar</h3>
-                    <p><strong>Adultos:</strong> 1 comprimido (500mg) a cada 6 horas</p>
-                    <p><strong>Dose máxima:</strong> 4g por dia (8 comprimidos)</p>
-                    <p><strong>Duração:</strong> Máximo 5 dias consecutivos</p>
-                </div>
-
-                <div class="warning-box">
-                    <h3><span>⚠️</span> Atenção</h3>
-                    <p>• Não exceder a dose recomendada<br>
-                    • Evitar o uso com álcool<br>
-                    • Consulte um médico se os sintomas persistirem</p>
-                </div>
-
-                <div class="detail-section">
-                    <h3><span>🚫</span> Contraindicações</h3>
-                    <div class="interaction-item">
-                        <strong>Alergia ao paracetamol</strong><br>
-                        <small>Reações alérgicas podem ser graves</small>
-                    </div>
-                    <div class="interaction-item">
-                        <strong>Doenças hepáticas graves</strong><br>
-                        <small>Pode agravar problemas no fígado</small>
-                    </div>
-                </div>
-
-                <div class="detail-section">
-                    <h3><span>🤝</span> Interações Medicamentosas</h3>
-                    <div class="interaction-item">
-                        <strong>Varfarina</strong> - Pode potencializar efeito anticoagulante
-                    </div>
-                    <div class="interaction-item">
-                        <strong>Álcool</strong> - Aumenta risco de lesão hepática
-                    </div>
-                </div>
-
-                <button class="emergency-btn">
-                    <span>💝</span>
-                    Adicionar aos Favoritos
-                </button>
-            </div>
-
-            <div class="bottom-nav">
-                <div class="nav-item" onclick="showScreen('home')">
-                    <div class="nav-icon">🏠</div>
-                    <div class="nav-label">Início</div>
-                </div>
-                <div class="nav-item" onclick="showScreen('search')">
-                    <div class="nav-icon">🔍</div>
-                    <div class="nav-label">Buscar</div>
-                </div>
-                <div class="nav-item">
-                    <div class="nav-icon">💝</div>
-                    <div class="nav-label">Favoritos</div>
-                </div>
-                <div class="nav-item" onclick="showScreen('profile')">
-                    <div class="nav-icon">👤</div>
-                    <div class="nav-label">Perfil</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tela de Perfil -->
-        <div class="screen" id="profile-screen">
-            <div class="status-bar">
-                <span>9:41</span>
-                <span>Perfil</span>
-                <span>🔋 100%</span>
-            </div>
-            
-            <div class="profile-header">
-                <div class="profile-avatar">👤</div>
-                <h1>João Silva</h1>
-                <p>Usuário desde Janeiro 2024</p>
-            </div>
-
-            <div class="content">
-                <div class="profile-option">
-                    <div class="option-icon">📋</div>
-                    <div>
-                        <h4>Meus Medicamentos</h4>
-                        <p>12 medicamentos salvos</p>
-                    </div>
-                </div>
-
-                <div class="profile-option">
-                    <div class="option-icon">⏰</div>
-                    <div>
-                        <h4>Lembretes</h4>
-                        <p>3 lembretes ativos</p>
-                    </div>
-                </div>
-
-                <div class="profile-option">
-                    <div class="option-icon">📊</div>
-                    <div>
-                        <h4>Histórico</h4>
-                        <p>Ver medicamentos consultados</p>
-                    </div>
-                </div>
-
-                <div class="profile-option">
-                    <div class="option-icon">⚙️</div>
-                    <div>
-                        <h4>Configurações</h4>
-                        <p>Personalizar aplicativo</p>
-                    </div>
-                </div>
-
-                <div class="profile-option">
-                    <div class="option-icon">🩺</div>
-                    <div>
-                        <h4>Dados de Saúde</h4>
-                        <p>Alergias e condições médicas</p>
-                    </div>
-                </div>
-
-                <div class="profile-option">
-                    <div class="option-icon">📞</div>
-                    <div>
-                        <h4>Suporte</h4>
-                        <p>Ajuda e contato</p>
-                    </div>
-                </div>
-
-                <div class="profile-option">
-                    <div class="option-icon">🔒</div>
-                    <div>
-                        <h4>Privacidade</h4>
-                        <p>Políticas e termos de uso</p>
-                    </div>
-                </div>
-
-                <button class="emergency-btn" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
-                    <span>👨‍⚕️</span>
-                    Falar com Farmacêutico
-                </button>
-            </div>
-
-            <div class="bottom-nav">
-                <div class="nav-item" onclick="showScreen('home')">
-                    <div class="nav-icon">🏠</div>
-                    <div class="nav-label">Início</div>
-                </div>
-                <div class="nav-item" onclick="showScreen('search')">
-                    <div class="nav-icon">🔍</div>
-                    <div class="nav-label">Buscar</div>
-                </div>
-                <div class="nav-item">
-                    <div class="nav-icon">💝</div>
-                    <div class="nav-label">Favoritos</div>
-                </div>
-                <div class="nav-item active">
-                    <div class="nav-icon">👤</div>
-                    <div class="nav-label">Perfil</div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function showScreen(screenName) {
-            // Remove active class from all screens
+        let currentScreen = 'home';
+        
+        const medications = {
+            'Paracetamol': {
+                name: 'Paracetamol 500mg',
+                subtitle: 'Analgésico e Antitérmico',
+                indication: 'Indicado para o tratamento de dores leves a moderadas e febre. Eficaz contra dor de cabeça, dores musculares e articulares.',
+                usage: 'Adultos: 1 comprimido a cada 6 horas. Máximo de 4 comprimidos por dia. Tomar com água, preferencialmente após as refeições.',
+                contraindications: 'Hipersensibilidade ao paracetamol. Insuficiência hepática grave. Uso com álcool deve ser evitado.',
+                sideEffects: 'Raros: náuseas, vômitos, reações alérgicas. Em caso de overdose: danos ao fígado.',
+                price: 'R$ 3,50 - R$ 8,00 (genérico)<br>R$ 8,00 - R$ 15,00 (marca)'
+            },
+            'Ibuprofeno': {
+                name: 'Ibuprofeno 600mg',
+                subtitle: 'Anti-inflamatório não esteroidal',
+                indication: 'Tratamento de dores, inflamações e febre. Eficaz para artrite, dores menstruais e dores pós-operatórias.',
+                usage: 'Adultos: 1 comprimido a cada 8 horas. Máximo de 3 comprimidos por dia. Tomar sempre após as refeições.',
+                contraindications: 'Úlcera péptica ativa, insuficiência renal grave, alergia a AINEs, gravidez (3º trimestre).',
+                sideEffects: 'Náuseas, azia, dor abdominal, tontura. Risco de úlceras e problemas cardiovasculares com uso prolongado.',
+                price: 'R$ 8,00 - R$ 12,00 (genérico)<br>R$ 15,00 - R$ 25,00 (marca)'
+            },
+            'Amoxicilina': {
+                name: 'Amoxicilina 500mg',
+                subtitle: 'Antibiótico Penicilina',
+                indication: 'Tratamento de infecções bacterianas: respiratórias, urinárias, de pele e tecidos moles.',
+                usage: 'Adultos: 1 cápsula a cada 8 horas por 7-10 dias. Completar todo o tratamento mesmo com melhora dos sintomas.',
+                contraindications: 'Alergia à penicilina ou beta-lactâmicos. Mononucleose infecciosa.',
+                sideEffects: 'Diarreia, náuseas, vômitos, candidíase oral. Reações alérgicas podem ser graves.',
+                price: 'R$ 12,00 - R$ 18,00 (genérico)<br>R$ 25,00 - R$ 40,00 (marca)'
+            }
+        };
+
+        function showScreen(screenId) {
+            // Hide all screens
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
             });
             
-            // Remove active class from all screen buttons
-            document.querySelectorAll('.screen-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            // Show selected screen
+            document.getElementById(screenId).classList.add('active');
             
-            // Show the selected screen
-            document.getElementById(screenName + '-screen').classList.add('active');
-            
-            // Update active button
-            event.target.classList.add('active');
-            
-            // Update bottom navigation
-            updateBottomNav(screenName);
-        }
-
-        function updateBottomNav(activeScreen) {
+            // Update navigation
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
             
-            // Add active class to corresponding nav item
-            if (activeScreen === 'home') {
-                document.querySelector('.nav-item[onclick="showScreen(\'home\')"]').classList.add('active');
-            } else if (activeScreen === 'search') {
-                document.querySelector('.nav-item[onclick="showScreen(\'search\')
-function showScreen(screenName) {
-    // Remove active class from all screens
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
-    
-    // Remove active class from all screen buttons
-    document.querySelectorAll('.screen-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    
-    // Show the selected screen
-    document.getElementById(screenName + '-screen').classList.add('active');
-    
-    // Update active button
-    if (event && event.target) {
-        event.target.classList.add('active');
-    }
-    
-    // Update bottom navigation
-    updateBottomNav(screenName);
-}
-
-function updateBottomNav(activeScreen) {
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    
-    // Add active class to corresponding nav item
-    const navItems = document.querySelectorAll('.nav-item');
-    
-    switch(activeScreen) {
-        case 'home':
-            navItems.forEach(item => {
-                if (item.onclick && item.onclick.toString().includes('home')) {
-                    item.classList.add('active');
-                }
-            });
-            break;
-        case 'search':
-            navItems.forEach(item => {
-                if (item.onclick && item.onclick.toString().includes('search')) {
-                    item.classList.add('active');
-                }
-            });
-            break;
-        case 'profile':
-            navItems.forEach(item => {
-                if (item.onclick && item.onclick.toString().includes('profile')) {
-                    item.classList.add('active');
-                }
-            });
-            break;
-        default:
-            // Keep current active state for other screens
-            break;
-    }
-}
-
-// Função para buscar medicamentos
-function searchMedicine() {
-    const searchInput = document.querySelector('.search-bar input');
-    const searchTerm = searchInput.value.toLowerCase();
-    
-    if (searchTerm.length > 0) {
-        // Simula busca e vai para tela de busca
-        showScreen('search');
-        // Atualiza o campo de busca na tela de busca
-        setTimeout(() => {
-            const searchScreenInput = document.querySelector('#search-screen .search-bar input');
-            if (searchScreenInput) {
-                searchScreenInput.value = searchTerm;
-            }
-        }, 100);
-    }
-}
-
-// Função para adicionar aos favoritos
-function addToFavorites(medicineName) {
-    // Simula adição aos favoritos
-    alert(`${medicineName} foi adicionado aos seus favoritos!`);
-}
-
-// Função para emergência
-function callEmergency() {
-    if (confirm('Deseja ligar para o serviço de emergência (192 - SAMU)?')) {
-        // Em um app real, isso faria uma chamada
-        alert('Conectando com o SAMU...');
-    }
-}
-
-// Função para falar com farmacêutico
-function callPharmacist() {
-    alert('Conectando você com um farmacêutico disponível...');
-}
-
-// Event listeners para interações
-document.addEventListener('DOMContentLoaded', function() {
-    // Adicionar event listeners para busca
-    const searchInputs = document.querySelectorAll('.search-bar input');
-    searchInputs.forEach(input => {
-        input.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                searchMedicine();
-            }
-        });
-    });
-    
-    // Event listener para botão de emergência
-    const emergencyButtons = document.querySelectorAll('.emergency-btn');
-    emergencyButtons.forEach(btn => {
-        if (btn.textContent.includes('Emergência')) {
-            btn.addEventListener('click', callEmergency);
-        } else if (btn.textContent.includes('Farmacêutico')) {
-            btn.addEventListener('click', callPharmacist);
-        } else if (btn.textContent.includes('Favoritos')) {
-            btn.addEventListener('click', () => addToFavorites('Paracetamol 500mg'));
+            // Find and activate corresponding nav item
+            const navItems = document.querySelectorAll('.nav-item');
+            if (screenId === 'home') navItems[0].classList.add('active');
+            else if (screenId === 'search') navItems[1].classList.add('active');
+            else if (screenId === 'reminders') navItems[2].classList.add('active');
+            else if (screenId === 'profile') navItems[3].classList.add('active');
+            
+            currentScreen = screenId;
         }
-    });
-    
-    // Animações suaves para cards
-    const cards = document.querySelectorAll('.medicine-card, .action-card, .profile-option');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-    
-    // Floating action button
-    const floatingAdd = document.querySelector('.floating-add');
-    if (floatingAdd) {
-        floatingAdd.addEventListener('click', function() {
-            alert('Função para adicionar novo medicamento em desenvolvimento!');
-        });
-    }
-    
-    // Atualizar horário na status bar
-    function updateTime() {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('pt-BR', {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-        
-        document.querySelectorAll('.status-bar span:first-child').forEach(span => {
-            span.textContent = timeString;
-        });
-    }
-    
-    // Atualizar horário a cada minuto
-    updateTime();
-    setInterval(updateTime, 60000);
-    
-    // Função para simular loading
-    function showLoading(duration = 1000) {
-        const loadingDiv = document.createElement('div');
-        loadingDiv.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 9999;
-            font-size: 16px;
-        `;
-        loadingDiv.textContent = 'Carregando...';
-        document.body.appendChild(loadingDiv);
-        
-        setTimeout(() => {
-            document.body.removeChild(loadingDiv);
-        }, duration);
-    }
-    
-    // Adicionar loading nas transições de tela
-    const originalShowScreen = window.showScreen;
-    window.showScreen = function(screenName) {
-        showLoading(500);
-        setTimeout(() => {
-            originalShowScreen(screenName);
-        }, 200);
-    };
-});
 
-// Função para vibração (se suportado pelo dispositivo)
-function vibrate(pattern = [100]) {
-    if ('vibrate' in navigator) {
-        navigator.vibrate(pattern);
-    }
-}
+        function showMedicationDetail(medName) {
+            const med = medications[medName];
+            if (!med) return;
+            
+            // Update medication detail content
+            document.getElementById('med-detail-title').textContent = medName;
+            document.getElementById('detail-name').textContent = med.name;
+            
+            // Update all info sections
+            const infoSections = document.querySelectorAll('#medication-detail .info-section');
+            const infoTexts = document.querySelectorAll('#medication-detail .info-text');
+            
+            infoTexts[0].textContent = med.indication;
+            infoTexts[1].textContent = med.usage;
+            infoTexts[2].textContent = med.contraindications;
+            infoTexts[3].textContent = med.sideEffects;
+            infoTexts[4].innerHTML = med.price;
+            
+            document.querySelector('#medication-detail .med-subtitle').textContent = med.subtitle;
+            
+            showScreen('medication-detail');
+        }
 
-// Adicionar vibração aos cliques importantes
-document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('emergency-btn') || 
-        e.target.classList.contains('floating-add') ||
-        e.target.classList.contains('action-card')) {
-        vibrate([50]);
-    }
-});
-</script>
+        // Add some interactive feedback
+        document.querySelectorAll('.action-card, .med-card, .profile-option').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const medCards = document.querySelectorAll('#search .med-card');
+            
+            medCards.forEach(card => {
+                const medName = card.querySelector('.med-name').textContent.toLowerCase();
+                if (medName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
 </html>
