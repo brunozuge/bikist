@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediApp - Seus Medicamentos</title>
+    <title>💕 O Quanto Eu Te Amo, Bibi 💕</title>
     <style>
         * {
             margin: 0;
@@ -12,734 +12,553 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
-            margin: 0;
-            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .phone-container {
+        /* Corações flutuantes */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            min-height: 100vh;
-            background: #ffffff;
-            max-width: 480px;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Estrelas brilhantes */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Container principal */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
             margin: 0 auto;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            position: relative;
-        }
-
-        .phone-screen {
-            width: 100%;
+            padding: 20px;
             min-height: 100vh;
-            background: #ffffff;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .screen {
-            display: none;
-            width: 100%;
-            min-height: 100vh;
+            display: flex;
             flex-direction: column;
-        }
-
-        .screen.active {
-            display: flex;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 20px;
-            display: flex;
             align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
         }
 
         .header h1 {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .header-icon {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            min-height: calc(100vh - 140px);
-            padding-bottom: 90px;
-        }
-
-        .bottom-nav {
-            display: flex;
-            background: white;
-            border-top: 1px solid #e0e0e0;
-            height: 70px;
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 480px;
-            z-index: 1000;
-        }
-
-        .nav-item {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #999;
-        }
-
-        .nav-item.active {
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .nav-icon {
-            width: 24px;
-            height: 24px;
-            margin-bottom: 4px;
-            font-size: 20px;
-        }
-
-        .nav-text {
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        /* Home Screen */
-        .welcome-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        .quick-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .action-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .action-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        }
-
-        .action-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: #667eea;
-        }
-
-        /* Search Screen */
-        .search-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 15px 50px 15px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 25px;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .search-input:focus {
-            border-color: #667eea;
-        }
-
-        .search-btn {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #667eea;
-            color: white;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .med-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 15px;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
             margin-bottom: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffa8a8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .med-card:hover {
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        .header p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
         }
 
-        .med-name {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
+        /* Cards de amor */
+        .love-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 40px;
         }
 
-        .med-info {
-            color: #666;
-            font-size: 14px;
-        }
-
-        /* Profile Screen */
-        .profile-header {
+        .love-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px;
             text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.8s ease-out forwards;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 182, 193, 0.3);
+        }
+
+        .love-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .love-card:nth-child(1) { animation-delay: 0.1s; }
+        .love-card:nth-child(2) { animation-delay: 0.2s; }
+        .love-card:nth-child(3) { animation-delay: 0.3s; }
+        .love-card:nth-child(4) { animation-delay: 0.4s; }
+        .love-card:nth-child(5) { animation-delay: 0.5s; }
+        .love-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .love-card-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .love-card h3 {
+            font-size: 1.5rem;
+            color: #e91e63;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .love-card p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .love-meter {
+            width: 100%;
+            height: 20px;
+            background: rgba(233, 30, 99, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .love-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #e91e63, #ff6b9d);
+            border-radius: 10px;
+            animation: fillUp 2s ease-out forwards;
+            box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
+        }
+
+        @keyframes fillUp {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        /* Seção de mensagem especial */
+        .special-message {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 3px solid rgba(255, 182, 193, 0.5);
+            animation: fadeInUp 1s ease-out 0.5s both;
+            max-width: 800px;
             margin-bottom: 30px;
         }
 
-        .profile-avatar {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .special-message h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: #e91e63;
+            margin-bottom: 20px;
+            animation: heartbeat 2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.05); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.05); }
+            70% { transform: scale(1); }
+        }
+
+        .special-message p {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Botão interativo */
+        .love-button {
+            background: linear-gradient(45deg, #e91e63, #ff6b9d);
             color: white;
-            font-size: 32px;
-            margin: 0 auto 15px;
-        }
-
-        .profile-options {
-            list-style: none;
-        }
-
-        .profile-option {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 10px;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(233, 30, 99, 0.3);
+            font-family: inherit;
+            font-weight: bold;
         }
 
-        .profile-option:hover {
-            background: #f8f9ff;
+        .love-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
+            background: linear-gradient(45deg, #ff6b9d, #e91e63);
         }
 
-        /* Medication Detail */
-        .med-detail-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        .love-button:active {
+            transform: translateY(0);
         }
 
-        .med-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 10px;
+        /* Animações */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .med-subtitle {
-            color: #666;
-            margin-bottom: 20px;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .info-section {
-            margin-bottom: 20px;
-        }
-
-        .info-title {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .info-title::before {
-            content: '•';
-            color: #667eea;
-            font-size: 20px;
-            margin-right: 10px;
-        }
-
-        .info-text {
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .back-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        /* Reminders Screen */
-        .reminder-card {
-            background: white;
-            border-left: 4px solid #667eea;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .reminder-time {
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .add-btn {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 999;
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .love-cards {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .love-card {
+                padding: 25px;
+            }
+            
+            .special-message {
+                padding: 30px;
+                margin: 20px 0;
+            }
         }
 
         @media (max-width: 480px) {
-            .phone-container {
-                box-shadow: none;
+            .love-card {
+                padding: 20px;
             }
             
-            .content {
-                padding: 15px;
+            .love-card-icon {
+                font-size: 2.5rem;
             }
             
-            .quick-actions {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            
-            .action-card {
-                padding: 15px;
-            }
-            
-            .header {
-                padding: 15px;
-            }
-            
-            .add-btn {
-                right: 15px;
-                bottom: 85px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .phone-container {
-                max-width: 600px;
-            }
-            
-            .quick-actions {
-                grid-template-columns: repeat(4, 1fr);
+            .special-message {
+                padding: 25px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="phone-container">
-        <div class="phone-screen">
-            <!-- Home Screen -->
-            <div class="screen active" id="home">
-                <div class="header">
-                    <h1>MediApp</h1>
-                    <div class="header-icon">⚙️</div>
-                </div>
-                <div class="content">
-                    <div class="welcome-card">
-                        <h2>Olá, João!</h2>
-                        <p>Gerencie seus medicamentos de forma inteligente</p>
-                    </div>
-                    <div class="quick-actions">
-                        <div class="action-card" onclick="showScreen('search')">
-                            <div class="action-icon">🔍</div>
-                            <h3>Buscar</h3>
-                            <p>Medicamentos</p>
-                        </div>
-                        <div class="action-card" onclick="showScreen('reminders')">
-                            <div class="action-icon">⏰</div>
-                            <h3>Lembretes</h3>
-                            <p>Horários</p>
-                        </div>
-                        <div class="action-card" onclick="showMedicationDetail('Paracetamol')">
-                            <div class="action-icon">💊</div>
-                            <h3>Meus</h3>
-                            <p>Medicamentos</p>
-                        </div>
-                        <div class="action-card" onclick="showScreen('profile')">
-                            <div class="action-icon">👤</div>
-                            <h3>Perfil</h3>
-                            <p>Configurações</p>
-                        </div>
-                    </div>
-                    <div class="info-section">
-                        <h3>Próximos Lembretes</h3>
-                        <div class="reminder-card">
-                            <div class="reminder-time">14:00</div>
-                            <div>Paracetamol 500mg</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bottom-nav">
-                    <div class="nav-item active" onclick="showScreen('home')">
-                        <div class="nav-icon">🏠</div>
-                        <div class="nav-text">Início</div>
-                    </div>
-                    <div class="nav-item" onclick="showScreen('search')">
-                        <div class="nav-icon">🔍</div>
-                        <div class="nav-text">Buscar</div>
-                    </div>
-                    <div class="nav-item" onclick="showScreen('reminders')">
-                        <div class="nav-icon">⏰</div>
-                        <div class="nav-text">Lembretes</div>
-                    </div>
-                    <div class="nav-item" onclick="showScreen('profile')">
-                        <div class="nav-icon">👤</div>
-                        <div class="nav-text">Perfil</div>
-                    </div>
-                </div>
-            </div>
+    <!-- Estrelas de fundo -->
+    <div class="stars"></div>
+    
+    <!-- Corações flutuantes -->
+    <div class="floating-hearts"></div>
 
-            <!-- Search Screen -->
-            <div class="screen" id="search">
-                <div class="header">
-                    <h1>Buscar Medicamentos</h1>
-                    <div class="header-icon">🔍</div>
-                </div>
-                <div class="content">
-                    <div class="search-container">
-                        <input type="text" class="search-input" placeholder="Digite o nome do medicamento...">
-                        <button class="search-btn">🔍</button>
-                    </div>
-                    <div class="med-card" onclick="showMedicationDetail('Paracetamol')">
-                        <div class="med-name">Paracetamol 500mg</div>
-                        <div class="med-info">Analgésico e antitérmico • Comprimido</div>
-                    </div>
-                    <div class="med-card" onclick="showMedicationDetail('Ibuprofeno')">
-                        <div class="med-name">Ibuprofeno 600mg</div>
-                        <div class="med-info">Anti-inflamatório • Comprimido</div>
-                    </div>
-                    <div class="med-card" onclick="showMedicationDetail('Amoxicilina')">
-                        <div class="med-name">Amoxicilina 500mg</div>
-                        <div class="med-info">Antibiótico • Cápsula</div>
-                    </div>
-                </div>
-                <div class="bottom-nav">
-                    <div class="nav-item" onclick="showScreen('home')">
-                        <div class="nav-icon">🏠</div>
-                        <div class="nav-text">Início</div>
-                    </div>
-                    <div class="nav-item active" onclick="showScreen('search')">
-                        <div class="nav-icon">🔍</div>
-                        <div class="nav-text">Buscar</div>
-                    </div>
-                    <div class="nav-item" onclick="showScreen('reminders')">
-                        <div class="nav-icon">⏰</div>
-                        <div class="nav-text">Lembretes</div>
-                    </div>
-                    <div class="nav-item" onclick="showScreen('profile')">
-                        <div class="nav-icon">👤</div>
-                        <div class="nav-text">Perfil</div>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>💕 O Quanto Eu Te Amo, Bibi 💕</h1>
+            <p>Cada batida do meu coração sussurra seu nome</p>
+        </div>
 
-            <!-- Reminders Screen -->
-            <div class="screen" id="reminders">
-                <div class="header">
-                    <h1>Meus Lembretes</h1>
-                    <div class="header-icon">⏰</div>
-                </div>
-                <div class="content">
-                    <div class="reminder-card">
-                        <div class="reminder-time">08:00</div>
-                        <div>Paracetamol 500mg</div>
-                        <div class="med-info">Tomar 1 comprimido</div>
-                    </div>
-                    <div class="reminder-card">
-                        <div class="reminder-time">14:00</div>
-                        <div>Paracetamol 500mg</div>
-                        <div class="med-info">Tomar 1 comprimido</div>
-                    </div>
-                    <div class="reminder-card">
-                        <div class="reminder-time">20:00</div>
-                        <div>Ibuprofeno 600mg</div>
-                        <div class="med-info">Tomar 1 comprimido após refeição</div>
-                    </div>
-                </div>
-                <button class="add-btn">+</button>
-                <div class="bottom-nav">
-                    <div class="nav-item" onclick="showScreen('home')">
-                        <div class="nav-icon">🏠</div>
-                        <div class="nav-text">Início</div>
-                    </div>
-                    <div class="nav-item" onclick="showScreen('search')">
-                        <div class="nav-icon">🔍</div>
-                        <div class="nav-text">Buscar</div>
-                    </div>
-                    <div class="nav-item active" onclick="showScreen('reminders')">
-                        <div class="nav-icon">⏰</div>
-                        <div class="nav-text">Lembretes</div>
-                    </div>
-                    <div class="nav-item" onclick="showScreen('profile')">
-                        <div class="nav-icon">👤</div>
-                        <div class="nav-text">Perfil</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Profile Screen -->
-            <div class="screen" id="profile">
-                <div class="header">
-                    <h1>Meu Perfil</h1>
-                    <div class="header-icon">👤</div>
-                </div>
-                <div class="content">
-                    <div class="profile-header">
-                        <div class="profile-avatar">J</div>
-                        <h2>João Silva</h2>
-                        <p>joao.silva@email.com</p>
-                    </div>
-                    <ul class="profile-options">
-                        <li class="profile-option">
-                            <span>📊 Histórico Médico</span>
-                            <span>></span>
-                        </li>
-                        <li class="profile-option">
-                            <span>🔔 Configurar Notificações</span>
-                            <span>></span>
-                        </li>
-                        <li class="profile-option">
-                            <span>🏥 Médicos e Especialistas</span>
-                            <span>></span>
-                        </li>
-                        <li class="profile-option">
-                            <span>📱 Configurações do App</span>
-                            <span>></span>
-                        </li>
-                        <li class="profile-option">
-                            <span>❓ Ajuda e Suporte</span>
-                            <span>></span>
-                        </li>
-                        <li class="profile-option">
-                            <span>🚪 Sair</span>
-                            <span>></span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="bottom-nav">
-                    <div class="nav-item" onclick="showScreen('home')">
-                        <div class="nav-icon">🏠</div>
-                        <div class="nav-text">Início</div>
-                    </div>
-                    <div class="nav-item" onclick="showScreen('search')">
-                        <div class="nav-icon">🔍</div>
-                        <div class="nav-text">Buscar</div>
-                    </div>
-                    <div class="nav-item" onclick="showScreen('reminders')">
-                        <div class="nav-icon">⏰</div>
-                        <div class="nav-text">Lembretes</div>
-                    </div>
-                    <div class="nav-item active" onclick="showScreen('profile')">
-                        <div class="nav-icon">👤</div>
-                        <div class="nav-text">Perfil</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Medication Detail Screen -->
-            <div class="screen" id="medication-detail">
-                <div class="header">
-                    <button class="back-btn" onclick="showScreen('search')">←</button>
-                    <h1 id="med-detail-title">Paracetamol</h1>
-                    <div class="header-icon">💊</div>
-                </div>
-                <div class="content">
-                    <div class="med-detail-card">
-                        <div class="med-title" id="detail-name">Paracetamol 500mg</div>
-                        <div class="med-subtitle">Analgésico e Antitérmico</div>
-                        
-                        <div class="info-section">
-                            <div class="info-title">Para que serve</div>
-                            <div class="info-text">Indicado para o tratamento de dores leves a moderadas e febre. Eficaz contra dor de cabeça, dores musculares e articulares.</div>
-                        </div>
-
-                        <div class="info-section">
-                            <div class="info-title">Como usar</div>
-                            <div class="info-text">Adultos: 1 comprimido a cada 6 horas. Máximo de 4 comprimidos por dia. Tomar com água, preferencialmente após as refeições.</div>
-                        </div>
-
-                        <div class="info-section">
-                            <div class="info-title">Contraindicações</div>
-                            <div class="info-text">Hipersensibilidade ao paracetamol. Insuficiência hepática grave. Uso com álcool deve ser evitado.</div>
-                        </div>
-
-                        <div class="info-section">
-                            <div class="info-title">Efeitos Colaterais</div>
-                            <div class="info-text">Raros: náuseas, vômitos, reações alérgicas. Em caso de overdose: danos ao fígado.</div>
-                        </div>
-
-                        <div class="info-section">
-                            <div class="info-title">Preço Médio</div>
-                            <div class="info-text">R$ 3,50 - R$ 8,00 (genérico)<br>R$ 8,00 - R$ 15,00 (marca)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Cards de amor -->
+        <div class="love-cards">
+    <div class="love-card">
+        <div class="love-card-icon">💖</div>
+        <h3>Amor Infinito</h3>
+        <p>Te amar é como olhar para o céu à noite... parece que nunca tem fim e a cada dia descubro um motivo novo pra te amar ainda mais.</p>
+        <div class="love-meter">
+            <div class="love-fill"></div>
         </div>
     </div>
 
+    <div class="love-card">
+        <div class="love-card-icon">🌟</div>
+        <h3>Minha Estrela</h3>
+        <p>Você é aquela luz que aparece mesmo nos meus dias mais nublados... sempre me guiando e me lembrando de sorrir.</p>
+        <div class="love-meter">
+            <div class="love-fill"></div>
+        </div>
+    </div>
+
+   
+
+   
+
+    <div class="love-card">
+        <div class="love-card-icon">🏰</div>
+        <h3>Nosso Futuro</h3>
+        <p>O que vem pela frente? Mais risos, mais planos e mais capítulos lindos dessa história que é só nossa.</p>
+        <div class="love-meter">
+            <div class="love-fill"></div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Mensagem especial -->
+       <div class="special-message">
+    <h2>💕 Para Você, Minha Bibi Amada 💕</h2>
+    <p>
+        Não existe jeito certo de medir o quanto eu te amo... Mas se existisse, com certeza ultrapassaria todos os limites possíveis.
+        Você é meu sol nas manhãs mais cinzas, minha lua nas noites mais silenciosas e cada estrela que faz meu céu brilhar.
+    </p>
+    <p>
+        Estar com você é como ganhar um presente novo todos os dias... cada riso, cada abraço, cada olhar teu faz tudo valer a pena.
+        Você transforma tudo ao meu redor... deixa tudo mais leve, mais bonito, mais nosso.
+    </p>
+    <p>
+        Eu te prometo amor... hoje, amanhã e em todos os amanhãs que ainda vamos viver. 
+        Porque você é o meu lugar no mundo, meu porto seguro e o motivo de tantos sorrisos bobos.
+    </p>
+
+    <p>
+       Mesmo com tudo oque aconteceu com a sua família, confiou em mim.
+       Muito obrigado por tudo bi. EU TE AMO MOZI  💕💕💕
+    </p>
+    <button class="love-button" onclick="showLoveMessage()">💕 Clique Aqui 💕</button>
+</div>
+
+
     <script>
-        let currentScreen = 'home';
-        
-        const medications = {
-            'Paracetamol': {
-                name: 'Paracetamol 500mg',
-                subtitle: 'Analgésico e Antitérmico',
-                indication: 'Indicado para o tratamento de dores leves a moderadas e febre. Eficaz contra dor de cabeça, dores musculares e articulares.',
-                usage: 'Adultos: 1 comprimido a cada 6 horas. Máximo de 4 comprimidos por dia. Tomar com água, preferencialmente após as refeições.',
-                contraindications: 'Hipersensibilidade ao paracetamol. Insuficiência hepática grave. Uso com álcool deve ser evitado.',
-                sideEffects: 'Raros: náuseas, vômitos, reações alérgicas. Em caso de overdose: danos ao fígado.',
-                price: 'R$ 3,50 - R$ 8,00 (genérico)<br>R$ 8,00 - R$ 15,00 (marca)'
-            },
-            'Ibuprofeno': {
-                name: 'Ibuprofeno 600mg',
-                subtitle: 'Anti-inflamatório não esteroidal',
-                indication: 'Tratamento de dores, inflamações e febre. Eficaz para artrite, dores menstruais e dores pós-operatórias.',
-                usage: 'Adultos: 1 comprimido a cada 8 horas. Máximo de 3 comprimidos por dia. Tomar sempre após as refeições.',
-                contraindications: 'Úlcera péptica ativa, insuficiência renal grave, alergia a AINEs, gravidez (3º trimestre).',
-                sideEffects: 'Náuseas, azia, dor abdominal, tontura. Risco de úlceras e problemas cardiovasculares com uso prolongado.',
-                price: 'R$ 8,00 - R$ 12,00 (genérico)<br>R$ 15,00 - R$ 25,00 (marca)'
-            },
-            'Amoxicilina': {
-                name: 'Amoxicilina 500mg',
-                subtitle: 'Antibiótico Penicilina',
-                indication: 'Tratamento de infecções bacterianas: respiratórias, urinárias, de pele e tecidos moles.',
-                usage: 'Adultos: 1 cápsula a cada 8 horas por 7-10 dias. Completar todo o tratamento mesmo com melhora dos sintomas.',
-                contraindications: 'Alergia à penicilina ou beta-lactâmicos. Mononucleose infecciosa.',
-                sideEffects: 'Diarreia, náuseas, vômitos, candidíase oral. Reações alérgicas podem ser graves.',
-                price: 'R$ 12,00 - R$ 18,00 (genérico)<br>R$ 25,00 - R$ 40,00 (marca)'
+        // Criar estrelas
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const starCount = 50;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
             }
-        };
-
-        function showScreen(screenId) {
-            // Hide all screens
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            
-            // Show selected screen
-            document.getElementById(screenId).classList.add('active');
-            
-            // Update navigation
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Find and activate corresponding nav item
-            const navItems = document.querySelectorAll('.nav-item');
-            if (screenId === 'home') navItems[0].classList.add('active');
-            else if (screenId === 'search') navItems[1].classList.add('active');
-            else if (screenId === 'reminders') navItems[2].classList.add('active');
-            else if (screenId === 'profile') navItems[3].classList.add('active');
-            
-            currentScreen = screenId;
         }
 
-        function showMedicationDetail(medName) {
-            const med = medications[medName];
-            if (!med) return;
+        // Criar corações flutuantes
+        function createFloatingHearts() {
+            const heartsContainer = document.querySelector('.floating-hearts');
             
-            // Update medication detail content
-            document.getElementById('med-detail-title').textContent = medName;
-            document.getElementById('detail-name').textContent = med.name;
-            
-            // Update all info sections
-            const infoSections = document.querySelectorAll('#medication-detail .info-section');
-            const infoTexts = document.querySelectorAll('#medication-detail .info-text');
-            
-            infoTexts[0].textContent = med.indication;
-            infoTexts[1].textContent = med.usage;
-            infoTexts[2].textContent = med.contraindications;
-            infoTexts[3].textContent = med.sideEffects;
-            infoTexts[4].innerHTML = med.price;
-            
-            document.querySelector('#medication-detail .med-subtitle').textContent = med.subtitle;
-            
-            showScreen('medication-detail');
-        }
-
-        // Add some interactive feedback
-        document.querySelectorAll('.action-card, .med-card, .profile-option').forEach(card => {
-            card.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💕';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                
+                heartsContainer.appendChild(heart);
+                
+                // Remove o coração após a animação
                 setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 7000);
+            }, 800);
+        }
+
+        // Função do botão de amor
+      function showLoveMessage() {
+    const messages = [
+        "💕 Eu te amo de um jeito que nem sei explicar... só sinto, e é gigante! 💕",
+        "🌟 Você é meu detalhe favorito em todos os meus dias. 🌟",
+        "💖 Quando penso em felicidade... automaticamente penso em você. 💖",
+        "🦋 Você é o motivo do meu sorriso bobo 🦋",
+        "💕 Com você, até os dias difíceis ficam mais leves... você é minha paz. 💕",
+        "💕 Meu amor por você só cresce... hoje mais que ontem, amanhã mais que hoje! 💕",
+        "⭐ Você é meu porto seguro, meu abraço favorito e meu lugar no mundo. ⭐",
+        "💖 Não tem um só dia que eu não agradeça por ter você. Te amo demais! 💖"
+    ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            // Criar elemento de mensagem
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(45deg, #ff6b9d, #e91e63);
+                color: white;
+                padding: 30px;
+                border-radius: 20px;
+                font-size: 1.5rem;
+                text-align: center;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+                z-index: 1000;
+                animation: popIn 0.5s ease-out;
+                max-width: 90%;
+                font-family: 'Comic Sans MS', cursive;
+            `;
+            
+            messageDiv.innerHTML = randomMessage;
+            document.body.appendChild(messageDiv);
+            
+            // Adicionar animação CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes popIn {
+                    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+                    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Remover mensagem após 3 segundos
+            setTimeout(() => {
+                messageDiv.style.animation = 'popIn 0.3s ease-out reverse';
+                setTimeout(() => {
+                    if (messageDiv.parentNode) {
+                        messageDiv.parentNode.removeChild(messageDiv);
+                    }
+                }, 300);
+            }, 3000);
+            
+            // Criar explosão de corações
+            createHeartExplosion();
+        }
+
+        // Explosão de corações
+        function createHeartExplosion() {
+            const heartsContainer = document.querySelector('.floating-hearts');
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '💕';
+                    heart.style.cssText = `
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        font-size: ${Math.random() * 20 + 20}px;
+                        color: #ff6b9d;
+                        pointer-events: none;
+                        animation: explode 1.5s ease-out forwards;
+                        animation-delay: ${i * 0.05}s;
+                    `;
+                    
+                    heartsContainer.appendChild(heart);
+                    
+                    // Adicionar animação de explosão
+                    const angle = (360 / 20) * i;
+                    const distance = Math.random() * 200 + 100;
+                    
+                    heart.style.setProperty('--angle', angle + 'deg');
+                    heart.style.setProperty('--distance', distance + 'px');
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) {
+                            heart.parentNode.removeChild(heart);
+                        }
+                    }, 2000);
+                }, i * 50);
+            }
+            
+            // Adicionar animação de explosão
+            const explosionStyle = document.createElement('style');
+            explosionStyle.textContent = `
+                @keyframes explode {
+                    0% { 
+                        transform: translate(-50%, -50%) rotate(0deg) translateX(0) scale(1);
+                        opacity: 1;
+                    }
+                    100% { 
+                        transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--distance)) scale(0);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(explosionStyle);
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            createStars();
+            createFloatingHearts();
         });
 
-        // Search functionality
-        document.querySelector('.search-input').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const medCards = document.querySelectorAll('#search .med-card');
+        // Adicionar efeito de hover nos cards
+        document.querySelectorAll('.love-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
             
-            medCards.forEach(card => {
-                const medName = card.querySelector('.med-name').textContent.toLowerCase();
-                if (medName.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
             });
         });
     </script>
