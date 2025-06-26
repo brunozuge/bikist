@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 O Quanto Eu Te Amo, Bibi 💕</title>
+    <title>MediCare - Gerenciador de Medicamentos</title>
     <style>
         * {
             margin: 0;
@@ -12,554 +12,713 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            color: #333;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Corações flutuantes */
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .heart {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 20px;
-            animation: float 6s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-        }
-
-        /* Estrelas brilhantes */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .star {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: twinkle 2s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.3; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.5); }
-        }
-
-        /* Container principal */
-        .container {
-            position: relative;
-            z-index: 2;
+        .app-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            position: relative;
         }
 
-        /* Header */
         .header {
             text-align: center;
             margin-bottom: 40px;
-            animation: fadeInDown 1s ease-out;
+            animation: slideDown 0.8s ease-out;
         }
 
-        .header h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            color: #fff;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            margin-bottom: 15px;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffa8a8);
+        .logo {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 10px;
         }
 
-        .header p {
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
+        .logo p {
             color: rgba(255, 255, 255, 0.9);
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            font-size: 1.1rem;
+            font-weight: 300;
         }
 
-        /* Cards de amor */
-        .love-cards {
+        .dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 1000px;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .love-card {
+        .card {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
             padding: 30px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transform: translateY(20px);
-            opacity: 0;
-            animation: slideUp 0.8s ease-out forwards;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
-            border: 2px solid rgba(255, 182, 193, 0.3);
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        .love-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-            background: rgba(255, 255, 255, 1);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
 
-        .love-card:nth-child(1) { animation-delay: 0.1s; }
-        .love-card:nth-child(2) { animation-delay: 0.2s; }
-        .love-card:nth-child(3) { animation-delay: 0.3s; }
-        .love-card:nth-child(4) { animation-delay: 0.4s; }
-        .love-card:nth-child(5) { animation-delay: 0.5s; }
-        .love-card:nth-child(6) { animation-delay: 0.6s; }
-
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .love-card-icon {
-            font-size: 3rem;
+        .card h2 {
+            color: #2c3e50;
             margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e6ed;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 12px;
+            margin: 0 5px;
+        }
+
+        .medication-list {
+            grid-column: span 2;
+        }
+
+        .medication-item {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.5s ease-out;
+        }
+
+        .medication-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .medication-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .medication-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .medication-dose {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .medication-times {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .time-badge {
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .time-badge.taken {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: bounceIn 0.8s ease-out;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-pill {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-pill:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-pill:nth-child(2) { top: 60%; left: 80%; animation-delay: 2s; }
+        .floating-pill:nth-child(3) { top: 80%; left: 20%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .pulse {
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .love-card h3 {
-            font-size: 1.5rem;
-            color: #e91e63;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .love-card p {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .love-meter {
-            width: 100%;
-            height: 20px;
-            background: rgba(233, 30, 99, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 15px;
-        }
-
-        .love-fill {
-            height: 100%;
-            background: linear-gradient(45deg, #e91e63, #ff6b9d);
-            border-radius: 10px;
-            animation: fillUp 2s ease-out forwards;
-            box-shadow: 0 2px 10px rgba(233, 30, 99, 0.3);
-        }
-
-        @keyframes fillUp {
-            from { width: 0%; }
-            to { width: 100%; }
-        }
-
-        /* Seção de mensagem especial */
-        .special-message {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            border: 3px solid rgba(255, 182, 193, 0.5);
-            animation: fadeInUp 1s ease-out 0.5s both;
-            max-width: 800px;
-            margin-bottom: 30px;
-        }
-
-        .special-message h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            color: #e91e63;
-            margin-bottom: 20px;
-            animation: heartbeat 2s infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            14% { transform: scale(1.05); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.05); }
-            70% { transform: scale(1); }
-        }
-
-        .special-message p {
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        /* Botão interativo */
-        .love-button {
-            background: linear-gradient(45deg, #e91e63, #ff6b9d);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(233, 30, 99, 0.3);
-            font-family: inherit;
-            font-weight: bold;
-        }
-
-        .love-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
-            background: linear-gradient(45deg, #ff6b9d, #e91e63);
-        }
-
-        .love-button:active {
-            transform: translateY(0);
-        }
-
-        /* Animações */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
         }
 
         /* Responsividade */
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .love-cards {
+            .dashboard {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
-            .love-card {
-                padding: 25px;
+
+            .medication-list {
+                grid-column: span 1;
             }
-            
-            .special-message {
-                padding: 30px;
-                margin: 20px 0;
+
+            .logo h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .medication-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
 
         @media (max-width: 480px) {
-            .love-card {
-                padding: 20px;
+            .app-container {
+                padding: 10px;
             }
-            
-            .love-card-icon {
-                font-size: 2.5rem;
+
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .special-message {
-                padding: 25px;
+
+            .medication-times {
+                justify-content: center;
             }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
         }
     </style>
 </head>
 <body>
-    <!-- Estrelas de fundo -->
-    <div class="stars"></div>
-    
-    <!-- Corações flutuantes -->
-    <div class="floating-hearts"></div>
+    <div class="floating-elements">
+        <div class="floating-pill"></div>
+        <div class="floating-pill"></div>
+        <div class="floating-pill"></div>
+    </div>
 
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>💕 O Quanto Eu Te Amo, Bibi 💕</h1>
-            <p>Cada batida do meu coração sussurra seu nome</p>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <h1>💊 MediCare</h1>
+                <p>Seu assistente pessoal de medicamentos</p>
+            </div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalMeds">0</div>
+                <div class="stat-label">Medicamentos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="todayDoses">0</div>
+                <div class="stat-label">Doses Hoje</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="takenDoses">0</div>
+                <div class="stat-label">Tomadas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="adherenceRate">0%</div>
+                <div class="stat-label">Adesão</div>
+            </div>
         </div>
 
-        <!-- Cards de amor -->
-        <div class="love-cards">
-    <div class="love-card">
-        <div class="love-card-icon">💖</div>
-        <h3>Amor Infinito</h3>
-        <p>Te amar é como olhar para o céu à noite... parece que nunca tem fim e a cada dia descubro um motivo novo pra te amar ainda mais.</p>
-        <div class="love-meter">
-            <div class="love-fill"></div>
+        <div class="dashboard">
+            <div class="card">
+                <h2><span class="icon">+</span>Adicionar Medicamento</h2>
+                <form id="medicationForm">
+                    <div class="form-group">
+                        <label for="medName">Nome do Medicamento</label>
+                        <input type="text" id="medName" class="form-control" placeholder="Ex: Paracetamol" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="medDose">Dosagem</label>
+                        <input type="text" id="medDose" class="form-control" placeholder="Ex: 500mg" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="medFrequency">Frequência (horas)</label>
+                        <select id="medFrequency" class="form-control" required>
+                            <option value="">Selecione</option>
+                            <option value="6">A cada 6 horas</option>
+                            <option value="8">A cada 8 horas</option>
+                            <option value="12">A cada 12 horas</option>
+                            <option value="24">Uma vez ao dia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="medStart">Primeiro horário</label>
+                        <input type="time" id="medStart" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary pulse">Adicionar Medicamento</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2><span class="icon">⏰</span>Próximas Doses</h2>
+                <div id="nextDoses">
+                    <p style="text-align: center; color: #7f8c8d; margin-top: 30px;">
+                        Adicione medicamentos para ver os próximos horários
+                    </p>
+                </div>
+            </div>
+
+            <div class="card medication-list">
+                <h2><span class="icon">📋</span>Meus Medicamentos</h2>
+                <div id="medicationsList">
+                    <p style="text-align: center; color: #7f8c8d; margin-top: 30px;">
+                        Nenhum medicamento adicionado ainda
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="love-card">
-        <div class="love-card-icon">🌟</div>
-        <h3>Minha Estrela</h3>
-        <p>Você é aquela luz que aparece mesmo nos meus dias mais nublados... sempre me guiando e me lembrando de sorrir.</p>
-        <div class="love-meter">
-            <div class="love-fill"></div>
-        </div>
-    </div>
-
-   
-
-   
-
-    <div class="love-card">
-        <div class="love-card-icon">🏰</div>
-        <h3>Nosso Futuro</h3>
-        <p>O que vem pela frente? Mais risos, mais planos e mais capítulos lindos dessa história que é só nossa.</p>
-        <div class="love-meter">
-            <div class="love-fill"></div>
-        </div>
-    </div>
-</div>
-
-
-        <!-- Mensagem especial -->
-       <div class="special-message">
-    <h2>💕 Para Você, Minha Bibi Amada 💕</h2>
-    <p>
-        Não existe jeito certo de medir o quanto eu te amo... Mas se existisse, com certeza ultrapassaria todos os limites possíveis.
-        Você é meu sol nas manhãs mais cinzas, minha lua nas noites mais silenciosas e cada estrela que faz meu céu brilhar.
-    </p>
-    <p>
-        Estar com você é como ganhar um presente novo todos os dias... cada riso, cada abraço, cada olhar teu faz tudo valer a pena.
-        Você transforma tudo ao meu redor... deixa tudo mais leve, mais bonito, mais nosso.
-    </p>
-    <p>
-        Eu te prometo amor... hoje, amanhã e em todos os amanhãs que ainda vamos viver. 
-        Porque você é o meu lugar no mundo, meu porto seguro e o motivo de tantos sorrisos bobos.
-    </p>
-
-    <p>
-       Mesmo com tudo oque aconteceu com a sua família, confiou em mim.
-       Muito obrigado por tudo bi. EU TE AMO MOZI  💕💕💕
-    </p>
-    <button class="love-button" onclick="showLoveMessage()">💕 Clique Aqui 💕</button>
-</div>
-
+    <div class="notification" id="notification"></div>
 
     <script>
-        // Criar estrelas
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            const starCount = 50;
-            
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 2 + 's';
-                starsContainer.appendChild(star);
-            }
-        }
+        let medications = [];
+        let takenDoses = {};
 
-        // Criar corações flutuantes
-        function createFloatingHearts() {
-            const heartsContainer = document.querySelector('.floating-hearts');
+        // Função para mostrar notificação
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification show ${type}`;
             
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = '💕';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
-                
-                heartsContainer.appendChild(heart);
-                
-                // Remove o coração após a animação
-                setTimeout(() => {
-                    if (heart.parentNode) {
-                        heart.parentNode.removeChild(heart);
-                    }
-                }, 7000);
-            }, 800);
-        }
-
-        // Função do botão de amor
-      function showLoveMessage() {
-    const messages = [
-        "💕 Eu te amo de um jeito que nem sei explicar... só sinto, e é gigante! 💕",
-        "🌟 Você é meu detalhe favorito em todos os meus dias. 🌟",
-        "💖 Quando penso em felicidade... automaticamente penso em você. 💖",
-        "🦋 Você é o motivo do meu sorriso bobo 🦋",
-        "💕 Com você, até os dias difíceis ficam mais leves... você é minha paz. 💕",
-        "💕 Meu amor por você só cresce... hoje mais que ontem, amanhã mais que hoje! 💕",
-        "⭐ Você é meu porto seguro, meu abraço favorito e meu lugar no mundo. ⭐",
-        "💖 Não tem um só dia que eu não agradeça por ter você. Te amo demais! 💖"
-    ];
-            
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            
-            // Criar elemento de mensagem
-            const messageDiv = document.createElement('div');
-            messageDiv.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: linear-gradient(45deg, #ff6b9d, #e91e63);
-                color: white;
-                padding: 30px;
-                border-radius: 20px;
-                font-size: 1.5rem;
-                text-align: center;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-                z-index: 1000;
-                animation: popIn 0.5s ease-out;
-                max-width: 90%;
-                font-family: 'Comic Sans MS', cursive;
-            `;
-            
-            messageDiv.innerHTML = randomMessage;
-            document.body.appendChild(messageDiv);
-            
-            // Adicionar animação CSS
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes popIn {
-                    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-                    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Remover mensagem após 3 segundos
             setTimeout(() => {
-                messageDiv.style.animation = 'popIn 0.3s ease-out reverse';
-                setTimeout(() => {
-                    if (messageDiv.parentNode) {
-                        messageDiv.parentNode.removeChild(messageDiv);
-                    }
-                }, 300);
+                notification.classList.remove('show');
             }, 3000);
-            
-            // Criar explosão de corações
-            createHeartExplosion();
         }
 
-        // Explosão de corações
-        function createHeartExplosion() {
-            const heartsContainer = document.querySelector('.floating-hearts');
+        // Função para gerar horários baseados na frequência
+        function generateTimes(startTime, frequency) {
+            const times = [];
+            const [hours, minutes] = startTime.split(':').map(Number);
+            let currentHour = hours;
+
+            for (let i = 0; i < 24 / frequency; i++) {
+                const timeString = `${currentHour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+                times.push(timeString);
+                currentHour = (currentHour + frequency) % 24;
+            }
+
+            return times;
+        }
+
+        // Função para adicionar medicamento
+        function addMedication(event) {
+            event.preventDefault();
             
-            for (let i = 0; i < 20; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.innerHTML = '💕';
-                    heart.style.cssText = `
-                        position: absolute;
-                        left: 50%;
-                        top: 50%;
-                        transform: translate(-50%, -50%);
-                        font-size: ${Math.random() * 20 + 20}px;
-                        color: #ff6b9d;
-                        pointer-events: none;
-                        animation: explode 1.5s ease-out forwards;
-                        animation-delay: ${i * 0.05}s;
-                    `;
-                    
-                    heartsContainer.appendChild(heart);
-                    
-                    // Adicionar animação de explosão
-                    const angle = (360 / 20) * i;
-                    const distance = Math.random() * 200 + 100;
-                    
-                    heart.style.setProperty('--angle', angle + 'deg');
-                    heart.style.setProperty('--distance', distance + 'px');
-                    
-                    setTimeout(() => {
-                        if (heart.parentNode) {
-                            heart.parentNode.removeChild(heart);
-                        }
-                    }, 2000);
-                }, i * 50);
+            const name = document.getElementById('medName').value.trim();
+            const dose = document.getElementById('medDose').value.trim();
+            const frequency = parseInt(document.getElementById('medFrequency').value);
+            const startTime = document.getElementById('medStart').value;
+
+            if (!name || !dose || !frequency || !startTime) {
+                showNotification('Por favor, preencha todos os campos', 'error');
+                return;
+            }
+
+            const medication = {
+                id: Date.now(),
+                name,
+                dose,
+                frequency,
+                times: generateTimes(startTime, frequency),
+                active: true
+            };
+
+            medications.push(medication);
+            saveToStorage();
+            renderMedications();
+            updateStats();
+            updateNextDoses();
+            
+            // Limpar formulário
+            document.getElementById('medicationForm').reset();
+            
+            showNotification(`${name} adicionado com sucesso!`);
+        }
+
+        // Função para marcar dose como tomada
+        function markDoseTaken(medId, time) {
+            const today = new Date().toDateString();
+            const key = `${medId}-${time}-${today}`;
+            
+            if (!takenDoses[key]) {
+                takenDoses[key] = true;
+                saveToStorage();
+                renderMedications();
+                updateStats();
+                updateNextDoses();
+                showNotification('Dose marcada como tomada!');
+            }
+        }
+
+        // Função para verificar se dose foi tomada
+        function isDoseTaken(medId, time) {
+            const today = new Date().toDateString();
+            const key = `${medId}-${time}-${today}`;
+            return takenDoses[key] || false;
+        }
+
+        // Função para remover medicamento
+        function removeMedication(id) {
+            if (confirm('Tem certeza que deseja remover este medicamento?')) {
+                medications = medications.filter(med => med.id !== id);
+                saveToStorage();
+                renderMedications();
+                updateStats();
+                updateNextDoses();
+                showNotification('Medicamento removido');
+            }
+        }
+
+        // Função para renderizar medicamentos
+        function renderMedications() {
+            const container = document.getElementById('medicationsList');
+            
+            if (medications.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #7f8c8d; margin-top: 30px;">Nenhum medicamento adicionado ainda</p>';
+                return;
+            }
+
+            container.innerHTML = medications.map(med => `
+                <div class="medication-item">
+                    <div class="medication-header">
+                        <div>
+                            <div class="medication-name">${med.name}</div>
+                            <div class="medication-dose">${med.dose} - A cada ${med.frequency}h</div>
+                        </div>
+                        <button class="btn btn-danger btn-small" onclick="removeMedication(${med.id})">
+                            Remover
+                        </button>
+                    </div>
+                    <div class="medication-times">
+                        ${med.times.map(time => `
+                            <span class="time-badge ${isDoseTaken(med.id, time) ? 'taken' : ''}" 
+                                  onclick="markDoseTaken(${med.id}, '${time}')"
+                                  style="cursor: pointer;">
+                                ${time} ${isDoseTaken(med.id, time) ? '✓' : ''}
+                            </span>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Função para atualizar próximas doses
+        function updateNextDoses() {
+            const container = document.getElementById('nextDoses');
+            const now = new Date();
+            const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            let nextDoses = [];
+            
+            medications.forEach(med => {
+                med.times.forEach(time => {
+                    if (!isDoseTaken(med.id, time) && time >= currentTime) {
+                        nextDoses.push({
+                            name: med.name,
+                            dose: med.dose,
+                            time: time
+                        });
+                    }
+                });
+            });
+
+            nextDoses.sort((a, b) => a.time.localeCompare(b.time));
+            nextDoses = nextDoses.slice(0, 3); // Próximas 3 doses
+
+            if (nextDoses.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #7f8c8d;">Todas as doses de hoje foram tomadas! 🎉</p>';
+                return;
+            }
+
+            container.innerHTML = nextDoses.map(dose => `
+                <div style="padding: 10px; background: rgba(102, 126, 234, 0.1); border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #667eea;">
+                    <strong>${dose.time}</strong> - ${dose.name} (${dose.dose})
+                </div>
+            `).join('');
+        }
+
+        // Função para atualizar estatísticas
+        function updateStats() {
+            const totalMeds = medications.length;
+            const today = new Date().toDateString();
+            
+            let totalDosesToday = 0;
+            let takenDosesToday = 0;
+            
+            medications.forEach(med => {
+                totalDosesToday += med.times.length;
+                med.times.forEach(time => {
+                    const key = `${med.id}-${time}-${today}`;
+                    if (takenDoses[key]) {
+                        takenDosesToday++;
+                    }
+                });
+            });
+
+            const adherenceRate = totalDosesToday > 0 ? Math.round((takenDosesToday / totalDosesToday) * 100) : 0;
+
+            document.getElementById('totalMeds').textContent = totalMeds;
+            document.getElementById('todayDoses').textContent = totalDosesToday;
+            document.getElementById('takenDoses').textContent = takenDosesToday;
+            document.getElementById('adherenceRate').textContent = adherenceRate + '%';
+        }
+
+        // Funções de armazenamento
+        function saveToStorage() {
+            localStorage.setItem('medications', JSON.stringify(medications));
+            localStorage.setItem('takenDoses', JSON.stringify(takenDoses));
+        }
+
+        function loadFromStorage() {
+            const savedMeds = localStorage.getItem('medications');
+            const savedDoses = localStorage.getItem('takenDoses');
+            
+            if (savedMeds) {
+                medications = JSON.parse(savedMeds);
             }
             
-            // Adicionar animação de explosão
-            const explosionStyle = document.createElement('style');
-            explosionStyle.textContent = `
-                @keyframes explode {
-                    0% { 
-                        transform: translate(-50%, -50%) rotate(0deg) translateX(0) scale(1);
-                        opacity: 1;
-                    }
-                    100% { 
-                        transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--distance)) scale(0);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(explosionStyle);
+            if (savedDoses) {
+                takenDoses = JSON.parse(savedDoses);
+            }
         }
 
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function() {
-            createStars();
-            createFloatingHearts();
-        });
-
-        // Adicionar efeito de hover nos cards
-        document.querySelectorAll('.love-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
+        // Verificar medicamentos pendentes periodicamente
+        function checkPendingMedications() {
+            const now = new Date();
+            const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
             
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+            medications.forEach(med => {
+                med.times.forEach(time => {
+                    if (time === currentTime && !isDoseTaken(med.id, time)) {
+                        showNotification(`⏰ Hora de tomar: ${med.name} (${med.dose})`, 'reminder');
+                    }
+                });
             });
+        }
+
+        // Event listeners
+        document.getElementById('medicationForm').addEventListener('submit', addMedication);
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromStorage();
+            renderMedications();
+            updateStats();
+            updateNextDoses();
+            
+            // Verificar medicamentos a cada minuto
+            setInterval(checkPendingMedications, 60000);
+            
+            // Atualizar próximas doses a cada 5 minutos
+            setInterval(updateNextDoses, 300000);
         });
     </script>
 </body>
