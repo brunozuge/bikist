@@ -194,13 +194,108 @@
             }
         }
 
+        /* Responsividade completa */
+        @media (max-width: 1200px) {
+            .main-text {
+                font-size: clamp(2rem, 7vw, 5rem);
+            }
+            .pulse-ring {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
         @media (max-width: 768px) {
             .main-text {
-                font-size: clamp(1.5rem, 6vw, 3rem);
+                font-size: clamp(1.8rem, 8vw, 4rem);
+                line-height: 1.2;
+                margin-bottom: 1.5rem;
             }
             .romantic-message {
-                font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+                font-size: clamp(1rem, 4vw, 1.3rem);
                 padding: 0 1rem;
+                margin-top: 1.5rem;
+            }
+            .pulse-ring {
+                width: 120px;
+                height: 120px;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-text {
+                font-size: clamp(1.5rem, 9vw, 3rem);
+                line-height: 1.1;
+                margin-bottom: 1rem;
+                letter-spacing: 0.05em;
+            }
+            .romantic-message {
+                font-size: clamp(0.9rem, 4.5vw, 1.1rem);
+                padding: 0 0.5rem;
+                margin-top: 1rem;
+            }
+            .pulse-ring {
+                width: 100px;
+                height: 100px;
+            }
+            .container {
+                padding: 0 0.5rem;
+            }
+            .heart {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .main-text {
+                font-size: clamp(1.2rem, 10vw, 2.5rem);
+                line-height: 1.1;
+            }
+            .romantic-message {
+                font-size: clamp(0.8rem, 5vw, 1rem);
+            }
+            .pulse-ring {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Responsividade para telas muito grandes */
+        @media (min-width: 1920px) {
+            .main-text {
+                font-size: clamp(4rem, 6vw, 8rem);
+            }
+            .romantic-message {
+                font-size: clamp(1.5rem, 2vw, 2rem);
+            }
+            .pulse-ring {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        /* Orientação landscape em dispositivos móveis */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .main-text {
+                font-size: clamp(1.5rem, 6vh, 3rem);
+                margin-bottom: 1rem;
+            }
+            .romantic-message {
+                font-size: clamp(0.8rem, 3vh, 1.1rem);
+                margin-top: 1rem;
+            }
+            .container {
+                padding: 0 2rem;
+            }
+        }
+
+        /* Ajustes para telas de alta densidade */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .main-text {
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
             }
         }
     </style>
@@ -219,15 +314,16 @@
             BIANCA KIST ZUGE
         </div>
         <div class="romantic-message">
-            ❤️ Para sempre e sempre ❤️
+            ❤️ MUUUUITO MUITÃO ❤️
         </div>
     </div>
 
     <script>
-        // Criar estrelas
+        // Criar estrelas (responsivo)
         function createStars() {
             const starsContainer = document.querySelector('.stars');
-            for (let i = 0; i < 100; i++) {
+            const starCount = window.innerWidth < 768 ? 50 : 100;
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 star.style.left = Math.random() * 100 + '%';
@@ -239,22 +335,25 @@
             }
         }
 
-        // Criar corações flutuantes
+        // Criar corações flutuantes (responsivo)
         function createHearts() {
             const heartsContainer = document.querySelector('.hearts');
+            const interval = window.innerWidth < 768 ? 1200 : 800;
             setInterval(() => {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
                 heart.innerHTML = '❤️';
                 heart.style.left = Math.random() * 100 + '%';
                 heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                heart.style.fontSize = window.innerWidth < 768 ? 
+                    (Math.random() * 1 + 1) + 'rem' : 
+                    (Math.random() * 1.5 + 1) + 'rem';
                 heartsContainer.appendChild(heart);
 
                 setTimeout(() => {
                     heart.remove();
                 }, 6000);
-            }, 800);
+            }, interval);
         }
 
         // Criar partículas
@@ -292,19 +391,20 @@
         createParticles();
         createBackgroundShapes();
 
-        // Efeito de clique para criar mais corações
+        // Efeito de clique para criar mais corações (responsivo)
         document.addEventListener('click', (e) => {
-            for (let i = 0; i < 5; i++) {
+            const heartCount = window.innerWidth < 768 ? 3 : 5;
+            for (let i = 0; i < heartCount; i++) {
                 const heart = document.createElement('div');
                 heart.innerHTML = '💖';
                 heart.style.position = 'absolute';
                 heart.style.left = e.clientX + 'px';
                 heart.style.top = e.clientY + 'px';
-                heart.style.fontSize = '2rem';
+                heart.style.fontSize = window.innerWidth < 768 ? '1.5rem' : '2rem';
                 heart.style.color = '#ff69b4';
                 heart.style.pointerEvents = 'none';
                 heart.style.animation = 'float 2s ease-out forwards';
-                heart.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
+                heart.style.transform = `translate(${(Math.random() - 0.5) * (window.innerWidth < 768 ? 60 : 100)}px, ${(Math.random() - 0.5) * (window.innerWidth < 768 ? 60 : 100)}px)`;
                 document.body.appendChild(heart);
 
                 setTimeout(() => {
