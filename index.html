@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Bianca ❤️</title>
+    <title>AI Interactive Hub</title>
     <style>
         * {
             margin: 0;
@@ -12,386 +12,740 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #f093fb);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c1e, #1a1a2e, #16213e);
+            color: #ffffff;
             overflow-x: hidden;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            padding: 60px 0;
-            position: relative;
-        }
-
-        .floating-hearts {
-            position: absolute;
+        .neural-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
             overflow: hidden;
         }
 
-        .heart {
-            position: absolute;
-            color: rgba(255, 182, 193, 0.8);
-            font-size: 2rem;
-            animation: float 6s ease-in-out infinite;
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
-            50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
-        }
-
-        .main-title {
+        .hero h1 {
             font-size: 4rem;
-            font-weight: bold;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 900;
+            background: linear-gradient(45deg, #00d4ff, #00b4d8, #0077b6, #023e8a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
-            animation: titlePulse 3s ease-in-out infinite;
+            animation: aiGlow 4s ease-in-out infinite alternate;
+            letter-spacing: -2px;
         }
 
-        @keyframes titlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes aiGlow {
+            0% { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3)); }
+            100% { filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.7)); }
         }
 
         .subtitle {
-            font-size: 1.5rem;
-            color: rgba(255,255,255,0.9);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            animation: typewriter 3s steps(40, end);
         }
 
-        .card {
-            background: rgba(255,255,255,0.95);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 30px 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, rgba(0, 212, 255, 0.2), rgba(0, 180, 216, 0.2));
+            border: 2px solid #00d4ff;
+            color: #ffffff;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
             backdrop-filter: blur(10px);
-            transform: translateY(20px);
-            opacity: 0;
-            animation: slideUp 1s ease forwards;
         }
 
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.4s; }
-        .card:nth-child(4) { animation-delay: 0.6s; }
-
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .cta-button:hover {
+            background: linear-gradient(45deg, rgba(0, 212, 255, 0.4), rgba(0, 180, 216, 0.4));
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3);
         }
 
-        .card h2 {
-            color: #333;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+        .section {
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
             text-align: center;
-            position: relative;
-        }
-
-        .card h2::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            margin: 15px auto;
-            border-radius: 2px;
-        }
-
-        .card p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #555;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .special-message {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            font-size: 3rem;
+            margin-bottom: 60px;
+            background: linear-gradient(45deg, #ffffff, #00d4ff);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: bold;
-            font-size: 1.4rem;
         }
 
-        .julia-message {
-            background: linear-gradient(45deg, #f093fb, #f5576c);
-            color: white;
-            text-align: center;
-            padding: 25px;
+        .neural-network {
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .neuron {
+            width: 15px;
+            height: 15px;
+            background: #00d4ff;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+        }
+
+        .connection {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+            animation: dataFlow 3s linear infinite;
+        }
+
+        @keyframes dataFlow {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .ai-demos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 255, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .demo-title {
+            font-size: 1.5rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-interface {
+            height: 300px;
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
-            font-size: 1.3rem;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .chat-message {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 3px solid #00d4ff;
+            animation: messageSlide 0.5s ease-out;
+        }
+
+        @keyframes messageSlide {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .ai-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .ai-input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .send-btn {
+            background: linear-gradient(45deg, #00d4ff, #0077b6);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .ml-playground {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .slider-group {
+            margin: 20px 0;
+        }
+
+        .slider-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #00d4ff;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .ai-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .ai-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00d4ff, #0077b6);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .prediction-result {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            border-radius: 15px;
+            padding: 20px;
             margin-top: 20px;
-            animation: rainbow 3s ease-in-out infinite;
-        }
-
-        @keyframes rainbow {
-            0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(90deg); }
-        }
-
-        .button-container {
             text-align: center;
+        }
+
+        .data-viz {
+            width: 100%;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px 0;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .bar {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            background: linear-gradient(0deg, #00d4ff, #023e8a);
+            border-radius: 5px 5px 0 0;
+            transition: height 0.5s ease;
+        }
+
+        .floating-brain {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.3), transparent);
+            border-radius: 50%;
+            animation: floatBrain 6s ease-in-out infinite;
+        }
+
+        @keyframes floatBrain {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
             margin: 40px 0;
         }
 
-        .magic-button {
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
+        .stat-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .magic-button:hover {
+        .stat-card:hover {
+            background: rgba(0, 212, 255, 0.2);
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #764ba2 0%, #667eea 100%);
         }
 
-        .sparkles {
-            position: fixed;
-            pointer-events: none;
-            top: 0;
-            left: 0;
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00d4ff;
+            display: block;
+        }
+
+        .loading-bar {
             width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .loading-progress {
             height: 100%;
-            z-index: 1000;
+            background: linear-gradient(90deg, #00d4ff, #0077b6, #00d4ff);
+            border-radius: 10px;
+            animation: loading 2s ease-in-out infinite;
         }
 
-        .sparkle {
-            position: absolute;
-            color: #ffd700;
-            font-size: 1rem;
-            animation: sparkle 2s ease-in-out infinite;
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
 
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
-            50% { opacity: 1; transform: scale(1) rotate(180deg); }
-        }
-
-        /* Responsivo */
         @media (max-width: 768px) {
-            .main-title {
-                font-size: 2.5rem;
-            }
-            
-            .card {
-                padding: 25px;
-                margin: 20px 10px;
-            }
-            
-            .card h2 {
-                font-size: 2rem;
-            }
-            
-            .card p {
-                font-size: 1.1rem;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 2rem;
-            }
-            
-            .card {
-                padding: 20px;
-            }
-            
-            .card h2 {
-                font-size: 1.8rem;
-            }
-            
-            .card p {
-                font-size: 1rem;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .ai-demos { grid-template-columns: 1fr; }
+            .cta-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="sparkles" id="sparkles"></div>
-    
-    <div class="container">
-        <div class="header">
-            <div class="floating-hearts" id="hearts"></div>
-            <h1 class="main-title">Para Bi Bibi Bianca Moi Mozi ❤️</h1>
-            <p class="subtitle">Uma mensagem especial do coração</p>
-        </div>
+    <canvas class="neural-bg" id="neuralBg"></canvas>
 
-        <div class="card">
-            <h2>🙏 Minhas Sinceras Desculpas</h2>
-            <p>Bianca, quero pedir desculpas de todo o meu coração. Sei que cometi erros e que talvez tenha te magoado de alguma forma.</p>
-            <p>Peço perdão por qualquer dor que possa ter causado. Você não merece isso, e eu reconheço meus equívocos.</p>
-            <p class="special-message">Por favor, me perdoe. Tu é muito importante para mim. 💔</p>
-        </div>
-
-        <div class="card">
-            <h2>🌟 Minha Eterna Gratidão</h2>
-            <p>Sou infinitamente grato por ter você na minha vida, Mozi. Você trouxe luz, alegria e significado para os meus dias.</p>
-            <p>Obrigado por todos os momentos especiais, pelas risadas, pelo carinho e por simplesmente ser essa pessoa incrível que você é.</p>
-            <p class="special-message">Minha gratidão por você é maior que o universo! 🌌✨</p>
-        </div>
-
-        <div class="card">
-            <h2>💖 O Que Você Significa Para Mim</h2>
-            <p>Bi Bibi Bianca Moi Mozi, você é alguém especial demais! Sua presença faz toda a diferença.</p>
-            <p>Cada dia ao seu lado é um presente. Você tem um coração puro e uma alma linda que ilumina tudo ao redor.</p>
-            <p class="special-message">Você é única e maravilhosa! Nunca se esqueça disso! 🌺</p>
-        </div>
-
-        <div class="card">
-            <div class="julia-message">
-                🎉 E JULIA É O CRL! 🎉<br>
+    <section class="hero">
+        <div class="floating-brain"></div>
+        <div class="hero-content">
+            <h1>INTELIGÊNCIA ARTIFICIAL</h1>
+            <p class="subtitle">Explorando o futuro da tecnologia cognitiva</p>
+            <div class="cta-grid">
+                <button class="cta-button" onclick="scrollToSection('neural')">Rede Neural</button>
+                <button class="cta-button" onclick="scrollToSection('chat')">AI Chat</button>
+                <button class="cta-button" onclick="scrollToSection('ml')">Machine Learning</button>
+                <button class="cta-button" onclick="scrollToSection('stats')">Estatísticas</button>
             </div>
         </div>
+    </section>
 
-        <div class="button-container">
-            <button class="magic-button" onclick="createMagic()">✨ Clique para Magia ✨</button>
+    <section class="section" id="neural">
+        <h2 class="section-title">Rede Neural Artificial</h2>
+        <div class="neural-network" id="neuralNetwork"></div>
+        <p style="text-align: center; opacity: 0.8;">
+            Visualização em tempo real de uma rede neural processando informações através de neurônios conectados.
+        </p>
+    </section>
+
+    <section class="section" id="chat">
+        <h2 class="section-title">Demonstrações Interativas</h2>
+        <div class="ai-demos">
+            <div class="demo-card">
+                <h3 class="demo-title">🤖 Chat com IA</h3>
+                <div class="chat-interface" id="chatInterface">
+                    <div class="chat-message">
+                        <strong>AI:</strong> Olá! Sou uma inteligência artificial. Como posso ajudá-lo hoje?
+                    </div>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="ai-input" id="chatInput" placeholder="Digite sua mensagem...">
+                    <button class="send-btn" onclick="sendMessage()">Enviar</button>
+                </div>
+            </div>
+
+            <div class="demo-card">
+                <h3 class="demo-title">🧠 Reconhecimento de Padrões</h3>
+                <div class="data-viz" id="patternViz"></div>
+                <button class="cta-button" onclick="generatePattern()" style="width: 100%;">Gerar Novo Padrão</button>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="section" id="ml">
+        <h2 class="section-title">Laboratório de Machine Learning</h2>
+        <div class="ml-playground">
+            <h3 style="color: #00d4ff; margin-bottom: 20px;">Preditor de Tendências</h3>
+            
+            <div class="slider-group">
+                <label class="slider-label">Dados de Entrada (Volume): <span id="dataValue">50</span></label>
+                <input type="range" min="0" max="100" value="50" class="ai-slider" id="dataSlider">
+            </div>
+            
+            <div class="slider-group">
+                <label class="slider-label">Complexidade do Modelo: <span id="complexityValue">5</span></label>
+                <input type="range" min="1" max="10" value="5" class="ai-slider" id="complexitySlider">
+            </div>
+            
+            <div class="slider-group">
+                <label class="slider-label">Taxa de Aprendizado: <span id="learningValue">0.01</span></label>
+                <input type="range" min="1" max="100" value="1" class="ai-slider" id="learningSlider">
+            </div>
+
+            <div class="loading-bar">
+                <div class="loading-progress" id="trainingProgress"></div>
+            </div>
+
+            <div class="prediction-result">
+                <h4>Resultado da Predição</h4>
+                <div style="font-size: 2rem; color: #00d4ff; margin: 10px 0;" id="predictionOutput">85.3%</div>
+                <p>Precisão do modelo baseado nos parâmetros configurados</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="stats">
+        <h2 class="section-title">Estatísticas da IA</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number" id="neuronsCount">1,024</span>
+                <div>Neurônios Ativos</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="connectionsCount">15,360</span>
+                <div>Conexões Ativas</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="processedData">847</span>
+                <div>MB Processados</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="accuracy">94.7%</span>
+                <div>Precisão</div>
+            </div>
+        </div>
+    </section>
 
     <script>
-        // Criar corações flutuantes
-        function createHearts() {
-            const heartsContainer = document.getElementById('hearts');
-            const heartSymbols = ['💖', '💕', '💗', '💝', '💘', '❤️', '🧡', '💛', '💚', '💙', '💜'];
+        // Neural network background
+        function initNeuralBackground() {
+            const canvas = document.getElementById('neuralBg');
+            const ctx = canvas.getContext('2d');
             
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 2 + 's';
-                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                
-                heartsContainer.appendChild(heart);
-                
-                setTimeout(() => {
-                    heart.remove();
-                }, 6000);
-            }, 1000);
-        }
-
-        // Criar efeito de estrelinhas
-        function createSparkles(x, y) {
-            const sparklesContainer = document.getElementById('sparkles');
-            const sparkleSymbols = ['✨', '⭐', '🌟', '💫', '⚡'];
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
             
-            for (let i = 0; i < 8; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                sparkle.innerHTML = sparkleSymbols[Math.floor(Math.random() * sparkleSymbols.length)];
-                sparkle.style.left = (x - 20 + Math.random() * 40) + 'px';
-                sparkle.style.top = (y - 20 + Math.random() * 40) + 'px';
-                sparkle.style.animationDelay = Math.random() * 0.5 + 's';
-                
-                sparklesContainer.appendChild(sparkle);
-                
-                setTimeout(() => {
-                    sparkle.remove();
-                }, 2000);
-            }
-        }
-
-        // Função mágica do botão
-        function createMagic() {
-            // Criar explosão de estrelinhas
-            for (let i = 0; i < 20; i++) {
-                setTimeout(() => {
-                    createSparkles(
-                        Math.random() * window.innerWidth,
-                        Math.random() * window.innerHeight
-                    );
-                }, i * 100);
+            const neurons = [];
+            for (let i = 0; i < 100; i++) {
+                neurons.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
             }
             
-            // Mudar temporariamente o fundo
-            document.body.style.animation = 'none';
-            document.body.style.background = 'linear-gradient(-45deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e)';
-            
-            setTimeout(() => {
-                document.body.style.animation = 'gradientShift 15s ease infinite';
-                document.body.style.background = 'linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #f093fb)';
-            }, 3000);
-            
-            // Mensagem especial
-            setTimeout(() => {
-                alert('💖 Bianca, você é incrível! Espero que aceite minhas desculpas e saiba o quanto você é especial! 💖');
-            }, 1000);
-        }
-
-        // Efeito de clique em qualquer lugar
-        document.addEventListener('click', function(e) {
-            createSparkles(e.clientX, e.clientY);
-        });
-
-        // Inicializar corações
-        createHearts();
-
-        // Animação suave ao rolar
-        window.addEventListener('scroll', () => {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-                if (isVisible) {
-                    card.style.transform = 'translateY(0)';
-                    card.style.opacity = '1';
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                neurons.forEach(neuron => {
+                    neuron.x += neuron.vx;
+                    neuron.y += neuron.vy;
+                    
+                    if (neuron.x < 0 || neuron.x > canvas.width) neuron.vx *= -1;
+                    if (neuron.y < 0 || neuron.y > canvas.height) neuron.vy *= -1;
+                });
+                
+                // Draw connections
+                ctx.strokeStyle = 'rgba(0, 212, 255, 0.1)';
+                ctx.lineWidth = 1;
+                for (let i = 0; i < neurons.length; i++) {
+                    for (let j = i + 1; j < neurons.length; j++) {
+                        const dist = Math.hypot(neurons[i].x - neurons[j].x, neurons[i].y - neurons[j].y);
+                        if (dist < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(neurons[i].x, neurons[i].y);
+                            ctx.lineTo(neurons[j].x, neurons[j].y);
+                            ctx.stroke();
+                        }
+                    }
                 }
-            });
-        });
+                
+                // Draw neurons
+                ctx.fillStyle = 'rgba(0, 212, 255, 0.8)';
+                neurons.forEach(neuron => {
+                    ctx.beginPath();
+                    ctx.arc(neuron.x, neuron.y, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
 
-        // Adicionar mais interatividade
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-                this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)';
+        // Create neural network visualization
+        function createNeuralNetwork() {
+            const container = document.getElementById('neuralNetwork');
+            container.innerHTML = '';
+            
+            // Create layers
+            const layers = [4, 6, 6, 3];
+            const layerSpacing = container.offsetWidth / (layers.length + 1);
+            
+            for (let l = 0; l < layers.length; l++) {
+                for (let n = 0; n < layers[l]; n++) {
+                    const neuron = document.createElement('div');
+                    neuron.className = 'neuron';
+                    neuron.style.left = (l + 1) * layerSpacing + 'px';
+                    neuron.style.top = (container.offsetHeight / (layers[l] + 1)) * (n + 1) + 'px';
+                    neuron.style.animationDelay = Math.random() * 2 + 's';
+                    container.appendChild(neuron);
+                }
+            }
+            
+            // Create connections
+            for (let l = 0; l < layers.length - 1; l++) {
+                for (let i = 0; i < layers[l]; i++) {
+                    for (let j = 0; j < layers[l + 1]; j++) {
+                        const connection = document.createElement('div');
+                        connection.className = 'connection';
+                        
+                        const x1 = (l + 1) * layerSpacing;
+                        const y1 = (container.offsetHeight / (layers[l] + 1)) * (i + 1);
+                        const x2 = (l + 2) * layerSpacing;
+                        const y2 = (container.offsetHeight / (layers[l + 1] + 1)) * (j + 1);
+                        
+                        const length = Math.hypot(x2 - x1, y2 - y1);
+                        const angle = Math.atan2(y2 - y1, x2 - x1);
+                        
+                        connection.style.width = length + 'px';
+                        connection.style.left = x1 + 'px';
+                        connection.style.top = y1 + 'px';
+                        connection.style.transform = `rotate(${angle}rad)`;
+                        connection.style.animationDelay = Math.random() * 3 + 's';
+                        
+                        container.appendChild(connection);
+                    }
+                }
+            }
+        }
+
+        // Chat functionality
+        const aiResponses = [
+            "Interessante pergunta! A IA está evoluindo rapidamente.",
+            "Posso ajudar você com isso. Vamos explorar juntos!",
+            "Excelente observação sobre tecnologia!",
+            "A inteligência artificial tem aplicações infinitas.",
+            "Isso me faz pensar em algoritmos avançados.",
+            "Vamos analisar dados para encontrar a resposta.",
+            "A machine learning pode resolver esse problema!",
+            "Neural networks são fascinantes, não acha?"
+        ];
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const chat = document.getElementById('chatInterface');
+            
+            if (input.value.trim() === '') return;
+            
+            // User message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-message';
+            userMsg.innerHTML = `<strong>Você:</strong> ${input.value}`;
+            chat.appendChild(userMsg);
+            
+            // AI response (after delay)
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'chat-message';
+                const response = aiResponses[Math.floor(Math.random() * aiResponses.length)];
+                aiMsg.innerHTML = `<strong>AI:</strong> ${response}`;
+                chat.appendChild(aiMsg);
+                chat.scrollTop = chat.scrollHeight;
+            }, 1000);
+            
+            input.value = '';
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        // Pattern generation
+        function generatePattern() {
+            const viz = document.getElementById('patternViz');
+            viz.innerHTML = '';
+            
+            for (let i = 0; i < 10; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.style.left = (i * 50 + 20) + 'px';
+                bar.style.height = Math.random() * 150 + 20 + 'px';
+                bar.style.animationDelay = i * 0.1 + 's';
+                viz.appendChild(bar);
+            }
+        }
+
+        // ML Playground
+        function updateSliders() {
+            const dataSlider = document.getElementById('dataSlider');
+            const complexitySlider = document.getElementById('complexitySlider');
+            const learningSlider = document.getElementById('learningSlider');
+            
+            dataSlider.addEventListener('input', (e) => {
+                document.getElementById('dataValue').textContent = e.target.value;
+                updatePrediction();
             });
             
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-                this.style.boxShadow = '0 15px 35px rgba(0,0,0,0.1)';
+            complexitySlider.addEventListener('input', (e) => {
+                document.getElementById('complexityValue').textContent = e.target.value;
+                updatePrediction();
             });
+            
+            learningSlider.addEventListener('input', (e) => {
+                const value = (e.target.value / 100).toFixed(3);
+                document.getElementById('learningValue').textContent = value;
+                updatePrediction();
+            });
+        }
+
+        function updatePrediction() {
+            const data = parseInt(document.getElementById('dataSlider').value);
+            const complexity = parseInt(document.getElementById('complexitySlider').value);
+            const learning = parseInt(document.getElementById('learningSlider').value);
+            
+            const prediction = (data * 0.4 + complexity * 8 + learning * 0.3).toFixed(1);
+            document.getElementById('predictionOutput').textContent = Math.min(99.9, prediction) + '%';
+        }
+
+        // Statistics animation
+        function animateStats() {
+            const counters = ['neuronsCount', 'connectionsCount', 'processedData', 'accuracy'];
+            const targets = [1024, 15360, 847, 94.7];
+            
+            counters.forEach((id, index) => {
+                const element = document.getElementById(id);
+                const target = targets[index];
+                let current = 0;
+                const increment = target / 100;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    if (id === 'accuracy') {
+                        element.textContent = current.toFixed(1) + '%';
+                    } else {
+                        element.textContent = Math.floor(current).toLocaleString();
+                    }
+                }, 50);
+            });
+        }
+
+        // Utility functions
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Chat input enter key
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
         });
+
+        // Initialize everything
+        window.addEventListener('load', () => {
+            initNeuralBackground();
+            createNeuralNetwork();
+            generatePattern();
+            updateSliders();
+            
+            setTimeout(animateStats, 1000);
+        });
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('neuralBg');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            createNeuralNetwork();
+        });
+
+        // Auto-update stats
+        setInterval(() => {
+            const neurons = document.getElementById('neuronsCount');
+            const connections = document.getElementById('connectionsCount');
+            const data = document.getElementById('processedData');
+            
+            neurons.textContent = (parseInt(neurons.textContent.replace(',', '')) + Math.floor(Math.random() * 10)).toLocaleString();
+            connections.textContent = (parseInt(connections.textContent.replace(',', '')) + Math.floor(Math.random() * 50)).toLocaleString();
+            data.textContent = (parseInt(data.textContent) + Math.floor(Math.random() * 5)).toLocaleString();
+        }, 3000);
     </script>
 </body>
 </html>
