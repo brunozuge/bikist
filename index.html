@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Interactive Hub</title>
+    <title>Para minha Bibi 💕</title>
     <style>
         * {
             margin: 0;
@@ -12,967 +12,349 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0c0c1e, #1a1a2e, #16213e);
-            color: #ffffff;
-            overflow-x: hidden;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(45deg, #ffb3ba, #ffdfba, #bae1ff, #baffc9);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease infinite;
+            min-height: 100vh;
+            color: #333;
         }
 
-        .neural-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-            max-width: 900px;
-            padding: 0 20px;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #00d4ff, #00b4d8, #0077b6, #023e8a);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            animation: aiGlow 4s ease-in-out infinite alternate;
-            letter-spacing: -2px;
-        }
-
-        @keyframes aiGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3)); }
-            100% { filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.7)); }
-        }
-
-        .subtitle {
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-            animation: typewriter 3s steps(40, end);
-        }
-
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .cta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .cta-button {
-            background: linear-gradient(45deg, rgba(0, 212, 255, 0.2), rgba(0, 180, 216, 0.2));
-            border: 2px solid #00d4ff;
-            color: #ffffff;
-            padding: 15px 25px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 1px;
-            backdrop-filter: blur(10px);
-        }
-
-        .cta-button:hover {
-            background: linear-gradient(45deg, rgba(0, 212, 255, 0.4), rgba(0, 180, 216, 0.4));
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3);
-        }
-
-        .section {
-            padding: 100px 20px;
-            max-width: 1400px;
+        .container {
+            max-width: 800px;
             margin: 0 auto;
+            padding: 20px;
         }
 
-        .section-title {
+        .heart-header {
             text-align: center;
-            font-size: 3rem;
-            margin-bottom: 60px;
-            background: linear-gradient(45deg, #ffffff, #00d4ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            padding: 40px 20px;
+            margin-bottom: 30px;
         }
 
-        .neural-network {
-            width: 100%;
-            height: 400px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-            margin: 40px 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-        }
-
-        .neuron {
-            width: 15px;
-            height: 15px;
-            background: #00d4ff;
-            border-radius: 50%;
-            position: absolute;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+        .name {
+            font-size: 3.5rem;
+            color: #d63384;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             animation: pulse 2s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.7; }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        .connection {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
-            animation: dataFlow 3s linear infinite;
-        }
-
-        @keyframes dataFlow {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        .ai-demos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .demo-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .demo-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 212, 255, 0.6);
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
-        }
-
-        .demo-title {
-            font-size: 1.5rem;
-            color: #00d4ff;
+        .tagline {
+            font-size: 1.3rem;
+            color: #6f42c1;
+            font-style: italic;
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .chat-interface {
-            height: 300px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            overflow-y: auto;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-        }
-
-        .chat-message {
-            background: rgba(0, 212, 255, 0.1);
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 10px;
-            border-left: 3px solid #00d4ff;
-            animation: messageSlide 0.5s ease-out;
-        }
-
-        @keyframes messageSlide {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .ai-input {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 10px;
-            padding: 12px;
-            color: white;
-            font-size: 14px;
-        }
-
-        .ai-input:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
-        }
-
-        .send-btn {
-            background: linear-gradient(45deg, #00d4ff, #0077b6);
-            border: none;
-            border-radius: 10px;
-            padding: 12px 20px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .send-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
-        }
-
-        .ml-playground {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
+        .love-card {
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px;
-            margin: 40px 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-        }
-
-        .slider-group {
+            border-radius: 20px;
             margin: 20px 0;
-        }
-
-        .slider-label {
-            display: block;
-            margin-bottom: 10px;
-            color: #00d4ff;
-            font-weight: bold;
-        }
-
-        .ai-slider {
-            width: 100%;
-            height: 8px;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.2);
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .ai-slider::-webkit-slider-thumb {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #00d4ff, #0077b6);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
-        .prediction-result {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid #00d4ff;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .data-viz {
-            width: 100%;
-            height: 200px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            margin: 20px 0;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-        }
-
-        .bar {
-            position: absolute;
-            bottom: 0;
-            width: 40px;
-            background: linear-gradient(0deg, #00d4ff, #023e8a);
-            border-radius: 5px 5px 0 0;
-            transition: height 0.5s ease;
-        }
-
-        .floating-brain {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.3), transparent);
-            border-radius: 50%;
-            animation: floatBrain 6s ease-in-out infinite;
-        }
-
-        @keyframes floatBrain {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-20px) scale(1.1); }
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .stat-card {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            background: rgba(0, 212, 255, 0.2);
+        .love-card:hover {
             transform: translateY(-5px);
         }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #00d4ff;
-            display: block;
+        .love-card h2 {
+            color: #e91e63;
+            font-size: 2rem;
+            margin-bottom: 15px;
         }
 
-        .loading-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
+        .love-card p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .interactive-heart {
+            font-size: 4rem;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin: 20px;
+        }
+
+        .interactive-heart:hover {
+            transform: scale(1.3);
+            filter: brightness(1.2);
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
             margin: 20px 0;
+            text-align: center;
+            font-size: 1.4rem;
+            color: #d63384;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 5px solid #e91e63;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
-        .loading-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #00d4ff, #0077b6, #00d4ff);
-            border-radius: 10px;
-            animation: loading 2s ease-in-out infinite;
+        .message-box.show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease;
         }
 
-        @keyframes loading {
-            0% { width: 0%; }
-            100% { width: 100%; }
+        .photo-memories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
         }
 
-        @media (max-width: 1200px) {
-            .hero h1 { font-size: 3.5rem; }
-            .section { padding: 80px 15px; }
-            .ai-demos { grid-template-columns: 1fr; }
-            .neural-network { height: 350px; }
+        .memory {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        @media (max-width: 992px) {
-            .hero h1 { font-size: 3rem; }
-            .section-title { font-size: 2.5rem; }
-            .cta-grid { grid-template-columns: repeat(2, 1fr); }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .demo-card { padding: 25px; }
-            .ml-playground { padding: 25px; }
+        .memory:hover {
+            transform: rotate(3deg) scale(1.05);
         }
 
-        @media (max-width: 768px) {
-            .hero {
-                padding: 0 15px;
-                min-height: 100vh;
-            }
-            .hero h1 { 
+        .simple-button {
+            background: linear-gradient(45deg, #ff6b9d, #ffa8e4);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .simple-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .footer-love {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.1rem;
+            color: #6f42c1;
+        }
+
+        @media (max-width: 600px) {
+            .name {
                 font-size: 2.5rem;
-                letter-spacing: -1px;
             }
-            .subtitle { 
-                font-size: 1.2rem;
-                margin-bottom: 30px;
-            }
-            .ai-demos { 
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .cta-grid { 
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            .cta-button {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
-            .section { 
-                padding: 60px 15px; 
-            }
-            .section-title { 
-                font-size: 2rem; 
-                margin-bottom: 40px;
-            }
-            .neural-network { 
-                height: 300px;
-                margin: 30px 0;
-            }
-            .demo-card { 
+            
+            .love-card {
                 padding: 20px;
-                margin: 0 5px;
-            }
-            .chat-interface { 
-                height: 250px; 
-            }
-            .ml-playground { 
-                padding: 20px; 
-            }
-            .stats-grid { 
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            .stat-card {
-                padding: 15px;
-            }
-            .stat-number { 
-                font-size: 2rem; 
-            }
-            .data-viz { 
-                height: 150px; 
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero h1 { 
-                font-size: 2rem;
-                line-height: 1.2;
-            }
-            .subtitle { 
-                font-size: 1rem; 
-            }
-            .section { 
-                padding: 50px 10px; 
-            }
-            .section-title { 
-                font-size: 1.8rem; 
-            }
-            .neural-network { 
-                height: 250px;
-                border-radius: 15px;
-            }
-            .demo-card { 
-                padding: 15px;
-                border-radius: 15px;
-            }
-            .demo-title { 
-                font-size: 1.3rem; 
-            }
-            .chat-interface { 
-                height: 200px; 
-                padding: 15px;
-            }
-            .input-group { 
-                flex-direction: column;
-                gap: 10px;
-            }
-            .send-btn { 
-                width: 100%;
-                padding: 10px;
-            }
-            .ml-playground { 
-                padding: 15px;
-                border-radius: 15px;
-            }
-            .slider-group { 
-                margin: 15px 0; 
-            }
-            .stats-grid { 
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .stat-card {
-                padding: 12px;
-            }
-            .stat-number { 
-                font-size: 1.8rem; 
-            }
-            .data-viz { 
-                height: 120px; 
-            }
-            .prediction-result {
-                padding: 15px;
-            }
-            .cta-button {
-                padding: 10px 15px;
-                font-size: 0.85rem;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .hero h1 { 
-                font-size: 1.8rem; 
-            }
-            .subtitle { 
-                font-size: 0.9rem; 
-            }
-            .section { 
-                padding: 40px 8px; 
-            }
-            .section-title { 
-                font-size: 1.6rem; 
-            }
-            .neural-network { 
-                height: 200px; 
-            }
-            .demo-card, .ml-playground { 
-                padding: 12px; 
-            }
-            .chat-interface { 
-                height: 180px; 
-                padding: 10px;
-            }
-            .stat-number { 
-                font-size: 1.5rem; 
-            }
-        }
-
-        /* Landscape mobile optimization */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .hero {
-                padding: 20px 15px;
-            }
-            .hero h1 { 
-                font-size: 2rem; 
-            }
-            .subtitle { 
-                font-size: 0.9rem;
-                margin-bottom: 20px;
-            }
-            .cta-grid { 
-                grid-template-columns: repeat(4, 1fr);
-                gap: 10px;
-            }
-            .cta-button {
-                padding: 8px 12px;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Touch device optimizations */
-        @media (hover: none) {
-            .cta-button:hover,
-            .demo-card:hover,
-            .stat-card:hover {
-                transform: none;
+                margin: 15px 10px;
             }
             
-            .cta-button:active {
-                transform: scale(0.95);
+            .photo-memories {
+                grid-template-columns: repeat(3, 1fr);
             }
             
-            .demo-card:active,
-            .stat-card:active {
-                transform: translateY(-5px);
+            .interactive-heart {
+                font-size: 3rem;
+                margin: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <canvas class="neural-bg" id="neuralBg"></canvas>
+    <div class="container">
+        <header class="heart-header">
+            <h1 class="name">Bibi Bi Moi Mozi</h1>
+            <p class="tagline">Meu coração tem seu nome escrito 💖</p>
+        </header>
 
-    <section class="hero">
-        <div class="floating-brain"></div>
-        <div class="hero-content">
-            <h1>INTELIGÊNCIA ARTIFICIAL</h1>
-            <p class="subtitle">Explorando o futuro da tecnologia cognitiva</p>
-            <div class="cta-grid">
-                <button class="cta-button" onclick="scrollToSection('neural')">Rede Neural</button>
-                <button class="cta-button" onclick="scrollToSection('chat')">AI Chat</button>
-                <button class="cta-button" onclick="scrollToSection('ml')">Machine Learning</button>
-                <button class="cta-button" onclick="scrollToSection('stats')">Estatísticas</button>
-            </div>
+        <div class="love-card" onclick="showMessage('love')">
+            <h2>💕 Meu Amor</h2>
+            <p>Você é a razão do meu sorriso todos os dias. Sua presença torna tudo mais belo e especial.</p>
         </div>
-    </section>
 
-    <section class="section" id="neural">
-        <h2 class="section-title">Rede Neural Artificial</h2>
-        <div class="neural-network" id="neuralNetwork"></div>
-        <p style="text-align: center; opacity: 0.8;">
-            Visualização em tempo real de uma rede neural processando informações através de neurônios conectados.
-        </p>
-    </section>
-
-    <section class="section" id="chat">
-        <h2 class="section-title">Demonstrações Interativas</h2>
-        <div class="ai-demos">
-            <div class="demo-card">
-                <h3 class="demo-title">🤖 Chat com IA</h3>
-                <div class="chat-interface" id="chatInterface">
-                    <div class="chat-message">
-                        <strong>AI:</strong> Olá! Sou uma inteligência artificial. Como posso ajudá-lo hoje?
-                    </div>
-                </div>
-                <div class="input-group">
-                    <input type="text" class="ai-input" id="chatInput" placeholder="Digite sua mensagem...">
-                    <button class="send-btn" onclick="sendMessage()">Enviar</button>
-                </div>
-            </div>
-
-            <div class="demo-card">
-                <h3 class="demo-title">🧠 Reconhecimento de Padrões</h3>
-                <div class="data-viz" id="patternViz"></div>
-                <button class="cta-button" onclick="generatePattern()" style="width: 100%;">Gerar Novo Padrão</button>
-            </div>
+        <div class="love-card" onclick="showMessage('gratitude')">
+            <h2>🌹 Minha Gratidão</h2>
+            <p>Obrigado por ser quem você é, por me fazer sentir amado e por tornar minha vida completa.</p>
         </div>
-    </section>
 
-    <section class="section" id="ml">
-        <h2 class="section-title">Laboratório de Machine Learning</h2>
-        <div class="ml-playground">
-            <h3 style="color: #00d4ff; margin-bottom: 20px;">Preditor de Tendências</h3>
-            
-            <div class="slider-group">
-                <label class="slider-label">Dados de Entrada (Volume): <span id="dataValue">50</span></label>
-                <input type="range" min="0" max="100" value="50" class="ai-slider" id="dataSlider">
-            </div>
-            
-            <div class="slider-group">
-                <label class="slider-label">Complexidade do Modelo: <span id="complexityValue">5</span></label>
-                <input type="range" min="1" max="10" value="5" class="ai-slider" id="complexitySlider">
-            </div>
-            
-            <div class="slider-group">
-                <label class="slider-label">Taxa de Aprendizado: <span id="learningValue">0.01</span></label>
-                <input type="range" min="1" max="100" value="1" class="ai-slider" id="learningSlider">
-            </div>
-
-            <div class="loading-bar">
-                <div class="loading-progress" id="trainingProgress"></div>
-            </div>
-
-            <div class="prediction-result">
-                <h4>Resultado da Predição</h4>
-                <div style="font-size: 2rem; color: #00d4ff; margin: 10px 0;" id="predictionOutput">85.3%</div>
-                <p>Precisão do modelo baseado nos parâmetros configurados</p>
-            </div>
+        <div class="love-card" onclick="showMessage('future')">
+            <h2>✨ Nosso Futuro</h2>
+            <p>Quero construir todos os meus sonhos ao seu lado, criando uma história linda juntos.</p>
         </div>
-    </section>
 
-    <section class="section" id="stats">
-        <h2 class="section-title">Estatísticas da IA</h2>
-        <div class="stats-grid">
-            <div class="stat-card">
-                <span class="stat-number" id="neuronsCount">1,024</span>
-                <div>Neurônios Ativos</div>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number" id="connectionsCount">15,360</span>
-                <div>Conexões Ativas</div>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number" id="processedData">847</span>
-                <div>MB Processados</div>
-            </div>
-            <div class="stat-card">
-                <span class="stat-number" id="accuracy">94.7%</span>
-                <div>Precisão</div>
-            </div>
+        <div style="text-align: center; margin: 30px 0;">
+            <span class="interactive-heart" onclick="createFloatingHeart(event)">💝</span>
+            <span class="interactive-heart" onclick="createFloatingHeart(event)">💖</span>
+            <span class="interactive-heart" onclick="createFloatingHeart(event)">💗</span>
         </div>
-    </section>
+
+        <div class="message-box" id="messageBox">
+            Clique nos cards ou corações para ver mensagens especiais! 💕
+        </div>
+
+  
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="simple-button" onclick="randomLoveMessage()">Mensagem Surpresa</button>
+            <button class="simple-button" onclick="showPromise()">Minha Promessa</button>
+        </div>
+
+        <footer class="footer-love">
+            <p>Para sempre seu, com todo meu amor 💕</p>
+        </footer>
+    </div>
 
     <script>
-        // Neural network background
-        function initNeuralBackground() {
-            const canvas = document.getElementById('neuralBg');
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            // Responsive neuron count
-            const neuronCount = window.innerWidth < 768 ? 50 : 100;
-            const neurons = [];
-            
-            for (let i = 0; i < neuronCount; i++) {
-                neurons.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5
-                });
-            }
-            
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
-                neurons.forEach(neuron => {
-                    neuron.x += neuron.vx;
-                    neuron.y += neuron.vy;
-                    
-                    if (neuron.x < 0 || neuron.x > canvas.width) neuron.vx *= -1;
-                    if (neuron.y < 0 || neuron.y > canvas.height) neuron.vy *= -1;
-                });
-                
-                // Draw connections (fewer on mobile)
-                const maxDistance = window.innerWidth < 768 ? 80 : 100;
-                ctx.strokeStyle = 'rgba(0, 212, 255, 0.1)';
-                ctx.lineWidth = 1;
-                
-                for (let i = 0; i < neurons.length; i++) {
-                    for (let j = i + 1; j < neurons.length; j++) {
-                        const dist = Math.hypot(neurons[i].x - neurons[j].x, neurons[i].y - neurons[j].y);
-                        if (dist < maxDistance) {
-                            ctx.beginPath();
-                            ctx.moveTo(neurons[i].x, neurons[i].y);
-                            ctx.lineTo(neurons[j].x, neurons[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-                
-                // Draw neurons
-                ctx.fillStyle = 'rgba(0, 212, 255, 0.8)';
-                const neuronSize = window.innerWidth < 768 ? 1.5 : 2;
-                neurons.forEach(neuron => {
-                    ctx.beginPath();
-                    ctx.arc(neuron.x, neuron.y, neuronSize, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-                
-                requestAnimationFrame(animate);
-            }
-            animate();
-        }
+        const messages = {
+            love: [
+                "Bibi, você é minha pessoa favorita no mundo inteiro 💕",
+                "Seu sorriso é minha parte favorita de cada dia ☀️",
+                "Com você, encontrei meu para sempre 💖"
+            ],
+            gratitude: [
+                "Obrigado por me amar do jeito que sou 🥰",
+                "Você torna cada dia mais especial só por existir 🌟",
+                "Sou grato por ter você na minha vida 🙏"
+            ],
+            future: [
+                "Quero envelhecer ao seu lado, rindo de nossas piadas internas 👫",
+                "Vamos construir nosso cantinho de amor e paz 🏡",
+                "Nossos sonhos vão se tornar realidade juntos ✨"
+            ],
+            memories: {
+                first: "Lembra do nosso primeiro encontro? Meu coração sabia que você era especial 💕",
+                happy: "Você me faz rir até quando estou triste. É mágico! 😄",
+                sunset: "Todos os pores do sol são mais bonitos ao seu lado 🌅",
+                dance: "Dançar com você é como flutuar nas nuvens 💃✨",
+                kiss: "Seus beijos são meu lugar favorito no universo 💋",
+                forever: "Infinito é pouco para descrever meu amor por você ♾️💖"
+            },
+            random: [
+                "Se o amor fosse uma cor, seria você 🌈",
+                "Você é minha música favorita tocando sem parar 🎵",
+                "Em um mundo cheio de pessoas, você é minha única 👑",
+                "Você faz meu coração bater em verso e prosa 💗",
+                "Meu amor por você cresce a cada segundo ⏰💕"
+            ],
+            promises: [
+                "Prometo te amar em todos os dias da minha vida 💍",
+                "Prometo ser seu melhor amigo e maior apoiador sempre 🤝",
+                "Prometo que nosso amor será nossa maior aventura 🗺️💕"
+            ]
+        };
 
-        // Create neural network visualization
-        function createNeuralNetwork() {
-            const container = document.getElementById('neuralNetwork');
-            container.innerHTML = '';
+        function showMessage(type) {
+            const messageBox = document.getElementById('messageBox');
+            const randomMsg = messages[type][Math.floor(Math.random() * messages[type].length)];
             
-            // Responsive layer configuration
-            const layers = window.innerWidth < 768 ? [3, 4, 4, 2] : [4, 6, 6, 3];
-            const layerSpacing = container.offsetWidth / (layers.length + 1);
-            const neuronSize = window.innerWidth < 576 ? 12 : 15;
-            
-            for (let l = 0; l < layers.length; l++) {
-                for (let n = 0; n < layers[l]; n++) {
-                    const neuron = document.createElement('div');
-                    neuron.className = 'neuron';
-                    neuron.style.width = neuronSize + 'px';
-                    neuron.style.height = neuronSize + 'px';
-                    neuron.style.left = (l + 1) * layerSpacing + 'px';
-                    neuron.style.top = (container.offsetHeight / (layers[l] + 1)) * (n + 1) + 'px';
-                    neuron.style.animationDelay = Math.random() * 2 + 's';
-                    container.appendChild(neuron);
-                }
-            }
-            
-            // Create connections (fewer on mobile for performance)
-            const connectionDensity = window.innerWidth < 768 ? 0.7 : 1;
-            for (let l = 0; l < layers.length - 1; l++) {
-                for (let i = 0; i < layers[l]; i++) {
-                    for (let j = 0; j < layers[l + 1]; j++) {
-                        if (Math.random() > connectionDensity) continue;
-                        
-                        const connection = document.createElement('div');
-                        connection.className = 'connection';
-                        
-                        const x1 = (l + 1) * layerSpacing;
-                        const y1 = (container.offsetHeight / (layers[l] + 1)) * (i + 1);
-                        const x2 = (l + 2) * layerSpacing;
-                        const y2 = (container.offsetHeight / (layers[l + 1] + 1)) * (j + 1);
-                        
-                        const length = Math.hypot(x2 - x1, y2 - y1);
-                        const angle = Math.atan2(y2 - y1, x2 - x1);
-                        
-                        connection.style.width = length + 'px';
-                        connection.style.left = x1 + 'px';
-                        connection.style.top = y1 + 'px';
-                        connection.style.transform = `rotate(${angle}rad)`;
-                        connection.style.animationDelay = Math.random() * 3 + 's';
-                        
-                        container.appendChild(connection);
-                    }
-                }
-            }
-        }
-
-        // Chat functionality
-        const aiResponses = [
-            "Interessante pergunta! A IA está evoluindo rapidamente.",
-            "Posso ajudar você com isso. Vamos explorar juntos!",
-            "Excelente observação sobre tecnologia!",
-            "A inteligência artificial tem aplicações infinitas.",
-            "Isso me faz pensar em algoritmos avançados.",
-            "Vamos analisar dados para encontrar a resposta.",
-            "A machine learning pode resolver esse problema!",
-            "Neural networks são fascinantes, não acha?"
-        ];
-
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const chat = document.getElementById('chatInterface');
-            
-            if (input.value.trim() === '') return;
-            
-            // User message
-            const userMsg = document.createElement('div');
-            userMsg.className = 'chat-message';
-            userMsg.innerHTML = `<strong>Você:</strong> ${input.value}`;
-            chat.appendChild(userMsg);
-            
-            // AI response (after delay)
+            messageBox.classList.remove('show');
             setTimeout(() => {
-                const aiMsg = document.createElement('div');
-                aiMsg.className = 'chat-message';
-                const response = aiResponses[Math.floor(Math.random() * aiResponses.length)];
-                aiMsg.innerHTML = `<strong>AI:</strong> ${response}`;
-                chat.appendChild(aiMsg);
-                chat.scrollTop = chat.scrollHeight;
-            }, 1000);
-            
-            input.value = '';
-            chat.scrollTop = chat.scrollHeight;
+                messageBox.innerHTML = randomMsg;
+                messageBox.classList.add('show');
+            }, 200);
         }
 
-        // Pattern generation
-        function generatePattern() {
-            const viz = document.getElementById('patternViz');
-            viz.innerHTML = '';
+        function showMemory(memoryType) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.classList.remove('show');
+            setTimeout(() => {
+                messageBox.innerHTML = messages.memories[memoryType];
+                messageBox.classList.add('show');
+            }, 200);
+        }
+
+        function randomLoveMessage() {
+            const messageBox = document.getElementById('messageBox');
+            const randomMsg = messages.random[Math.floor(Math.random() * messages.random.length)];
             
-            const barCount = window.innerWidth < 576 ? 6 : window.innerWidth < 768 ? 8 : 10;
-            const barWidth = window.innerWidth < 576 ? 30 : window.innerWidth < 768 ? 35 : 40;
-            const spacing = (viz.offsetWidth - (barCount * barWidth)) / (barCount + 1);
+            messageBox.classList.remove('show');
+            setTimeout(() => {
+                messageBox.innerHTML = randomMsg;
+                messageBox.classList.add('show');
+            }, 200);
+        }
+
+        function showPromise() {
+            const messageBox = document.getElementById('messageBox');
+            const randomPromise = messages.promises[Math.floor(Math.random() * messages.promises.length)];
             
-            for (let i = 0; i < barCount; i++) {
-                const bar = document.createElement('div');
-                bar.className = 'bar';
-                bar.style.left = (spacing + i * (barWidth + spacing)) + 'px';
-                bar.style.width = barWidth + 'px';
-                bar.style.height = Math.random() * (viz.offsetHeight - 40) + 20 + 'px';
-                bar.style.animationDelay = i * 0.1 + 's';
-                viz.appendChild(bar);
+            messageBox.classList.remove('show');
+            setTimeout(() => {
+                messageBox.innerHTML = randomPromise;
+                messageBox.classList.add('show');
+            }, 200);
+        }
+
+        function createFloatingHeart(event) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💕';
+            heart.style.position = 'fixed';
+            heart.style.left = event.clientX + 'px';
+            heart.style.top = event.clientY + 'px';
+            heart.style.fontSize = '2rem';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9999';
+            heart.style.animation = 'floatUp 2s ease-out forwards';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+
+        // Adicionar animação CSS para corações flutuantes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-100px) scale(1.5);
+                }
             }
-        }
+        `;
+        document.head.appendChild(style);
 
-        // ML Playground
-        function updateSliders() {
-            const dataSlider = document.getElementById('dataSlider');
-            const complexitySlider = document.getElementById('complexitySlider');
-            const learningSlider = document.getElementById('learningSlider');
-            
-            dataSlider.addEventListener('input', (e) => {
-                document.getElementById('dataValue').textContent = e.target.value;
-                updatePrediction();
-            });
-            
-            complexitySlider.addEventListener('input', (e) => {
-                document.getElementById('complexityValue').textContent = e.target.value;
-                updatePrediction();
-            });
-            
-            learningSlider.addEventListener('input', (e) => {
-                const value = (e.target.value / 100).toFixed(3);
-                document.getElementById('learningValue').textContent = value;
-                updatePrediction();
-            });
-        }
-
-        function updatePrediction() {
-            const data = parseInt(document.getElementById('dataSlider').value);
-            const complexity = parseInt(document.getElementById('complexitySlider').value);
-            const learning = parseInt(document.getElementById('learningSlider').value);
-            
-            const prediction = (data * 0.4 + complexity * 8 + learning * 0.3).toFixed(1);
-            document.getElementById('predictionOutput').textContent = Math.min(99.9, prediction) + '%';
-        }
-
-        // Statistics animation
-        function animateStats() {
-            const counters = ['neuronsCount', 'connectionsCount', 'processedData', 'accuracy'];
-            const targets = [1024, 15360, 847, 94.7];
-            
-            counters.forEach((id, index) => {
-                const element = document.getElementById(id);
-                const target = targets[index];
-                let current = 0;
-                const increment = target / 100;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    
-                    if (id === 'accuracy') {
-                        element.textContent = current.toFixed(1) + '%';
-                    } else {
-                        element.textContent = Math.floor(current).toLocaleString();
-                    }
-                }, 50);
-            });
-        }
-
-        // Utility functions
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Chat input enter key
-        document.getElementById('chatInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        // Initialize everything
+        // Mostrar mensagem inicial após carregar
         window.addEventListener('load', () => {
-            initNeuralBackground();
-            createNeuralNetwork();
-            generatePattern();
-            updateSliders();
-            
-            setTimeout(animateStats, 1000);
+            setTimeout(() => {
+                document.getElementById('messageBox').classList.add('show');
+            }, 1000);
         });
-
-        // Resize handler
-        window.addEventListener('resize', () => {
-            const canvas = document.getElementById('neuralBg');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            // Recreate neural network with new dimensions
-            setTimeout(createNeuralNetwork, 100);
-            
-            // Regenerate pattern visualization
-            setTimeout(generatePattern, 200);
-        });
-
-        // Auto-update stats
-        setInterval(() => {
-            const neurons = document.getElementById('neuronsCount');
-            const connections = document.getElementById('connectionsCount');
-            const data = document.getElementById('processedData');
-            
-            neurons.textContent = (parseInt(neurons.textContent.replace(',', '')) + Math.floor(Math.random() * 10)).toLocaleString();
-            connections.textContent = (parseInt(connections.textContent.replace(',', '')) + Math.floor(Math.random() * 50)).toLocaleString();
-            data.textContent = (parseInt(data.textContent) + Math.floor(Math.random() * 5)).toLocaleString();
-        }, 3000);
     </script>
 </body>
 </html>
