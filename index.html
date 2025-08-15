@@ -32,67 +32,392 @@
     .p{position:absolute; font-size:12px; opacity:.5; animation: rise linear infinite;}
     @keyframes rise{from{transform:translateY(120vh) scale(.9); opacity:.2} to{transform:translateY(-20vh) scale(1.2); opacity:.6}}
 
-    /* App shell */
-    .app{position:relative; z-index:1; max-width:900px; height:100vh; margin:0 auto; display:grid; grid-template-rows:auto 1fr auto;}
-
-    .topbar{
-      display:flex; align-items:center; gap:12px; padding:16px; backdrop-filter: blur(8px); background: linear-gradient(to right, var(--glass), transparent);
-      border-bottom:1px solid rgba(255,255,255,.08);
+    /* App shell - Responsivo */
+    .app{
+      position: relative; z-index:1; max-width:900px; height:100vh; margin:0 auto; 
+      display:grid; grid-template-rows:auto auto 1fr auto auto;
+      width: 100%;
     }
-    .avatar{width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#ffd1e6,#b7a7ff); display:grid; place-items:center; color:#5b2b45; font-weight:700}
-    .title{display:flex; flex-direction:column; line-height:1.1}
-    .title b{font-size:1.05rem}
-    .title span{font-size:.8rem; color:var(--muted)}
-    .actions{margin-left:auto; display:flex; gap:8px}
-    .btn{appearance:none; border:1px solid rgba(255,255,255,.12); background:var(--glass); color:var(--text); padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:600}
+
+    /* Header responsivo */
+    .topbar{
+      display:flex; align-items:center; gap:8px; padding:12px 16px; 
+      backdrop-filter: blur(8px); background: linear-gradient(to right, var(--glass), transparent);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      min-height: 60px;
+    }
+    .avatar{
+      width:36px; height:36px; border-radius:50%; 
+      background:linear-gradient(135deg,#ffd1e6,#b7a7ff); 
+      display:grid; place-items:center; color:#5b2b45; font-weight:700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .title{display:flex; flex-direction:column; line-height:1.1; flex: 1; min-width: 0;}
+    .title b{font-size:1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+    .title span{font-size:.75rem; color:var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+    
+    .actions{
+      margin-left:auto; display:flex; gap:4px; flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .btn{
+      appearance:none; border:1px solid rgba(255,255,255,.12); 
+      background:var(--glass); color:var(--text); padding:6px 10px; 
+      border-radius:999px; cursor:pointer; font-weight:600;
+      font-size: 0.8rem; white-space: nowrap;
+      transition: all 0.2s ease;
+    }
     .btn:hover{background:var(--glass-2)}
 
-    /* Área do chat */
-    .chat{padding:16px; overflow:auto; display:flex; flex-direction:column; gap:6px; scroll-behavior:smooth}
-    .day{align-self:center; margin:8px 0; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.08); font-size:.75rem; color:#c7d2fe}
+    /* Day tag responsivo */
+    .day{
+      align-self:center; margin:8px 0; padding:6px 12px; border-radius:999px; 
+      background:rgba(255,255,255,.08); font-size:.7rem; color:#c7d2fe;
+      max-width: calc(100% - 32px); text-align: center;
+    }
 
-    .row{display:flex; gap:8px; align-items:flex-end; max-width:100%;}
+    /* Área do chat responsiva */
+    .chat{
+      padding:12px 16px; overflow:auto; display:flex; flex-direction:column; gap:6px; 
+      scroll-behavior:smooth; flex: 1;
+    }
+
+    .row{display:flex; gap:6px; align-items:flex-end; max-width:100%; margin-bottom: 4px;}
     .row.you{justify-content:flex-start}
     .row.me{justify-content:flex-end}
 
-    .bubble{max-width:72%; padding:10px 12px; border-radius:16px; line-height:1.35; font-size:.98rem; position:relative; box-shadow:0 4px 18px rgba(0,0,0,.22)}
+    .bubble{
+      max-width:75%; padding:10px 12px; border-radius:16px; line-height:1.4; 
+      font-size:.95rem; position:relative; box-shadow:0 4px 18px rgba(0,0,0,.22);
+      word-wrap: break-word; overflow-wrap: break-word; hyphens: auto;
+    }
     .you .bubble{background:var(--you); color:#411936; border-bottom-left-radius:6px}
     .me .bubble{background:var(--my); color:#dfe7ff; border-bottom-right-radius:6px}
-    .stamp{font-size:.7rem; color:var(--muted); margin-top:2px}
+    .stamp{
+      font-size:.65rem; color:var(--muted); margin-top:2px; 
+      white-space: nowrap; flex-shrink: 0;
+    }
 
     /* digitando... */
-    .typing{display:flex; gap:6px; align-items:center; background:var(--you); color:#411936; border-radius:16px; padding:8px 12px; width:110px}
-    .dot{width:6px; height:6px; border-radius:50%; background:#ff6b9d; opacity:.8; animation:blink 1.2s infinite}
+    .typing{
+      display:flex; gap:6px; align-items:center; background:var(--you); 
+      color:#411936; border-radius:16px; padding:8px 12px; width:90px;
+    }
+    .dot{width:5px; height:5px; border-radius:50%; background:#ff6b9d; opacity:.8; animation:blink 1.2s infinite}
     .dot:nth-child(2){animation-delay:.2s}
     .dot:nth-child(3){animation-delay:.4s}
     @keyframes blink{0%,80%,100%{transform:translateY(0); opacity:.3}40%{transform:translateY(-3px); opacity:1}}
 
-    /* composer */
-    .composer{display:flex; gap:10px; padding:14px; border-top:1px solid rgba(255,255,255,.08); background:linear-gradient(to right, transparent, var(--glass));}
-    .input{flex:1; display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:10px 12px}
-    .input input{flex:1; background:transparent; border:none; outline:none; color:var(--text); font-size:1rem}
-    .send{background:var(--accent); border:none; color:white; padding:10px 14px; border-radius:12px; font-weight:700; cursor:pointer}
-    .send:hover{filter:brightness(1.05)}
-
-    /* quick actions */
-    .quick{display:flex; gap:8px; padding:0 14px 10px; flex-wrap:wrap}
-    .chip{border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:#fff; padding:8px 12px; border-radius:999px; cursor:pointer; font-size:.9rem}
+    /* Quick actions responsivas */
+    .quick{
+      display:flex; gap:6px; padding:8px 16px 12px; flex-wrap:wrap;
+      justify-content: center; max-height: 80px; overflow-y: auto;
+    }
+    .chip{
+      border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); 
+      color:#fff; padding:6px 10px; border-radius:999px; cursor:pointer; 
+      font-size:.8rem; white-space: nowrap; transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
     .chip:hover{background:rgba(255,255,255,.1)}
 
-    /* Modal surpresa */
-    .modal{position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; z-index:4}
-    .card{width:min(520px, 92vw); background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:18px; padding:22px; backdrop-filter: blur(10px); box-shadow:0 30px 60px rgba(0,0,0,.45)}
-    .card h3{margin:0 0 8px}
-    .card p{color:#e8ecff; margin:0 0 12px}
-    .card .close{margin-top:8px}
+    /* composer responsivo */
+    .composer{
+      display:flex; gap:8px; padding:12px 16px; 
+      border-top:1px solid rgba(255,255,255,.08); 
+      background:linear-gradient(to right, transparent, var(--glass));
+      align-items: stretch;
+    }
+    .input{
+      flex:1; display:flex; align-items:center; gap:8px; 
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); 
+      border-radius:14px; padding:8px 12px; min-height: 44px;
+    }
+    .input input{
+      flex:1; background:transparent; border:none; outline:none; 
+      color:var(--text); font-size:.95rem; min-width: 0;
+    }
+    #count{
+      font-size:.7rem; color:var(--muted); white-space: nowrap; 
+      margin-left: 4px; flex-shrink: 0;
+    }
+    .send{
+      background:var(--accent); border:none; color:white; padding:10px 16px; 
+      border-radius:12px; font-weight:700; cursor:pointer; font-size: 0.9rem;
+      transition: all 0.2s ease; min-height: 44px; flex-shrink: 0;
+    }
+    .send:hover{filter:brightness(1.05)}
+
+    /* Modal responsivo */
+    .modal{
+      position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; 
+      align-items:center; justify-content:center; z-index:4; padding: 16px;
+    }
+    .card{
+      width:min(520px, 100%); background:rgba(255,255,255,.08); 
+      border:1px solid rgba(255,255,255,.15); border-radius:18px; padding:20px; 
+      backdrop-filter: blur(10px); box-shadow:0 30px 60px rgba(0,0,0,.45);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .card h3{margin:0 0 12px; font-size: 1.1rem; line-height: 1.3;}
+    .card p{color:#e8ecff; margin:0 0 16px; line-height: 1.5;}
+    .card .close{margin-top:12px; width: 100%;}
 
     /* Tema claro alternativo */
     .light{--bg1:#fff5fb; --bg2:#f3f0ff; --text:#1f2937; --muted:#6b7280; --my:#f1f5ff; --you:#ffeaf3}
-    .light body{}
 
-    @media (max-width:700px){
-      .bubble{max-width:88%}
-      .title b{font-size:1rem}
+    /* Media queries para diferentes tamanhos de tela */
+    
+    /* Tablets em landscape e desktops pequenos */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .app { max-width: 100%; margin: 0; }
+      .topbar { padding: 14px 20px; }
+      .chat { padding: 16px 20px; }
+      .composer { padding: 14px 20px; }
+      .quick { padding: 10px 20px 14px; }
+    }
+
+    /* Tablets em portrait */
+    @media (max-width: 768px) and (min-width: 481px) {
+      .app { max-width: 100%; margin: 0; }
+      .topbar { 
+        padding: 12px 16px; 
+        flex-wrap: wrap; 
+        gap: 8px;
+      }
+      .actions { 
+        flex-wrap: wrap; 
+        gap: 6px;
+        width: 100%;
+        justify-content: flex-end;
+        margin-top: 8px;
+        margin-left: 0;
+      }
+      .btn { 
+        padding: 6px 8px; 
+        font-size: 0.75rem; 
+      }
+      .bubble { max-width: 80%; }
+      .title b { font-size: 0.95rem; }
+      .title span { font-size: 0.7rem; }
+      .avatar { width: 32px; height: 32px; font-size: 0.8rem; }
+    }
+
+    /* Smartphones */
+    @media (max-width: 480px) {
+      .app { 
+        max-width: 100%; 
+        margin: 0;
+        height: 100vh;
+      }
+      
+      .topbar { 
+        padding: 10px 12px; 
+        flex-wrap: wrap;
+        min-height: auto;
+      }
+      
+      .avatar { 
+        width: 28px; 
+        height: 28px; 
+        font-size: 0.7rem; 
+      }
+      
+      .title { 
+        flex: 1; 
+        min-width: 120px; 
+      }
+      .title b { 
+        font-size: 0.85rem; 
+      }
+      .title span { 
+        font-size: 0.65rem; 
+      }
+      
+      .actions { 
+        width: 100%; 
+        margin-left: 0; 
+        margin-top: 8px;
+        justify-content: space-between;
+      }
+      .btn { 
+        padding: 4px 8px; 
+        font-size: 0.7rem; 
+        flex: 1;
+        margin: 0 2px;
+      }
+      
+      .chat { 
+        padding: 8px 12px; 
+        gap: 4px; 
+      }
+      
+      .bubble { 
+        max-width: 85%; 
+        padding: 8px 10px; 
+        font-size: 0.9rem; 
+        line-height: 1.35;
+      }
+      
+      .stamp { 
+        font-size: 0.6rem; 
+        margin-top: 1px; 
+      }
+      
+      .quick { 
+        padding: 6px 12px 8px; 
+        gap: 4px;
+        max-height: 60px;
+      }
+      .chip { 
+        padding: 4px 8px; 
+        font-size: 0.7rem; 
+      }
+      
+      .composer { 
+        padding: 8px 12px; 
+        gap: 6px; 
+      }
+      .input { 
+        padding: 6px 10px; 
+        min-height: 40px;
+      }
+      .input input { 
+        font-size: 0.9rem; 
+      }
+      #count { 
+        font-size: 0.65rem; 
+      }
+      .send { 
+        padding: 8px 12px; 
+        font-size: 0.8rem; 
+        min-height: 40px;
+      }
+      
+      .day { 
+        font-size: 0.65rem; 
+        padding: 4px 8px; 
+        margin: 6px 0; 
+      }
+      
+      .typing { 
+        width: 70px; 
+        padding: 6px 8px; 
+      }
+      .dot { 
+        width: 4px; 
+        height: 4px; 
+      }
+      
+      .modal { 
+        padding: 12px; 
+      }
+      .card { 
+        padding: 16px; 
+        border-radius: 12px;
+      }
+      .card h3 { 
+        font-size: 1rem; 
+      }
+      .card p { 
+        font-size: 0.9rem; 
+      }
+    }
+
+    /* Smartphones muito pequenos */
+    @media (max-width: 320px) {
+      .topbar { padding: 8px 10px; }
+      .chat { padding: 6px 10px; }
+      .composer { padding: 6px 10px; }
+      .quick { padding: 4px 10px 6px; }
+      
+      .bubble { 
+        max-width: 88%; 
+        padding: 6px 8px; 
+        font-size: 0.85rem; 
+      }
+      
+      .btn { 
+        padding: 3px 6px; 
+        font-size: 0.65rem; 
+      }
+      
+      .chip { 
+        padding: 3px 6px; 
+        font-size: 0.65rem; 
+      }
+      
+      .input { 
+        padding: 4px 8px; 
+        min-height: 36px;
+      }
+      .send { 
+        padding: 6px 10px; 
+        min-height: 36px;
+        font-size: 0.75rem;
+      }
+    }
+
+    /* Landscape em smartphones */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .app { 
+        grid-template-rows: auto auto 1fr auto auto; 
+      }
+      .topbar { 
+        padding: 6px 12px; 
+        min-height: 44px;
+      }
+      .chat { 
+        padding: 6px 12px; 
+      }
+      .composer { 
+        padding: 6px 12px; 
+      }
+      .quick { 
+        padding: 4px 12px 6px; 
+        max-height: 50px;
+      }
+      .day { 
+        margin: 4px 0; 
+      }
+      .bubble { 
+        padding: 6px 8px; 
+        font-size: 0.85rem; 
+      }
+    }
+
+    /* Ajustes para partículas em telas pequenas */
+    @media (max-width: 480px) {
+      .particles { 
+        opacity: 0.6; 
+      }
+      .p { 
+        font-size: 8px; 
+      }
+    }
+
+    /* Scroll customizado para dispositivos móveis */
+    .chat::-webkit-scrollbar {
+      width: 3px;
+    }
+    .chat::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .chat::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+
+    /* Melhor touch target para dispositivos móveis */
+    @media (hover: none) and (pointer: coarse) {
+      .btn, .chip, .send {
+        min-height: 44px;
+        min-width: 44px;
+      }
+      .input {
+        min-height: 44px;
+      }
     }
   </style>
 </head>
@@ -111,9 +436,9 @@
         <span id="status">online • digitando… às vezes 😄</span>
       </div>
       <div class="actions">
-        <button class="btn" id="toggleTheme">Alternar tema</button>
-        <button class="btn" id="surprise">Surpresa ✨</button>
-        <button class="btn" id="soundBtn">Som: off</button>
+        <button class="btn" id="toggleTheme">Tema</button>
+        <button class="btn" id="surprise">✨</button>
+        <button class="btn" id="soundBtn">Som</button>
       </div>
     </header>
 
@@ -262,27 +587,47 @@
     let light=false; toggleThemeBtn.onclick = ()=>{ light = !light; document.documentElement.classList.toggle('light', light); };
 
     // Som
-    document.getElementById('soundBtn').onclick = (e)=>{ soundOn = !soundOn; e.target.textContent = `Som: ${soundOn? 'on':'off'}`; };
+    document.getElementById('soundBtn').onclick = (e)=>{ soundOn = !soundOn; e.target.textContent = soundOn? 'Som ✓':'Som'; };
 
     // Partículas
     const particles = document.getElementById('particles');
     function spawnParticles(){
-      for(let i=0;i<18;i++){
+      // Menos partículas em telas pequenas
+      const particleCount = window.innerWidth < 480 ? 8 : 18;
+      for(let i=0;i<particleCount;i++){
         const n = document.createElement('div');
         n.className='p'; n.textContent = Math.random()>0.5 ? '✦' : '❤';
         n.style.left = (Math.random()*100)+'vw';
         n.style.animationDuration = (8+Math.random()*10)+'s';
-        n.style.fontSize = (10+Math.random()*18)+'px';
+        n.style.fontSize = (10+Math.random()*(window.innerWidth < 480 ? 12 : 18))+'px';
         n.style.opacity = 0.25 + Math.random()*0.5;
         particles.appendChild(n);
         setTimeout(()=> n.remove(), 18000);
       }
     }
-    spawnParticles(); setInterval(spawnParticles, 4000);
+    spawnParticles(); setInterval(spawnParticles, window.innerWidth < 480 ? 6000 : 4000);
 
     // Persistência simples
-    function persist(){ localStorage.setItem('bibi_chat', chatEl.innerHTML); }
-    function restore(){ const d = localStorage.getItem('bibi_chat'); if(d){ chatEl.innerHTML = d; setTimeout(()=> chatEl.scrollTop = chatEl.scrollHeight, 0);} else { intro(); } }
+    function persist(){ 
+      try {
+        localStorage.setItem('bibi_chat', chatEl.innerHTML);
+      } catch(e) {
+        console.log('Storage não disponível');
+      }
+    }
+    function restore(){ 
+      try {
+        const d = localStorage.getItem('bibi_chat'); 
+        if(d){ 
+          chatEl.innerHTML = d; 
+          setTimeout(()=> chatEl.scrollTop = chatEl.scrollHeight, 0);
+        } else { 
+          intro(); 
+        }
+      } catch(e) {
+        intro();
+      }
+    }
 
     // Mensagem inicial
     async function intro(){
@@ -293,6 +638,18 @@
       await typeText(b, 'Oi, amor. Que bom te ver aqui. Pronto pra nossa conversa? 💬💖');
       persist();
     }
+
+    // Ajustar altura do viewport em dispositivos móveis
+    function setViewportHeight() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(setViewportHeight, 100);
+    });
 
     restore();
   </script>
