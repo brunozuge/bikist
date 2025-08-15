@@ -1,113 +1,300 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chat Romântico Interativo — Bibi 💖</title>
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #1a1a40, #4a148c);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-  }
-  .chat-container {
-    display: flex;
-    flex-direction: column;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 15px;
-    width: 90%;
-    max-width: 500px;
-    height: 90%;
-    max-height: 700px;
-    box-sizing: border-box;
-  }
-  .messages {
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 5px;
-  }
-  .message {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 80%;
-    word-wrap: break-word;
-  }
-  .sent {
-    background: #ff80ab;
-    align-self: flex-end;
-    color: #fff;
-  }
-  .received {
-    background: #fff9c4;
-    align-self: flex-start;
-    color: #000;
-  }
-  .input-container {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  input {
-    flex: 1;
-    padding: 10px;
-    border-radius: 20px;
-    border: none;
-    outline: none;
-  }
-  button {
-    background: #ff4081;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 50%;
-    cursor: pointer;
-    color: #fff;
-  }
-  @media (max-width: 600px) {
-    .chat-container {
-      width: 100%;
-      height: 100%;
-      border-radius: 0;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat da Bibi 💕</title>
+  <style>
+    :root{
+      --bg1:#0b1220; --bg2:#151f35; --accent:#ff6b9d; --accent-2:#a78bfa; --my:#1f2a48; --you:#fbe7f1; --text:#e8ecff; --muted:#94a3b8;
+      --glass: rgba(255,255,255,.08); --glass-2: rgba(255,255,255,.12);
     }
-    .message {
-      font-size: 14px;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text); background: radial-gradient(1200px 600px at 20% -10%, #233053 10%, transparent 60%), linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow:hidden; position:relative;
     }
-  }
-</style>
+
+    /* Aurora suave ao fundo */
+    .aurora{position:absolute; inset:-20% -10% -10% -10%; pointer-events:none; filter: blur(30px); opacity:.7;}
+    .a1,.a2,.a3{position:absolute; width:70vw; height:70vh; border-radius:50%; mix-blend-mode:screen;}
+    .a1{background: radial-gradient(circle at 30% 30%, #7dd3fc, transparent 60%); animation: float1 18s ease-in-out infinite;}
+    .a2{background: radial-gradient(circle at 70% 60%, #f0abfc, transparent 60%); animation: float2 22s ease-in-out infinite;}
+    .a3{background: radial-gradient(circle at 40% 70%, #fecaca, transparent 60%); animation: float3 26s ease-in-out infinite;}
+    @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(6vw, -3vh)}}
+    @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-5vw, 4vh)}}
+    @keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(2vw, 5vh)}}
+
+    /* Partículas sutis (estrelas/coraçõezinhos) */
+    .particles{position:absolute; inset:0; pointer-events:none; overflow:hidden}
+    .p{position:absolute; font-size:12px; opacity:.5; animation: rise linear infinite;}
+    @keyframes rise{from{transform:translateY(120vh) scale(.9); opacity:.2} to{transform:translateY(-20vh) scale(1.2); opacity:.6}}
+
+    /* App shell */
+    .app{position:relative; z-index:1; max-width:900px; height:100vh; margin:0 auto; display:grid; grid-template-rows:auto 1fr auto;}
+
+    .topbar{
+      display:flex; align-items:center; gap:12px; padding:16px; backdrop-filter: blur(8px); background: linear-gradient(to right, var(--glass), transparent);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .avatar{width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#ffd1e6,#b7a7ff); display:grid; place-items:center; color:#5b2b45; font-weight:700}
+    .title{display:flex; flex-direction:column; line-height:1.1}
+    .title b{font-size:1.05rem}
+    .title span{font-size:.8rem; color:var(--muted)}
+    .actions{margin-left:auto; display:flex; gap:8px}
+    .btn{appearance:none; border:1px solid rgba(255,255,255,.12); background:var(--glass); color:var(--text); padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:600}
+    .btn:hover{background:var(--glass-2)}
+
+    /* Área do chat */
+    .chat{padding:16px; overflow:auto; display:flex; flex-direction:column; gap:6px; scroll-behavior:smooth}
+    .day{align-self:center; margin:8px 0; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.08); font-size:.75rem; color:#c7d2fe}
+
+    .row{display:flex; gap:8px; align-items:flex-end; max-width:100%;}
+    .row.you{justify-content:flex-start}
+    .row.me{justify-content:flex-end}
+
+    .bubble{max-width:72%; padding:10px 12px; border-radius:16px; line-height:1.35; font-size:.98rem; position:relative; box-shadow:0 4px 18px rgba(0,0,0,.22)}
+    .you .bubble{background:var(--you); color:#411936; border-bottom-left-radius:6px}
+    .me .bubble{background:var(--my); color:#dfe7ff; border-bottom-right-radius:6px}
+    .stamp{font-size:.7rem; color:var(--muted); margin-top:2px}
+
+    /* digitando... */
+    .typing{display:flex; gap:6px; align-items:center; background:var(--you); color:#411936; border-radius:16px; padding:8px 12px; width:110px}
+    .dot{width:6px; height:6px; border-radius:50%; background:#ff6b9d; opacity:.8; animation:blink 1.2s infinite}
+    .dot:nth-child(2){animation-delay:.2s}
+    .dot:nth-child(3){animation-delay:.4s}
+    @keyframes blink{0%,80%,100%{transform:translateY(0); opacity:.3}40%{transform:translateY(-3px); opacity:1}}
+
+    /* composer */
+    .composer{display:flex; gap:10px; padding:14px; border-top:1px solid rgba(255,255,255,.08); background:linear-gradient(to right, transparent, var(--glass));}
+    .input{flex:1; display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:10px 12px}
+    .input input{flex:1; background:transparent; border:none; outline:none; color:var(--text); font-size:1rem}
+    .send{background:var(--accent); border:none; color:white; padding:10px 14px; border-radius:12px; font-weight:700; cursor:pointer}
+    .send:hover{filter:brightness(1.05)}
+
+    /* quick actions */
+    .quick{display:flex; gap:8px; padding:0 14px 10px; flex-wrap:wrap}
+    .chip{border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:#fff; padding:8px 12px; border-radius:999px; cursor:pointer; font-size:.9rem}
+    .chip:hover{background:rgba(255,255,255,.1)}
+
+    /* Modal surpresa */
+    .modal{position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; z-index:4}
+    .card{width:min(520px, 92vw); background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:18px; padding:22px; backdrop-filter: blur(10px); box-shadow:0 30px 60px rgba(0,0,0,.45)}
+    .card h3{margin:0 0 8px}
+    .card p{color:#e8ecff; margin:0 0 12px}
+    .card .close{margin-top:8px}
+
+    /* Tema claro alternativo */
+    .light{--bg1:#fff5fb; --bg2:#f3f0ff; --text:#1f2937; --muted:#6b7280; --my:#f1f5ff; --you:#ffeaf3}
+    .light body{}
+
+    @media (max-width:700px){
+      .bubble{max-width:88%}
+      .title b{font-size:1rem}
+    }
+  </style>
 </head>
 <body>
-<div class="chat-container">
-  <div class="messages" id="messages"></div>
-  <div class="input-container">
-    <input type="text" id="userInput" placeholder="Escreva uma mensagem...">
-    <button onclick="sendMessage()">➤</button>
+  <!-- fundos -->
+  <div class="aurora" aria-hidden="true">
+    <div class="a1"></div><div class="a2"></div><div class="a3"></div>
   </div>
-</div>
-<script>
-  const messages = document.getElementById('messages');
-  function sendMessage() {
-    const input = document.getElementById('userInput');
-    const text = input.value.trim();
-    if (text) {
-      addMessage(text, 'sent');
-      input.value = '';
-      setTimeout(() => addMessage('Te amo, Bibi! 💖', 'received'), 1000);
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="avatar">BZ</div>
+      <div class="title">
+        <b>Bibi 💖</b>
+        <span id="status">online • digitando… às vezes 😄</span>
+      </div>
+      <div class="actions">
+        <button class="btn" id="toggleTheme">Alternar tema</button>
+        <button class="btn" id="surprise">Surpresa ✨</button>
+        <button class="btn" id="soundBtn">Som: off</button>
+      </div>
+    </header>
+
+    <div class="day" id="dayTag"></div>
+
+    <main class="chat" id="chat" aria-live="polite"></main>
+
+    <div class="quick" id="quick">
+      <button class="chip" data-msg="Oi, meu amor! Como você tá?">Oi, meu amor! 💗</button>
+      <button class="chip" data-msg="Pensei em você o dia todo…">Pensei em você… ✨</button>
+      <button class="chip" data-msg="Vamos planejar nosso final de semana?">Final de semana? 🗓️</button>
+      <button class="chip" data-msg="Quero te contar uma coisa…">Tenho um segredo 🤫</button>
+      <button class="chip" data-msg="Aceita um abraço bem apertado?">Um abraço? 🤍</button>
+    </div>
+
+    <footer class="composer">
+      <div class="input"><input id="text" placeholder="Escreva uma mensagem…" maxlength="240" /><span id="count" aria-hidden="true">0/240</span></div>
+      <button class="send" id="send">Enviar</button>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="card">
+      <h3>Minha mensagem para você 💌</h3>
+      <p>Entre todas as palavras, escolho as suas. Entre todos os lugares, escolho o seu abraço. Entre todos os futuros, escolho o nosso. ♾️</p>
+      <button class="btn close" id="closeModal">Fechar</button>
+    </div>
+  </div>
+
+  <audio id="snd" preload="auto">
+    <source src="data:audio/mp3;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAACcQAA..." type="audio/mp3" />
+  </audio>
+
+  <script>
+    // Util: hora
+    const ts = () => new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+
+    // Estado
+    const chatEl = document.getElementById('chat');
+    const inputEl = document.getElementById('text');
+    const countEl = document.getElementById('count');
+    const snd = document.getElementById('snd');
+    let soundOn = false;
+
+    // Mensagens automáticas da Bibi
+    const replies = [
+      "Eu tava pensando em você agora mesmo 💕",
+      "Seu nome tem um cantinho reservado no meu coração ✨",
+      "Que tal um abraço bem longo hoje? 🤍",
+      "Só de lembrar do seu sorriso, meu dia fica melhor 😊",
+      "Eu escolho você. Sempre. ♾️",
+      "Vamos planejar algo gostoso pro final de semana? 🍰"
+    ];
+
+    // Tipando efeito
+    function typeText(el, text, speed = 18){
+      return new Promise(resolve=>{
+        let i=0; const t = setInterval(()=>{ el.textContent += text.charAt(i++); if(i>text.length){clearInterval(t); resolve();}}, speed);
+      });
     }
-  }
-  function addMessage(text, type) {
-    const msg = document.createElement('div');
-    msg.classList.add('message', type);
-    msg.textContent = text;
-    messages.appendChild(msg);
-    messages.scrollTop = messages.scrollHeight;
-  }
-</script>
+
+    // Bolha
+    function bubble({from='me', text='', time=ts()}){
+      const row = document.createElement('div'); row.className = `row ${from}`;
+      const b = document.createElement('div'); b.className = 'bubble';
+      const s = document.createElement('div'); s.className = 'stamp'; s.textContent = time;
+      row.appendChild(b); row.appendChild(s);
+      chatEl.appendChild(row);
+      chatEl.scrollTop = chatEl.scrollHeight;
+      return {row, b};
+    }
+
+    // Digitando indicador
+    function typing(){
+      const row = document.createElement('div'); row.className = 'row you';
+      const box = document.createElement('div'); box.className = 'typing';
+      box.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+      row.appendChild(box); chatEl.appendChild(row); chatEl.scrollTop = chatEl.scrollHeight;
+      return {row};
+    }
+
+    // Responder fluxo
+    async function respond(userText){
+      // minha msg
+      const {b: myB} = bubble({from:'me'});
+      await typeText(myB, userText);
+      if(soundOn) try{ snd.currentTime=0; snd.play().catch(()=>{});}catch{}
+
+      // indicador
+      const t = typing();
+      await new Promise(r=>setTimeout(r, 700 + Math.random()*900));
+
+      // resposta
+      t.row.remove();
+      const {b: youB} = bubble({from:'you'});
+      const answer = smartReply(userText);
+      await typeText(youB, answer);
+      if(soundOn) try{ snd.currentTime=0; snd.play().catch(()=>{});}catch{}
+      persist();
+    }
+
+    // Resposta baseada no texto
+    function smartReply(text){
+      const t = text.toLowerCase();
+      if(t.includes('saudade')||t.includes('sdds')) return 'Saudade tem nome e endereço: você no meu abraço. 💞';
+      if(t.includes('final')||t.includes('fim de semana')||t.includes('sábado')||t.includes('domingo')) return 'Topo um café com pôr do sol ou filminho com coberta? ☕🌇';
+      if(t.includes('segredo')) return 'Conta baixinho no meu ouvido… prometo guardar no coração 🤫💗';
+      if(t.includes('amo')||t.includes('te amo')) return 'Eu te amo mais. Discussão encerrada. 😌💘';
+      if(t.includes('abraço')) return 'Abraço aprovado e solicitado. Quando? Agora. 🫂';
+      if(t.includes('beijo')) return 'Cientificamente comprovado: beijos seus curam qualquer coisa. 💋';
+      return replies[Math.floor(Math.random()*replies.length)];
+    }
+
+    // Quick chips
+    document.getElementById('quick').addEventListener('click', (e)=>{
+      if(e.target.classList.contains('chip')){
+        send(e.target.getAttribute('data-msg'));
+      }
+    });
+
+    // Envio
+    document.getElementById('send').addEventListener('click', ()=> send());
+    inputEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); send(); }});
+    inputEl.addEventListener('input', ()=>{ countEl.textContent = `${inputEl.value.length}/240`; });
+
+    function send(prefill){
+      const txt = (prefill ?? inputEl.value).trim();
+      if(!txt) return;
+      inputEl.value=''; countEl.textContent='0/240';
+      respond(txt);
+    }
+
+    // Dia tag
+    const dayTag = document.getElementById('dayTag');
+    dayTag.textContent = new Date().toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'long'});
+
+    // Modal
+    const modal = document.getElementById('modal');
+    document.getElementById('surprise').onclick = ()=>{ modal.style.display='flex'; };
+    document.getElementById('closeModal').onclick = ()=>{ modal.style.display='none'; };
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.style.display='none'; });
+
+    // Tema
+    const toggleThemeBtn = document.getElementById('toggleTheme');
+    let light=false; toggleThemeBtn.onclick = ()=>{ light = !light; document.documentElement.classList.toggle('light', light); };
+
+    // Som
+    document.getElementById('soundBtn').onclick = (e)=>{ soundOn = !soundOn; e.target.textContent = `Som: ${soundOn? 'on':'off'}`; };
+
+    // Partículas
+    const particles = document.getElementById('particles');
+    function spawnParticles(){
+      for(let i=0;i<18;i++){
+        const n = document.createElement('div');
+        n.className='p'; n.textContent = Math.random()>0.5 ? '✦' : '❤';
+        n.style.left = (Math.random()*100)+'vw';
+        n.style.animationDuration = (8+Math.random()*10)+'s';
+        n.style.fontSize = (10+Math.random()*18)+'px';
+        n.style.opacity = 0.25 + Math.random()*0.5;
+        particles.appendChild(n);
+        setTimeout(()=> n.remove(), 18000);
+      }
+    }
+    spawnParticles(); setInterval(spawnParticles, 4000);
+
+    // Persistência simples
+    function persist(){ localStorage.setItem('bibi_chat', chatEl.innerHTML); }
+    function restore(){ const d = localStorage.getItem('bibi_chat'); if(d){ chatEl.innerHTML = d; setTimeout(()=> chatEl.scrollTop = chatEl.scrollHeight, 0);} else { intro(); } }
+
+    // Mensagem inicial
+    async function intro(){
+      const t = typing();
+      await new Promise(r=>setTimeout(r, 900));
+      t.row.remove();
+      const {b} = bubble({from:'you'});
+      await typeText(b, 'Oi, amor. Que bom te ver aqui. Pronto pra nossa conversa? 💬💖');
+      persist();
+    }
+
+    restore();
+  </script>
 </body>
 </html>
