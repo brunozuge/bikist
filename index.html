@@ -3,7 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BZZ</title>
+    <title>Para Você, Meu Amor</title>
+    
+    <!-- Meta tags para PWA e ícone na tela inicial -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Meu Amor">
+    <meta name="theme-color" content="#e91e63">
+    
+    <!-- Ícones para diferentes dispositivos Apple -->
+    <link rel="apple-touch-icon" sizes="57x57" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTciIGhlaWdodD0iNTciIHZpZXdCb3g9IjAgMCA1NyA1NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjU3IiBoZWlnaHQ9IjU3IiByeD0iMTIiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8cGF0aCBkPSJNMjguNSA0M0MyOC41IDQzIDQxIDMyIDQxIDIzQzQxIDE4IDM3IDE0IDMyIDE0QzI5IDE0IDI2IDE2IDI1IDE5QzI0IDE2IDIxIDE0IDE4IDE0QzEzIDE0IDkgMTggOSAyM0M5IDMyIDIxLjUgNDMgMjguNSA0M1oiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MCIgeDE9IjAiIHkxPSIwIiB4Mj0iNTciIHkyPSI1NyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjZTkxZTYzIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljMjdiMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=">
+    <link rel="apple-touch-icon" sizes="60x60" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiByeD0iMTMiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8cGF0aCBkPSJNMzAgNDVDMzAgNDUgNDMgMzQgNDMgMjVDNDMgMjAgMzkgMTYgMzQgMTZDMzEgMTYgMjggMTggMjcgMjFDMjYgMTggMjMgMTYgMjAgMTZDMTUgMTYgMTEgMjAgMTEgMjVDMTEgMzQgMjQgNDUgMzAgNDVaIiBmaWxsPSJ3aGl0ZSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDAiIHgxPSIwIiB5MT0iMCIgeDI9IjYwIiB5Mj0iNjAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI2U5MWU2MyIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5YzI3YjAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K">
+    <link rel="apple-touch-icon" sizes="72x72" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iMTYiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8cGF0aCBkPSJNMzYgNTRDMzYgNTQgNTEuNiA0MC44IDUxLjYgMzBDNTEuNiAyNCA0Ni44IDE5LjIgNDAuOCAxOS4yQzM3LjIgMTkuMiAzMy42IDIxLjYgMzIuNCAyNUMzMS4yIDIxLjYgMjcuNiAxOS4yIDI0IDE5LjJDMTguMSAxOS4yIDEzLjMgMjQgMTMuMyAzMEMxMy4yIDQwLjggMjguOCA1NCAzNiA1NFoiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MCIgeDE9IjAiIHkxPSIwIiB4Mj0iNzIiIHkyPSI3MiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjZTkxZTYzIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljMjdiMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=">
+    <link rel="apple-touch-icon" sizes="76x76" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzYiIGhlaWdodD0iNzYiIHZpZXdCb3g9IjAgMCA3NiA3NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijc2IiBoZWlnaHQ9Ijc2IiByeD0iMTciIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8cGF0aCBkPSJNMzggNTdDMzggNTcgNTQuNCA0My4yIDU0LjQgMzEuNUM1NC40IDI1LjIgNDkuMiAyMCAzOC42IDIwQzM5LjIgMjAgMzUuNCsyMi42IDM0LjIgMjYuM0MzMyuOCAyMi42IDI5IDIwIDI1LjIgMjBDMTkuIyAyMCAxNCsyNS4yIDE0LjQgMzEuNUMxNC4zIDQzLjIgMzAuNiA1NyAzOCA1N1oiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MCIgeDE9IjAiIHkxPSIwIiB4Mj0iNzYiIHkyPSI3NiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjZTkxZTYzIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljMjdiMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=">
+    <link rel="apple-touch-icon" sizes="114x114" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTE0IiBoZWlnaHQ9IjExNCIgdmlld0JveD0iMCAwIDExNCAxMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMTQiIGhlaWdodD0iMTE0IiByeD0iMjUiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8cGF0aCBkPSJNNTcgODVDNTcgODUgODEuMyA2NC44IDgxLjMgNDcuM0M4MS4zIDM3LjggNzMuOCAzMCA2NC4zIDMwQzU5IDMwIDUzLjcgMzMuOSA1MS4zIDM5LjRDNDguOSAzMy45IDQzLjYgMzAgMzguMyAzMEMyOC44IDMwIDIxLjMgMzcuOCAyMS4zIDQ3LjNDMjEuMyA2NC44IDQ1LjcgODUgNTcgODVaIiBmaWxsPSJ3aGl0ZSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDAiIHgxPSIwIiB5MT0iMCIgeDI9IjExNCIgeTI9IjExNCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjZTkxZTYzIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljMjdiMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=">
+    <link rel="apple-touch-icon" sizes="120x120" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iMjYiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8cGF0aCBkPSJNNjAgOTBDNjAgOTAgODYgNjggODYgNDlDODYgMzkgNzggMzEgNjggMzFDNjIgMzEgNTYgMzUgNTQgNDBDNTIgMzUgNDYgMzEgNDAgMzFDMzAgMzEgMjIgMzkgMjIgNDlDMjIgNjggNDggOTAgNjAgOTBaIiBmaWxsPSJ3aGl0ZSIvPgo8ZGVmcz4KPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDAiIHgxPSIwIiB5MT0iMCIgeDI9IjEyMCIgeTI9IjEyMCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjZTkxZTYzIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljMjdiMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=">
+    <link rel="apple-touch-icon" sizes="144x144" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDE0NCAxNDQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNDQiIGhlaWdodD0iMTQ0IiByeD0iMzIiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8cGF0aCBkPSJNNzIgMTA4QzcyIDEwOCAxMDMuMiA4MS42IDEwMy4yIDU4LjhDMTAzLjIgNDYuOCA5My42IDM3LjIgODEuNiAzNy4yQzc0LjQgMzcuMiA2Ny4yIDQyIDY0LjggNDhDNjIuNCA0MiA1NS4yIDM3LjIgNDggMzcuMkMzNi4wIDM3LjIgMjYuNCA0Ni44IDI2LjQgNTguOEMyNi40IDgxLjYgNTcuNiAxMDggNzIgMTA4WiIgZmlsbD0id2hpdGUiLz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwIiB4MT0iMCIgeTE9IjAiIHgyPSIxNDQiIHkyPSIxNDQiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KPHN0b3Agc3RvcC1jb2xvcj0iI2U5MWU2MyIvPgo8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5YzI3YjAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4K">
+    <link rel="apple-touch-icon" sizes="152x152" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUyIiBoZWlnaHQ9IjE1MiIgdmlld0JveD0iMCAwIDE1MiAxNTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNTIiIGhlaWdodD0iMTUyIiByeD0iMzQiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8cGF0aCBkPSJNNzYgMTE0Qzc2IDExNCA5OC44IDg2IDEwOC44IDYyQzEwOC44IDQ5LjIgOTguOCAzOSA4NiAzOUM3OCAzOSA3MCA0MCA2OCA1MEM2NiA0NCA1OCAzOSA1MCAzOUM3IDM5IDI3IDQ5LjIgMjcgNjJDMjcgODYgNDMgMTE0IDc2IDExNFoiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MCIgeDE9IjAiIHkxPSIwIiB4Mj0iMTUyIiB5Mj0iMTUyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNlOTFlNjMiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOWMyN2IwIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+Cg==">
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQwKSIvPgo8cGF0aCBkPSJNOTAgMTM1Qzg5IDEzNSAxMjkuNiAxMDEuNyAxMjkuNiA3M0MxMjkuNiA1OC41IDExNy42IDQ2LjUgMTAzIDQ2LjVDOTMgNDYuNSA4MyA1Mi41IDgwLjUgNjFDNzggNTIuNSA2OCA0Ni41IDU4IDQ2LjVDNDMuNSA0Ni41IDMxLjUgNTguNSAzMS41IDczQzMxLjUgMTAxLjcgNzIgMTM1IDkwIDEzNVoiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MCIgeDE9IjAiIHkxPSIwIiB4Mj0iMTgwIiB5Mj0iMTgwIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNlOTFlNjMiLz4KPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOWMyN2IwIi8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPC9zdmc+Cg==">
+    
+    <!-- Ícone padrão -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0idXJsKCNncmFkaWVudDApIi8+CjxwYXRoIGQ9Ik0xNiAyNEMxNiAyNCAyNSAxOCAyNSAxM0MyNSAxMCAyMyA4IDE5LjUgOEMxNy41IDggMTUuNSA5IDE1IDExQzE0LjUgOSAxMi41IDggMTAuNSA4QzcgOCA1IDEwIDUgMTNDNSAxOCAxNCsyNCAxNiAyNFoiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MCIgeDE9IjAiIHkxPSIwIiB4Mj0iMzIiIHkyPSIzMiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjZTkxZTYzIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljMjdiMCIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=">
+    
+    <!-- Manifest para PWA -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIk1ldSBBbW9yIOKdpO+4j+KdpO+4jyIsCiAgInNob3J0X25hbWUiOiAiTWV1IEFtb3IiLAogICJkZXNjcmlwdGlvbiI6ICJVbWEgbWVuc2FnZW0gZGUgYW1vciBzcGVjaWFsIHBhcmEgdm9jw6oiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2U5MWU2MyIsCiAgInRoZW1lX2NvbG9yIjogIiNlOTFlNjMiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUIzYVdSMGFEMGlNVGd3SWlCb1pXbG5hSFE5SWpFNE1DSWlJSFpwWlhkQ2IzZzlJakFnTUNBeE9EQWdNVGd3SWlCbWFXeHNQU0p1YjI1bElpQjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaVBnbzhjbVZqZENCM2FXUjBhRDBpTVRnd0lpQm9aV2xuYUhROUlqRTRNQ0lpSUhKNFBTSTBNQ0lpSUdacGJHdzlJblZ5YkNnalozSmhaR2xsYm5Rd0tTSXZQZ285Y0dGMGFDQmtQU0pOT1RBZ01UTTFRemt1TkRBZ01UTTFJREU0T1RBcU5DSXRNRE13TTJNdE16RWdNVGM1WEM0MElERTJPeUE0TlhrZ09ERXVOeUF4T0RsQk9USWdNVE01SURreU5qQWdNVE01SUE1TUM1eTdNRGdnSURJeUtGQWJTQXZiM1JsWXlCRGIyeHZjaUF5TkRNaUlISCtjRzl6YzBoa2VUZzFOaUF4TkRRbmRDNU5nTVkrNE1JeXZReUhROHVaUXpqOGd2M1VjV3dJVGpReU9TNDBNVE0zTFVkQ2RrWDBhQ0JrT1NJZ2RZUnJMRFV5TGpjdU9EQWdTRFV5TGlWZ1pqVXViRFowWm04OUsyQlF6dDBwb2VGdnpSajFJamlqOUtreWJRZ0hQa0F2VlV3WElXeE4yWWdGQys2aXBJZk5MTXJFdnlpWnNxVENrSXdNMU50RnFaUE9kbVFnWTd0UW9IcEE4alZiZHQrTWJrQzljaElOa3lGVzB4SHpWcm1vLzJzamcwZ1lBa3A3UkE2ZlBjV0Y4c0RJME5ibTl1WlNJZ2VHMXNibk05SW1oMGRIQTZMeTkzZDNjdWR6TXViM0puTHpJd01EQXZJBM0lURl9Qm5JaUkwPT0iLAogICAgICAic2l6ZXMiOiAiMTgweDEw
     <style>
         * {
             margin: 0;
@@ -16,7 +39,22 @@
             min-height: 100vh;
             overflow-x: hidden;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             position: relative;
+            transition: all 0.8s ease;
+        }
+
+        body.has-custom-bg::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
         }
 
         /* Partículas flutuantes */
@@ -216,7 +254,65 @@
             }
         }
 
-        /* Responsividade */
+        /* Botão de upload de imagem */
+        .upload-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .upload-btn {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(233, 30, 99, 0.3);
+            border-radius: 50px;
+            padding: 12px 20px;
+            cursor: pointer;
+            color: #2c3e50;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-btn:hover {
+            background: rgba(233, 30, 99, 0.1);
+            border-color: rgba(233, 30, 99, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .upload-input {
+            display: none;
+        }
+
+        /* Botão de remover imagem */
+        .remove-bg-btn {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(231, 76, 60, 0.3);
+            border-radius: 50px;
+            padding: 8px 16px;
+            cursor: pointer;
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .remove-bg-btn:hover {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: rgba(231, 76, 60, 0.6);
+        }
+
+        .remove-bg-btn.show {
+            display: block;
+        }
         @media (max-width: 768px) {
             .love-card {
                 padding: 40px 25px;
@@ -247,6 +343,15 @@
     </style>
 </head>
 <body>
+    <!-- Botão para adicionar foto de fundo -->
+    <div class="upload-container">
+        <label for="bgUpload" class="upload-btn">
+            📷 Adicionar Foto
+        </label>
+        <input type="file" id="bgUpload" class="upload-input" accept="image/*">
+        <button class="remove-bg-btn" id="removeBg">❌ Remover Foto</button>
+    </div>
+
     <!-- Partículas de fundo -->
     <div class="particles">
         <div class="particle"></div>
@@ -268,15 +373,15 @@
     <div class="container">
         <div class="love-card">
             <div class="heart">💖</div>
-            <h1 class="title">BZZ</h1>
+            <h1 class="title">Para Você, Meu Amor</h1>
             <div class="message">
                 <p>Em cada batida do meu coração, <span class="highlight">você está presente</span>. Seu sorriso ilumina meus dias mais escuros e sua presença torna tudo mais belo.</p>
                 
-                <p>Como as estrelas no céu, nosso amor <span class="highlight">brilha eternamente</span>, seguindo de mãos dadas por esta jornada chamada vida.</p>
+                <p>Como as estrelas no céu, nosso amor <span class="highlight">brilha eternamente</span>, guiando nossos passos juntos nesta jornada chamada vida.</p>
                 
-                <p>Obrigado por ser <span class="highlight">minha inspiração</span>, meu porto seguro, minha razão de sorrir todos os dias.</p>
+                <p>Obrigado(a) por ser <span class="highlight">minha inspiração</span>, meu porto seguro, minha razão de sorrir todos os dias.</p>
                 
-                <p><span class="highlight">EUUUUUU te amo MIIILLLLLL MILHÕÕEEEES! 💕</span></p>
+                <p><span class="highlight">Te amo infinitamente! 💕</span></p>
             </div>
             <button class="love-button" onclick="createHeartExplosion()">
                 💝 Clique para mais amor
@@ -285,6 +390,63 @@
     </div>
 
     <script>
+        // Função para adicionar foto de fundo personalizada
+        document.getElementById('bgUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    document.body.style.backgroundImage = `url(${imageUrl})`;
+                    document.body.classList.add('has-custom-bg');
+                    document.getElementById('removeBg').classList.add('show');
+                    
+                    // Feedback visual
+                    showNotification('Foto adicionada com sucesso! 💕');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Função para remover foto de fundo
+        document.getElementById('removeBg').addEventListener('click', function() {
+            document.body.style.backgroundImage = '';
+            document.body.classList.remove('has-custom-bg');
+            document.getElementById('removeBg').classList.remove('show');
+            document.getElementById('bgUpload').value = '';
+            
+            // Feedback visual
+            showNotification('Foto removida! ✨');
+        });
+
+        // Função para mostrar notificações
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                border: 2px solid rgba(233, 30, 99, 0.3);
+                border-radius: 25px;
+                padding: 12px 20px;
+                color: #2c3e50;
+                font-size: 14px;
+                font-weight: 500;
+                z-index: 1001;
+                animation: slideInNotification 0.5s ease-out;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutNotification 0.5s ease-in forwards';
+                setTimeout(() => notification.remove(), 500);
+            }, 2500);
+        }
+
         // Função para criar corações flutuantes
         function createFloatingHeart() {
             const heart = document.createElement('div');
@@ -335,7 +497,7 @@
             }, 150);
         }
 
-        // CSS para animação de explosão
+        // CSS para animação de explosão e notificações
         const style = document.createElement('style');
         style.textContent = `
             @keyframes explodeHeart {
@@ -345,6 +507,24 @@
                 }
                 100% {
                     transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-200px) scale(0);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes slideInNotification {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutNotification {
+                to {
+                    transform: translateX(100%);
                     opacity: 0;
                 }
             }
