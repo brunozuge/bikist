@@ -198,22 +198,198 @@
             50% { transform: translateY(-20px); }
         }
 
-        @media (max-width: 768px) {
+        /* Responsividade para tablets */
+        @media (max-width: 1024px) {
             .container {
-                margin: 20px;
-                padding: 30px 20px;
+                max-width: 90%;
+                padding: 35px;
             }
             
             h1 {
-                font-size: 2em;
+                font-size: 2.2em;
+            }
+            
+            .gear {
+                width: 70px;
+                height: 70px;
+            }
+        }
+
+        /* Responsividade para tablets pequenos e celulares grandes */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                margin: 0;
+                padding: 25px 20px;
+                border-radius: 15px;
+                max-width: 100%;
+            }
+            
+            .gear {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 15px;
             }
             
             .subtitle {
-                font-size: 1.1em;
+                font-size: 1em;
+                margin-bottom: 25px;
             }
             
             .message {
+                font-size: 0.95em;
+                padding: 15px;
+                margin-bottom: 25px;
+                line-height: 1.5;
+            }
+            
+            .signature {
+                font-size: 1.1em;
+                margin-top: 30px;
+                padding: 12px;
+            }
+            
+            .floating-element:nth-child(1) {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .floating-element:nth-child(2) {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .floating-element:nth-child(3) {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        /* Responsividade para celulares pequenos */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+                border-radius: 12px;
+            }
+            
+            .gear {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+                margin-bottom: 12px;
+            }
+            
+            .subtitle {
+                font-size: 0.9em;
+                margin-bottom: 20px;
+            }
+            
+            .message {
+                font-size: 0.9em;
+                padding: 12px;
+                margin-bottom: 20px;
+                line-height: 1.4;
+            }
+            
+            .signature {
                 font-size: 1em;
+                margin-top: 25px;
+                padding: 10px;
+            }
+            
+            .heart {
+                font-size: 1.2em;
+            }
+            
+            .loading-bar {
+                margin-top: 20px;
+                height: 4px;
+            }
+        }
+
+        /* Responsividade para telas muito pequenas */
+        @media (max-width: 360px) {
+            .container {
+                padding: 15px 12px;
+            }
+            
+            h1 {
+                font-size: 1.3em;
+            }
+            
+            .subtitle {
+                font-size: 0.85em;
+            }
+            
+            .message {
+                font-size: 0.85em;
+                padding: 10px;
+            }
+            
+            .gear {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        /* Responsividade para orientação paisagem em dispositivos móveis */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+            
+            .container {
+                margin-top: 0;
+                padding: 15px;
+            }
+            
+            .gear {
+                width: 40px;
+                height: 40px;
+                margin-bottom: 15px;
+            }
+            
+            h1 {
+                font-size: 1.4em;
+                margin-bottom: 10px;
+            }
+            
+            .subtitle {
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+            
+            .message {
+                font-size: 0.85em;
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .signature {
+                font-size: 0.95em;
+                margin-top: 15px;
+                padding: 8px;
+            }
+            
+            .floating-elements {
+                display: none;
             }
         }
     </style>
