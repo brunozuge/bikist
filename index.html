@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
         body {
-            background: linear-gradient(135deg, #f0e4d7, #d3c4a3);
+            background: linear-gradient(135deg, #e0e0e0, #b3b3b3);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -16,13 +16,13 @@
             margin: 0;
             font-family: 'Dancing Script', cursive;
             text-align: center;
-            color: #5a4b3b;
+            color: #4d4d4d;
             overflow: hidden;
             position: relative;
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 40px 60px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -36,7 +36,7 @@
         h1 {
             font-size: 3.5em;
             margin-bottom: 10px;
-            color: #8c7851;
+            color: #666;
             animation: pulse 2s infinite;
         }
 
@@ -47,14 +47,24 @@
         }
 
         .heart {
-            color: #d88373;
+            color: #8c8c8c;
             animation: beat 1.2s infinite;
         }
 
         .details {
             font-size: 1em;
-            color: #7b6a57;
+            color: #5e5e5e;
             margin-top: 30px;
+        }
+
+        .gear-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3em;
+            color: #777;
+            animation: rotateGear 3s linear infinite;
+            opacity: 0.6;
         }
 
         @keyframes fadeIn {
@@ -89,11 +99,16 @@
             }
         }
 
-        /* Corações de fundo */
+        @keyframes rotateGear {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Corações de fundo (em tons de cinza) */
         .heart-bg {
             position: absolute;
             font-size: 3em;
-            color: rgba(216, 131, 115, 0.2);
+            color: rgba(140, 140, 140, 0.2);
             opacity: 0;
             animation: floatHearts 15s infinite;
         }
@@ -113,6 +128,8 @@
 </head>
 <body>
 
+    <div class="gear-container">⚙️</div>
+
     <div class="heart-bg">❤️</div>
     <div class="heart-bg">❤️</div>
     <div class="heart-bg">❤️</div>
@@ -120,19 +137,18 @@
     <div class="heart-bg">❤️</div>
 
     <div class="container">
-        <h1>O nosso amor está em manutenção</h1>
+        <h1>Nosso espaço está sendo aperfeiçoado</h1>
         <p>
-            O site do nosso amor está passando por uma pequena atualização para ficar ainda mais perfeito. 
-            É que o meu coração está ocupado demais pensando em você para manter tudo funcionando. 
-            <span class="heart">❤️</span>
+            Estamos trabalhando nos bastidores com muito carinho para deixar tudo ainda melhor para você, meu amor.
+            Assim como um ajuste fino em uma engrenagem, cada detalhe está sendo cuidado. <span class="heart">❤️</span>
         </p>
         <p>
-            Volto logo com mais amor e novidades para você!
+            Em breve voltaremos com tudo funcionando perfeitamente para o nosso amor.
         </p>
         <div class="details">
-            Com todo o meu carinho,
+            Com amor e dedicação,
             <br>
-            [Seu Nome]
+            Seu [Seu Nome]
         </div>
     </div>
 
