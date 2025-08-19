@@ -1,190 +1,259 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estamos em Manutenção</title>
+    <title>Site em Manutenção - BZZ</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            background: linear-gradient(135deg, #e0e0e0, #b3b3b3);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 50%, #3a3a3a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Dancing Script', cursive;
-            text-align: center;
-            color: #4d4d4d;
+            justify-content: center;
             overflow: hidden;
             position: relative;
         }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 40px 60px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            transform: scale(0.95);
-            animation: fadeIn 1.5s forwards;
-            position: relative;
-            z-index: 1;
-        }
-
-        h1 {
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            color: #666;
-            animation: pulse 2s infinite;
-        }
-
-        p {
-            font-size: 1.5em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .heart {
-            color: #8c8c8c;
-            animation: beat 1.2s infinite;
-        }
-
-        .details {
-            font-size: 1em;
-            color: #5e5e5e;
-            margin-top: 30px;
-        }
-
-        .gear-container {
+        .background-pattern {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 3em;
-            color: #777;
-            animation: rotateGear 3s linear infinite;
-            opacity: 0.6;
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
         }
 
-        @keyframes fadeIn {
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: scale(0.8);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: scale(1);
+                transform: translateY(0);
             }
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
+        .gear {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            position: relative;
         }
 
-        @keyframes beat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
+        .gear-svg {
+            width: 100%;
+            height: 100%;
+            animation: spin 3s linear infinite;
         }
 
-        @keyframes rotateGear {
+        @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* Corações de fundo (em tons de cinza) */
-        .heart-bg {
+        .gear path {
+            fill: #8b8b8b;
+            filter: drop-shadow(0 0 10px rgba(139, 139, 139, 0.3));
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #c0c0c0, #ffffff, #a8a8a8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .message {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #d0d0d0;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            border-left: 4px solid #8b8b8b;
+        }
+
+        .signature {
+            font-size: 1.2em;
+            color: #a8a8a8;
+            font-weight: bold;
+            margin-top: 40px;
+            padding: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .heart {
+            color: #ff6b6b;
+            font-size: 1.5em;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .loading-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #8b8b8b, #c0c0c0, #8b8b8b);
+            border-radius: 3px;
+            animation: loading 2s ease-in-out infinite;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        .floating-elements {
             position: absolute;
-            font-size: 3em;
-            color: rgba(140, 140, 140, 0.2);
-            opacity: 0;
-            animation: floatHearts 15s infinite;
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .heart-bg:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
-        .heart-bg:nth-child(2) { top: 50%; left: 80%; animation-delay: 3s; font-size: 2.5em; }
-        .heart-bg:nth-child(3) { top: 80%; left: 40%; animation-delay: 6s; font-size: 4em; }
-        .heart-bg:nth-child(4) { top: 30%; left: 60%; animation-delay: 9s; font-size: 3.5em; }
-        .heart-bg:nth-child(5) { top: 90%; left: 10%; animation-delay: 12s; }
-
-        @keyframes floatHearts {
-            0% { transform: translateY(0); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-100vh); opacity: 0; }
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
         }
 
-        /* MEDIA QUERIES para responsividade */
+        .floating-element:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
         @media (max-width: 768px) {
             .container {
-                padding: 30px 40px;
-                max-width: 90%;
+                margin: 20px;
+                padding: 30px 20px;
             }
-
-            h1 {
-                font-size: 2.5em;
-            }
-
-            p {
-                font-size: 1.2em;
-            }
-
-            .gear-container {
-                font-size: 2em;
-                top: 10px;
-                right: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
+            
             h1 {
                 font-size: 2em;
             }
-
-            p {
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .message {
                 font-size: 1em;
             }
         }
     </style>
 </head>
 <body>
-
-    <div class="gear-container">⚙️</div>
-
-    <div class="heart-bg">❤️</div>
-    <div class="heart-bg">❤️</div>
-    <div class="heart-bg">❤️</div>
-    <div class="heart-bg">❤️</div>
-    <div class="heart-bg">❤️</div>
-
-    <div class="container">
-        <h1>Nosso espaço está sendo aperfeiçoado</h1>
-        <p>
-            Estamos trabalhando nos bastidores com muito carinho para deixar tudo ainda melhor para você, meu amor.
-            Assim como um ajuste fino em uma engrenagem, cada detalhe está sendo cuidado. <span class="heart">❤️</span>
-        </p>
-        <p>
-            Em breve voltaremos com tudo funcionando perfeitamente para o nosso amor.
-        </p>
-        <div class="details">
-            Com amor e dedicação,
-            <br>
-            Seu BZZ
-        </div>
+    <div class="background-pattern"></div>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
     </div>
 
+    <div class="container">
+        <div class="gear">
+            <svg class="gear-svg" viewBox="0 0 24 24">
+                <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+            </svg>
+        </div>
+
+        <h1>Site em Manutenção</h1>
+        <div class="subtitle">Aperfeiçoando tudo com amor</div>
+
+        <div class="message">
+            Olá, meu amor! <span class="heart">♥</span><br><br>
+            
+            Estou trabalhando para deixar nosso cantinho digital ainda mais especial. 
+            O site está temporariamente em manutenção, mas logo estará de volta, 
+            mais bonito e funcional do que nunca!
+            <br><br>
+            Aguarde um pouquinho... estou colocando todo meu carinho neste projeto! <span class="heart">♥</span>
+        </div>
+
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+
+        <div class="signature">
+            Com amor,<br>
+            <strong>BZZ</strong> <span class="heart">♥</span>
+        </div>
+    </div>
 </body>
 </html>
