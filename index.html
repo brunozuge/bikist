@@ -65,6 +65,7 @@
             color: #777;
             animation: rotateGear 3s linear infinite;
             opacity: 0.6;
+            z-index: 0;
         }
 
         @keyframes fadeIn {
@@ -111,6 +112,7 @@
             color: rgba(140, 140, 140, 0.2);
             opacity: 0;
             animation: floatHearts 15s infinite;
+            z-index: 0;
         }
 
         .heart-bg:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
@@ -123,6 +125,38 @@
             0% { transform: translateY(0); opacity: 0; }
             50% { opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        /* MEDIA QUERIES para responsividade */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 40px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            p {
+                font-size: 1.2em;
+            }
+
+            .gear-container {
+                font-size: 2em;
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -148,7 +182,7 @@
         <div class="details">
             Com amor e dedicação,
             <br>
-           BZZ
+            Seu BZZ
         </div>
     </div>
 
