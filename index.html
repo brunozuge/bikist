@@ -1,373 +1,140 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Você, Meu Amor</title>
-
-
-
-      <link rel="apple-touch-icon" href="https://img.freepik.com/vetores-gratis/forma-do-coracao-no-fundo-escuro_1017-3857.jpg?semt=ais_hybrid&w=740&q=80">
+    <title>Estamos em Manutenção</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
         body {
-            font-family: 'Georgia', serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f0e4d7, #d3c4a3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            color: #5a4b3b;
+            overflow: hidden;
             position: relative;
         }
 
-        /* Partículas flutuantes */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+        .container {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            transform: scale(0.95);
+            animation: fadeIn 1.5s forwards;
+            position: relative;
             z-index: 1;
         }
 
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            color: #8c7851;
+            animation: pulse 2s infinite;
         }
 
-        .particle:nth-child(1) { width: 4px; height: 4px; left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; animation-delay: 1s; }
-        .particle:nth-child(3) { width: 3px; height: 3px; left: 30%; animation-delay: 2s; }
-        .particle:nth-child(4) { width: 5px; height: 5px; left: 40%; animation-delay: 3s; }
-        .particle:nth-child(5) { width: 4px; height: 4px; left: 50%; animation-delay: 4s; }
-        .particle:nth-child(6) { width: 6px; height: 6px; left: 60%; animation-delay: 5s; }
-        .particle:nth-child(7) { width: 3px; height: 3px; left: 70%; animation-delay: 0.5s; }
-        .particle:nth-child(8) { width: 5px; height: 5px; left: 80%; animation-delay: 1.5s; }
-        .particle:nth-child(9) { width: 4px; height: 4px; left: 90%; animation-delay: 2.5s; }
-        .particle:nth-child(10) { width: 6px; height: 6px; left: 15%; animation-delay: 3.5s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10%, 90% { opacity: 1; }
-            50% { transform: translateY(-10vh) rotate(180deg); }
+        p {
+            font-size: 1.5em;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        /* Container principal */
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Card principal */
-        .love-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 60px 40px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            max-width: 600px;
-            width: 100%;
-            transform: translateY(30px);
-            animation: slideUp 1.5s ease-out forwards;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .love-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(255, 192, 203, 0.3), transparent);
-            animation: rotate 8s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes slideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes rotate {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Coração principal */
         .heart {
-            font-size: 80px;
-            color: #e91e63;
-            margin-bottom: 30px;
-            animation: heartbeat 1.5s ease-in-out infinite;
+            color: #d88373;
+            animation: beat 1.2s infinite;
         }
 
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        /* Título */
-        .title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            color: #2c3e50;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #e91e63, #9c27b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeIn 2s ease-out 0.5s both;
-        }
-
-        /* Mensagem */
-        .message {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            line-height: 1.8;
-            color: #34495e;
-            margin-bottom: 40px;
-            animation: fadeIn 2s ease-out 1s both;
-        }
-
-        .message p {
-            margin-bottom: 20px;
-        }
-
-        .highlight {
-            color: #e91e63;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(233, 30, 99, 0.3);
-        }
-
-        /* Botão interativo */
-        .love-button {
-            background: linear-gradient(135deg, #e91e63, #9c27b0);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            animation: fadeIn 2s ease-out 1.5s both;
-            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
-        }
-
-        .love-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.4);
-        }
-
-        /* Corações flutuantes */
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .floating-heart {
-            position: absolute;
-            font-size: 20px;
-            color: rgba(233, 30, 99, 0.6);
-            animation: floatHeart 8s linear infinite;
-        }
-
-        @keyframes floatHeart {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh) rotate(360deg);
-                opacity: 0;
-            }
+        .details {
+            font-size: 1em;
+            color: #7b6a57;
+            margin-top: 30px;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: scale(0.8);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1);
             }
         }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .love-card {
-                padding: 40px 25px;
-                margin: 10px;
-                border-radius: 20px;
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
             }
-            
-            .heart {
-                font-size: 60px;
+            50% {
+                transform: scale(1.05);
             }
-            
-            .love-button {
-                padding: 12px 30px;
-                font-size: 1.1rem;
+            100% {
+                transform: scale(1);
             }
         }
 
-        @media (max-width: 480px) {
-            .love-card {
-                padding: 30px 20px;
+        @keyframes beat {
+            0%, 100% {
+                transform: scale(1);
             }
-            
-            .heart {
-                font-size: 50px;
-                margin-bottom: 20px;
+            50% {
+                transform: scale(1.1);
             }
+        }
+
+        /* Corações de fundo */
+        .heart-bg {
+            position: absolute;
+            font-size: 3em;
+            color: rgba(216, 131, 115, 0.2);
+            opacity: 0;
+            animation: floatHearts 15s infinite;
+        }
+
+        .heart-bg:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+        .heart-bg:nth-child(2) { top: 50%; left: 80%; animation-delay: 3s; font-size: 2.5em; }
+        .heart-bg:nth-child(3) { top: 80%; left: 40%; animation-delay: 6s; font-size: 4em; }
+        .heart-bg:nth-child(4) { top: 30%; left: 60%; animation-delay: 9s; font-size: 3.5em; }
+        .heart-bg:nth-child(5) { top: 90%; left: 10%; animation-delay: 12s; }
+
+        @keyframes floatHearts {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <!-- Partículas de fundo -->
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-    </div>
 
-    <!-- Corações flutuantes -->
-    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="heart-bg">❤️</div>
+    <div class="heart-bg">❤️</div>
+    <div class="heart-bg">❤️</div>
+    <div class="heart-bg">❤️</div>
+    <div class="heart-bg">❤️</div>
 
-    <!-- Conteúdo principal -->
     <div class="container">
-        <div class="love-card">
-            <div class="heart">💖</div>
-            <h1 class="title">Para Você, Meu Amor</h1>
-            <div class="message">
-                <p>Em cada batida do meu coração, <span class="highlight">você está presente</span>. Seu sorriso ilumina meus dias mais escuros e sua presença torna tudo mais belo.</p>
-                
-                <p>Como as estrelas no céu, nosso amor <span class="highlight">brilha eternamente</span>, seguindo de mãos dadas por esta jornada chamada vida.</p>
-                
-                <p>Obrigado por ser <span class="highlight">minha inspiração</span>, meu porto seguro, minha razão de sorrir todos os dias.</p>
-                
-                <p><span class="highlight">EUUUUUU te amo MIIILLLLLL MILHÕÕEEEES! 💕</span></p>
-            </div>
-            <button class="love-button" onclick="createHeartExplosion()">
-                💝 Clique para mais amor
-            </button>
+        <h1>O nosso amor está em manutenção</h1>
+        <p>
+            O site do nosso amor está passando por uma pequena atualização para ficar ainda mais perfeito. 
+            É que o meu coração está ocupado demais pensando em você para manter tudo funcionando. 
+            <span class="heart">❤️</span>
+        </p>
+        <p>
+            Volto logo com mais amor e novidades para você!
+        </p>
+        <div class="details">
+            Com todo o meu carinho,
+            <br>
+            [Seu Nome]
         </div>
     </div>
 
-    <script>
-        // Função para criar corações flutuantes
-        function createFloatingHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerHTML = ['💖', '💕', '💗', '💓', '💝'][Math.floor(Math.random() * 5)];
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
-            heart.style.animationDelay = Math.random() * 2 + 's';
-            
-            document.getElementById('floatingHearts').appendChild(heart);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 8000);
-        }
-
-        // Criar corações continuamente
-        setInterval(createFloatingHeart, 2000);
-
-        // Função de explosão de corações no clique
-        function createHeartExplosion() {
-            for (let i = 0; i < 20; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.innerHTML = '💖';
-                    heart.style.position = 'fixed';
-                    heart.style.left = '50%';
-                    heart.style.top = '50%';
-                    heart.style.fontSize = '30px';
-                    heart.style.pointerEvents = 'none';
-                    heart.style.zIndex = '1000';
-                    heart.style.animation = `explodeHeart 2s ease-out forwards`;
-                    
-                    const angle = (360 / 20) * i;
-                    heart.style.setProperty('--angle', angle + 'deg');
-                    
-                    document.body.appendChild(heart);
-                    
-                    setTimeout(() => heart.remove(), 2000);
-                }, i * 50);
-            }
-            
-            // Feedback visual no botão
-            const button = event.target;
-            button.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                button.style.transform = 'translateY(-3px)';
-            }, 150);
-        }
-
-        // CSS para animação de explosão
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes explodeHeart {
-                0% {
-                    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(0) scale(1);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-200px) scale(0);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Adicionar corações iniciais
-        for (let i = 0; i < 5; i++) {
-            setTimeout(createFloatingHeart, i * 400);
-        }
-
-        // Efeito de hover nos corações flutuantes
-        document.addEventListener('mousemove', (e) => {
-            if (Math.random() > 0.95) {
-                createFloatingHeart();
-            }
-        });
-    </script>
 </body>
 </html>
