@@ -115,9 +115,9 @@
         /* Game Board */
         .game-board {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            max-width: 400px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            max-width: 540px;
             margin: 20px auto;
             padding: 20px;
         }
@@ -240,8 +240,8 @@
             }
             
             .game-board {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 8px;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 6px;
                 padding: 15px;
             }
             
@@ -267,12 +267,12 @@
 
         @media (max-width: 480px) {
             .game-board {
-                grid-template-columns: repeat(3, 1fr);
-                max-width: 300px;
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 320px;
             }
             
             .card {
-                font-size: 1.2em;
+                font-size: 1em;
             }
             
             h1 {
@@ -331,7 +331,7 @@
                     <li><strong>Clique nas cartas</strong> para revelá-las</li>
                     <li><strong>Memorize a posição</strong> dos símbolos românticos</li>
                     <li><strong>Encontre os pares</strong> clicando em duas cartas iguais</li>
-                    <li><strong>Complete o jogo</strong> encontrando todos os 8 pares</li>
+                    <li><strong>Complete o jogo</strong> encontrando todos os 12 pares</li>
                 </ul>
                 
                 <h3>💡 Dicas para Bibi</h3>
@@ -391,7 +391,7 @@
 
     <script>
         // Símbolos românticos para o jogo
-        const symbols = ['💕', '💖', '💝', '🌹', '💐', '💍', '👑', '🦋'];
+        const symbols = ['💕', '💖', '💝', '🌹', '💐', '💍', '👑', '🦋', '💘', '🌺', '💒', '🥀'];
         
         let cards = [];
         let flippedCards = [];
@@ -550,8 +550,8 @@
             
             // Calculate score (higher is better)
             const baseScore = 1000;
-            const timeBonus = Math.max(0, 300 - elapsed);
-            const efficiencyBonus = Math.max(0, (16 - attempts) * 20);
+            const timeBonus = Math.max(0, 500 - elapsed);
+            const efficiencyBonus = Math.max(0, (24 - attempts) * 30);
             const totalScore = baseScore + timeBonus + efficiencyBonus;
             
             let timeText = seconds < 60 ? `${seconds} segundos` : `${minutes}m ${seconds}s`;
