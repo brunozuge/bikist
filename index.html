@@ -3,579 +3,746 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo da Memória Romântico - Para Bibi 💕</title>
+    <title>8-Ball Pool</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0;
             padding: 10px;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        h1 {
-            color: #d63384;
-            margin-bottom: 10px;
-            font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .subtitle {
-            color: #6f42c1;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .screen {
-            display: none;
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        /* Manual Screen */
-        .manual {
-            text-align: left;
-            padding: 20px;
-        }
-
-        .manual h2 {
-            color: #d63384;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 2em;
-        }
-
-        .manual h3 {
-            color: #6f42c1;
-            margin: 15px 0 10px 0;
-            font-size: 1.3em;
-        }
-
-        .manual p, .manual li {
-            color: #495057;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .manual ul {
-            margin-left: 20px;
-        }
-
-        .heart-divider {
-            text-align: center;
-            font-size: 1.5em;
-            color: #d63384;
-            margin: 20px 0;
-        }
-
-        /* Game Controls */
-        .game-controls {
-            margin: 20px 0;
+            background: #1a4d3a;
+            color: white;
+            font-family: Arial, sans-serif;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: auto;
+        }
+        
+        h1 {
+            margin: 0 0 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            text-align: center;
+        }
+        
+        #gameContainer {
+            position: relative;
+            border: clamp(3px, 1vw, 10px) solid #8B4513;
+            border-radius: 10px;
+            background: #228B22;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            max-width: 100%;
+            max-height: 70vh;
+        }
+        
+        canvas {
+            display: block;
+            background: linear-gradient(45deg, #228B22 25%, transparent 25%), 
+                        linear-gradient(-45deg, #228B22 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #228B22 75%), 
+                        linear-gradient(-45deg, transparent 75%, #228B22 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        #controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 0 10px;
         }
-
-        .score-info {
-            color: #6f42c1;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-
-        .timer {
-            color: #dc3545;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        /* Game Board */
-        .game-board {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-            max-width: 540px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-
-        .card {
-            aspect-ratio: 1;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            border-radius: 15px;
-            cursor: pointer;
+        
+        #powerContainer {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 2em;
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-            position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            gap: 10px;
+            min-width: 200px;
+            flex: 1;
+            max-width: 300px;
         }
-
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        
+        #power {
+            flex: 1;
+            height: 12px;
+            background: #333;
+            border-radius: 6px;
+            overflow: hidden;
+            min-width: 150px;
         }
-
-        .card.flipped {
-            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
-            animation: flip 0.6s ease-in-out;
+        
+        #powerBar {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #ffff00, #ff0000);
+            width: 0%;
+            transition: width 0.1s;
         }
-
-        .card.matched {
-            background: linear-gradient(45deg, #00b894, #00cec9);
-            animation: match 0.8s ease-in-out;
-            cursor: default;
-        }
-
-        .card.matched:hover {
-            transform: scale(1);
-        }
-
-        @keyframes flip {
-            0% { transform: rotateY(0deg) scale(1); }
-            50% { transform: rotateY(90deg) scale(0.8); }
-            100% { transform: rotateY(0deg) scale(1); }
-        }
-
-        @keyframes match {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2) rotate(5deg); }
-            100% { transform: scale(1) rotate(0deg); }
-        }
-
-        /* Buttons */
-        .btn {
-            background: linear-gradient(45deg, #d63384, #6f42c1);
+        
+        button {
+            padding: clamp(8px, 2vw, 12px) clamp(15px, 3vw, 20px);
+            background: #8B4513;
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin: 10px;
-            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.4);
+            font-size: clamp(14px, 2.5vw, 16px);
+            transition: background 0.3s;
+            white-space: nowrap;
         }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(214, 51, 132, 0.6);
+        
+        button:hover {
+            background: #A0522D;
         }
-
-        .btn:active {
-            transform: translateY(0);
+        
+        button:active {
+            transform: scale(0.95);
         }
-
-        .btn-secondary {
-            background: linear-gradient(45deg, #6c757d, #495057);
-            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
-        }
-
-        .btn-secondary:hover {
-            box-shadow: 0 6px 20px rgba(108, 117, 125, 0.6);
-        }
-
-        /* Victory Screen */
-        .victory {
-            text-align: center;
-        }
-
-        .victory h2 {
-            color: #d63384;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .fireworks {
-            font-size: 3em;
-            animation: fireworks 1s infinite;
-        }
-
-        @keyframes fireworks {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-            
-            .subtitle {
-                font-size: 1em;
-            }
-            
-            .game-board {
-                grid-template-columns: repeat(6, 1fr);
-                gap: 6px;
-                padding: 15px;
-            }
-            
-            .card {
-                font-size: 1.5em;
-            }
-            
-            .container {
-                padding: 15px;
-                margin: 10px;
-            }
-            
-            .game-controls {
-                flex-direction: column;
-                gap: 5px;
-            }
-            
-            .btn {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .game-board {
-                grid-template-columns: repeat(4, 1fr);
-                max-width: 320px;
-            }
-            
-            .card {
-                font-size: 1em;
-            }
-            
-            h1 {
-                font-size: 1.5em;
-            }
-        }
-
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
+        
+        #info {
+            display: flex;
+            gap: clamp(10px, 3vw, 30px);
+            margin-top: 15px;
+            font-size: clamp(14px, 2.5vw, 18px);
+            flex-wrap: wrap;
+            justify-content: center;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            max-width: 800px;
+            padding: 0 10px;
         }
-
-        .heart {
-            position: absolute;
-            color: rgba(214, 51, 132, 0.3);
-            font-size: 20px;
-            animation: float 6s infinite linear;
+        
+        .player {
+            padding: clamp(8px, 2vw, 12px);
+            border-radius: 5px;
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+            min-width: 140px;
+            flex: 1;
+            max-width: 200px;
         }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 1;
+        
+        .player.active {
+            background: rgba(255,255,0,0.3);
+        }
+        
+        #gameStatus {
+            text-align: center;
+            min-width: 120px;
+            flex: 1;
+            max-width: 150px;
+        }
+        
+        #instructions {
+            max-width: 95%;
+            margin-top: 15px;
+            text-align: center;
+            font-size: clamp(12px, 2vw, 14px);
+            opacity: 0.8;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        /* Mobile specific styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
             }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
+            
+            h1 {
+                margin-bottom: 10px;
+            }
+            
+            #gameContainer {
+                max-height: 50vh;
+            }
+            
+            #controls {
+                margin-top: 10px;
+                gap: 10px;
+            }
+            
+            #info {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            
+            .player {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            #gameStatus {
+                width: 100%;
+                max-width: 300px;
+                padding: 10px;
+                background: rgba(0,0,0,0.3);
+                border-radius: 5px;
+            }
+            
+            #powerContainer {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            button {
+                min-width: 120px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #gameContainer {
+                max-height: 45vh;
+            }
+            
+            #instructions {
+                font-size: 11px;
+                margin-top: 10px;
+            }
+        }
+        
+        /* Landscape mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            #gameContainer {
+                max-height: 60vh;
+            }
+            
+            #info {
+                flex-direction: row;
+                gap: 15px;
+                font-size: 14px;
+            }
+            
+            .player, #gameStatus {
+                min-width: auto;
+                padding: 5px 8px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="floating-hearts" id="floatingHearts"></div>
+    <h1>🎱 ZUGE BOLLAS</h1>
     
-    <div class="container">
-        <h1>💕 Jogo da Memória Romântico 💕</h1>
-        <p class="subtitle">Feito especialmente para Bibi com muito amor</p>
-
-        <!-- Manual Screen -->
-        <div id="manualScreen" class="screen active">
-            <div class="manual">
-                <h2>📖 Manual do Jogo</h2>
-                
-                <div class="heart-divider">💖 💖 💖</div>
-                
-                <h3>🎯 Objetivo</h3>
-                <p>Encontre todos os pares de símbolos românticos no menor tempo possível! Cada par que você encontrar representa um momento especial de amor.</p>
-                
-                <h3>🎮 Como Jogar</h3>
-                <ul>
-                    <li><strong>Clique nas cartas</strong> para revelá-las</li>
-                    <li><strong>Memorize a posição</strong> dos símbolos românticos</li>
-                    <li><strong>Encontre os pares</strong> clicando em duas cartas iguais</li>
-                    <li><strong>Complete o jogo</strong> encontrando todos os 12 pares</li>
-                </ul>
-                
-                <h3>💡 Dicas para Bibi</h3>
-                <ul>
-                    <li>Comece revelando cartas em cantos opostos</li>
-                    <li>Tente criar um padrão mental do tabuleiro</li>
-                    <li>Use o coração para memorizar melhor 💕</li>
-                    <li>Não desista - o amor sempre encontra um caminho!</li>
-                </ul>
-                
-                <h3>🏆 Pontuação</h3>
-                <p>Sua pontuação é baseada no número de tentativas e no tempo gasto. Quanto menos tentativas e mais rápido você for, maior será sua pontuação romântica!</p>
-                
-                <div class="heart-divider">💝 💝 💝</div>
-                
-                <p style="text-align: center; font-style: italic; color: #d63384;">
-                    "Cada par encontrado é como encontrar você todos os dias - sempre uma surpresa maravilhosa!"
-                </p>
-            </div>
-            
-            <button class="btn" onclick="startGame()">💕 Começar a Jogar 💕</button>
-        </div>
-
-        <!-- Game Screen -->
-        <div id="gameScreen" class="screen">
-            <div class="game-controls">
-                <div class="score-info">
-                    <div>Tentativas: <span id="attempts">0</span></div>
-                    <div>Pares: <span id="pairs">0</span>/8</div>
-                </div>
-                <div class="timer">⏰ <span id="timer">00:00</span></div>
-            </div>
-            
-            <div class="game-board" id="gameBoard"></div>
-            
-            <button class="btn btn-secondary" onclick="showManual()">📖 Manual</button>
-            <button class="btn" onclick="resetGame()">🔄 Novo Jogo</button>
-        </div>
-
-        <!-- Victory Screen -->
-        <div id="victoryScreen" class="screen">
-            <div class="victory">
-                <div class="fireworks">🎉✨🎊✨🎉</div>
-                <h2>Parabéns, Bibi! 💕</h2>
-                <p style="font-size: 1.3em; color: #6f42c1; margin: 20px 0;">
-                    Você completou o jogo da memória romântico!
-                </p>
-                <div id="finalStats" style="margin: 20px 0; font-size: 1.1em;"></div>
-                <p style="font-style: italic; color: #d63384; margin: 20px 0;">
-                    "Sua memória é tão perfeita quanto nosso amor - inesquecível! 💖"
-                </p>
-                <button class="btn" onclick="resetGame()">💕 Jogar Novamente</button>
-                <button class="btn btn-secondary" onclick="showManual()">📖 Ver Manual</button>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+    </div>
+    
+    <div id="controls">
+        <div id="powerContainer">
+            <label>Força: </label>
+            <div id="power">
+                <div id="powerBar"></div>
             </div>
         </div>
+        <button onclick="resetGame()">Novo Jogo</button>
+    </div>
+    
+    <div id="info">
+        <div id="player1" class="player active">
+            <strong>Jogador 1</strong><br>
+            Bolas: <span id="p1Balls">Lisas (1-7)</span>
+        </div>
+        <div id="player2" class="player">
+            <strong>Jogador 2</strong><br>
+            Bolas: <span id="p2Balls">Listradas (9-15)</span>
+        </div>
+        <div id="gameStatus">
+            <strong>Status:</strong><br>
+            <span id="status">Vez do Jogador 1</span>
+        </div>
+    </div>
+    
+    <div id="instructions">
+        <p><strong>Como jogar:</strong> Clique e arraste para mirar. Solte para atirar. Use a barra de força para controlar a potência.</p>
+        <p>Objetivo: Encape todas as suas bolas (lisas ou listradas) e depois a bola 8 preta.</p>
     </div>
 
     <script>
-        // Símbolos românticos para o jogo
-        const symbols = ['💕', '💖', '💝', '🌹', '💐', '💍', '👑', '🦋', '💘', '🌺', '💒', '🥀'];
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const powerBar = document.getElementById('powerBar');
         
-        let cards = [];
-        let flippedCards = [];
-        let matchedPairs = 0;
-        let attempts = 0;
-        let startTime;
-        let timerInterval;
-        let gameActive = false;
-
-        function createFloatingHearts() {
-            const heartsContainer = document.getElementById('floatingHearts');
-            
-            setInterval(() => {
-                if (Math.random() > 0.7) {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart';
-                    heart.textContent = '💕';
-                    heart.style.left = Math.random() * 100 + '%';
-                    heart.style.animationDuration = (4 + Math.random() * 4) + 's';
-                    heartsContainer.appendChild(heart);
-                    
-                    setTimeout(() => {
-                        if (heartsContainer.contains(heart)) {
-                            heartsContainer.removeChild(heart);
-                        }
-                    }, 8000);
-                }
-            }, 1000);
-        }
-
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
-        }
-
-        function showManual() {
-            showScreen('manualScreen');
-        }
-
-        function startGame() {
-            showScreen('gameScreen');
-            initializeGame();
-        }
-
-        function initializeGame() {
-            // Reset game state
-            cards = [];
-            flippedCards = [];
-            matchedPairs = 0;
-            attempts = 0;
-            gameActive = true;
-            
-            // Create card pairs
-            const cardSymbols = [...symbols, ...symbols];
-            
-            // Shuffle cards
-            for (let i = cardSymbols.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [cardSymbols[i], cardSymbols[j]] = [cardSymbols[j], cardSymbols[i]];
+        let balls = [];
+        let cueBall = null;
+        let aimLine = null;
+        let isDragging = false;
+        let currentPlayer = 1;
+        let gameEnded = false;
+        let power = 0;
+        let powerDirection = 1;
+        let powerInterval = null;
+        
+        // Configurações do jogo
+        let BALL_RADIUS = 12;
+        const FRICTION = 0.98;
+        const MIN_SPEED = 0.1;
+        const MAX_POWER = 15;
+        
+        class Ball {
+            constructor(x, y, number, color) {
+                this.x = x;
+                this.y = y;
+                this.vx = 0;
+                this.vy = 0;
+                this.radius = BALL_RADIUS;
+                this.number = number;
+                this.color = color;
+                this.pocketed = false;
+                this.isCue = number === 0;
+                this.isEightBall = number === 8;
+                this.isSolid = number >= 1 && number <= 7;
+                this.isStripe = number >= 9 && number <= 15;
             }
             
-            // Create game board
-            const gameBoard = document.getElementById('gameBoard');
-            gameBoard.innerHTML = '';
-            
-            cardSymbols.forEach((symbol, index) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.dataset.symbol = symbol;
-                card.dataset.index = index;
-                card.textContent = '💝';
-                card.addEventListener('click', flipCard);
-                gameBoard.appendChild(card);
-                cards.push(card);
-            });
-            
-            // Start timer
-            startTime = Date.now();
-            updateTimer();
-            timerInterval = setInterval(updateTimer, 1000);
-            
-            // Update displays
-            updateDisplay();
-        }
-
-        function flipCard(event) {
-            if (!gameActive) return;
-            
-            const card = event.target;
-            
-            // Ignore if card is already flipped or matched
-            if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
-            
-            // Ignore if two cards are already flipped
-            if (flippedCards.length >= 2) return;
-            
-            // Flip the card
-            card.classList.add('flipped');
-            card.textContent = card.dataset.symbol;
-            flippedCards.push(card);
-            
-            // Check for match if two cards are flipped
-            if (flippedCards.length === 2) {
-                attempts++;
-                setTimeout(checkMatch, 800);
-            }
-        }
-
-        function checkMatch() {
-            const [card1, card2] = flippedCards;
-            
-            if (card1.dataset.symbol === card2.dataset.symbol) {
-                // Match found
-                card1.classList.add('matched');
-                card2.classList.add('matched');
-                matchedPairs++;
+            update() {
+                if (this.pocketed) return;
                 
-                // Check if game is complete
-                if (matchedPairs === symbols.length) {
-                    gameActive = false;
-                    clearInterval(timerInterval);
-                    setTimeout(showVictory, 500);
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // Aplicar atrito
+                this.vx *= FRICTION;
+                this.vy *= FRICTION;
+                
+                // Parar se muito devagar
+                if (Math.abs(this.vx) < MIN_SPEED && Math.abs(this.vy) < MIN_SPEED) {
+                    this.vx = 0;
+                    this.vy = 0;
                 }
-            } else {
-                // No match
-                card1.classList.remove('flipped');
-                card2.classList.remove('flipped');
-                card1.textContent = '💝';
-                card2.textContent = '💝';
+                
+                // Colisão com bordas
+                if (this.x - this.radius <= 0 || this.x + this.radius >= canvas.width) {
+                    this.vx = -this.vx;
+                    this.x = Math.max(this.radius, Math.min(canvas.width - this.radius, this.x));
+                }
+                if (this.y - this.radius <= 0 || this.y + this.radius >= canvas.height) {
+                    this.vy = -this.vy;
+                    this.y = Math.max(this.radius, Math.min(canvas.height - this.radius, this.y));
+                }
+                
+                // Verificar caçapas (cantos e meio das laterais)
+                this.checkPockets();
             }
             
-            flippedCards = [];
-            updateDisplay();
+            checkPockets() {
+                const pocketSize = Math.max(12, canvas.width * 0.025);
+                const borderOffset = Math.max(15, canvas.width * 0.03);
+                
+                const pockets = [
+                    {x: borderOffset, y: borderOffset}, 
+                    {x: canvas.width/2, y: borderOffset * 0.8}, 
+                    {x: canvas.width - borderOffset, y: borderOffset},
+                    {x: borderOffset, y: canvas.height - borderOffset}, 
+                    {x: canvas.width/2, y: canvas.height - borderOffset * 0.8}, 
+                    {x: canvas.width - borderOffset, y: canvas.height - borderOffset}
+                ];
+                
+                for (let pocket of pockets) {
+                    const dist = Math.sqrt((this.x - pocket.x)**2 + (this.y - pocket.y)**2);
+                    if (dist < pocketSize + 5) {
+                        this.pocket();
+                        break;
+                    }
+                }
+            }
+            
+            pocket() {
+                this.pocketed = true;
+                this.vx = 0;
+                this.vy = 0;
+                
+                if (this.isCue) {
+                    // Reposicionar bola branca
+                    this.x = canvas.width * 0.25;
+                    this.y = canvas.height / 2;
+                    this.pocketed = false;
+                    switchPlayer();
+                } else if (this.isEightBall) {
+                    endGame();
+                } else {
+                    checkPlayerBalls();
+                }
+            }
+            
+            draw() {
+                if (this.pocketed) return;
+                
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                
+                if (this.isCue) {
+                    ctx.fillStyle = 'white';
+                    ctx.fill();
+                    ctx.strokeStyle = '#ddd';
+                } else {
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                    
+                    // Número na bola
+                    if (this.isStripe) {
+                        // Faixa branca para bolas listradas
+                        ctx.fillStyle = 'white';
+                        ctx.fillRect(this.x - this.radius + 3, this.y - 3, this.radius * 2 - 6, 6);
+                    }
+                    
+                    ctx.fillStyle = this.isStripe || this.isEightBall ? 'white' : 'black';
+                    ctx.font = '10px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(this.number.toString(), this.x, this.y + 3);
+                    
+                    ctx.strokeStyle = '#333';
+                }
+                
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.restore();
+            }
         }
-
-        function updateDisplay() {
-            document.getElementById('attempts').textContent = attempts;
-            document.getElementById('pairs').textContent = matchedPairs;
+        
+        function initGame() {
+            balls = [];
+            gameEnded = false;
+            currentPlayer = 1;
+            updateUI();
+            
+            // Ajustar tamanho do canvas baseado na tela
+            adjustCanvasSize();
+            
+            // Bola branca
+            cueBall = new Ball(canvas.width * 0.25, canvas.height / 2, 0, 'white');
+            balls.push(cueBall);
+            
+            // Cores das bolas
+            const colors = ['white', '#FFD700', '#0000FF', '#FF0000', '#800080', '#FF8C00', '#008000', '#8B0000', '#000000', '#FFD700', '#0000FF', '#FF0000', '#800080', '#FF8C00', '#008000', '#8B0000'];
+            
+            // Triângulo de bolas
+            const startX = canvas.width * 0.75;
+            const startY = canvas.height / 2;
+            let ballIndex = 1;
+            
+            for (let row = 0; row < 5; row++) {
+                for (let col = 0; col <= row; col++) {
+                    if (ballIndex <= 15) {
+                        const x = startX + row * (BALL_RADIUS * 2 - 1);
+                        const y = startY + (col - row/2) * (BALL_RADIUS * 2 - 1);
+                        
+                        // Colocar a bola 8 no meio
+                        let number = ballIndex;
+                        if (row === 2 && col === 1) {
+                            number = 8;
+                        } else if (ballIndex === 8) {
+                            number = row === 4 ? (col === 0 ? 15 : 14) : ballIndex;
+                        }
+                        
+                        balls.push(new Ball(x, y, number, colors[number]));
+                        ballIndex++;
+                    }
+                }
+            }
         }
-
-        function updateTimer() {
-            if (!gameActive) return;
+        
+        function adjustCanvasSize() {
+            const maxWidth = Math.min(window.innerWidth - 40, 800);
+            const maxHeight = Math.min(window.innerHeight * 0.6, 400);
             
-            const elapsed = Math.floor((Date.now() - startTime) / 1000);
-            const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
-            const seconds = (elapsed % 60).toString().padStart(2, '0');
-            document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+            // Manter proporção 2:1
+            let width = maxWidth;
+            let height = width / 2;
+            
+            if (height > maxHeight) {
+                height = maxHeight;
+                width = height * 2;
+            }
+            
+            canvas.width = width;
+            canvas.height = height;
+            
+            // Ajustar tamanho das bolas baseado no tamanho do canvas
+            const scale = width / 800;
+            BALL_RADIUS = Math.max(8, 12 * scale);
         }
-
-        function showVictory() {
-            const elapsed = Math.floor((Date.now() - startTime) / 1000);
-            const minutes = Math.floor(elapsed / 60);
-            const seconds = elapsed % 60;
+        
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Calculate score (higher is better)
-            const baseScore = 1000;
-            const timeBonus = Math.max(0, 500 - elapsed);
-            const efficiencyBonus = Math.max(0, (24 - attempts) * 30);
-            const totalScore = baseScore + timeBonus + efficiencyBonus;
+            // Desenhar caçapas
+            drawPockets();
             
-            let timeText = seconds < 60 ? `${seconds} segundos` : `${minutes}m ${seconds}s`;
+            // Desenhar bolas
+            balls.forEach(ball => ball.draw());
             
-            document.getElementById('finalStats').innerHTML = `
-                <div style="color: #6f42c1; margin: 10px 0;">⏱️ Tempo: ${timeText}</div>
-                <div style="color: #6f42c1; margin: 10px 0;">🎯 Tentativas: ${attempts}</div>
-                <div style="color: #d63384; margin: 10px 0; font-weight: bold; font-size: 1.2em;">
-                    💖 Pontuação do Amor: ${totalScore} pontos
-                </div>
-            `;
-            
-            showScreen('victoryScreen');
+            // Desenhar linha de mira
+            if (aimLine && !gameEnded) {
+                ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(cueBall.x, cueBall.y);
+                ctx.lineTo(aimLine.x, aimLine.y);
+                ctx.stroke();
+                ctx.setLineDash([]);
+            }
         }
-
+        
+        function drawPockets() {
+            const pocketSize = Math.max(12, canvas.width * 0.025);
+            const borderOffset = Math.max(15, canvas.width * 0.03);
+            
+            const pockets = [
+                {x: borderOffset, y: borderOffset}, 
+                {x: canvas.width/2, y: borderOffset * 0.8}, 
+                {x: canvas.width - borderOffset, y: borderOffset},
+                {x: borderOffset, y: canvas.height - borderOffset}, 
+                {x: canvas.width/2, y: canvas.height - borderOffset * 0.8}, 
+                {x: canvas.width - borderOffset, y: canvas.height - borderOffset}
+            ];
+            
+            pockets.forEach(pocket => {
+                ctx.beginPath();
+                ctx.arc(pocket.x, pocket.y, pocketSize, 0, Math.PI * 2);
+                ctx.fillStyle = '#000';
+                ctx.fill();
+                ctx.strokeStyle = '#8B4513';
+                ctx.lineWidth = Math.max(1, canvas.width * 0.004);
+                ctx.stroke();
+            });
+        }
+        
+        function update() {
+            balls.forEach(ball => ball.update());
+            handleCollisions();
+            
+            // Verificar se todas as bolas pararam
+            const allStopped = balls.every(ball => ball.vx === 0 && ball.vy === 0);
+            if (allStopped && !isDragging) {
+                // Permitir próxima jogada
+            }
+        }
+        
+        function handleCollisions() {
+            for (let i = 0; i < balls.length; i++) {
+                for (let j = i + 1; j < balls.length; j++) {
+                    const ball1 = balls[i];
+                    const ball2 = balls[j];
+                    
+                    if (ball1.pocketed || ball2.pocketed) continue;
+                    
+                    const dx = ball2.x - ball1.x;
+                    const dy = ball2.y - ball1.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < ball1.radius + ball2.radius) {
+                        // Colisão detectada
+                        const angle = Math.atan2(dy, dx);
+                        const sin = Math.sin(angle);
+                        const cos = Math.cos(angle);
+                        
+                        // Separar bolas
+                        const overlap = ball1.radius + ball2.radius - distance;
+                        ball1.x -= overlap * cos * 0.5;
+                        ball1.y -= overlap * sin * 0.5;
+                        ball2.x += overlap * cos * 0.5;
+                        ball2.y += overlap * sin * 0.5;
+                        
+                        // Trocar velocidades
+                        const vx1 = ball1.vx * cos + ball1.vy * sin;
+                        const vy1 = ball1.vy * cos - ball1.vx * sin;
+                        const vx2 = ball2.vx * cos + ball2.vy * sin;
+                        const vy2 = ball2.vy * cos - ball2.vx * sin;
+                        
+                        ball1.vx = vx2 * cos - vy1 * sin;
+                        ball1.vy = vy1 * cos + vx2 * sin;
+                        ball2.vx = vx1 * cos - vy2 * sin;
+                        ball2.vy = vy2 * cos + vx1 * sin;
+                    }
+                }
+            }
+        }
+        
+        function switchPlayer() {
+            currentPlayer = currentPlayer === 1 ? 2 : 1;
+            updateUI();
+        }
+        
+        function checkPlayerBalls() {
+            const player1Balls = balls.filter(b => b.isSolid && !b.pocketed);
+            const player2Balls = balls.filter(b => b.isStripe && !b.pocketed);
+            
+            if (player1Balls.length === 0 || player2Balls.length === 0) {
+                // Um jogador encaçapou todas as suas bolas
+                updateUI();
+            }
+        }
+        
+        function endGame() {
+            gameEnded = true;
+            const winner = currentPlayer === 1 ? 2 : 1; // Quem encaçapou a bola 8 sem encaçapar todas as suas perde
+            document.getElementById('status').textContent = `Jogador ${winner} venceu!`;
+        }
+        
+        function updateUI() {
+            const player1Element = document.getElementById('player1');
+            const player2Element = document.getElementById('player2');
+            const statusElement = document.getElementById('status');
+            
+            player1Element.classList.toggle('active', currentPlayer === 1);
+            player2Element.classList.toggle('active', currentPlayer === 2);
+            
+            if (!gameEnded) {
+                statusElement.textContent = `Vez do Jogador ${currentPlayer}`;
+            }
+            
+            // Atualizar contagem de bolas
+            const player1Balls = balls.filter(b => b.isSolid && !b.pocketed).length;
+            const player2Balls = balls.filter(b => b.isStripe && !b.pocketed).length;
+            
+            document.getElementById('p1Balls').textContent = `Lisas (${player1Balls} restantes)`;
+            document.getElementById('p2Balls').textContent = `Listradas (${player2Balls} restantes)`;
+        }
+        
+        function startPowerMeter() {
+            if (powerInterval) return;
+            
+            powerInterval = setInterval(() => {
+                power += powerDirection * 2;
+                if (power >= 100) {
+                    power = 100;
+                    powerDirection = -1;
+                } else if (power <= 0) {
+                    power = 0;
+                    powerDirection = 1;
+                }
+                powerBar.style.width = power + '%';
+            }, 50);
+        }
+        
+        function stopPowerMeter() {
+            if (powerInterval) {
+                clearInterval(powerInterval);
+                powerInterval = null;
+            }
+        }
+        
+        // Event listeners
+        function getEventPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+        
+        function startAiming(e) {
+            if (gameEnded) return;
+            e.preventDefault();
+            
+            const pos = getEventPos(e);
+            const dx = pos.x - cueBall.x;
+            const dy = pos.y - cueBall.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < Math.max(50, canvas.width * 0.08)) {
+                isDragging = true;
+                startPowerMeter();
+            }
+        }
+        
+        function updateAiming(e) {
+            if (!isDragging || gameEnded) return;
+            e.preventDefault();
+            
+            const pos = getEventPos(e);
+            aimLine = { x: pos.x, y: pos.y };
+        }
+        
+        function shoot(e) {
+            if (!isDragging || gameEnded) return;
+            e.preventDefault();
+            
+            stopPowerMeter();
+            
+            if (aimLine) {
+                const dx = aimLine.x - cueBall.x;
+                const dy = aimLine.y - cueBall.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance > 0) {
+                    const force = (power / 100) * MAX_POWER;
+                    cueBall.vx = (dx / distance) * force;
+                    cueBall.vy = (dy / distance) * force;
+                }
+            }
+            
+            isDragging = false;
+            aimLine = null;
+            power = 0;
+            powerBar.style.width = '0%';
+        }
+        
+        // Mouse events
+        canvas.addEventListener('mousedown', startAiming);
+        canvas.addEventListener('mousemove', updateAiming);
+        canvas.addEventListener('mouseup', shoot);
+        canvas.addEventListener('mouseleave', shoot);
+        
+        // Touch events
+        canvas.addEventListener('touchstart', startAiming);
+        canvas.addEventListener('touchmove', updateAiming);
+        canvas.addEventListener('touchend', shoot);
+        canvas.addEventListener('touchcancel', shoot);
+        
+        // Prevent scrolling on touch
+        canvas.addEventListener('touchstart', e => e.preventDefault());
+        canvas.addEventListener('touchmove', e => e.preventDefault());
+        
+        // Resize handler
+        window.addEventListener('resize', () => {
+            if (!isDragging) {
+                adjustCanvasSize();
+                // Reposicionar bolas proporcionalmente
+                const scaleX = canvas.width / 800;
+                const scaleY = canvas.height / 400;
+                
+                balls.forEach(ball => {
+                    if (ball.isCue) {
+                        ball.x = canvas.width * 0.25;
+                        ball.y = canvas.height / 2;
+                    } else {
+                        ball.x = Math.min(ball.x * scaleX, canvas.width - BALL_RADIUS);
+                        ball.y = Math.min(ball.y * scaleY, canvas.height - BALL_RADIUS);
+                    }
+                });
+            }
+        });
+        
         function resetGame() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-            initializeGame();
+            stopPowerMeter();
+            initGame();
+            power = 0;
+            powerBar.style.width = '0%';
         }
-
-        // Initialize floating hearts
-        createFloatingHearts();
+        
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // Inicializar jogo
+        initGame();
+        gameLoop();
     </script>
 </body>
 </html>
