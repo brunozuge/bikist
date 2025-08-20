@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caça Corações 💖</title>
+    <title>Jardim do Amor da Bibi 🌸</title>
     <style>
         * {
             margin: 0;
@@ -12,763 +12,950 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 50%, #ffeaa7 100%);
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #F0E68C 100%);
+            background-size: 400% 400%;
+            animation: skyGradient 15s ease infinite;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             overflow-x: hidden;
-            user-select: none;
         }
 
-        .header {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin: 20px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        @keyframes skyGradient {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .clouds {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cloud {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.6;
+            animation: cloudFloat 20s linear infinite;
+        }
+
+        @keyframes cloudFloat {
+            from { transform: translateX(-100px); }
+            to { transform: translateX(calc(100vw + 100px)); }
+        }
+
+        .game-container {
+            position: relative;
+            z-index: 2;
             width: 95%;
-            max-width: 500px;
+            max-width: 900px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border: 3px solid rgba(255, 182, 193, 0.5);
         }
 
         .title {
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
-            color: #ff1744;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: pulse 2s infinite;
+            text-align: center;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: #d63384;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: titleGlow 3s ease-in-out infinite alternate;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes titleGlow {
+            from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
+            to { text-shadow: 2px 2px 15px rgba(214, 51, 132, 0.4); }
         }
 
-        .score-board {
+        .stats {
             display: flex;
             justify-content: space-around;
-            margin-top: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        .score-item {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 10px 15px;
-            border-radius: 15px;
-            color: #d63031;
-            font-weight: bold;
-            font-size: clamp(0.9rem, 3vw, 1.1rem);
-        }
-
-        .game-area {
-            position: relative;
-            width: 95%;
-            max-width: 400px;
-            height: 70vh;
-            background: rgba(255, 255, 255, 0.1);
+        .stat {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            padding: 10px 20px;
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+            animation: statPulse 2s ease-in-out infinite alternate;
         }
 
-        .heart {
-            position: absolute;
-            font-size: 30px;
+        @keyframes statPulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        .garden {
+            background: linear-gradient(45deg, #228B22, #32CD32, #90EE90);
+            border-radius: 20px;
+            padding: 20px;
+            min-height: 400px;
+            position: relative;
+            border: 4px solid #8B4513;
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            align-content: start;
+        }
+
+        .plot {
+            background: rgba(139, 69, 19, 0.3);
+            border: 2px dashed #8B4513;
+            border-radius: 10px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            z-index: 10;
-            animation: heartFloat 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
         }
 
-        .heart:hover {
-            transform: scale(1.3);
+        .plot:hover {
+            background: rgba(139, 69, 19, 0.5);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        @keyframes heartFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(10deg); }
+        .plot.planted {
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            cursor: default;
         }
 
-        .heart-red { color: #ff1744; }
-        .heart-pink { color: #ff6b9d; }
-        .heart-purple { color: #a55eea; }
-        .heart-gold { color: #ffd700; }
-
-        .special-heart {
-            font-size: 40px !important;
-            animation: rainbow 2s linear infinite, heartFloat 3s ease-in-out infinite;
+        .flower {
+            font-size: 35px;
+            animation: flowerGrow 2s ease-out, flowerSway 4s ease-in-out infinite;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
         }
 
-        @keyframes rainbow {
-            0% { color: #ff1744; }
-            16% { color: #ff6b9d; }
-            33% { color: #a55eea; }
-            50% { color: #00b894; }
-            66% { color: #0984e3; }
-            83% { color: #ffd700; }
-            100% { color: #ff1744; }
+        @keyframes flowerGrow {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotate(-90deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
         }
 
-        .broken-heart {
-            color: #636e72 !important;
-            animation: shake 0.5s ease-in-out;
+        @keyframes flowerSway {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+        .seed-shop {
+            background: rgba(255, 182, 193, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .seed-shop h3 {
+            color: #d63384;
+            margin-bottom: 15px;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+
+        .seeds {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .seed {
+            background: white;
+            border: 3px solid #ff69b4;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 20px;
+            position: relative;
+        }
+
+        .seed:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
+        }
+
+        .seed.selected {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            transform: scale(1.15);
+        }
+
+        .seed-price {
+            font-size: 10px;
+            font-weight: bold;
+            color: #d63384;
+            margin-top: 2px;
+        }
+
+        .message {
+            background: rgba(255, 240, 245, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            color: #d63384;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            border: 2px solid rgba(255, 182, 193, 0.5);
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
         }
 
         .controls {
             display: flex;
-            gap: 15px;
-            margin: 20px;
-            flex-wrap: wrap;
             justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .btn {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 12px 25px;
             border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(238, 90, 36, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+            font-family: inherit;
+            font-weight: bold;
         }
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(238, 90, 36, 0.4);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
         }
 
-        .btn-start {
-            background: linear-gradient(45deg, #00b894, #00a085);
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
         }
 
-        .btn-pause {
-            background: linear-gradient(45deg, #fdcb6e, #e17055);
-        }
-
-        .game-over {
+        .sparkle {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            display: none;
-            animation: popIn 0.5s ease-out;
+            font-size: 15px;
+            pointer-events: none;
+            animation: sparkleAnim 2s ease-out forwards;
         }
 
-        @keyframes popIn {
+        @keyframes sparkleAnim {
             0% {
                 opacity: 0;
-                transform: translate(-50%, -50%) scale(0.5);
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5) rotate(180deg);
             }
             100% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
+                opacity: 0;
+                transform: scale(0) rotate(360deg);
             }
         }
 
-        .combo-indicator {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 215, 0, 0.9);
-            color: #d63031;
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-weight: bold;
-            display: none;
-            animation: comboGlow 0.5s ease-in-out;
+        @media (max-width: 768px) {
+            .garden {
+                grid-template-columns: repeat(4, 1fr);
+                min-height: 300px;
+            }
+            
+            .plot {
+                height: 70px;
+            }
+            
+            .flower {
+                font-size: 30px;
+            }
+            
+            .seed {
+                width: 60px;
+                height: 60px;
+                font-size: 18px;
+            }
         }
 
-        @keyframes comboGlow {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        @media (max-width: 480px) {
+            .garden {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            
+            .plot {
+                height: 60px;
+            }
+            
+            .flower {
+                font-size: 25px;
+            }
         }
 
-        .message-display {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.95);
-            color: #d63031;
-            padding: 15px 20px;
-            border-radius: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            display: none;
-            animation: messageShow 2s ease-in-out;
-            z-index: 100;
-            text-align: center;
-            max-width: 80%;
-        }
-
-        @keyframes messageShow {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-        }
-
-        .manual-overlay {
+        /* Manual Styles */
+        .manual-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            z-index: 1000;
             display: flex;
-            justify-content: center;
             align-items: center;
-            z-index: 2000;
-            animation: fadeIn 0.3s ease;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .manual-popup {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        .manual-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
             padding: 30px;
-            border-radius: 20px;
-            max-width: 90%;
-            width: 500px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 182, 193, 0.5);
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            animation: popIn 0.5s ease-out;
         }
 
-        .manual-popup h2 {
+        .manual-title {
             text-align: center;
-            margin-bottom: 20px;
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #d63384;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: titleGlow 3s ease-in-out infinite alternate;
         }
 
-        .heart-guide {
-            margin-bottom: 20px;
+        .manual-subtitle {
+            text-align: center;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: #e91e63;
+            margin-bottom: 30px;
+            font-style: italic;
         }
 
-        .heart-item {
+        .manual-content {
+            display: grid;
+            gap: 25px;
+        }
+
+        .manual-section {
+            background: rgba(255, 240, 245, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid rgba(255, 182, 193, 0.3);
+        }
+
+        .manual-section h3 {
+            color: #d63384;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px solid rgba(214, 51, 132, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .manual-steps {
+            display: grid;
+            gap: 15px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #ff69b4;
+        }
+
+        .step-number {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 15px;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .step-content strong {
+            color: #d63384;
+            display: block;
+            margin-bottom: 5px;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.4;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .flower-guide, .tips, .controls-guide {
+            display: grid;
+            gap: 10px;
+        }
+
+        .flower-item, .tip, .control-item {
+            background: white;
+            padding: 12px;
             border-radius: 10px;
-            transition: all 0.3s ease;
+            border-left: 4px solid #ff69b4;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .heart-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(5px);
+        .tip strong, .control-item strong {
+            color: #d63384;
         }
 
-        .heart-item.danger {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-        }
-
-        .heart-demo {
-            font-size: 30px;
-            margin-right: 15px;
-            min-width: 40px;
+        .manual-footer {
             text-align: center;
-            animation: heartFloat 2s ease-in-out infinite;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(214, 51, 132, 0.2);
         }
 
-        .heart-info {
-            font-size: clamp(14px, 3vw, 16px);
-            font-weight: 500;
-        }
-
-        .manual-tips {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
+        .love-message {
+            color: #d63384;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             margin-bottom: 20px;
+            font-weight: bold;
+            font-style: italic;
         }
 
-        .manual-tips h3 {
-            margin-bottom: 10px;
-            font-size: clamp(16px, 3.5vw, 18px);
+        .start-game-btn {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+            animation: buttonPulse 2s ease-in-out infinite alternate;
         }
 
-        .manual-tips ul {
-            list-style: none;
-            padding: 0;
+        .start-game-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 20, 147, 0.5);
         }
 
-        .manual-tips li {
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-            font-size: clamp(13px, 3vw, 15px);
+        @keyframes buttonPulse {
+            from { box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4); }
+            to { box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6); }
         }
 
-        .manual-tips li:before {
-            content: '✨';
-            position: absolute;
-            left: 0;
-        }
-
-        /* Responsividade */
         @media (max-width: 768px) {
-            .header {
-                width: 90%;
-                padding: 15px;
+            .manual-container {
+                padding: 20px;
+                margin: 10px;
             }
             
-            .game-area {
-                height: 60vh;
-                width: 95%;
+            .step {
+                flex-direction: column;
+                text-align: center;
             }
             
-            .heart {
-                font-size: 25px;
-            }
-            
-            .special-heart {
-                font-size: 35px !important;
-            }
-            
-            .btn {
-                padding: 10px 18px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .game-area {
-                height: 50vh;
-            }
-            
-            .heart {
-                font-size: 22px;
-            }
-            
-            .special-heart {
-                font-size: 28px !important;
+            .step-number {
+                align-self: center;
+                margin-bottom: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="manual-overlay" id="manualOverlay">
-        <div class="manual-popup">
-            <h2>💖 Como Jogar</h2>
+    <div class="clouds"></div>
+    
+    <!-- Manual/Tutorial Screen -->
+    <div id="manualScreen" class="manual-screen">
+        <div class="manual-container">
+            <h1 class="manual-title">💖 Manual do Jardim do Amor 💖</h1>
+            <div class="manual-subtitle">Um guia especial para a Bibi começar sua aventura! 🌸</div>
+            
             <div class="manual-content">
-                <div class="heart-guide">
-                    <div class="heart-item">
-                        <span class="heart-demo heart-red">❤️</span>
-                        <span class="heart-info">Coração Vermelho = 10 pontos</span>
-                    </div>
-                    <div class="heart-item">
-                        <span class="heart-demo heart-pink">💕</span>
-                        <span class="heart-info">Coração Rosa = 15 pontos</span>
-                    </div>
-                    <div class="heart-item">
-                        <span class="heart-demo heart-purple">💜</span>
-                        <span class="heart-info">Coração Roxo = 20 pontos</span>
-                    </div>
-                    <div class="heart-item">
-                        <span class="heart-demo heart-gold">💛</span>
-                        <span class="heart-info">Coração Dourado = 25 pontos</span>
-                    </div>
-                    <div class="heart-item">
-                        <span class="heart-demo special-heart">💖</span>
-                        <span class="heart-info">Coração Especial = 50 pontos</span>
-                    </div>
-                    <div class="heart-item danger">
-                        <span class="heart-demo broken-heart">💔</span>
-                        <span class="heart-info">Coração Partido = -20 pontos</span>
+                <div class="manual-section">
+                    <h3>🎯 Como Jogar</h3>
+                    <div class="manual-steps">
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <strong>Escolha uma Semente 🌱</strong>
+                                <p>Clique em uma das sementes na loja. Cada uma tem um preço e gera uma flor diferente!</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <strong>Plante no Jardim 🌿</strong>
+                                <p>Clique em qualquer canteiro vazio para plantar. Sua flor crescerá magicamente!</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <strong>Colha e Ganhe Moedas 💰</strong>
+                                <p>Use "Colher Todas" para ganhar o dobro do que gastou em sementes!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="manual-tips">
-                    <h3>🎯 Dicas:</h3>
-                    <ul>
-                        <li>Faça combos para multiplicar pontos!</li>
-                        <li>Evite os corações partidos 💔</li>
-                        <li>Corações especiais 💖 valem muito mais!</li>
-                        <li>Mensagens de amor aparecem a cada 10 combos!</li>
-                    </ul>
+
+                <div class="manual-section">
+                    <h3>🌸 Tipos de Flores e Preços</h3>
+                    <div class="flower-guide">
+                        <div class="flower-item">🌹 <strong>Rosa Vermelha</strong> - 10 moedas</div>
+                        <div class="flower-item">🌷 <strong>Tulipa Rosa</strong> - 15 moedas</div>
+                        <div class="flower-item">🌺 <strong>Hibisco</strong> - 20 moedas</div>
+                        <div class="flower-item">🌸 <strong>Flor de Cerejeira</strong> - 25 moedas</div>
+                        <div class="flower-item">🌻 <strong>Girassol</strong> - 30 moedas</div>
+                    </div>
+                </div>
+
+                <div class="manual-section">
+                    <h3>✨ Dicas Mágicas</h3>
+                    <div class="tips">
+                        <div class="tip">💡 <strong>Fertilizante Mágico:</strong> Custa 50 moedas mas dobra o valor de TODAS as suas flores!</div>
+                        <div class="tip">🏆 <strong>Níveis:</strong> A cada 5 flores plantadas você sobe de nível e ganha moedas bônus!</div>
+                        <div class="tip">💖 <strong>Mensagens Especiais:</strong> Receba declarações de amor a cada flor plantada!</div>
+                        <div class="tip">🌈 <strong>Estratégia:</strong> Plante flores baratas primeiro para acumular moedas!</div>
+                    </div>
+                </div>
+
+                <div class="manual-section">
+                    <h3>🎮 Controles</h3>
+                    <div class="controls-guide">
+                        <div class="control-item">🌸 <strong>Colher Todas:</strong> Remove todas as flores e ganha moedas</div>
+                        <div class="control-item">✨ <strong>Fertilizante Mágico:</strong> Dobra o valor das flores plantadas</div>
+                        <div class="control-item">🔄 <strong>Novo Jardim:</strong> Reinicia o jogo com 50 moedas</div>
+                    </div>
                 </div>
             </div>
-            <button class="btn btn-start" onclick="closeManual()">
-                ❤️ Entendi, Vamos Jogar!
-            </button>
-        </div>
-    </div>
 
-    <div class="header">
-        <h1 class="title">💖 Caça Corações 💖</h1>
-        <div class="instructions">Clique nos corações que aparecem! Evite os corações partidos!</div>
-        <div class="score-board">
-            <div class="score-item">
-                <div>❤️ Pontos</div>
-                <div id="score">0</div>
-            </div>
-            <div class="score-item">
-                <div>⏱️ Tempo</div>
-                <div id="time">60</div>
-            </div>
-            <div class="score-item">
-                <div>🔥 Combo</div>
-                <div id="combo">0</div>
+            <div class="manual-footer">
+                <p class="love-message">Bibi, este jardim foi criado com todo amor para você! 💕</p>
+                <button class="start-game-btn" onclick="startGameFromManual()">
+                    🌸 Começar Minha Aventura! 🌸
+                </button>
             </div>
         </div>
     </div>
-
-    <div class="game-area" id="gameArea">
-        <div class="combo-indicator" id="comboIndicator">
-            COMBO x<span id="comboText">0</span>! 🔥
+    
+    <div class="game-container" id="gameContainer" style="display: none;">
+        <h1 class="title">🌸 Jardim do Amor da Bibi 🌸</h1>
+        
+        <div class="stats">
+            <div class="stat">💰 Moedas: <span id="coins">50</span></div>
+            <div class="stat">🌸 Flores: <span id="flowerCount">0</span></div>
+            <div class="stat">💖 Nível: <span id="level">1</span></div>
         </div>
-        <div class="message-display" id="messageDisplay"></div>
-    </div>
-
-    <div class="controls">
-        <button class="btn btn-start" onclick="startGame()" id="startBtn">
-            🚀 Começar Jogo
-        </button>
-        <button class="btn btn-pause" onclick="pauseGame()" id="pauseBtn" style="display: none;">
-            ⏸️ Pausar
-        </button>
-        <button class="btn" onclick="showManual()">
-            📖 Como Jogar
-        </button>
-        <button class="btn" onclick="resetGame()">
-            🔄 Reiniciar
-        </button>
-    </div>
-
-    <div class="game-over" id="gameOver">
-        <h2>🎉 Fim de Jogo! 🎉</h2>
-        <p>Sua pontuação: <span id="finalScore">0</span></p>
-        <p id="performanceMessage"></p>
-        <button class="btn" onclick="startGame()" style="margin-top: 15px;">
-            Jogar Novamente
-        </button>
+        
+        <div class="seed-shop">
+            <h3>🏪 Loja de Sementes Mágicas</h3>
+            <div class="seeds">
+                <div class="seed" data-flower="🌹" data-price="10" onclick="selectSeed(this)">
+                    🌱
+                    <div class="seed-price">10💰</div>
+                </div>
+                <div class="seed" data-flower="🌷" data-price="15" onclick="selectSeed(this)">
+                    🌱
+                    <div class="seed-price">15💰</div>
+                </div>
+                <div class="seed" data-flower="🌺" data-price="20" onclick="selectSeed(this)">
+                    🌱
+                    <div class="seed-price">20💰</div>
+                </div>
+                <div class="seed" data-flower="🌸" data-price="25" onclick="selectSeed(this)">
+                    🌱
+                    <div class="seed-price">25💰</div>
+                </div>
+                <div class="seed" data-flower="🌻" data-price="30" onclick="selectSeed(this)">
+                    🌱
+                    <div class="seed-price">30💰</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="garden" id="garden"></div>
+        
+        <div class="message" id="message">
+            Bem-vinda ao seu jardim mágico, Bibi! Escolha uma semente e clique em um canteiro para plantar! 🌱
+        </div>
+        
+        <div class="controls">
+            <button class="btn" onclick="harvestAll()">🌸 Colher Todas</button>
+            <button class="btn" onclick="addMagicFertilizer()">✨ Fertilizante Mágico</button>
+            <button class="btn" onclick="resetGarden()">🔄 Novo Jardim</button>
+        </div>
     </div>
 
     <script>
-        let gameState = {
-            score: 0,
-            time: 60,
-            combo: 0,
-            isPlaying: false,
-            isPaused: false,
-            hearts: [],
-            gameTimer: null,
-            spawnTimer: null,
-            comboTimer: null
-        };
+        let coins = 50;
+        let flowerCount = 0;
+        let level = 1;
+        let selectedSeed = null;
+        let selectedPrice = 0;
+        let selectedFlower = '';
+        let plantedFlowers = [];
 
-        const heartTypes = [
-            { emoji: '❤️', points: 10, class: 'heart-red', weight: 40 },
-            { emoji: '💕', points: 15, class: 'heart-pink', weight: 30 },
-            { emoji: '💜', points: 20, class: 'heart-purple', weight: 20 },
-            { emoji: '💛', points: 25, class: 'heart-gold', weight: 15 },
-            { emoji: '💖', points: 50, class: 'special-heart', weight: 8 },
-            { emoji: '💔', points: -20, class: 'broken-heart', weight: 12 }
+        const romanticMessages = [
+            "Bibi, suas flores são tão lindas quanto você! 🌸",
+            "Cada flor plantada é um 'eu te amo'! 💕",
+            "Seu jardim é um paraíso, assim como você! 🌺",
+            "Bibi, você faz tudo florescer ao seu redor! 🌷",
+            "Suas mãos mágicas criam beleza onde tocam! ✨",
+            "Cada flor é uma prova do nosso amor! 💖",
+            "Bibi, você é mais bela que todas as flores! 🌹",
+            "Nosso amor cresce como essas flores! 🌻",
+            "Você é a jardineira do meu coração! 💓",
+            "Bibi, seu sorriso faz as flores brilharem! ☀️",
+            "Cada canteiro é uma declaração de amor! 💝",
+            "Você planta amor e colhe felicidade! 🦋",
+            "Bibi, você é minha flor mais preciosa! 👑",
+            "Seu jardim reflete a beleza da sua alma! 🌈",
+            "Com você, a vida é sempre primavera! 🌿"
         ];
 
-        const loveMessages = [
-            "Você é incrível! 💕",
-            "Meu coração é seu! ❤️",
-            "Você me faz sorrir! 😊",
-            "Te amo muito! 💖",
-            "Você é especial! ✨",
-            "Minha vida é melhor com você! 🌟"
-        ];
-
-        function updateDisplay() {
-            document.getElementById('score').textContent = gameState.score;
-            document.getElementById('time').textContent = gameState.time;
-            document.getElementById('combo').textContent = gameState.combo;
-        }
-
-        function startGame() {
-            if (gameState.isPaused) {
-                resumeGame();
-                return;
+        function initializeGarden() {
+            const garden = document.getElementById('garden');
+            garden.innerHTML = '';
+            
+            // Criar 16 canteiros
+            for (let i = 0; i < 16; i++) {
+                const plot = document.createElement('div');
+                plot.className = 'plot';
+                plot.onclick = () => plantFlower(plot, i);
+                garden.appendChild(plot);
             }
-
-            gameState = {
-                score: 0,
-                time: 60,
-                combo: 0,
-                isPlaying: true,
-                isPaused: false,
-                hearts: []
-            };
-
-            document.getElementById('gameOver').style.display = 'none';
-            document.getElementById('startBtn').style.display = 'none';
-            document.getElementById('pauseBtn').style.display = 'inline-block';
-
-            updateDisplay();
             
-            gameState.gameTimer = setInterval(updateTime, 1000);
-            gameState.spawnTimer = setInterval(spawnHeart, 800);
-        }
-
-        function pauseGame() {
-            gameState.isPaused = !gameState.isPaused;
-            const pauseBtn = document.getElementById('pauseBtn');
-            
-            if (gameState.isPaused) {
-                clearInterval(gameState.gameTimer);
-                clearInterval(gameState.spawnTimer);
-                pauseBtn.innerHTML = '▶️ Continuar';
-            } else {
-                resumeGame();
-            }
-        }
-
-        function resumeGame() {
-            gameState.isPaused = false;
-            gameState.gameTimer = setInterval(updateTime, 1000);
-            gameState.spawnTimer = setInterval(spawnHeart, 800);
-            document.getElementById('pauseBtn').innerHTML = '⏸️ Pausar';
-        }
-
-        function resetGame() {
-            clearInterval(gameState.gameTimer);
-            clearInterval(gameState.spawnTimer);
-            clearInterval(gameState.comboTimer);
-            
-            document.querySelectorAll('.heart').forEach(heart => heart.remove());
-            
-            gameState = {
-                score: 0,
-                time: 60,
-                combo: 0,
-                isPlaying: false,
-                isPaused: false,
-                hearts: []
-            };
-
-            document.getElementById('gameOver').style.display = 'none';
-            document.getElementById('startBtn').style.display = 'inline-block';
-            document.getElementById('pauseBtn').style.display = 'none';
-            document.getElementById('comboIndicator').style.display = 'none';
-            
+            createClouds();
             updateDisplay();
         }
 
-        function spawnHeart() {
-            if (!gameState.isPlaying || gameState.isPaused) return;
-
-            const gameArea = document.getElementById('gameArea');
-            const heart = document.createElement('div');
+        function createClouds() {
+            const cloudsContainer = document.querySelector('.clouds');
             
-            const heartType = getRandomHeartType();
-            heart.className = `heart ${heartType.class}`;
-            heart.innerHTML = heartType.emoji;
-            heart.dataset.points = heartType.points;
-            
-            const maxX = gameArea.clientWidth - 50;
-            const maxY = gameArea.clientHeight - 50;
-            heart.style.left = Math.random() * maxX + 'px';
-            heart.style.top = Math.random() * maxY + 'px';
-            
-            heart.onclick = () => catchHeart(heart, heartType);
-            
-            gameArea.appendChild(heart);
-            gameState.hearts.push(heart);
-            
-            // Remove heart after 3 seconds
-            setTimeout(() => {
-                if (heart.parentNode) {
-                    heart.remove();
-                    gameState.hearts = gameState.hearts.filter(h => h !== heart);
-                }
-            }, 3000);
-        }
-
-        function catchHeart(heart, heartType) {
-            if (!gameState.isPlaying || gameState.isPaused) return;
-
-            const points = parseInt(heart.dataset.points);
-            
-            if (points > 0) {
-                gameState.combo++;
-                gameState.score += points + (gameState.combo > 5 ? gameState.combo * 2 : 0);
+            setInterval(() => {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                cloud.innerHTML = ['☁️', '⛅', '🌤️'][Math.floor(Math.random() * 3)];
+                cloud.style.top = Math.random() * 50 + '%';
+                cloud.style.animationDuration = (Math.random() * 10 + 15) + 's';
                 
-                if (gameState.combo > 5) {
-                    showCombo();
-                }
-                
-                if (gameState.combo % 10 === 0) {
-                    showMessage(loveMessages[Math.floor(Math.random() * loveMessages.length)]);
-                }
-                
-                // Reset combo timer
-                clearTimeout(gameState.comboTimer);
-                gameState.comboTimer = setTimeout(() => {
-                    gameState.combo = 0;
-                    document.getElementById('comboIndicator').style.display = 'none';
-                    updateDisplay();
-                }, 2000);
-                
-            } else {
-                gameState.combo = 0;
-                gameState.score = Math.max(0, gameState.score + points);
-                document.getElementById('comboIndicator').style.display = 'none';
-                
-                // Shake effect
-                heart.classList.add('broken-heart');
-            }
-            
-            // Particle effect
-            createParticleEffect(heart);
-            
-            heart.remove();
-            gameState.hearts = gameState.hearts.filter(h => h !== heart);
-            updateDisplay();
-        }
-
-        function getRandomHeartType() {
-            const totalWeight = heartTypes.reduce((sum, type) => sum + type.weight, 0);
-            let random = Math.random() * totalWeight;
-            
-            for (let type of heartTypes) {
-                random -= type.weight;
-                if (random <= 0) {
-                    return type;
-                }
-            }
-            
-            return heartTypes[0];
-        }
-
-        function createParticleEffect(element) {
-            const rect = element.getBoundingClientRect();
-            const gameArea = document.getElementById('gameArea');
-            const gameAreaRect = gameArea.getBoundingClientRect();
-            
-            for (let i = 0; i < 5; i++) {
-                const particle = document.createElement('div');
-                particle.innerHTML = '✨';
-                particle.style.position = 'absolute';
-                particle.style.left = (rect.left - gameAreaRect.left + 15) + 'px';
-                particle.style.top = (rect.top - gameAreaRect.top + 15) + 'px';
-                particle.style.pointerEvents = 'none';
-                particle.style.fontSize = '20px';
-                particle.style.zIndex = '1000';
-                
-                gameArea.appendChild(particle);
+                cloudsContainer.appendChild(cloud);
                 
                 setTimeout(() => {
-                    particle.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
-                    particle.style.opacity = '0';
-                    particle.style.transition = 'all 1s ease-out';
-                }, 10);
-                
-                setTimeout(() => particle.remove(), 1000);
-            }
+                    if (cloud.parentNode) {
+                        cloud.parentNode.removeChild(cloud);
+                    }
+                }, 25000);
+            }, 8000);
         }
 
-        function showCombo() {
-            const indicator = document.getElementById('comboIndicator');
-            const comboText = document.getElementById('comboText');
+        function selectSeed(seedElement) {
+            // Remover seleção anterior
+            document.querySelectorAll('.seed').forEach(s => s.classList.remove('selected'));
             
-            comboText.textContent = gameState.combo;
-            indicator.style.display = 'block';
+            // Selecionar nova semente
+            seedElement.classList.add('selected');
+            selectedSeed = seedElement;
+            selectedFlower = seedElement.dataset.flower;
+            selectedPrice = parseInt(seedElement.dataset.price);
             
-            // Animate
-            indicator.style.animation = 'none';
-            setTimeout(() => {
-                indicator.style.animation = 'comboGlow 0.5s ease-in-out';
-            }, 10);
+            updateMessage(`Semente selecionada: ${selectedFlower} por ${selectedPrice} moedas! Clique em um canteiro para plantar! 🌱`);
         }
 
-        function showMessage(message) {
-            const display = document.getElementById('messageDisplay');
-            display.textContent = message;
-            display.style.display = 'block';
-            
-            setTimeout(() => {
-                display.style.display = 'none';
-            }, 2000);
-        }
-
-        function updateTime() {
-            if (!gameState.isPlaying || gameState.isPaused) return;
-            
-            gameState.time--;
-            
-            if (gameState.time <= 0) {
-                endGame();
+        function plantFlower(plot, index) {
+            if (!selectedSeed) {
+                updateMessage("Primeiro selecione uma semente na loja! 🌱");
+                return;
             }
             
+            if (plot.classList.contains('planted')) {
+                updateMessage("Este canteiro já tem uma flor! Escolha outro! 🌸");
+                return;
+            }
+            
+            if (coins < selectedPrice) {
+                updateMessage("Moedas insuficientes! Colha suas flores para ganhar mais! 💰");
+                return;
+            }
+            
+            // Debitar moedas e plantar
+            coins -= selectedPrice;
+            plot.classList.add('planted');
+            
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.innerHTML = selectedFlower;
+            plot.appendChild(flower);
+            
+            // Adicionar à lista de flores plantadas
+            plantedFlowers[index] = {
+                flower: selectedFlower,
+                value: selectedPrice * 2 // Valor de colheita é o dobro do preço
+            };
+            
+            // Efeito de brilho
+            createSparkle(plot);
+            
+            flowerCount++;
+            updateDisplay();
+            
+            // Verificar level up
+            if (flowerCount % 5 === 0) {
+                levelUp();
+            }
+            
+            // Mensagem aleatória
+            const randomMessage = romanticMessages[Math.floor(Math.random() * romanticMessages.length)];
+            updateMessage(randomMessage);
+        }
+
+        function harvestAll() {
+            const plantedPlots = document.querySelectorAll('.plot.planted');
+            
+            if (plantedPlots.length === 0) {
+                updateMessage("Não há flores para colher! Plante algumas primeiro! 🌱");
+                return;
+            }
+            
+            let totalEarned = 0;
+            let flowersHarvested = 0;
+            
+            plantedPlots.forEach((plot, index) => {
+                const plotIndex = Array.from(plot.parentNode.children).indexOf(plot);
+                if (plantedFlowers[plotIndex]) {
+                    totalEarned += plantedFlowers[plotIndex].value;
+                    flowersHarvested++;
+                    
+                    // Efeito visual
+                    createSparkle(plot);
+                    
+                    // Remover flor
+                    plot.classList.remove('planted');
+                    plot.innerHTML = '';
+                    delete plantedFlowers[plotIndex];
+                }
+            });
+            
+            coins += totalEarned;
+            updateDisplay();
+            
+            updateMessage(`Colhidas ${flowersHarvested} flores! Você ganhou ${totalEarned} moedas! 💰✨`);
+        }
+
+        function addMagicFertilizer() {
+            if (coins < 50) {
+                updateMessage("Fertilizante mágico custa 50 moedas! 💰");
+                return;
+            }
+            
+            const plantedPlots = document.querySelectorAll('.plot.planted');
+            
+            if (plantedPlots.length === 0) {
+                updateMessage("Não há flores para fertilizar! Plante algumas primeiro! 🌱");
+                return;
+            }
+            
+            coins -= 50;
+            
+            // Dobrar valor de todas as flores plantadas
+            plantedPlots.forEach(plot => {
+                const plotIndex = Array.from(plot.parentNode.children).indexOf(plot);
+                if (plantedFlowers[plotIndex]) {
+                    plantedFlowers[plotIndex].value *= 2;
+                    
+                    // Efeito visual especial
+                    const flower = plot.querySelector('.flower');
+                    if (flower) {
+                        flower.style.animation = 'flowerGrow 1s ease-out, flowerSway 2s ease-in-out infinite';
+                        flower.style.filter = 'drop-shadow(0 0 10px gold)';
+                    }
+                    
+                    createSparkle(plot);
+                }
+            });
+            
+            updateDisplay();
+            updateMessage("Fertilizante mágico aplicado! Suas flores agora valem o dobro! ✨💫");
+        }
+
+        function levelUp() {
+            level++;
+            coins += level * 10; // Bônus por subir de nível
+            
+            updateMessage(`Parabéns Bibi! Você subiu para o nível ${level}! Bônus de ${level * 10} moedas! 🎉`);
             updateDisplay();
         }
 
-        function endGame() {
-            gameState.isPlaying = false;
-            clearInterval(gameState.gameTimer);
-            clearInterval(gameState.spawnTimer);
-            clearInterval(gameState.comboTimer);
+        function resetGarden() {
+            coins = 50;
+            flowerCount = 0;
+            level = 1;
+            plantedFlowers = [];
+            selectedSeed = null;
             
-            document.getElementById('startBtn').style.display = 'inline-block';
-            document.getElementById('pauseBtn').style.display = 'none';
+            document.querySelectorAll('.seed').forEach(s => s.classList.remove('selected'));
             
-            const gameOver = document.getElementById('gameOver');
-            const finalScore = document.getElementById('finalScore');
-            const performanceMessage = document.getElementById('performanceMessage');
-            
-            finalScore.textContent = gameState.score;
-            
-            let message = '';
-            if (gameState.score >= 1000) {
-                message = '🌟 Incrível! Você é um(a) expert em corações! 🌟';
-            } else if (gameState.score >= 500) {
-                message = '💕 Muito bem! Seu coração é cheio de amor! 💕';
-            } else if (gameState.score >= 200) {
-                message = '❤️ Bom trabalho! Continue praticando! ❤️';
-            } else {
-                message = '💖 Que fofo! Cada tentativa é um gesto de amor! 💖';
-            }
-            
-            performanceMessage.textContent = message;
-            gameOver.style.display = 'block';
+            initializeGarden();
+            updateMessage("Novo jardim criado! Vamos começar uma nova aventura, Bibi! 🌱");
         }
 
-        function closeManual() {
-            document.getElementById('manualOverlay').style.display = 'none';
+        function createSparkle(element) {
+            const sparkles = ['✨', '⭐', '🌟', '💫', '🦋'];
+            
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
+                    sparkle.style.left = (Math.random() * 60 + 10) + 'px';
+                    sparkle.style.top = (Math.random() * 60 + 10) + 'px';
+                    
+                    element.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        if (sparkle.parentNode) {
+                            sparkle.parentNode.removeChild(sparkle);
+                        }
+                    }, 2000);
+                }, i * 200);
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('coins').textContent = coins;
+            document.getElementById('flowerCount').textContent = flowerCount;
+            document.getElementById('level').textContent = level;
+        }
+
+        function updateMessage(text) {
+            const messageEl = document.getElementById('message');
+            messageEl.style.opacity = '0';
+            messageEl.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                messageEl.textContent = text;
+                messageEl.style.opacity = '1';
+                messageEl.style.transform = 'scale(1)';
+            }, 250);
+        }
+
+        // Função para iniciar o jogo a partir do manual
+        function startGameFromManual() {
+            document.getElementById('manualScreen').style.display = 'none';
+            document.getElementById('gameContainer').style.display = 'block';
+            
+            // Inicializar o conteúdo do jogo
+            const gameContainer = document.getElementById('gameContainer');
+            gameContainer.innerHTML = `
+                <h1 class="title">🌸 Jardim do Amor da Bibi 🌸</h1>
+                
+                <div class="stats">
+                    <div class="stat">💰 Moedas: <span id="coins">50</span></div>
+                    <div class="stat">🌸 Flores: <span id="flowerCount">0</span></div>
+                    <div class="stat">💖 Nível: <span id="level">1</span></div>
+                </div>
+                
+                <div class="seed-shop">
+                    <h3>🏪 Loja de Sementes Mágicas</h3>
+                    <div class="seeds">
+                        <div class="seed" data-flower="🌹" data-price="10" onclick="selectSeed(this)">
+                            🌱
+                            <div class="seed-price">10💰</div>
+                        </div>
+                        <div class="seed" data-flower="🌷" data-price="15" onclick="selectSeed(this)">
+                            🌱
+                            <div class="seed-price">15💰</div>
+                        </div>
+                        <div class="seed" data-flower="🌺" data-price="20" onclick="selectSeed(this)">
+                            🌱
+                            <div class="seed-price">20💰</div>
+                        </div>
+                        <div class="seed" data-flower="🌸" data-price="25" onclick="selectSeed(this)">
+                            🌱
+                            <div class="seed-price">25💰</div>
+                        </div>
+                        <div class="seed" data-flower="🌻" data-price="30" onclick="selectSeed(this)">
+                            🌱
+                            <div class="seed-price">30💰</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="garden" id="garden"></div>
+                
+                <div class="message" id="message">
+                    Bem-vinda ao seu jardim mágico, Bibi! Escolha uma semente e clique em um canteiro para plantar! 🌱
+                </div>
+                
+                <div class="controls">
+                    <button class="btn" onclick="harvestAll()">🌸 Colher Todas</button>
+                    <button class="btn" onclick="addMagicFertilizer()">✨ Fertilizante Mágico</button>
+                    <button class="btn" onclick="resetGame()">🔄 Novo Jardim</button>
+                    <button class="btn" onclick="showManual()">📖 Ver Manual</button>
+                </div>
+            `;
+            
+            initializeGarden();
         }
 
         function showManual() {
-            document.getElementById('manualOverlay').style.display = 'flex';
+            document.getElementById('manualScreen').style.display = 'flex';
+            document.getElementById('gameContainer').style.display = 'none';
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            updateDisplay();
-        });
+        // Inicializar o jogo
+        window.onload = function() {
+            createClouds();
+        };
     </script>
 </body>
 </html>
