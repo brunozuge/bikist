@@ -3,900 +3,1134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8-Ball Pool</title>
+    <title>Quiz 1º Ano Ensino Médio - Escolas Maristas</title>
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            margin: 0;
-            padding: 10px;
-            background: #1a4d3a;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            overflow-x: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        
-        h1 {
-            margin: 0 0 15px 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 2rem;
+            max-width: 800px;
+            width: 95%;
+            margin: 20px;
+        }
+
+        .header {
             text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
         }
-        
-        #gameContainer {
-            position: relative;
-            border: clamp(3px, 1vw, 10px) solid #8B4513;
+
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background: linear-gradient(45deg, #f0f2f5, #e8ecf0);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-icon {
+            font-size: 1.5rem;
+        }
+
+        .subject-selector {
+            margin-bottom: 2rem;
+        }
+
+        .subject-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .subject-btn {
+            padding: 0.8rem 1rem;
+            border: 2px solid #ddd;
+            background: white;
             border-radius: 10px;
-            background: #228B22;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            max-width: 100%;
-            max-height: 70vh;
-        }
-        
-        canvas {
-            display: block;
-            background: linear-gradient(45deg, #228B22 25%, transparent 25%), 
-                        linear-gradient(-45deg, #228B22 25%, transparent 25%), 
-                        linear-gradient(45deg, transparent 75%, #228B22 75%), 
-                        linear-gradient(-45deg, transparent 75%, #228B22 75%);
-            background-size: 30px 30px;
-            background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
-            max-width: 100%;
-            height: auto;
-        }
-        
-        #controls {
-            margin-top: 15px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            max-width: 800px;
-            padding: 0 10px;
-        }
-        
-        #powerContainer {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 200px;
-            flex: 1;
-            max-width: 300px;
-        }
-        
-        #power {
-            flex: 1;
-            height: 12px;
-            background: #333;
-            border-radius: 6px;
-            overflow: hidden;
-            min-width: 150px;
-        }
-        
-        #powerBar {
-            height: 100%;
-            background: linear-gradient(90deg, #00ff00, #ffff00, #ff0000);
-            width: 0%;
-            transition: width 0.1s;
-        }
-        
-        button {
-            padding: clamp(8px, 2vw, 12px) clamp(15px, 3vw, 20px);
-            background: #8B4513;
-            color: white;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
-            font-size: clamp(14px, 2.5vw, 16px);
-            transition: background 0.3s;
-            white-space: nowrap;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            color: #333;
         }
-        
-        button:hover {
-            background: #A0522D;
+
+        .subject-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
-        button:active {
-            transform: scale(0.95);
+
+        .subject-btn.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
         }
-        
-        #info {
-            display: flex;
-            gap: clamp(10px, 3vw, 30px);
-            margin-top: 15px;
-            font-size: clamp(14px, 2.5vw, 18px);
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            max-width: 800px;
-            padding: 0 10px;
+
+        .question-container {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
         }
-        
-        .player {
-            padding: clamp(8px, 2vw, 12px);
-            border-radius: 5px;
-            background: rgba(0,0,0,0.3);
-            text-align: center;
-            min-width: 140px;
-            flex: 1;
-            max-width: 200px;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .player.active {
-            background: rgba(255,255,0,0.3);
+
+        .question {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 5px solid #667eea;
         }
-        
-        #gameStatus {
-            text-align: center;
-            min-width: 120px;
-            flex: 1;
-            max-width: 150px;
-        }
-        
-        #instructions {
-            max-width: 95%;
-            margin-top: 15px;
-            text-align: center;
-            font-size: clamp(12px, 2vw, 14px);
-            opacity: 0.8;
-            padding: 0 10px;
+
+        .question h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
             line-height: 1.4;
         }
-        
-        /* Mobile specific styles */
+
+        .options {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .option {
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .option.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .option.wrong {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .result {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .progress {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 20px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .start-screen {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .start-screen h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .instructions ul {
+            margin-left: 1.5rem;
+            color: #666;
+        }
+
+        .instructions li {
+            margin: 0.5rem 0;
+        }
+
         @media (max-width: 768px) {
-            body {
-                padding: 5px;
+            .container {
+                padding: 1rem;
+                margin: 10px;
             }
             
-            h1 {
-                margin-bottom: 10px;
-            }
-            
-            #gameContainer {
-                max-height: 50vh;
-            }
-            
-            #controls {
-                margin-top: 10px;
-                gap: 10px;
-            }
-            
-            #info {
+            .stats {
                 flex-direction: column;
-                gap: 10px;
+                text-align: center;
+            }
+            
+            .subject-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
                 align-items: center;
             }
-            
-            .player {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            #gameStatus {
-                width: 100%;
-                max-width: 300px;
-                padding: 10px;
-                background: rgba(0,0,0,0.3);
-                border-radius: 5px;
-            }
-            
-            #powerContainer {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            button {
-                min-width: 120px;
-            }
-            
-            .game-started #info {
-                display: none;
-            }
-            
-            .game-started #instructions {
-                display: none;
-            }
-            
-            .game-started #controls {
-                position: fixed;
-                bottom: 10px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: rgba(0,0,0,0.8);
-                padding: 10px;
-                border-radius: 10px;
-                z-index: 100;
-            }
-            
-            .game-started #gameContainer {
-                max-height: 90vh;
-                max-width: 100vw;
-            }
         }
-        
-        @media (max-width: 480px) {
-            #gameContainer {
-                max-height: 45vh;
-            }
-            
-            #instructions {
-                font-size: 11px;
-                margin-top: 10px;
-            }
-            
-            .game-started #gameContainer {
-                max-height: 88vh;
-            }
+
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            z-index: 1000;
+            animation: celebrate 2s ease-in-out;
+            pointer-events: none;
         }
-        
-        /* Landscape mobile - Modo paisagem otimizado */
-        @media (max-height: 500px) and (orientation: landscape) {
-            body {
-                padding: 2px;
-                justify-content: flex-start;
-            }
-            
-            h1 {
-                font-size: 1.2rem;
-                margin: 5px 0;
-            }
-            
-            #gameContainer {
-                max-height: 75vh;
-                max-width: 98vw;
-            }
-            
-            #info {
-                flex-direction: row;
-                gap: 15px;
-                font-size: 12px;
-                margin-top: 5px;
-            }
-            
-            .player, #gameStatus {
-                min-width: auto;
-                padding: 4px 8px;
-                font-size: 11px;
-            }
-            
-            #controls {
-                margin-top: 5px;
-                gap: 10px;
-            }
-            
-            #instructions {
-                font-size: 10px;
-                margin-top: 5px;
-            }
-            
-            /* Quando o jogo começar em paisagem */
-            .game-started {
-                height: 100vh;
-                overflow: hidden;
-            }
-            
-            .game-started h1 {
-                display: none;
-            }
-            
-            .game-started #info {
-                display: none;
-            }
-            
-            .game-started #instructions {
-                display: none;
-            }
-            
-            .game-started #controls {
-                position: fixed;
-                top: 5px;
-                right: 10px;
-                background: rgba(0,0,0,0.9);
-                padding: 5px 10px;
-                border-radius: 8px;
-                z-index: 100;
-                flex-direction: column;
-                gap: 5px;
-                font-size: 10px;
-            }
-            
-            .game-started #powerContainer {
-                min-width: 150px;
-                font-size: 10px;
-            }
-            
-            .game-started button {
-                padding: 5px 10px;
-                font-size: 10px;
-                min-width: auto;
-            }
-            
-            .game-started #gameContainer {
-                max-height: 100vh;
-                max-width: 100vw;
-                margin: 0;
-                border-width: 2px;
-            }
-            
-            /* Status do jogo no canto superior esquerdo */
-            .game-started::after {
-                content: attr(data-status);
-                position: fixed;
-                top: 10px;
-                left: 10px;
-                background: rgba(0,0,0,0.9);
-                color: white;
-                padding: 5px 10px;
-                border-radius: 8px;
-                font-size: 12px;
-                z-index: 100;
-                font-weight: bold;
-            }
+
+        @keyframes celebrate {
+            0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
         }
     </style>
 </head>
 <body>
-    <h1>🎱 ZUGE BOLLAS</h1>
-    
-    <div id="gameContainer">
-        <canvas id="gameCanvas" width="800" height="400"></canvas>
-    </div>
-    
-    <div id="controls">
-        <div id="powerContainer">
-            <label>Força: </label>
-            <div id="power">
-                <div id="powerBar"></div>
+    <div class="container">
+        <div class="header">
+            <div class="logo">📚 Quiz Zuge</div>
+            <div class="subtitle">1º Ano do Ensino Médio - Todas as Matérias</div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-icon">🎯</span>
+                <span>Pontuação: <span id="score">0</span></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">❓</span>
+                <span>Questão: <span id="questionNumber">0</span>/<span id="totalQuestions">0</span></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">✅</span>
+                <span>Acertos: <span id="correct">0</span></span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">📖</span>
+                <span>Matéria: <span id="currentSubject">-</span></span>
             </div>
         </div>
-        <button onclick="resetGame()">Novo Jogo</button>
-    </div>
-    
-    <div id="info">
-        <div id="player1" class="player active">
-            <strong>Jogador 1</strong><br>
-            Bolas: <span id="p1Balls">Lisas (1-7)</span>
+
+        <div class="start-screen" id="startScreen">
+            <h2>Bem-vindo ao Quiz das Escolas Maristas!</h2>
+            <div class="instructions">
+                <h3>📋 Como Jogar:</h3>
+                <ul>
+                    <li>Escolha uma matéria específica ou "TODAS" para um desafio completo</li>
+                    <li>Responda às perguntas baseadas no currículo do 1º ano</li>
+                    <li>Cada acerto vale 10 pontos</li>
+                    <li>Você pode pular questões se necessário</li>
+                    <li>No final, veja seu desempenho detalhado!</li>
+                </ul>
+            </div>
+            
+            <div class="subject-selector">
+                <h3 style="margin-bottom: 1rem; color: #333;">🎓 Escolha a Matéria:</h3>
+                <div class="subject-buttons">
+                    <button class="subject-btn active" data-subject="todas">🌟 TODAS AS MATÉRIAS</button>
+                    <button class="subject-btn" data-subject="matematica">➗ Matemática</button>
+                    <button class="subject-btn" data-subject="portugues">📝 Português</button>
+                    <button class="subject-btn" data-subject="fisica">⚡ Física</button>
+                    <button class="subject-btn" data-subject="quimica">🧪 Química</button>
+                    <button class="subject-btn" data-subject="biologia">🌱 Biologia</button>
+                    <button class="subject-btn" data-subject="historia">🏛️ História</button>
+                    <button class="subject-btn" data-subject="geografia">🌍 Geografia</button>
+                    <button class="subject-btn" data-subject="filosofia">🤔 Filosofia</button>
+                    <button class="subject-btn" data-subject="sociologia">👥 Sociologia</button>
+                    <button class="subject-btn" data-subject="ingles">🇺🇸 Inglês</button>
+                    <button class="subject-btn" data-subject="educacao_fisica">🏃 Ed. Física</button>
+                    <button class="subject-btn" data-subject="artes">🎨 Artes</button>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" id="startBtn">🚀 Iniciar Quiz</button>
         </div>
-        <div id="player2" class="player">
-            <strong>Jogador 2</strong><br>
-            Bolas: <span id="p2Balls">Listradas (9-15)</span>
+
+        <div class="question-container" id="questionContainer">
+            <div class="question">
+                <h3 id="questionText"></h3>
+            </div>
+            
+            <div class="options" id="options"></div>
+            
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="btn btn-primary" id="submitBtn" disabled>📤 Responder</button>
+                <button class="btn btn-secondary" id="skipBtn">⏭️ Pular</button>
+                <button class="btn btn-success" id="nextBtn" style="display: none;">➡️ Próxima</button>
+            </div>
         </div>
-        <div id="gameStatus">
-            <strong>Status:</strong><br>
-            <span id="status">Vez do Jogador 1</span>
+
+        <div class="result" id="result">
+            <h2>🎉 Quiz Finalizado!</h2>
+            <div class="score" id="finalScore"></div>
+            <p id="resultMessage"></p>
+            <div class="progress">
+                <div class="progress-bar" id="finalProgressBar"></div>
+            </div>
+            <div style="margin-top: 2rem;">
+                <button class="btn btn-primary" id="restartBtn">🔄 Jogar Novamente</button>
+            </div>
         </div>
-    </div>
-    
-    <div id="instructions">
-        <p><strong>Como jogar:</strong> Clique e arraste para mirar. Solte para atirar. Use a barra de força para controlar a potência.</p>
-        <p>Objetivo: Encape todas as suas bolas (lisas ou listradas) e depois a bola 8 preta.</p>
     </div>
 
     <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const powerBar = document.getElementById('powerBar');
-        
-        let balls = [];
-        let cueBall = null;
-        let aimLine = null;
-        let isDragging = false;
-        let currentPlayer = 1;
-        let gameEnded = false;
-        let power = 0;
-        let powerDirection = 1;
-        let powerInterval = null;
-        let gameStarted = false;
-        
-        // Configurações do jogo
-        let BALL_RADIUS = 12;
-        const FRICTION = 0.98;
-        const MIN_SPEED = 0.1;
-        const MAX_POWER = 15;
-        
-        class Ball {
-            constructor(x, y, number, color) {
-                this.x = x;
-                this.y = y;
-                this.vx = 0;
-                this.vy = 0;
-                this.radius = BALL_RADIUS;
-                this.number = number;
-                this.color = color;
-                this.pocketed = false;
-                this.isCue = number === 0;
-                this.isEightBall = number === 8;
-                this.isSolid = number >= 1 && number <= 7;
-                this.isStripe = number >= 9 && number <= 15;
-            }
-            
-            update() {
-                if (this.pocketed) return;
-                
-                this.x += this.vx;
-                this.y += this.vy;
-                
-                // Aplicar atrito
-                this.vx *= FRICTION;
-                this.vy *= FRICTION;
-                
-                // Parar se muito devagar
-                if (Math.abs(this.vx) < MIN_SPEED && Math.abs(this.vy) < MIN_SPEED) {
-                    this.vx = 0;
-                    this.vy = 0;
+        // Base de perguntas organizada por matéria
+        const questions = {
+            matematica: [
+                {
+                    question: "Qual é o valor de x na equação 2x + 5 = 13?",
+                    options: ["x = 3", "x = 4", "x = 5", "x = 6"],
+                    correct: 1
+                },
+                {
+                    question: "Uma função f(x) = 2x + 1. Qual é f(3)?",
+                    options: ["5", "6", "7", "8"],
+                    correct: 2
+                },
+                {
+                    question: "Qual é o conjunto solução da inequação x + 3 > 7?",
+                    options: ["x > 4", "x > 3", "x < 4", "x = 4"],
+                    correct: 0
+                },
+                {
+                    question: "Em um triângulo retângulo, se os catetos medem 3 e 4, qual é a hipotenusa?",
+                    options: ["5", "6", "7", "12"],
+                    correct: 0
+                },
+                {
+                    question: "Qual é a forma fatorada de x² - 9?",
+                    options: ["(x - 3)(x - 3)", "(x + 3)(x - 3)", "(x + 9)(x - 1)", "x(x - 9)"],
+                    correct: 1
                 }
-                
-                // Colisão com bordas
-                if (this.x - this.radius <= 0 || this.x + this.radius >= canvas.width) {
-                    this.vx = -this.vx;
-                    this.x = Math.max(this.radius, Math.min(canvas.width - this.radius, this.x));
+            ],
+            portugues: [
+                {
+                    question: "Qual figura de linguagem está presente em 'Meus olhos são dois sóis'?",
+                    options: ["Metáfora", "Metonímia", "Hipérbole", "Ironia"],
+                    correct: 0
+                },
+                {
+                    question: "O Romantismo no Brasil teve início com qual obra?",
+                    options: ["O Guarani", "Iracema", "Suspiros Poéticos e Saudades", "A Moreninha"],
+                    correct: 2
+                },
+                {
+                    question: "Em 'O menino comprou o livro', qual é a função sintática de 'o livro'?",
+                    options: ["Sujeito", "Objeto direto", "Objeto indireto", "Predicativo"],
+                    correct: 1
+                },
+                {
+                    question: "Qual é o plural de 'cidadão'?",
+                    options: ["Cidadãos", "Cidadões", "Cidadães", "Cidadans"],
+                    correct: 0
+                },
+                {
+                    question: "O texto 'Era uma vez uma princesa...' é um exemplo de:",
+                    options: ["Texto dissertativo", "Texto narrativo", "Texto descritivo", "Texto injuntivo"],
+                    correct: 1
                 }
-                if (this.y - this.radius <= 0 || this.y + this.radius >= canvas.height) {
-                    this.vy = -this.vy;
-                    this.y = Math.max(this.radius, Math.min(canvas.height - this.radius, this.y));
+            ],
+            fisica: [
+                {
+                    question: "A velocidade de um objeto em MRU é de 20 m/s. Em 5 segundos, qual distância percorre?",
+                    options: ["100 m", "80 m", "120 m", "90 m"],
+                    correct: 0
+                },
+                {
+                    question: "Qual é a unidade de força no Sistema Internacional?",
+                    options: ["Joule", "Newton", "Pascal", "Watt"],
+                    correct: 1
+                },
+                {
+                    question: "Na Segunda Lei de Newton, F = ma, o que representa 'a'?",
+                    options: ["Área", "Aceleração", "Amplitude", "Altura"],
+                    correct: 1
+                },
+                {
+                    question: "Um objeto cai em queda livre. Qual é sua aceleração (desconsiderando resistência do ar)?",
+                    options: ["9,8 m/s²", "10 m/s²", "8,9 m/s²", "Varia com a altura"],
+                    correct: 0
+                },
+                {
+                    question: "O que afirma a Lei da Inércia (1ª Lei de Newton)?",
+                    options: ["F = ma", "Toda ação tem uma reação", "Um corpo em repouso tende a permanecer em repouso", "E = mc²"],
+                    correct: 2
                 }
-                
-                // Verificar caçapas (cantos e meio das laterais)
-                this.checkPockets();
-            }
-            
-            checkPockets() {
-                const pocketSize = Math.max(12, canvas.width * 0.025);
-                const borderOffset = Math.max(15, canvas.width * 0.03);
-                
-                const pockets = [
-                    {x: borderOffset, y: borderOffset}, 
-                    {x: canvas.width/2, y: borderOffset * 0.8}, 
-                    {x: canvas.width - borderOffset, y: borderOffset},
-                    {x: borderOffset, y: canvas.height - borderOffset}, 
-                    {x: canvas.width/2, y: canvas.height - borderOffset * 0.8}, 
-                    {x: canvas.width - borderOffset, y: canvas.height - borderOffset}
-                ];
-                
-                for (let pocket of pockets) {
-                    const dist = Math.sqrt((this.x - pocket.x)**2 + (this.y - pocket.y)**2);
-                    if (dist < pocketSize + 5) {
-                        this.pocket();
-                        break;
-                    }
+            ],
+            quimica: [
+                {
+                    question: "Qual é o número atômico do carbono?",
+                    options: ["4", "6", "8", "12"],
+                    correct: 1
+                },
+                {
+                    question: "Quantos elétrons há na camada de valência do cloro (Cl)?",
+                    options: ["5", "6", "7", "8"],
+                    correct: 2
+                },
+                {
+                    question: "Qual tipo de ligação ocorre entre Na e Cl no sal de cozinha?",
+                    options: ["Covalente", "Iônica", "Metálica", "Van der Waals"],
+                    correct: 1
+                },
+                {
+                    question: "A fórmula da água é H₂O. Quantos átomos há em uma molécula de água?",
+                    options: ["2", "3", "4", "5"],
+                    correct: 1
+                },
+                {
+                    question: "Qual é a configuração eletrônica do oxigênio (Z=8)?",
+                    options: ["1s² 2s² 2p⁴", "1s² 2s² 2p⁶", "1s² 2s⁴ 2p²", "1s² 2p⁶"],
+                    correct: 0
                 }
-            }
-            
-            pocket() {
-                this.pocketed = true;
-                this.vx = 0;
-                this.vy = 0;
-                
-                if (this.isCue) {
-                    // Reposicionar bola branca
-                    this.x = canvas.width * 0.25;
-                    this.y = canvas.height / 2;
-                    this.pocketed = false;
-                    switchPlayer();
-                } else if (this.isEightBall) {
-                    endGame();
-                } else {
-                    checkPlayerBalls();
+            ],
+            biologia: [
+                {
+                    question: "Qual organela é responsável pela respiração celular?",
+                    options: ["Ribossomo", "Mitocôndria", "Núcleo", "Retículo endoplasmático"],
+                    correct: 1
+                },
+                {
+                    question: "Qual é a função dos cloroplastos?",
+                    options: ["Respiração", "Fotossíntese", "Digestão", "Reprodução"],
+                    correct: 1
+                },
+                {
+                    question: "Quantos cromossomos possui uma célula somática humana normal?",
+                    options: ["23", "44", "46", "48"],
+                    correct: 2
+                },
+                {
+                    question: "Qual reino inclui os fungos?",
+                    options: ["Plantae", "Animalia", "Fungi", "Protista"],
+                    correct: 2
+                },
+                {
+                    question: "O DNA é composto por quantas fitas?",
+                    options: ["1", "2", "3", "4"],
+                    correct: 1
                 }
-            }
-            
-            draw() {
-                if (this.pocketed) return;
-                
-                ctx.save();
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                
-                if (this.isCue) {
-                    ctx.fillStyle = 'white';
-                    ctx.fill();
-                    ctx.strokeStyle = '#ddd';
-                } else {
-                    ctx.fillStyle = this.color;
-                    ctx.fill();
-                    
-                    // Número na bola
-                    if (this.isStripe) {
-                        // Faixa branca para bolas listradas
-                        ctx.fillStyle = 'white';
-                        ctx.fillRect(this.x - this.radius + 3, this.y - 3, this.radius * 2 - 6, 6);
-                    }
-                    
-                    ctx.fillStyle = this.isStripe || this.isEightBall ? 'white' : 'black';
-                    ctx.font = '10px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(this.number.toString(), this.x, this.y + 3);
-                    
-                    ctx.strokeStyle = '#333';
+            ],
+            historia: [
+                {
+                    question: "Em que ano ocorreu a Proclamação da República no Brasil?",
+                    options: ["1888", "1889", "1890", "1891"],
+                    correct: 1
+                },
+                {
+                    question: "Qual foi a primeira capital do Brasil?",
+                    options: ["Rio de Janeiro", "São Paulo", "Salvador", "Brasília"],
+                    correct: 2
+                },
+                {
+                    question: "A Primeira Guerra Mundial ocorreu entre:",
+                    options: ["1912-1918", "1914-1918", "1916-1920", "1914-1919"],
+                    correct: 1
+                },
+                {
+                    question: "Quem foi o primeiro imperador do Brasil?",
+                    options: ["Dom Pedro I", "Dom Pedro II", "Dom João VI", "Getúlio Vargas"],
+                    correct: 0
+                },
+                {
+                    question: "A Lei Áurea foi assinada em:",
+                    options: ["1885", "1887", "1888", "1889"],
+                    correct: 2
                 }
-                
-                ctx.lineWidth = 1;
-                ctx.stroke();
-                ctx.restore();
-            }
-        }
-        
-        function initGame() {
-            balls = [];
-            gameEnded = false;
-            currentPlayer = 1;
-            updateUI();
-            
-            // Ajustar tamanho do canvas baseado na tela
-            adjustCanvasSize();
-            
-            // Bola branca
-            cueBall = new Ball(canvas.width * 0.25, canvas.height / 2, 0, 'white');
-            balls.push(cueBall);
-            
-            // Cores das bolas
-            const colors = ['white', '#FFD700', '#0000FF', '#FF0000', '#800080', '#FF8C00', '#008000', '#8B0000', '#000000', '#FFD700', '#0000FF', '#FF0000', '#800080', '#FF8C00', '#008000', '#8B0000'];
-            
-            // Triângulo de bolas
-            const startX = canvas.width * 0.75;
-            const startY = canvas.height / 2;
-            let ballIndex = 1;
-            
-            for (let row = 0; row < 5; row++) {
-                for (let col = 0; col <= row; col++) {
-                    if (ballIndex <= 15) {
-                        const x = startX + row * (BALL_RADIUS * 2 - 1);
-                        const y = startY + (col - row/2) * (BALL_RADIUS * 2 - 1);
-                        
-                        // Colocar a bola 8 no meio
-                        let number = ballIndex;
-                        if (row === 2 && col === 1) {
-                            number = 8;
-                        } else if (ballIndex === 8) {
-                            number = row === 4 ? (col === 0 ? 15 : 14) : ballIndex;
-                        }
-                        
-                        balls.push(new Ball(x, y, number, colors[number]));
-                        ballIndex++;
-                    }
+            ],
+            geografia: [
+                {
+                    question: "Qual é o maior país da América do Sul?",
+                    options: ["Argentina", "Brasil", "Peru", "Colômbia"],
+                    correct: 1
+                },
+                {
+                    question: "As placas tectônicas são responsáveis por:",
+                    options: ["Chuvas", "Terremotos", "Ventos", "Marés"],
+                    correct: 1
+                },
+                {
+                    question: "Qual linha imaginária divide a Terra em hemisférios Norte e Sul?",
+                    options: ["Trópico de Câncer", "Trópico de Capricórnio", "Equador", "Meridiano de Greenwich"],
+                    correct: 2
+                },
+                {
+                    question: "O Brasil faz fronteira com quantos países sul-americanos?",
+                    options: ["8", "9", "10", "12"],
+                    correct: 2
+                },
+                {
+                    question: "Qual é o clima predominante na região Amazônica?",
+                    options: ["Tropical", "Equatorial", "Subtropical", "Semiárido"],
+                    correct: 1
                 }
-            }
-        }
-        
-        function adjustCanvasSize() {
-            const maxWidth = Math.min(window.innerWidth - 40, 800);
-            let maxHeight = Math.min(window.innerHeight * 0.6, 400);
-            
-            // Se o jogo começou e estamos em paisagem mobile, usar toda a tela
-            if (gameStarted && window.innerHeight < 500 && window.innerWidth > window.innerHeight) {
-                maxHeight = window.innerHeight - 20;
-            } else if (gameStarted && window.innerWidth <= 768) {
-                maxHeight = window.innerHeight * 0.85;
-            }
-            
-            // Manter proporção 2:1
-            let width = maxWidth;
-            let height = width / 2;
-            
-            if (height > maxHeight) {
-                height = maxHeight;
-                width = height * 2;
-            }
-            
-            canvas.width = width;
-            canvas.height = height;
-            
-            // Ajustar tamanho das bolas baseado no tamanho do canvas
-            const scale = width / 800;
-            BALL_RADIUS = Math.max(8, 12 * scale);
-        }
-        
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Desenhar caçapas
-            drawPockets();
-            
-            // Desenhar bolas
-            balls.forEach(ball => ball.draw());
-            
-            // Desenhar linha de mira
-            if (aimLine && !gameEnded) {
-                ctx.strokeStyle = 'rgba(255,255,255,0.8)';
-                ctx.lineWidth = 2;
-                ctx.setLineDash([5, 5]);
-                ctx.beginPath();
-                ctx.moveTo(cueBall.x, cueBall.y);
-                ctx.lineTo(aimLine.x, aimLine.y);
-                ctx.stroke();
-                ctx.setLineDash([]);
-            }
-        }
-        
-        function drawPockets() {
-            const pocketSize = Math.max(12, canvas.width * 0.025);
-            const borderOffset = Math.max(15, canvas.width * 0.03);
-            
-            const pockets = [
-                {x: borderOffset, y: borderOffset}, 
-                {x: canvas.width/2, y: borderOffset * 0.8}, 
-                {x: canvas.width - borderOffset, y: borderOffset},
-                {x: borderOffset, y: canvas.height - borderOffset}, 
-                {x: canvas.width/2, y: canvas.height - borderOffset * 0.8}, 
-                {x: canvas.width - borderOffset, y: canvas.height - borderOffset}
-            ];
-            
-            pockets.forEach(pocket => {
-                ctx.beginPath();
-                ctx.arc(pocket.x, pocket.y, pocketSize, 0, Math.PI * 2);
-                ctx.fillStyle = '#000';
-                ctx.fill();
-                ctx.strokeStyle = '#8B4513';
-                ctx.lineWidth = Math.max(1, canvas.width * 0.004);
-                ctx.stroke();
-            });
-        }
-        
-        function update() {
-            balls.forEach(ball => ball.update());
-            handleCollisions();
-            
-            // Verificar se todas as bolas pararam
-            const allStopped = balls.every(ball => ball.vx === 0 && ball.vy === 0);
-            if (allStopped && !isDragging) {
-                // Permitir próxima jogada
-            }
-        }
-        
-        function handleCollisions() {
-            for (let i = 0; i < balls.length; i++) {
-                for (let j = i + 1; j < balls.length; j++) {
-                    const ball1 = balls[i];
-                    const ball2 = balls[j];
-                    
-                    if (ball1.pocketed || ball2.pocketed) continue;
-                    
-                    const dx = ball2.x - ball1.x;
-                    const dy = ball2.y - ball1.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < ball1.radius + ball2.radius) {
-                        // Colisão detectada
-                        const angle = Math.atan2(dy, dx);
-                        const sin = Math.sin(angle);
-                        const cos = Math.cos(angle);
-                        
-                        // Separar bolas
-                        const overlap = ball1.radius + ball2.radius - distance;
-                        ball1.x -= overlap * cos * 0.5;
-                        ball1.y -= overlap * sin * 0.5;
-                        ball2.x += overlap * cos * 0.5;
-                        ball2.y += overlap * sin * 0.5;
-                        
-                        // Trocar velocidades
-                        const vx1 = ball1.vx * cos + ball1.vy * sin;
-                        const vy1 = ball1.vy * cos - ball1.vx * sin;
-                        const vx2 = ball2.vx * cos + ball2.vy * sin;
-                        const vy2 = ball2.vy * cos - ball2.vx * sin;
-                        
-                        ball1.vx = vx2 * cos - vy1 * sin;
-                        ball1.vy = vy1 * cos + vx2 * sin;
-                        ball2.vx = vx1 * cos - vy2 * sin;
-                        ball2.vy = vy2 * cos + vx1 * sin;
-                    }
+            ],
+            filosofia: [
+                {
+                    question: "Quem é considerado o pai da filosofia ocidental?",
+                    options: ["Platão", "Aristóteles", "Sócrates", "Tales de Mileto"],
+                    correct: 2
+                },
+                {
+                    question: "'Penso, logo existo' é uma frase famosa de:",
+                    options: ["Kant", "Descartes", "Nietzsche", "Sartre"],
+                    correct: 1
+                },
+                {
+                    question: "A Ética estuda:",
+                    options: ["O belo", "A verdade", "O bem e o mal", "A existência"],
+                    correct: 2
+                },
+                {
+                    question: "Qual filósofo criou a Academia em Atenas?",
+                    options: ["Sócrates", "Platão", "Aristóteles", "Pitágoras"],
+                    correct: 1
+                },
+                {
+                    question: "O que significa 'filosofia' etimologicamente?",
+                    options: ["Amor à verdade", "Amor à sabedoria", "Amor à beleza", "Amor à justiça"],
+                    correct: 1
                 }
-            }
-        }
-        
-        function switchPlayer() {
-            currentPlayer = currentPlayer === 1 ? 2 : 1;
-            updateUI();
-        }
-        
-        function checkPlayerBalls() {
-            const player1Balls = balls.filter(b => b.isSolid && !b.pocketed);
-            const player2Balls = balls.filter(b => b.isStripe && !b.pocketed);
-            
-            if (player1Balls.length === 0 || player2Balls.length === 0) {
-                // Um jogador encaçapou todas as suas bolas
-                updateUI();
-            }
-        }
-        
-        function endGame() {
-            gameEnded = true;
-            const winner = currentPlayer === 1 ? 2 : 1; // Quem encaçapou a bola 8 sem encaçapar todas as suas perde
-            document.getElementById('status').textContent = `Jogador ${winner} venceu!`;
-            updateGameStatus();
-        }
-        
-        function updateUI() {
-            const player1Element = document.getElementById('player1');
-            const player2Element = document.getElementById('player2');
-            const statusElement = document.getElementById('status');
-            
-            player1Element.classList.toggle('active', currentPlayer === 1);
-            player2Element.classList.toggle('active', currentPlayer === 2);
-            
-            if (!gameEnded) {
-                statusElement.textContent = `Vez do Jogador ${currentPlayer}`;
-                updateGameStatus();
-            }
-            
-            // Atualizar contagem de bolas
-            const player1Balls = balls.filter(b => b.isSolid && !b.pocketed).length;
-            const player2Balls = balls.filter(b => b.isStripe && !b.pocketed).length;
-            
-            document.getElementById('p1Balls').textContent = `Lisas (${player1Balls} restantes)`;
-            document.getElementById('p2Balls').textContent = `Listradas (${player2Balls} restantes)`;
-        }
-        
-        function updateGameStatus() {
-            if (gameStarted) {
-                const status = gameEnded ? document.getElementById('status').textContent : `Vez do Jogador ${currentPlayer}`;
-                document.body.setAttribute('data-status', status);
-            }
-        }
-        
-        function startPowerMeter() {
-            if (powerInterval) return;
-            
-            powerInterval = setInterval(() => {
-                power += powerDirection * 2;
-                if (power >= 100) {
-                    power = 100;
-                    powerDirection = -1;
-                } else if (power <= 0) {
-                    power = 0;
-                    powerDirection = 1;
+            ],
+            sociologia: [
+                {
+                    question: "Quem é considerado um dos fundadores da Sociologia?",
+                    options: ["Karl Marx", "Auguste Comte", "Max Weber", "Todos os anteriores"],
+                    correct: 3
+                },
+                {
+                    question: "O que estuda a Sociologia?",
+                    options: ["A sociedade e suas relações", "A psique humana", "A natureza", "A economia apenas"],
+                    correct: 0
+                },
+                {
+                    question: "Qual conceito se refere ao processo de aprendizagem social?",
+                    options: ["Socialização", "Estratificação", "Mobilidade", "Alienação"],
+                    correct: 0
+                },
+                {
+                    question: "As instituições sociais incluem:",
+                    options: ["Família e escola", "Igreja e Estado", "Empresas", "Todas as alternativas"],
+                    correct: 3
+                },
+                {
+                    question: "Qual sociólogo desenvolveu a teoria da ação social?",
+                    options: ["Durkheim", "Marx", "Weber", "Comte"],
+                    correct: 2
                 }
-                powerBar.style.width = power + '%';
-            }, 50);
-        }
-        
-        function stopPowerMeter() {
-            if (powerInterval) {
-                clearInterval(powerInterval);
-                powerInterval = null;
-            }
-        }
-        
+            ],
+            ingles: [
+                {
+                    question: "What is the plural of 'child'?",
+                    options: ["childs", "children", "childrens", "child"],
+                    correct: 1
+                },
+                {
+                    question: "Choose the correct sentence:",
+                    options: ["I am study English", "I study English", "I studying English", "I studies English"],
+                    correct: 1
+                },
+                {
+                    question: "What does 'beautiful' mean in Portuguese?",
+                    options: ["Feio", "Bonito/Belo", "Grande", "Pequeno"],
+                    correct: 1
+                },
+                {
+                    question: "Complete: 'She _____ to school every day.'",
+                    options: ["go", "goes", "going", "went"],
+                    correct: 1
+                },
+                {
+                    question: "Which sentence is in the past tense?",
+                    options: ["I eat pizza", "I am eating pizza", "I ate pizza", "I will eat pizza"],
+                    correct: 2
+                }
+            ],
+            educacao_fisica: [
+                {
+                    question: "Quantos jogadores compõem uma equipe de basquete em quadra?",
+                    options: ["4", "5", "6", "7"],
+                    correct: 1
+                },
+                {
+                    question: "No vôlei, quantos toques cada equipe pode dar na bola?",
+                    options: ["2", "3", "4", "5"],
+                    correct: 1
+                },
+                {
+                    question: "Qual é a distância oficial de uma maratona?",
+                    options: ["40 km", "41,195 km", "42,195 km", "43 km"],
+                    correct: 2
+                },
+                {
+                    question: "O aquecimento antes do exercício serve para:",
+                    options: ["Perder peso", "Preparar o corpo", "Competir melhor", "Todas as alternativas"],
+                    correct: 3
+                },
+                {
+                    question: "Qual modalidade NÃO faz parte do atletismo?",
+                    options: ["Corrida", "Salto", "Natação", "Arremesso"],
+                    correct: 2
+                }
+            ],
+            artes: [
+                {
+                    question: "Quais são as cores primárias?",
+                    options: ["Azul, verde, amarelo", "Vermelho, azul, amarelo", "Verde, roxo, laranja", "Preto, branco, cinza"],
+                    correct: 1
+                },
+                {
+                    question: "Leonardo da Vinci pintou:",
+                    options: ["O Grito", "Guernica", "Mona Lisa", "A Noite Estrelada"],
+                    correct: 2
+                },
+                {
+                    question: "O Barroco brasileiro teve como características:",
+                    options: ["Simplicidade", "Ornamentação excessiva", "Cores frias", "Temas pagãos"],
+                    correct: 1
+                },
+                {
+                    question: "Qual elemento NÃO faz parte da linguagem teatral?",
+                    options: ["Cenário", "Figurino", "Pincel", "Iluminação"],
+                    correct: 2
+                },
+                {
+                    question: "A música clássica brasileira inclui compositores como:",
+                    options: ["Villa-Lobos", "Mozart", "Bach", "Beethoven"],
+                    correct: 0
+                }
+            ]
+        };
+
+        // Variáveis do jogo
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let selectedAnswer = null;
+        let selectedSubject = 'todas';
+
+        // Elementos DOM
+        const startScreen = document.getElementById('startScreen');
+        const questionContainer = document.getElementById('questionContainer');
+        const result = document.getElementById('result');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('options');
+        const submitBtn = document.getElementById('submitBtn');
+        const skipBtn = document.getElementById('skipBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const startBtn = document.getElementById('startBtn');
+        const restartBtn = document.getElementById('restartBtn');
+
+        // Stats elements
+        const scoreElement = document.getElementById('score');
+        const questionNumberElement = document.getElementById('questionNumber');
+        const totalQuestionsElement = document.getElementById('totalQuestions');
+        const correctElement = document.getElementById('correct');
+        const currentSubjectElement = document.getElementById('currentSubject');
+        const progressBar = document.getElementById('progressBar');
+
+        // Subject selection
+        const subjectButtons = document.querySelectorAll('.subject-btn');
+
         // Event listeners
-        function getEventPos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
+        subjectButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                subjectButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedSubject = btn.dataset.subject;
+            });
+        });
+
+        startBtn.addEventListener('click', startQuiz);
+        submitBtn.addEventListener('click', submitAnswer);
+        skipBtn.addEventListener('click', skipQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        function startQuiz() {
+            prepareQuestions();
+            currentQuestionIndex = 0;
+            score = 0;
+            correctAnswers = 0;
+            
+            updateStats();
+            showQuestion();
+            
+            startScreen.style.display = 'none';
+            questionContainer.style.display = 'block';
+        }
+
+        function prepareQuestions() {
+            if (selectedSubject === 'todas') {
+                currentQuestions = [];
+                // Mistura perguntas de todas as matérias
+                Object.keys(questions).forEach(subject => {
+                    currentQuestions = currentQuestions.concat(questions[subject]);
+                });
+                // Embaralha as perguntas
+                currentQuestions = shuffleArray(currentQuestions);
+                // Limita a 30 perguntas para não ficar muito longo
+                currentQuestions = currentQuestions.slice(0, 30);
+            } else {
+                currentQuestions = [...questions[selectedSubject]];
+                currentQuestions = shuffleArray(currentQuestions);
+            }
+            
+            totalQuestionsElement.textContent = currentQuestions.length;
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function showQuestion() {
+            if (currentQuestionIndex >= currentQuestions.length) {
+                endQuiz();
+                return;
+            }
+
+            const question = currentQuestions[currentQuestionIndex];
+            questionText.textContent = question.question;
+            
+            optionsContainer.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectOption(index, optionElement));
+                optionsContainer.appendChild(optionElement);
+            });
+
+            selectedAnswer = null;
+            submitBtn.disabled = true;
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'inline-block';
+            
+            updateStats();
+            updateProgressBar();
+        }
+
+        function selectOption(index, element) {
+            // Remove seleção anterior
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Adiciona nova seleção
+            element.classList.add('selected');
+            selectedAnswer = index;
+            submitBtn.disabled = false;
+        }
+
+        function submitAnswer() {
+            if (selectedAnswer === null) return;
+
+            const question = currentQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+            
+            // Mostra resultado
+            options.forEach((option, index) => {
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedAnswer && index !== question.correct) {
+                    option.classList.add('wrong');
+                }
+                option.style.pointerEvents = 'none';
+            });
+
+            // Atualiza pontuação
+            if (selectedAnswer === question.correct) {
+                score += 10;
+                correctAnswers++;
+                showCelebration('🎉');
+            } else {
+                showCelebration('😅');
+            }
+
+            updateStats();
+            
+            submitBtn.style.display = 'none';
+            nextBtn.style.display = 'inline-block';
+            skipBtn.disabled = true;
+        }
+
+        function skipQuestion() {
+            showCelebration('⏭️');
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            skipBtn.disabled = false;
+            showQuestion();
+        }
+
+        function updateStats() {
+            scoreElement.textContent = score;
+            questionNumberElement.textContent = currentQuestionIndex + 1;
+            correctElement.textContent = correctAnswers;
+            
+            const subjectNames = {
+                'todas': 'Todas as Matérias',
+                'matematica': 'Matemática',
+                'portugues': 'Português',
+                'fisica': 'Física',
+                'quimica': 'Química',
+                'biologia': 'Biologia',
+                'historia': 'História',
+                'geografia': 'Geografia',
+                'filosofia': 'Filosofia',
+                'sociologia': 'Sociologia',
+                'ingles': 'Inglês',
+                'educacao_fisica': 'Ed. Física',
+                'artes': 'Artes'
             };
+            
+            currentSubjectElement.textContent = subjectNames[selectedSubject];
         }
-        
-        function startAiming(e) {
-            if (gameEnded) return;
-            e.preventDefault();
-            
-            // Marcar que o jogo começou na primeira jogada
-            if (!gameStarted) {
-                gameStarted = true;
-                document.body.classList.add('game-started');
-                updateGameStatus();
-                adjustCanvasSize(); // Reajustar canvas para modo jogo
-            }
-            
-            const pos = getEventPos(e);
-            const dx = pos.x - cueBall.x;
-            const dy = pos.y - cueBall.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            if (distance < Math.max(50, canvas.width * 0.08)) {
-                isDragging = true;
-                startPowerMeter();
-            }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
+            progressBar.style.width = progress + '%';
         }
-        
-        function updateAiming(e) {
-            if (!isDragging || gameEnded) return;
-            e.preventDefault();
+
+        function showCelebration(emoji) {
+            const celebration = document.createElement('div');
+            celebration.className = 'celebration';
+            celebration.textContent = emoji;
+            document.body.appendChild(celebration);
             
-            const pos = getEventPos(e);
-            aimLine = { x: pos.x, y: pos.y };
-        }
-        
-        function shoot(e) {
-            if (!isDragging || gameEnded) return;
-            e.preventDefault();
-            
-            stopPowerMeter();
-            
-            if (aimLine) {
-                const dx = aimLine.x - cueBall.x;
-                const dy = aimLine.y - cueBall.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance > 0) {
-                    const force = (power / 100) * MAX_POWER;
-                    cueBall.vx = (dx / distance) * force;
-                    cueBall.vy = (dy / distance) * force;
-                }
-            }
-            
-            isDragging = false;
-            aimLine = null;
-            power = 0;
-            powerBar.style.width = '0%';
-        }
-        
-        // Mouse events
-        canvas.addEventListener('mousedown', startAiming);
-        canvas.addEventListener('mousemove', updateAiming);
-        canvas.addEventListener('mouseup', shoot);
-        canvas.addEventListener('mouseleave', shoot);
-        
-        // Touch events
-        canvas.addEventListener('touchstart', startAiming);
-        canvas.addEventListener('touchmove', updateAiming);
-        canvas.addEventListener('touchend', shoot);
-        canvas.addEventListener('touchcancel', shoot);
-        
-        // Prevent scrolling on touch
-        canvas.addEventListener('touchstart', e => e.preventDefault());
-        canvas.addEventListener('touchmove', e => e.preventDefault());
-        
-        // Resize handler
-        window.addEventListener('resize', () => {
-            if (!isDragging) {
-                setTimeout(() => { // Pequeno delay para aguardar a orientação mudar completamente
-                    adjustCanvasSize();
-                    // Reposicionar bolas proporcionalmente
-                    const scaleX = canvas.width / 800;
-                    const scaleY = canvas.height / 400;
-                    
-                    balls.forEach(ball => {
-                        if (ball.isCue) {
-                            ball.x = canvas.width * 0.25;
-                            ball.y = canvas.height / 2;
-                        } else {
-                            ball.x = Math.min(ball.x * scaleX, canvas.width - BALL_RADIUS);
-                            ball.y = Math.min(ball.y * scaleY, canvas.height - BALL_RADIUS);
-                        }
-                    });
-                }, 100);
-            }
-        });
-        
-        // Detectar mudança de orientação específica
-        window.addEventListener('orientationchange', () => {
             setTimeout(() => {
-                if (gameStarted) {
-                    adjustCanvasSize();
+                document.body.removeChild(celebration);
+            }, 2000);
+        }
+
+        function endQuiz() {
+            questionContainer.style.display = 'none';
+            result.classList.add('show');
+            
+            const finalScore = document.getElementById('finalScore');
+            const resultMessage = document.getElementById('resultMessage');
+            const finalProgressBar = document.getElementById('finalProgressBar');
+            
+            const percentage = Math.round((correctAnswers / currentQuestions.length) * 100);
+            
+            finalScore.textContent = score + ' pontos';
+            finalProgressBar.style.width = percentage + '%';
+            
+            let message = '';
+            if (percentage >= 90) {
+                message = `🏆 EXCELENTE! Você acertou ${correctAnswers} de ${currentQuestions.length} questões (${percentage}%)!\nVocê domina muito bem o conteúdo do 1º ano!`;
+            } else if (percentage >= 70) {
+                message = `👏 MUITO BOM! Você acertou ${correctAnswers} de ${currentQuestions.length} questões (${percentage}%)!\nContinue estudando para chegar à excelência!`;
+            } else if (percentage >= 50) {
+                message = `📚 BOM TRABALHO! Você acertou ${correctAnswers} de ${currentQuestions.length} questões (${percentage}%)!\nRevise os conteúdos e tente novamente!`;
+            } else {
+                message = `💪 CONTINUE TENTANDO! Você acertou ${correctAnswers} de ${currentQuestions.length} questões (${percentage}%)!\nEstude mais e não desista, você consegue!`;
+            }
+            
+            resultMessage.textContent = message;
+        }
+
+        function restartQuiz() {
+            result.classList.remove('show');
+            startScreen.style.display = 'block';
+            
+            // Reset stats
+            score = 0;
+            correctAnswers = 0;
+            currentQuestionIndex = 0;
+            selectedAnswer = null;
+            
+            // Reset progress bar
+            progressBar.style.width = '0%';
+            
+            updateStats();
+        }
+
+        // Adiciona mais perguntas para enriquecer o banco de dados
+        function addMoreQuestions() {
+            // Matemática - Adicionais
+            questions.matematica.push(
+                {
+                    question: "Qual é o domínio da função f(x) = √x?",
+                    options: ["x ≥ 0", "x > 0", "x ∈ ℝ", "x ≤ 0"],
+                    correct: 0
+                },
+                {
+                    question: "Se log₂(8) = x, então x vale:",
+                    options: ["2", "3", "4", "8"],
+                    correct: 1
+                },
+                {
+                    question: "A sequência (2, 5, 8, 11, ...) é uma PA. Qual é o 10º termo?",
+                    options: ["29", "30", "31", "32"],
+                    correct: 0
                 }
-            }, 500);
-        });
-        
-        function resetGame() {
-            stopPowerMeter();
-            gameStarted = false;
-            document.body.classList.remove('game-started');
-            document.body.removeAttribute('data-status');
-            initGame();
-            power = 0;
-            powerBar.style.width = '0%';
+            );
+
+            // Português - Adicionais
+            questions.portugues.push(
+                {
+                    question: "Na oração 'Entreguei o livro ao professor', temos:",
+                    options: ["Objeto direto apenas", "Objeto indireto apenas", "Objeto direto e indireto", "Predicativo"],
+                    correct: 2
+                },
+                {
+                    question: "Qual período literário valoriza a natureza e os sentimentos?",
+                    options: ["Barroco", "Arcadismo", "Romantismo", "Realismo"],
+                    correct: 2
+                },
+                {
+                    question: "'Vossa Excelência' é um pronome de tratamento usado para:",
+                    options: ["Papa", "Autoridades em geral", "Reis", "Médicos"],
+                    correct: 1
+                }
+            );
+
+            // Física - Adicionais
+            questions.fisica.push(
+                {
+                    question: "Um corpo percorre 100m em 10s. Sua velocidade média é:",
+                    options: ["5 m/s", "10 m/s", "15 m/s", "20 m/s"],
+                    correct: 1
+                },
+                {
+                    question: "A energia cinética depende de:",
+                    options: ["Massa apenas", "Velocidade apenas", "Massa e velocidade", "Altura apenas"],
+                    correct: 2
+                },
+                {
+                    question: "Qual grandeza física tem unidade Joule?",
+                    options: ["Força", "Energia", "Potência", "Pressão"],
+                    correct: 1
+                }
+            );
+
+            // Química - Adicionais
+            questions.quimica.push(
+                {
+                    question: "Qual é a massa molar aproximada do CO₂?",
+                    options: ["28 g/mol", "32 g/mol", "44 g/mol", "48 g/mol"],
+                    correct: 2
+                },
+                {
+                    question: "Em uma reação de neutralização, obtemos:",
+                    options: ["Ácido + base", "Sal + água", "Óxido + água", "Metal + não-metal"],
+                    correct: 1
+                },
+                {
+                    question: "O elemento com configuração 1s² 2s² 2p⁶ 3s¹ é:",
+                    options: ["Cloro", "Sódio", "Magnésio", "Fósforo"],
+                    correct: 1
+                }
+            );
+
+            // Biologia - Adicionais
+            questions.biologia.push(
+                {
+                    question: "A meiose produz células:",
+                    options: ["Diploides", "Haploides", "Triploides", "Somáticas"],
+                    correct: 1
+                },
+                {
+                    question: "Qual estrutura controla a entrada e saída de substâncias na célula?",
+                    options: ["Parede celular", "Membrana plasmática", "Citoplasma", "Núcleo"],
+                    correct: 1
+                },
+                {
+                    question: "Os vírus são considerados:",
+                    options: ["Seres vivos", "Parasitas obrigatórios", "Bactérias", "Fungos"],
+                    correct: 1
+                }
+            );
+
+            // História - Adicionais
+            questions.historia.push(
+                {
+                    question: "O período colonial brasileiro durou aproximadamente:",
+                    options: ["200 anos", "300 anos", "400 anos", "500 anos"],
+                    correct: 1
+                },
+                {
+                    question: "A Revolução Industrial iniciou-se na:",
+                    options: ["França", "Alemanha", "Inglaterra", "Estados Unidos"],
+                    correct: 2
+                },
+                {
+                    question: "Qual evento marca o início da Idade Moderna?",
+                    options: ["Queda de Constantinopla", "Descobrimento da América", "Reforma Protestante", "Revolução Francesa"],
+                    correct: 0
+                }
+            );
+
+            // Geografia - Adicionais
+            questions.geografia.push(
+                {
+                    question: "Qual é o rio mais extenso do mundo?",
+                    options: ["Nilo", "Amazonas", "Mississippi", "Yangtzé"],
+                    correct: 0
+                },
+                {
+                    question: "A Cordilheira dos Andes localiza-se na:",
+                    options: ["América do Norte", "América Central", "América do Sul", "Europa"],
+                    correct: 2
+                },
+                {
+                    question: "O movimento de rotação da Terra dura:",
+                    options: ["24 horas", "365 dias", "12 horas", "30 dias"],
+                    correct: 0
+                }
+            );
         }
-        
-        function gameLoop() {
-            update();
-            draw();
-            requestAnimationFrame(gameLoop);
-        }
-        
-        // Inicializar jogo
-        initGame();
-        gameLoop();
+
+        // Chama a função para adicionar mais perguntas
+        addMoreQuestions();
+
+        // Inicializa o jogo
+        updateStats();
     </script>
 </body>
 </html>
