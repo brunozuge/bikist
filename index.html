@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jardim do Amor da Bibi 🌸</title>
+    <title>Jogo da Memória Romântico - Para Bibi 💕</title>
     <style>
         * {
             margin: 0;
@@ -13,949 +13,569 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #F0E68C 100%);
-            background-size: 400% 400%;
-            animation: skyGradient 15s ease infinite;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        @keyframes skyGradient {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-
-        .clouds {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .cloud {
-            position: absolute;
-            font-size: 40px;
-            opacity: 0.6;
-            animation: cloudFloat 20s linear infinite;
-        }
-
-        @keyframes cloudFloat {
-            from { transform: translateX(-100px); }
-            to { transform: translateX(calc(100vw + 100px)); }
-        }
-
-        .game-container {
-            position: relative;
-            z-index: 2;
-            width: 95%;
-            max-width: 900px;
-            margin: 20px auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(15px);
-            padding: 30px;
-            border: 3px solid rgba(255, 182, 193, 0.5);
-        }
-
-        .title {
-            text-align: center;
-            font-size: clamp(1.8rem, 5vw, 3rem);
-            color: #d63384;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); }
-            to { text-shadow: 2px 2px 15px rgba(214, 51, 132, 0.4); }
-        }
-
-        .stats {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 20px;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
         }
 
-        .stat {
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
-            color: white;
-            padding: 10px 20px;
+        .container {
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            font-weight: bold;
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
-            animation: statPulse 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes statPulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
-        }
-
-        .garden {
-            background: linear-gradient(45deg, #228B22, #32CD32, #90EE90);
-            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            min-height: 400px;
-            position: relative;
-            border: 4px solid #8B4513;
-            margin: 20px 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 10px;
-            align-content: start;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(10px);
         }
 
-        .plot {
-            background: rgba(139, 69, 19, 0.3);
-            border: 2px dashed #8B4513;
-            border-radius: 10px;
-            height: 80px;
+        h1 {
+            color: #d63384;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #6f42c1;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Manual Screen */
+        .manual {
+            text-align: left;
+            padding: 20px;
+        }
+
+        .manual h2 {
+            color: #d63384;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .manual h3 {
+            color: #6f42c1;
+            margin: 15px 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .manual p, .manual li {
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .manual ul {
+            margin-left: 20px;
+        }
+
+        .heart-divider {
+            text-align: center;
+            font-size: 1.5em;
+            color: #d63384;
+            margin: 20px 0;
+        }
+
+        /* Game Controls */
+        .game-controls {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .score-info {
+            color: #6f42c1;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .timer {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Game Board */
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .card {
+            aspect-ratio: 1;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border-radius: 15px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 2em;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
             position: relative;
-            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .plot:hover {
-            background: rgba(139, 69, 19, 0.5);
+        .card:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
 
-        .plot.planted {
-            background: linear-gradient(45deg, #8B4513, #A0522D);
+        .card.flipped {
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            animation: flip 0.6s ease-in-out;
+        }
+
+        .card.matched {
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            animation: match 0.8s ease-in-out;
             cursor: default;
         }
 
-        .flower {
-            font-size: 35px;
-            animation: flowerGrow 2s ease-out, flowerSway 4s ease-in-out infinite;
-            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        .card.matched:hover {
+            transform: scale(1);
         }
 
-        @keyframes flowerGrow {
-            0% {
-                transform: scale(0) rotate(-180deg);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.2) rotate(-90deg);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
+        @keyframes flip {
+            0% { transform: rotateY(0deg) scale(1); }
+            50% { transform: rotateY(90deg) scale(0.8); }
+            100% { transform: rotateY(0deg) scale(1); }
         }
 
-        @keyframes flowerSway {
-            0%, 100% { transform: rotate(-2deg); }
-            50% { transform: rotate(2deg); }
+        @keyframes match {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); }
         }
 
-        .seed-shop {
-            background: rgba(255, 182, 193, 0.8);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .seed-shop h3 {
-            color: #d63384;
-            margin-bottom: 15px;
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-        }
-
-        .seeds {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .seed {
-            background: white;
-            border: 3px solid #ff69b4;
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 20px;
-            position: relative;
-        }
-
-        .seed:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
-        }
-
-        .seed.selected {
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
-            color: white;
-            transform: scale(1.15);
-        }
-
-        .seed-price {
-            font-size: 10px;
-            font-weight: bold;
-            color: #d63384;
-            margin-top: 2px;
-        }
-
-        .message {
-            background: rgba(255, 240, 245, 0.9);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-            color: #d63384;
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
-            border: 2px solid rgba(255, 182, 193, 0.5);
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.5s ease;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
+        /* Buttons */
         .btn {
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            background: linear-gradient(45deg, #d63384, #6f42c1);
             color: white;
             border: none;
             padding: 12px 25px;
             border-radius: 25px;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
-            font-family: inherit;
+            font-size: 1.1em;
             font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.4);
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(214, 51, 132, 0.6);
         }
 
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
+        .btn:active {
+            transform: translateY(0);
         }
 
-        .sparkle {
-            position: absolute;
-            font-size: 15px;
-            pointer-events: none;
-            animation: sparkleAnim 2s ease-out forwards;
+        .btn-secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
         }
 
-        @keyframes sparkleAnim {
-            0% {
-                opacity: 0;
-                transform: scale(0) rotate(0deg);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.5) rotate(180deg);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0) rotate(360deg);
-            }
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(108, 117, 125, 0.6);
         }
 
+        /* Victory Screen */
+        .victory {
+            text-align: center;
+        }
+
+        .victory h2 {
+            color: #d63384;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .fireworks {
+            font-size: 3em;
+            animation: fireworks 1s infinite;
+        }
+
+        @keyframes fireworks {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .garden {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1em;
+            }
+            
+            .game-board {
                 grid-template-columns: repeat(4, 1fr);
-                min-height: 300px;
+                gap: 8px;
+                padding: 15px;
             }
             
-            .plot {
-                height: 70px;
+            .card {
+                font-size: 1.5em;
             }
             
-            .flower {
-                font-size: 30px;
+            .container {
+                padding: 15px;
+                margin: 10px;
             }
             
-            .seed {
-                width: 60px;
-                height: 60px;
-                font-size: 18px;
+            .game-controls {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 1em;
             }
         }
 
         @media (max-width: 480px) {
-            .garden {
+            .game-board {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 8px;
+                max-width: 300px;
             }
             
-            .plot {
-                height: 60px;
+            .card {
+                font-size: 1.2em;
             }
             
-            .flower {
-                font-size: 25px;
+            h1 {
+                font-size: 1.5em;
             }
         }
 
-        /* Manual Styles */
-        .manual-screen {
+        .floating-hearts {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            overflow-y: auto;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .manual-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            padding: 30px;
-            max-width: 800px;
-            width: 100%;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(15px);
-            border: 3px solid rgba(255, 182, 193, 0.5);
-            max-height: 90vh;
-            overflow-y: auto;
+        .heart {
+            position: absolute;
+            color: rgba(214, 51, 132, 0.3);
+            font-size: 20px;
+            animation: float 6s infinite linear;
         }
 
-        .manual-title {
-            text-align: center;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            color: #d63384;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            animation: titleGlow 3s ease-in-out infinite alternate;
-        }
-
-        .manual-subtitle {
-            text-align: center;
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            color: #e91e63;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .manual-content {
-            display: grid;
-            gap: 25px;
-        }
-
-        .manual-section {
-            background: rgba(255, 240, 245, 0.8);
-            border-radius: 15px;
-            padding: 20px;
-            border: 2px solid rgba(255, 182, 193, 0.3);
-        }
-
-        .manual-section h3 {
-            color: #d63384;
-            font-size: clamp(1.2rem, 3vw, 1.6rem);
-            margin-bottom: 15px;
-            text-align: center;
-            border-bottom: 2px solid rgba(214, 51, 132, 0.3);
-            padding-bottom: 8px;
-        }
-
-        .manual-steps {
-            display: grid;
-            gap: 15px;
-        }
-
-        .step {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid #ff69b4;
-        }
-
-        .step-number {
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-
-        .step-content strong {
-            color: #d63384;
-            display: block;
-            margin-bottom: 5px;
-            font-size: clamp(1rem, 2.5vw, 1.1rem);
-        }
-
-        .step-content p {
-            color: #666;
-            line-height: 1.4;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-        }
-
-        .flower-guide, .tips, .controls-guide {
-            display: grid;
-            gap: 10px;
-        }
-
-        .flower-item, .tip, .control-item {
-            background: white;
-            padding: 12px;
-            border-radius: 10px;
-            border-left: 4px solid #ff69b4;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .tip strong, .control-item strong {
-            color: #d63384;
-        }
-
-        .manual-footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid rgba(214, 51, 132, 0.2);
-        }
-
-        .love-message {
-            color: #d63384;
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            margin-bottom: 20px;
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        .start-game-btn {
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 30px;
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
-            animation: buttonPulse 2s ease-in-out infinite alternate;
-        }
-
-        .start-game-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(255, 20, 147, 0.5);
-        }
-
-        @keyframes buttonPulse {
-            from { box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4); }
-            to { box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6); }
-        }
-
-        @media (max-width: 768px) {
-            .manual-container {
-                padding: 20px;
-                margin: 10px;
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
             }
-            
-            .step {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .step-number {
-                align-self: center;
-                margin-bottom: 10px;
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div class="clouds"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
     
-    <!-- Manual/Tutorial Screen -->
-    <div id="manualScreen" class="manual-screen">
-        <div class="manual-container">
-            <h1 class="manual-title">💖 Manual do Jardim do Amor 💖</h1>
-            <div class="manual-subtitle">Um guia especial para a Bibi começar sua aventura! 🌸</div>
+    <div class="container">
+        <h1>💕 Jogo da Memória Romântico 💕</h1>
+        <p class="subtitle">Feito especialmente para Bibi com muito amor</p>
+
+        <!-- Manual Screen -->
+        <div id="manualScreen" class="screen active">
+            <div class="manual">
+                <h2>📖 Manual do Jogo</h2>
+                
+                <div class="heart-divider">💖 💖 💖</div>
+                
+                <h3>🎯 Objetivo</h3>
+                <p>Encontre todos os pares de símbolos românticos no menor tempo possível! Cada par que você encontrar representa um momento especial de amor.</p>
+                
+                <h3>🎮 Como Jogar</h3>
+                <ul>
+                    <li><strong>Clique nas cartas</strong> para revelá-las</li>
+                    <li><strong>Memorize a posição</strong> dos símbolos românticos</li>
+                    <li><strong>Encontre os pares</strong> clicando em duas cartas iguais</li>
+                    <li><strong>Complete o jogo</strong> encontrando todos os 8 pares</li>
+                </ul>
+                
+                <h3>💡 Dicas para Bibi</h3>
+                <ul>
+                    <li>Comece revelando cartas em cantos opostos</li>
+                    <li>Tente criar um padrão mental do tabuleiro</li>
+                    <li>Use o coração para memorizar melhor 💕</li>
+                    <li>Não desista - o amor sempre encontra um caminho!</li>
+                </ul>
+                
+                <h3>🏆 Pontuação</h3>
+                <p>Sua pontuação é baseada no número de tentativas e no tempo gasto. Quanto menos tentativas e mais rápido você for, maior será sua pontuação romântica!</p>
+                
+                <div class="heart-divider">💝 💝 💝</div>
+                
+                <p style="text-align: center; font-style: italic; color: #d63384;">
+                    "Cada par encontrado é como encontrar você todos os dias - sempre uma surpresa maravilhosa!"
+                </p>
+            </div>
             
-            <div class="manual-content">
-                <div class="manual-section">
-                    <h3>🎯 Como Jogar</h3>
-                    <div class="manual-steps">
-                        <div class="step">
-                            <span class="step-number">1</span>
-                            <div class="step-content">
-                                <strong>Escolha uma Semente 🌱</strong>
-                                <p>Clique em uma das sementes na loja. Cada uma tem um preço e gera uma flor diferente!</p>
-                            </div>
-                        </div>
-                        <div class="step">
-                            <span class="step-number">2</span>
-                            <div class="step-content">
-                                <strong>Plante no Jardim 🌿</strong>
-                                <p>Clique em qualquer canteiro vazio para plantar. Sua flor crescerá magicamente!</p>
-                            </div>
-                        </div>
-                        <div class="step">
-                            <span class="step-number">3</span>
-                            <div class="step-content">
-                                <strong>Colha e Ganhe Moedas 💰</strong>
-                                <p>Use "Colher Todas" para ganhar o dobro do que gastou em sementes!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <button class="btn" onclick="startGame()">💕 Começar a Jogar 💕</button>
+        </div>
 
-                <div class="manual-section">
-                    <h3>🌸 Tipos de Flores e Preços</h3>
-                    <div class="flower-guide">
-                        <div class="flower-item">🌹 <strong>Rosa Vermelha</strong> - 10 moedas</div>
-                        <div class="flower-item">🌷 <strong>Tulipa Rosa</strong> - 15 moedas</div>
-                        <div class="flower-item">🌺 <strong>Hibisco</strong> - 20 moedas</div>
-                        <div class="flower-item">🌸 <strong>Flor de Cerejeira</strong> - 25 moedas</div>
-                        <div class="flower-item">🌻 <strong>Girassol</strong> - 30 moedas</div>
-                    </div>
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen">
+            <div class="game-controls">
+                <div class="score-info">
+                    <div>Tentativas: <span id="attempts">0</span></div>
+                    <div>Pares: <span id="pairs">0</span>/8</div>
                 </div>
-
-                <div class="manual-section">
-                    <h3>✨ Dicas Mágicas</h3>
-                    <div class="tips">
-                        <div class="tip">💡 <strong>Fertilizante Mágico:</strong> Custa 50 moedas mas dobra o valor de TODAS as suas flores!</div>
-                        <div class="tip">🏆 <strong>Níveis:</strong> A cada 5 flores plantadas você sobe de nível e ganha moedas bônus!</div>
-                        <div class="tip">💖 <strong>Mensagens Especiais:</strong> Receba declarações de amor a cada flor plantada!</div>
-                        <div class="tip">🌈 <strong>Estratégia:</strong> Plante flores baratas primeiro para acumular moedas!</div>
-                    </div>
-                </div>
-
-                <div class="manual-section">
-                    <h3>🎮 Controles</h3>
-                    <div class="controls-guide">
-                        <div class="control-item">🌸 <strong>Colher Todas:</strong> Remove todas as flores e ganha moedas</div>
-                        <div class="control-item">✨ <strong>Fertilizante Mágico:</strong> Dobra o valor das flores plantadas</div>
-                        <div class="control-item">🔄 <strong>Novo Jardim:</strong> Reinicia o jogo com 50 moedas</div>
-                    </div>
-                </div>
+                <div class="timer">⏰ <span id="timer">00:00</span></div>
             </div>
+            
+            <div class="game-board" id="gameBoard"></div>
+            
+            <button class="btn btn-secondary" onclick="showManual()">📖 Manual</button>
+            <button class="btn" onclick="resetGame()">🔄 Novo Jogo</button>
+        </div>
 
-            <div class="manual-footer">
-                <p class="love-message">Bibi, este jardim foi criado com todo amor para você! 💕</p>
-                <button class="start-game-btn" onclick="startGameFromManual()">
-                    🌸 Começar Minha Aventura! 🌸
-                </button>
+        <!-- Victory Screen -->
+        <div id="victoryScreen" class="screen">
+            <div class="victory">
+                <div class="fireworks">🎉✨🎊✨🎉</div>
+                <h2>Parabéns, Bibi! 💕</h2>
+                <p style="font-size: 1.3em; color: #6f42c1; margin: 20px 0;">
+                    Você completou o jogo da memória romântico!
+                </p>
+                <div id="finalStats" style="margin: 20px 0; font-size: 1.1em;"></div>
+                <p style="font-style: italic; color: #d63384; margin: 20px 0;">
+                    "Sua memória é tão perfeita quanto nosso amor - inesquecível! 💖"
+                </p>
+                <button class="btn" onclick="resetGame()">💕 Jogar Novamente</button>
+                <button class="btn btn-secondary" onclick="showManual()">📖 Ver Manual</button>
             </div>
-        </div>
-    </div>
-    
-    <div class="game-container" id="gameContainer" style="display: none;">
-        <h1 class="title">🌸 Jardim do Amor da Bibi 🌸</h1>
-        
-        <div class="stats">
-            <div class="stat">💰 Moedas: <span id="coins">50</span></div>
-            <div class="stat">🌸 Flores: <span id="flowerCount">0</span></div>
-            <div class="stat">💖 Nível: <span id="level">1</span></div>
-        </div>
-        
-        <div class="seed-shop">
-            <h3>🏪 Loja de Sementes Mágicas</h3>
-            <div class="seeds">
-                <div class="seed" data-flower="🌹" data-price="10" onclick="selectSeed(this)">
-                    🌱
-                    <div class="seed-price">10💰</div>
-                </div>
-                <div class="seed" data-flower="🌷" data-price="15" onclick="selectSeed(this)">
-                    🌱
-                    <div class="seed-price">15💰</div>
-                </div>
-                <div class="seed" data-flower="🌺" data-price="20" onclick="selectSeed(this)">
-                    🌱
-                    <div class="seed-price">20💰</div>
-                </div>
-                <div class="seed" data-flower="🌸" data-price="25" onclick="selectSeed(this)">
-                    🌱
-                    <div class="seed-price">25💰</div>
-                </div>
-                <div class="seed" data-flower="🌻" data-price="30" onclick="selectSeed(this)">
-                    🌱
-                    <div class="seed-price">30💰</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="garden" id="garden"></div>
-        
-        <div class="message" id="message">
-            Bem-vinda ao seu jardim mágico, Bibi! Escolha uma semente e clique em um canteiro para plantar! 🌱
-        </div>
-        
-        <div class="controls">
-            <button class="btn" onclick="harvestAll()">🌸 Colher Todas</button>
-            <button class="btn" onclick="addMagicFertilizer()">✨ Fertilizante Mágico</button>
-            <button class="btn" onclick="resetGarden()">🔄 Novo Jardim</button>
         </div>
     </div>
 
     <script>
-        let coins = 50;
-        let flowerCount = 0;
-        let level = 1;
-        let selectedSeed = null;
-        let selectedPrice = 0;
-        let selectedFlower = '';
-        let plantedFlowers = [];
+        // Símbolos românticos para o jogo
+        const symbols = ['💕', '💖', '💝', '🌹', '💐', '💍', '👑', '🦋'];
+        
+        let cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let attempts = 0;
+        let startTime;
+        let timerInterval;
+        let gameActive = false;
 
-        const romanticMessages = [
-            "Bibi, suas flores são tão lindas quanto você! 🌸",
-            "Cada flor plantada é um 'eu te amo'! 💕",
-            "Seu jardim é um paraíso, assim como você! 🌺",
-            "Bibi, você faz tudo florescer ao seu redor! 🌷",
-            "Suas mãos mágicas criam beleza onde tocam! ✨",
-            "Cada flor é uma prova do nosso amor! 💖",
-            "Bibi, você é mais bela que todas as flores! 🌹",
-            "Nosso amor cresce como essas flores! 🌻",
-            "Você é a jardineira do meu coração! 💓",
-            "Bibi, seu sorriso faz as flores brilharem! ☀️",
-            "Cada canteiro é uma declaração de amor! 💝",
-            "Você planta amor e colhe felicidade! 🦋",
-            "Bibi, você é minha flor mais preciosa! 👑",
-            "Seu jardim reflete a beleza da sua alma! 🌈",
-            "Com você, a vida é sempre primavera! 🌿"
-        ];
-
-        function initializeGarden() {
-            const garden = document.getElementById('garden');
-            garden.innerHTML = '';
-            
-            // Criar 16 canteiros
-            for (let i = 0; i < 16; i++) {
-                const plot = document.createElement('div');
-                plot.className = 'plot';
-                plot.onclick = () => plantFlower(plot, i);
-                garden.appendChild(plot);
-            }
-            
-            createClouds();
-            updateDisplay();
-        }
-
-        function createClouds() {
-            const cloudsContainer = document.querySelector('.clouds');
+        function createFloatingHearts() {
+            const heartsContainer = document.getElementById('floatingHearts');
             
             setInterval(() => {
-                const cloud = document.createElement('div');
-                cloud.className = 'cloud';
-                cloud.innerHTML = ['☁️', '⛅', '🌤️'][Math.floor(Math.random() * 3)];
-                cloud.style.top = Math.random() * 50 + '%';
-                cloud.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                
-                cloudsContainer.appendChild(cloud);
-                
-                setTimeout(() => {
-                    if (cloud.parentNode) {
-                        cloud.parentNode.removeChild(cloud);
-                    }
-                }, 25000);
-            }, 8000);
-        }
-
-        function selectSeed(seedElement) {
-            // Remover seleção anterior
-            document.querySelectorAll('.seed').forEach(s => s.classList.remove('selected'));
-            
-            // Selecionar nova semente
-            seedElement.classList.add('selected');
-            selectedSeed = seedElement;
-            selectedFlower = seedElement.dataset.flower;
-            selectedPrice = parseInt(seedElement.dataset.price);
-            
-            updateMessage(`Semente selecionada: ${selectedFlower} por ${selectedPrice} moedas! Clique em um canteiro para plantar! 🌱`);
-        }
-
-        function plantFlower(plot, index) {
-            if (!selectedSeed) {
-                updateMessage("Primeiro selecione uma semente na loja! 🌱");
-                return;
-            }
-            
-            if (plot.classList.contains('planted')) {
-                updateMessage("Este canteiro já tem uma flor! Escolha outro! 🌸");
-                return;
-            }
-            
-            if (coins < selectedPrice) {
-                updateMessage("Moedas insuficientes! Colha suas flores para ganhar mais! 💰");
-                return;
-            }
-            
-            // Debitar moedas e plantar
-            coins -= selectedPrice;
-            plot.classList.add('planted');
-            
-            const flower = document.createElement('div');
-            flower.className = 'flower';
-            flower.innerHTML = selectedFlower;
-            plot.appendChild(flower);
-            
-            // Adicionar à lista de flores plantadas
-            plantedFlowers[index] = {
-                flower: selectedFlower,
-                value: selectedPrice * 2 // Valor de colheita é o dobro do preço
-            };
-            
-            // Efeito de brilho
-            createSparkle(plot);
-            
-            flowerCount++;
-            updateDisplay();
-            
-            // Verificar level up
-            if (flowerCount % 5 === 0) {
-                levelUp();
-            }
-            
-            // Mensagem aleatória
-            const randomMessage = romanticMessages[Math.floor(Math.random() * romanticMessages.length)];
-            updateMessage(randomMessage);
-        }
-
-        function harvestAll() {
-            const plantedPlots = document.querySelectorAll('.plot.planted');
-            
-            if (plantedPlots.length === 0) {
-                updateMessage("Não há flores para colher! Plante algumas primeiro! 🌱");
-                return;
-            }
-            
-            let totalEarned = 0;
-            let flowersHarvested = 0;
-            
-            plantedPlots.forEach((plot, index) => {
-                const plotIndex = Array.from(plot.parentNode.children).indexOf(plot);
-                if (plantedFlowers[plotIndex]) {
-                    totalEarned += plantedFlowers[plotIndex].value;
-                    flowersHarvested++;
-                    
-                    // Efeito visual
-                    createSparkle(plot);
-                    
-                    // Remover flor
-                    plot.classList.remove('planted');
-                    plot.innerHTML = '';
-                    delete plantedFlowers[plotIndex];
-                }
-            });
-            
-            coins += totalEarned;
-            updateDisplay();
-            
-            updateMessage(`Colhidas ${flowersHarvested} flores! Você ganhou ${totalEarned} moedas! 💰✨`);
-        }
-
-        function addMagicFertilizer() {
-            if (coins < 50) {
-                updateMessage("Fertilizante mágico custa 50 moedas! 💰");
-                return;
-            }
-            
-            const plantedPlots = document.querySelectorAll('.plot.planted');
-            
-            if (plantedPlots.length === 0) {
-                updateMessage("Não há flores para fertilizar! Plante algumas primeiro! 🌱");
-                return;
-            }
-            
-            coins -= 50;
-            
-            // Dobrar valor de todas as flores plantadas
-            plantedPlots.forEach(plot => {
-                const plotIndex = Array.from(plot.parentNode.children).indexOf(plot);
-                if (plantedFlowers[plotIndex]) {
-                    plantedFlowers[plotIndex].value *= 2;
-                    
-                    // Efeito visual especial
-                    const flower = plot.querySelector('.flower');
-                    if (flower) {
-                        flower.style.animation = 'flowerGrow 1s ease-out, flowerSway 2s ease-in-out infinite';
-                        flower.style.filter = 'drop-shadow(0 0 10px gold)';
-                    }
-                    
-                    createSparkle(plot);
-                }
-            });
-            
-            updateDisplay();
-            updateMessage("Fertilizante mágico aplicado! Suas flores agora valem o dobro! ✨💫");
-        }
-
-        function levelUp() {
-            level++;
-            coins += level * 10; // Bônus por subir de nível
-            
-            updateMessage(`Parabéns Bibi! Você subiu para o nível ${level}! Bônus de ${level * 10} moedas! 🎉`);
-            updateDisplay();
-        }
-
-        function resetGarden() {
-            coins = 50;
-            flowerCount = 0;
-            level = 1;
-            plantedFlowers = [];
-            selectedSeed = null;
-            
-            document.querySelectorAll('.seed').forEach(s => s.classList.remove('selected'));
-            
-            initializeGarden();
-            updateMessage("Novo jardim criado! Vamos começar uma nova aventura, Bibi! 🌱");
-        }
-
-        function createSparkle(element) {
-            const sparkles = ['✨', '⭐', '🌟', '💫', '🦋'];
-            
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const sparkle = document.createElement('div');
-                    sparkle.className = 'sparkle';
-                    sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
-                    sparkle.style.left = (Math.random() * 60 + 10) + 'px';
-                    sparkle.style.top = (Math.random() * 60 + 10) + 'px';
-                    
-                    element.appendChild(sparkle);
+                if (Math.random() > 0.7) {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = '💕';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+                    heartsContainer.appendChild(heart);
                     
                     setTimeout(() => {
-                        if (sparkle.parentNode) {
-                            sparkle.parentNode.removeChild(sparkle);
+                        if (heartsContainer.contains(heart)) {
+                            heartsContainer.removeChild(heart);
                         }
-                    }, 2000);
-                }, i * 200);
-            }
+                    }, 8000);
+                }
+            }, 1000);
         }
 
-        function updateDisplay() {
-            document.getElementById('coins').textContent = coins;
-            document.getElementById('flowerCount').textContent = flowerCount;
-            document.getElementById('level').textContent = level;
-        }
-
-        function updateMessage(text) {
-            const messageEl = document.getElementById('message');
-            messageEl.style.opacity = '0';
-            messageEl.style.transform = 'scale(0.95)';
-            
-            setTimeout(() => {
-                messageEl.textContent = text;
-                messageEl.style.opacity = '1';
-                messageEl.style.transform = 'scale(1)';
-            }, 250);
-        }
-
-        // Função para iniciar o jogo a partir do manual
-        function startGameFromManual() {
-            document.getElementById('manualScreen').style.display = 'none';
-            document.getElementById('gameContainer').style.display = 'block';
-            
-            // Inicializar o conteúdo do jogo
-            const gameContainer = document.getElementById('gameContainer');
-            gameContainer.innerHTML = `
-                <h1 class="title">🌸 Jardim do Amor da Bibi 🌸</h1>
-                
-                <div class="stats">
-                    <div class="stat">💰 Moedas: <span id="coins">50</span></div>
-                    <div class="stat">🌸 Flores: <span id="flowerCount">0</span></div>
-                    <div class="stat">💖 Nível: <span id="level">1</span></div>
-                </div>
-                
-                <div class="seed-shop">
-                    <h3>🏪 Loja de Sementes Mágicas</h3>
-                    <div class="seeds">
-                        <div class="seed" data-flower="🌹" data-price="10" onclick="selectSeed(this)">
-                            🌱
-                            <div class="seed-price">10💰</div>
-                        </div>
-                        <div class="seed" data-flower="🌷" data-price="15" onclick="selectSeed(this)">
-                            🌱
-                            <div class="seed-price">15💰</div>
-                        </div>
-                        <div class="seed" data-flower="🌺" data-price="20" onclick="selectSeed(this)">
-                            🌱
-                            <div class="seed-price">20💰</div>
-                        </div>
-                        <div class="seed" data-flower="🌸" data-price="25" onclick="selectSeed(this)">
-                            🌱
-                            <div class="seed-price">25💰</div>
-                        </div>
-                        <div class="seed" data-flower="🌻" data-price="30" onclick="selectSeed(this)">
-                            🌱
-                            <div class="seed-price">30💰</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="garden" id="garden"></div>
-                
-                <div class="message" id="message">
-                    Bem-vinda ao seu jardim mágico, Bibi! Escolha uma semente e clique em um canteiro para plantar! 🌱
-                </div>
-                
-                <div class="controls">
-                    <button class="btn" onclick="harvestAll()">🌸 Colher Todas</button>
-                    <button class="btn" onclick="addMagicFertilizer()">✨ Fertilizante Mágico</button>
-                    <button class="btn" onclick="resetGame()">🔄 Novo Jardim</button>
-                    <button class="btn" onclick="showManual()">📖 Ver Manual</button>
-                </div>
-            `;
-            
-            initializeGarden();
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
         }
 
         function showManual() {
-            document.getElementById('manualScreen').style.display = 'flex';
-            document.getElementById('gameContainer').style.display = 'none';
+            showScreen('manualScreen');
         }
 
-        // Inicializar o jogo
-        window.onload = function() {
-            createClouds();
-        };
+        function startGame() {
+            showScreen('gameScreen');
+            initializeGame();
+        }
+
+        function initializeGame() {
+            // Reset game state
+            cards = [];
+            flippedCards = [];
+            matchedPairs = 0;
+            attempts = 0;
+            gameActive = true;
+            
+            // Create card pairs
+            const cardSymbols = [...symbols, ...symbols];
+            
+            // Shuffle cards
+            for (let i = cardSymbols.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cardSymbols[i], cardSymbols[j]] = [cardSymbols[j], cardSymbols[i]];
+            }
+            
+            // Create game board
+            const gameBoard = document.getElementById('gameBoard');
+            gameBoard.innerHTML = '';
+            
+            cardSymbols.forEach((symbol, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.symbol = symbol;
+                card.dataset.index = index;
+                card.textContent = '💝';
+                card.addEventListener('click', flipCard);
+                gameBoard.appendChild(card);
+                cards.push(card);
+            });
+            
+            // Start timer
+            startTime = Date.now();
+            updateTimer();
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            // Update displays
+            updateDisplay();
+        }
+
+        function flipCard(event) {
+            if (!gameActive) return;
+            
+            const card = event.target;
+            
+            // Ignore if card is already flipped or matched
+            if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+            
+            // Ignore if two cards are already flipped
+            if (flippedCards.length >= 2) return;
+            
+            // Flip the card
+            card.classList.add('flipped');
+            card.textContent = card.dataset.symbol;
+            flippedCards.push(card);
+            
+            // Check for match if two cards are flipped
+            if (flippedCards.length === 2) {
+                attempts++;
+                setTimeout(checkMatch, 800);
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            
+            if (card1.dataset.symbol === card2.dataset.symbol) {
+                // Match found
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+                
+                // Check if game is complete
+                if (matchedPairs === symbols.length) {
+                    gameActive = false;
+                    clearInterval(timerInterval);
+                    setTimeout(showVictory, 500);
+                }
+            } else {
+                // No match
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                card1.textContent = '💝';
+                card2.textContent = '💝';
+            }
+            
+            flippedCards = [];
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('attempts').textContent = attempts;
+            document.getElementById('pairs').textContent = matchedPairs;
+        }
+
+        function updateTimer() {
+            if (!gameActive) return;
+            
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+            const seconds = (elapsed % 60).toString().padStart(2, '0');
+            document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+        }
+
+        function showVictory() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            
+            // Calculate score (higher is better)
+            const baseScore = 1000;
+            const timeBonus = Math.max(0, 300 - elapsed);
+            const efficiencyBonus = Math.max(0, (16 - attempts) * 20);
+            const totalScore = baseScore + timeBonus + efficiencyBonus;
+            
+            let timeText = seconds < 60 ? `${seconds} segundos` : `${minutes}m ${seconds}s`;
+            
+            document.getElementById('finalStats').innerHTML = `
+                <div style="color: #6f42c1; margin: 10px 0;">⏱️ Tempo: ${timeText}</div>
+                <div style="color: #6f42c1; margin: 10px 0;">🎯 Tentativas: ${attempts}</div>
+                <div style="color: #d63384; margin: 10px 0; font-weight: bold; font-size: 1.2em;">
+                    💖 Pontuação do Amor: ${totalScore} pontos
+                </div>
+            `;
+            
+            showScreen('victoryScreen');
+        }
+
+        function resetGame() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            initializeGame();
+        }
+
+        // Initialize floating hearts
+        createFloatingHearts();
     </script>
 </body>
 </html>
