@@ -2,8 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-    <title>Corações Entrelaçados - Simulador Romântico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Sinceras Desculpas</title>
     <style>
         * {
             margin: 0;
@@ -13,788 +13,273 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .heart {
-            position: absolute;
-            color: rgba(255, 192, 203, 0.3);
-            font-size: 20px;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .header h1 {
-            color: #d63384;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .header p {
-            color: #6c757d;
-            font-size: 1.1rem;
-            font-style: italic;
-        }
-
-        .game-area {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(10px);
-            min-height: 600px;
-        }
-
-        .character-selection {
-            text-align: center;
-        }
-
-        .characters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .character-card {
-            background: linear-gradient(145deg, #fff, #f8f9fa);
-            border-radius: 15px;
-            padding: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .character-card:hover {
-            transform: translateY(-10px);
-            border-color: #d63384;
-            box-shadow: 0 20px 40px rgba(214, 51, 132, 0.3);
-        }
-
-        .character-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            padding: 20px;
         }
 
-        .character-name {
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 100%;
+            padding: 60px 40px;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart {
+            font-size: 4rem;
+            color: #e74c3c;
+            margin-bottom: 30px;
+            animation: heartbeat 2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 50%, 100% {
+                transform: scale(1);
+            }
+            25%, 75% {
+                transform: scale(1.1);
+            }
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .recipient {
+            color: #8e44ad;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            color: #34495e;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #8e44ad;
+        }
+
+        .signature {
+            color: #2c3e50;
             font-size: 1.3rem;
             font-weight: bold;
-            color: #d63384;
-            margin-bottom: 8px;
+            margin-top: 40px;
+            font-style: italic;
         }
 
-        .character-desc {
-            color: #6c757d;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        .story-section {
-            display: none;
-        }
-
-        .story-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #495057;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(248, 249, 250, 0.8);
-            border-radius: 10px;
-            border-left: 4px solid #d63384;
-        }
-
-        .choices {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .choice-btn {
-            background: linear-gradient(135deg, #d63384, #e91e63);
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(214, 51, 132, 0.3);
-            text-align: center;
-            width: 100%;
-            word-wrap: break-word;
-            hyphens: auto;
-            -webkit-hyphens: auto;
-            -ms-hyphens: auto;
-        }
-
-        .choice-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(214, 51, 132, 0.4);
-            background: linear-gradient(135deg, #e91e63, #d63384);
-        }
-
-        .relationship-meter {
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .meter-label {
-            font-weight: bold;
-            color: #d63384;
-            margin-bottom: 10px;
-        }
-
-        .meter-bar {
-            width: 100%;
-            height: 20px;
-            background: #e9ecef;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .meter-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ff6b6b, #ff8e8e, #ffb3b3);
-            border-radius: 10px;
-            transition: width 0.5s ease;
-            position: relative;
-        }
-
-        .meter-fill::after {
-            content: '💖';
+        .decorative-elements {
             position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 14px;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
         }
 
-        .ending-section {
-            text-align: center;
-            display: none;
-        }
-
-        .ending-title {
+        .floating-hearts {
+            position: absolute;
+            color: rgba(231, 76, 60, 0.3);
             font-size: 2rem;
-            color: #d63384;
-            margin-bottom: 20px;
+            animation: float 6s infinite ease-in-out;
         }
 
-        .ending-text {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #495057;
-            margin-bottom: 30px;
+        .heart1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
         }
 
-        .restart-btn {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        .heart2 {
+            top: 20%;
+            right: 15%;
+            animation-delay: 2s;
         }
 
-        .restart-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.4);
+        .heart3 {
+            bottom: 15%;
+            left: 20%;
+            animation-delay: 4s;
         }
 
-        @media (max-width: 1024px) {
-            .characters-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 20px;
+        .heart4 {
+            bottom: 25%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.3;
             }
-            
-            .character-card {
-                padding: 20px;
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+                opacity: 0.6;
             }
         }
 
+        /* Responsividade */
         @media (max-width: 768px) {
             .container {
-                padding: 10px;
+                padding: 40px 30px;
+                margin: 10px;
             }
-            
-            .header {
-                padding: 20px;
-                margin-bottom: 20px;
+
+            h1 {
+                font-size: 2rem;
             }
-            
-            .header h1 {
-                font-size: 1.8rem;
-                margin-bottom: 8px;
+
+            .recipient {
+                font-size: 1.5rem;
             }
-            
-            .header p {
-                font-size: 1rem;
-            }
-            
-            .game-area {
-                padding: 25px;
-                margin-bottom: 20px;
-            }
-            
-            .characters-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                margin-top: 20px;
-            }
-            
-            .character-card {
-                padding: 20px;
-                text-align: center;
-            }
-            
-            .character-avatar {
-                width: 70px;
-                height: 70px;
-                font-size: 2.2rem;
-                margin-bottom: 12px;
-            }
-            
-            .character-name {
-                font-size: 1.2rem;
-            }
-            
-            .character-desc {
-                font-size: 0.9rem;
-            }
-            
-            .story-text {
-                font-size: 1rem;
-                padding: 15px;
-                margin-bottom: 25px;
-            }
-            
-            .choice-btn {
-                padding: 12px 20px;
-                font-size: 0.95rem;
-                margin-bottom: 10px;
-                text-align: left;
-                line-height: 1.4;
-            }
-            
-            .relationship-meter {
-                margin: 15px 0;
-            }
-            
-            .meter-bar {
-                height: 18px;
-            }
-            
-            .ending-title {
-                font-size: 1.6rem;
-                margin-bottom: 15px;
-            }
-            
-            .ending-text {
+
+            .message {
                 font-size: 1.1rem;
-                margin-bottom: 25px;
-                line-height: 1.5;
+                padding: 25px;
             }
-            
-            .restart-btn {
-                padding: 12px 25px;
-                font-size: 1rem;
+
+            .heart {
+                font-size: 3rem;
+            }
+
+            .signature {
+                font-size: 1.2rem;
             }
         }
 
         @media (max-width: 480px) {
             body {
-                font-size: 14px;
+                padding: 10px;
             }
-            
-            .container {
-                padding: 8px;
-            }
-            
-            .header {
-                padding: 15px;
-                margin-bottom: 15px;
-            }
-            
-            .header h1 {
-                font-size: 1.5rem;
-                line-height: 1.2;
-            }
-            
-            .header p {
-                font-size: 0.9rem;
-            }
-            
-            .game-area {
-                padding: 15px;
-                min-height: 500px;
-            }
-            
-            .character-card {
-                padding: 15px;
-            }
-            
-            .character-avatar {
-                width: 60px;
-                height: 60px;
-                font-size: 2rem;
-                margin-bottom: 10px;
-            }
-            
-            .character-name {
-                font-size: 1.1rem;
-                margin-bottom: 6px;
-            }
-            
-            .character-desc {
-                font-size: 0.85rem;
-                line-height: 1.3;
-            }
-            
-            .story-text {
-                font-size: 0.95rem;
-                padding: 12px;
-                margin-bottom: 20px;
-                line-height: 1.6;
-            }
-            
-            .choice-btn {
-                padding: 10px 15px;
-                font-size: 0.9rem;
-                border-radius: 20px;
-                line-height: 1.3;
-            }
-            
-            .relationship-meter {
-                margin: 12px 0;
-            }
-            
-            .meter-label {
-                font-size: 0.9rem;
-                margin-bottom: 8px;
-            }
-            
-            .meter-bar {
-                height: 16px;
-            }
-            
-            .ending-title {
-                font-size: 1.4rem;
-                margin-bottom: 12px;
-                line-height: 1.2;
-            }
-            
-            .ending-text {
-                font-size: 1rem;
-                margin-bottom: 20px;
-                line-height: 1.4;
-            }
-            
-            .restart-btn {
-                padding: 10px 20px;
-                font-size: 0.95rem;
-            }
-            
-            .heart {
-                font-size: 16px;
-            }
-        }
 
-        @media (max-width: 320px) {
-            .header h1 {
-                font-size: 1.3rem;
+            .container {
+                padding: 30px 20px;
             }
-            
-            .header p {
-                font-size: 0.8rem;
-            }
-            
-            .game-area {
-                padding: 12px;
-            }
-            
-            .character-card {
-                padding: 12px;
-            }
-            
-            .character-avatar {
-                width: 50px;
-                height: 50px;
+
+            h1 {
                 font-size: 1.8rem;
             }
-            
-            .story-text {
-                font-size: 0.9rem;
-                padding: 10px;
+
+            .recipient {
+                font-size: 1.3rem;
             }
-            
-            .choice-btn {
-                padding: 8px 12px;
-                font-size: 0.85rem;
+
+            .message {
+                font-size: 1rem;
+                padding: 20px;
+                text-align: center;
             }
-            
-            .ending-title {
-                font-size: 1.2rem;
+
+            .heart {
+                font-size: 2.5rem;
             }
-            
-            .ending-text {
-                font-size: 0.9rem;
+
+            .signature {
+                font-size: 1.1rem;
+            }
+
+            .floating-hearts {
+                font-size: 1.5rem;
             }
         }
 
-        /* Orientação landscape em dispositivos móveis */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .header {
-                padding: 10px;
-                margin-bottom: 10px;
+        /* Efeito de brilho suave */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
+            border-radius: 22px;
+            z-index: -1;
+            animation: borderGlow 3s infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% {
+                opacity: 0.5;
             }
-            
-            .header h1 {
-                font-size: 1.4rem;
-                margin-bottom: 5px;
-            }
-            
-            .header p {
-                font-size: 0.85rem;
-            }
-            
-            .game-area {
-                padding: 15px;
-                min-height: auto;
-            }
-            
-            .characters-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 15px;
-            }
-            
-            .character-card {
-                padding: 10px;
-            }
-            
-            .character-avatar {
-                width: 40px;
-                height: 40px;
-                font-size: 1.5rem;
-                margin-bottom: 8px;
-            }
-            
-            .character-name {
-                font-size: 1rem;
-            }
-            
-            .character-desc {
-                font-size: 0.75rem;
-            }
-            
-            .story-text {
-                font-size: 0.9rem;
-                padding: 10px;
-                margin-bottom: 15px;
-            }
-            
-            .relationship-meter {
-                margin: 10px 0;
+            50% {
+                opacity: 0.8;
             }
         }
     </style>
 </head>
 <body>
-    <div class="floating-hearts"></div>
-    
+    <div class="decorative-elements">
+        <div class="floating-hearts heart1">💜</div>
+        <div class="floating-hearts heart2">💝</div>
+        <div class="floating-hearts heart3">💜</div>
+        <div class="floating-hearts heart4">💝</div>
+    </div>
+
     <div class="container">
-        <div class="header">
-            <h1>💕 Bruno & Bianca 💕</h1>
-            <p>Uma história de amor personalizada para Bi, Bibi, Mo e Mozi ✨</p>
+        <div class="heart">💔</div>
+        
+        <h1>Minhas Sinceras Desculpas</h1>
+        
+        <div class="recipient">Para Bi/Mo/Mozi</div>
+        
+        <div class="message">
+            <p>Sei que as palavras podem parecer insuficientes neste momento, mas preciso que saiba que me arrependo profundamente de tudo o que aconteceu entre nós.</p>
+            
+            <p>Reconheço os meus erros e entendo a dor que possa ter causado. Cada momento que passa, sinto mais intensamente o peso das minhas ações e o quanto gostaria de poder voltar atrás.</p>
+            
+            <p>Você significa muito para mim, e ver que te magoei é algo que carrego no coração. Sei que posso não merecer seu perdão agora, mas espero que um dia possa entender que meu arrependimento é genuíno e profundo.</p>
+            
+            <p>Estou disposto a fazer tudo o que estiver ao meu alcance para reparar o que foi quebrado e reconquistar sua confiança, se você me der essa oportunidade.</p>
+            
+            <p>Peço desculpas do fundo do meu coração e espero que possamos encontrar um caminho para seguir em frente, juntos ou em paz.</p>
         </div>
-
-        <div class="game-area">
-            <!-- Seleção de Personagem -->
-            <div class="character-selection" id="characterSelection">
-                <h2 style="color: #d63384; margin-bottom: 20px;">Bi, escolha qual versão do Bruno você quer encontrar hoje 😊</h2>
-                <div class="characters-grid">
-                    <div class="character-card" onclick="selectCharacter('musico')">
-                        <div class="character-avatar">🎸</div>
-                        <div class="character-name">Bruno Músico</div>
-                        <div class="character-desc">O Bruno que toca violão e canta para você, cheio de romantismo e melodias especiais.</div>
-                    </div>
-                    <div class="character-card" onclick="selectCharacter('intelectual')">
-                        <div class="character-avatar">📖</div>
-                        <div class="character-name">Bruno Intelectual</div>
-                        <div class="character-desc">O Bruno que adora conversar sobre tudo com você, cheio de ideias e sonhos para compartilhar.</div>
-                    </div>
-                    <div class="character-card" onclick="selectCharacter('aventureiro')">
-                        <div class="character-avatar">🌿</div>
-                        <div class="character-name">Bruno Aventureiro</div>
-                        <div class="character-desc">O Bruno que quer explorar o mundo com você, sempre pronto para novas aventuras juntos.</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Seção da História -->
-            <div class="story-section" id="storySection">
-                <div class="relationship-meter">
-                    <div class="meter-label">💖 Nível de Relacionamento: <span id="relationshipLevel">0</span>%</div>
-                    <div class="meter-bar">
-                        <div class="meter-fill" id="meterFill" style="width: 0%"></div>
-                    </div>
-                </div>
-                
-                <div class="story-text" id="storyText"></div>
-                
-                <div class="choices" id="choices"></div>
-            </div>
-
-            <!-- Seção do Final -->
-            <div class="ending-section" id="endingSection">
-                <div class="ending-title" id="endingTitle"></div>
-                <div class="ending-text" id="endingText"></div>
-                <button class="restart-btn" onclick="restartGame()">💝 Viver Outro Momento Especial</button>
-            </div>
+        
+        <div class="signature">
+            Com amor e arrependimento sincero,<br>
+            <strong>Bruno</strong> 💜
         </div>
     </div>
 
     <script>
-        let currentCharacter = '';
-        let currentScene = 0;
-        let relationshipPoints = 0;
-
-        const gameData = {
-            musico: {
-                scenes: [
-                    {
-                        text: "Bruno está no quintal tocando violão, cantando baixinho uma música que compôs pensando em você. Quando te vê chegando, seus olhos brilham e ele sorri daquele jeito especial.",
-                        choices: [
-                            { text: "Me sentar ao lado dele e pedir para cantar a música completa", points: 15 },
-                            { text: "Elogiar a voz dele e dizer que amo quando canta para mim", points: 10 },
-                            { text: "Perguntar se posso cantar junto com ele", points: 20 }
-                        ]
-                    },
-                    {
-                        text: "Bruno fica emocionado com sua reação. 'Bi, essa música é sobre nós', ele diz pegando sua mão. 'Cada verso fala do que sinto por você.' Ele começa a tocar nossa música favorita.",
-                        choices: [
-                            { text: "Dizer que também escrevi algo para ele (uma carta/poema)", points: 25 },
-                            { text: "Apoiar a cabeça no ombro dele e curtir o momento", points: 15 },
-                            { text: "Pedir para gravarmos juntos para guardar para sempre", points: 20 }
-                        ]
-                    },
-                    {
-                        text: "O momento fica ainda mais especial. Bruno para de tocar, te olha nos olhos e sussurra: 'Bianca, você é a melodia mais bonita da minha vida'. O coração bate forte.",
-                        choices: [
-                            { text: "'Bruno, você é minha música favorita também'", points: 30 },
-                            { text: "Beijar ele suavemente no meio da frase", points: 25 },
-                            { text: "'Quero que toque para mim todos os dias'", points: 20 }
-                        ]
-                    }
-                ]
-            },
-            intelectual: {
-                scenes: [
-                    {
-                        text: "Você encontra Bruno lendo no cantinho favorito dele, com uma xícara de café ao lado. Quando te vê, ele marca a página e abre o maior sorriso. 'Bi! Estava justamente pensando em você.'",
-                        choices: [
-                            { text: "Perguntar o que estava lendo e por que pensou em mim", points: 15 },
-                            { text: "Sentar no colo dele e dar um beijinho na testa", points: 20 },
-                            { text: "Dizer que também estava pensando nele", points: 10 }
-                        ]
-                    },
-                    {
-                        text: "Bruno te puxa para perto dele. 'Estava lendo sobre astronomia e pensei em como gostaria de mostrar as estrelas para você hoje à noite', ele fala com aquele brilho no olhar que você ama.",
-                        choices: [
-                            { text: "'Que romântico! Vamos ver as estrelas juntos sim'", points: 25 },
-                            { text: "'Bruno, você sempre tem as melhores ideias'", points: 20 },
-                            { text: "Sugerir fazer um piquenique noturno para ver as estrelas", points: 30 }
-                        ]
-                    },
-                    {
-                        text: "À noite, vocês estão deitados na grama olhando o céu estrelado. Bruno aponta uma constelação e diz: 'Mozi, se eu pudesse nomear uma estrela, seria com seu nome, porque você ilumina minha vida.'",
-                        choices: [
-                            { text: "'Bruno, você é meu universo inteiro'", points: 30 },
-                            { text: "Apertar a mão dele e dizer que me sinto amada", points: 25 },
-                            { text: "'Que tal criarmos nossa própria constelação?'", points: 20 }
-                        ]
-                    }
-                ]
-            },
-            aventureiro: {
-                scenes: [
-                    {
-                        text: "Bruno aparece com uma mochila nas costas e aquele sorriso travesso. 'Bibi, que tal uma aventura hoje? Descobri um lugar incrível para levarmos nosso lanche e passar a tarde juntos!'",
-                        choices: [
-                            { text: "'Sempre pronta para aventuras com você!'", points: 15 },
-                            { text: "Dar um beijo nele e perguntar que lugar é esse", points: 20 },
-                            { text: "'Vou preparar nossos sanduíches favoritos!'", points: 10 }
-                        ]
-                    },
-                    {
-                        text: "Vocês chegam a uma clareira linda com vista para a cidade. Bruno estende uma toalha e diz: 'Mo, queria um lugar especial só nosso. O que achou?' O pôr do sol está começando a pintar o céu.",
-                        choices: [
-                            { text: "'Está perfeito, Bruno. Você me surpreende sempre'", points: 25 },
-                            { text: "Sugerir que este seja nosso cantinho secreto", points: 30 },
-                            { text: "Tirar uma selfie juntos com essa vista linda", points: 20 }
-                        ]
-                    },
-                    {
-                        text: "Enquanto assistem o pôr do sol, Bruno te abraça por trás e sussurra no seu ouvido: 'Bianca, com você qualquer lugar se torna especial. Você faz cada dia ser uma nova aventura.'",
-                        choices: [
-                            { text: "'Bruno, você é minha aventura favorita'", points: 30 },
-                            { text: "Me virar nos braços dele e dizer que o amo", points: 25 },
-                            { text: "'Quero viver milhões de aventuras com você'", points: 20 }
-                        ]
-                    }
-                ]
-            }
-        };
-
-        function createFloatingHearts() {
-            const heartsContainer = document.querySelector('.floating-hearts');
-            for (let i = 0; i < 15; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = '💖';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 6 + 's';
-                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                heartsContainer.appendChild(heart);
-            }
-        }
-
-        function selectCharacter(character) {
-            currentCharacter = character;
-            currentScene = 0;
-            relationshipPoints = 0;
+        // Adiciona um efeito suave de entrada
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(50px)';
             
-            document.getElementById('characterSelection').style.display = 'none';
-            document.getElementById('storySection').style.display = 'block';
-            
-            updateRelationshipMeter();
-            showScene();
-        }
-
-        function showScene() {
-            const scene = gameData[currentCharacter].scenes[currentScene];
-            document.getElementById('storyText').textContent = scene.text;
-            
-            const choicesContainer = document.getElementById('choices');
-            choicesContainer.innerHTML = '';
-            
-            scene.choices.forEach((choice, index) => {
-                const button = document.createElement('button');
-                button.className = 'choice-btn';
-                button.textContent = choice.text;
-                button.onclick = () => makeChoice(choice.points);
-                choicesContainer.appendChild(button);
-            });
-        }
-
-        function makeChoice(points) {
-            relationshipPoints += points;
-            updateRelationshipMeter();
-            
-            currentScene++;
-            
-            if (currentScene < gameData[currentCharacter].scenes.length) {
-                setTimeout(showScene, 1000);
-            } else {
-                setTimeout(showEnding, 1000);
-            }
-        }
-
-        function updateRelationshipMeter() {
-            const percentage = Math.min(relationshipPoints, 100);
-            document.getElementById('relationshipLevel').textContent = percentage;
-            document.getElementById('meterFill').style.width = percentage + '%';
-        }
-
-        function showEnding() {
-            document.getElementById('storySection').style.display = 'none';
-            document.getElementById('endingSection').style.display = 'block';
-            
-            let title, text;
-            
-            if (relationshipPoints >= 80) {
-                title = "💕 Amor Infinito 💕";
-                text = `Bruno te olha com aqueles olhos apaixonados e diz: "Bianca, você é o amor da minha vida. Cada momento contigo é perfeito." Vocês se abraçam sabendo que esse amor é para sempre. Te amo, Bi! 💖`;
-            } else if (relationshipPoints >= 50) {
-                title = "💖 Nosso Romance Lindo 💖";
-                text = `Bruno sorri e sussurra: "Bibi, não consigo imaginar minha vida sem você. Você faz tudo fazer sentido." Vocês sabem que esse é só o começo de muitos momentos especiais juntos. Te amo, Mo! 💕`;
-            } else if (relationshipPoints >= 25) {
-                title = "🌸 Momentos Especiais 🌸";
-                text = `Bruno te dá um beijo na testa e diz: "Mozi, obrigado por esse momento lindo. Você sempre consegue fazer meu dia melhor." Vocês se despedem sabendo que há muito carinho entre vocês. 💗`;
-            } else {
-                title = "🌱 Até Logo, Amor 🌱";
-                text = `Mesmo que o momento tenha sido diferente do esperado, Bruno sorri e diz: "Bianca, obrigado por estar aqui. Você sempre será especial para mim." Às vezes os momentos são assim, mas o amor continua. 💙`;
-            }
-            
-            document.getElementById('endingTitle').textContent = title;
-            document.getElementById('endingText').textContent = text;
-        }
-
-        function restartGame() {
-            currentCharacter = '';
-            currentScene = 0;
-            relationshipPoints = 0;
-            
-            document.getElementById('endingSection').style.display = 'none';
-            document.getElementById('characterSelection').style.display = 'block';
-            
-            updateRelationshipMeter();
-        }
-
-        // Inicializar o jogo
-        createFloatingHearts();
-        updateRelationshipMeter();
+            setTimeout(() => {
+                container.style.transition = 'all 1s ease-out';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
     </script>
 </body>
 </html>
