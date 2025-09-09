@@ -17,10 +17,11 @@
             min-height: 100vh;
             color: #333;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -53,7 +54,7 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 30px;
             margin-bottom: 40px;
         }
@@ -62,7 +63,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 16px;
-            padding: 30px;
+            padding: 35px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -70,6 +71,7 @@
             overflow: hidden;
             animation: fadeInUp 0.6s ease-out forwards;
             opacity: 0;
+            cursor: pointer;
         }
 
         .card::before {
@@ -95,14 +97,14 @@
         .card-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .card-number {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -114,23 +116,28 @@
 
         .card h2 {
             color: #2d3748;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
             margin: 0;
         }
 
         .card-content {
-            line-height: 1.7;
+            line-height: 1.8;
             color: #4a5568;
+            font-size: 1rem;
+        }
+
+        .card-content p {
+            margin: 15px 0;
         }
 
         .card-content ul {
             margin: 15px 0;
-            padding-left: 20px;
+            padding-left: 25px;
         }
 
         .card-content li {
-            margin: 8px 0;
+            margin: 12px 0;
             position: relative;
         }
 
@@ -141,16 +148,17 @@
 
         .highlight {
             background: linear-gradient(120deg, rgba(255, 255, 0, 0.3), rgba(255, 255, 0, 0.1));
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 3px 8px;
+            border-radius: 5px;
             font-weight: 600;
+            color: #2d3748;
         }
 
         .warning {
             background: rgba(255, 107, 107, 0.1);
             border-left: 4px solid #ff6b6b;
-            padding: 15px;
-            margin: 15px 0;
+            padding: 18px;
+            margin: 20px 0;
             border-radius: 0 8px 8px 0;
             font-weight: 500;
         }
@@ -158,10 +166,30 @@
         .example {
             background: rgba(72, 187, 120, 0.1);
             border-left: 4px solid #48bb78;
-            padding: 15px;
-            margin: 15px 0;
+            padding: 18px;
+            margin: 20px 0;
             border-radius: 0 8px 8px 0;
             font-style: italic;
+        }
+
+        .info-box {
+            background: rgba(66, 153, 225, 0.1);
+            border-left: 4px solid #4299e1;
+            padding: 18px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: #2d3748;
+            margin: 20px 0 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .subsection {
+            margin-left: 20px;
+            margin-bottom: 15px;
         }
 
         .search-box {
@@ -192,6 +220,42 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: rgba(255, 255, 255, 0.9);
             animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .concept-detail {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .process-step {
+            counter-increment: step-counter;
+            margin: 12px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .process-step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #667eea;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .process-container {
+            counter-reset: step-counter;
         }
 
         @keyframes slideDown {
@@ -237,7 +301,7 @@
             }
 
             .card {
-                padding: 20px;
+                padding: 25px;
             }
 
             .header {
@@ -246,13 +310,13 @@
             }
 
             .card-number {
-                width: 35px;
-                height: 35px;
+                width: 40px;
+                height: 40px;
                 font-size: 0.9rem;
             }
 
             .card h2 {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
             }
         }
 
@@ -262,7 +326,7 @@
             }
 
             .card {
-                padding: 15px;
+                padding: 20px;
             }
 
             .header {
@@ -271,6 +335,10 @@
 
             .grid {
                 gap: 15px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -293,270 +361,270 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📚 Geografia</h1>
-            <p>Guia Completo de Estudos</p>
+            <h1>🌍 Geografia Completa</h1>
+            <p>Guia Detalhado de Estudos para Concursos e Vestibulares</p>
         </div>
 
-        <input type="text" class="search-box" placeholder="🔍 Pesquisar tópicos..." id="searchBox">
+        <input type="text" class="search-box" placeholder="🔍 Pesquisar tópicos, conceitos, exemplos..." id="searchBox">
 
         <div class="grid" id="cardGrid">
-            <div class="card" data-keywords="extrativismo mineral vegetal animal sustentável">
+            <div class="card" data-keywords="extrativismo mineral vegetal animal sustentável recursos naturais exploração ambiental">
                 <div class="card-header">
                     <div class="card-number">1</div>
                     <h2>Tipos de Extrativismo</h2>
                 </div>
                 <div class="card-content">
+                    <p><strong>Extrativismo</strong> é a atividade de retirada de recursos naturais do meio ambiente para uso humano. Pode ser classificado em três categorias principais:</p>
+                    
+                    <div class="section-title">🗿 Extrativismo Mineral</div>
                     <ul>
-                        <li><span class="highlight">Mineral</span>: extração de minerais (ferro, ouro, petróleo, carvão etc.)</li>
-                        <li><span class="highlight">Vegetal</span>: retirada de produtos da natureza, como madeira, látex, castanha</li>
-                        <li><span class="highlight">Animal</span>: caça, pesca, coleta de animais ou seus produtos (ex.: mel)</li>
+                        <li><span class="highlight">Metais</span>: ferro (mineração de hematita), ouro, prata, cobre, alumínio (bauxita)</li>
+                        <li><span class="highlight">Combustíveis fósseis</span>: petróleo, gás natural, carvão mineral</li>
+                        <li><span class="highlight">Minerais não-metálicos</span>: calcário, areia, brita, sal, gemas</li>
+                        <li><span class="highlight">Principais regiões no Brasil</span>: Quadrilátero Ferrífero (MG), Serra dos Carajás (PA), Bacia de Campos (RJ)</li>
                     </ul>
+
+                    <div class="section-title">🌳 Extrativismo Vegetal</div>
+                    <ul>
+                        <li><span class="highlight">Madeireiro</span>: corte de árvores para construção, móveis, papel</li>
+                        <li><span class="highlight">Não-madeireiro</span>: látex (borracha), castanha-do-pará, açaí, babaçu</li>
+                        <li><span class="highlight">Produtos medicinais</span>: plantas utilizadas na fabricação de remédios</li>
+                        <li><span class="highlight">Fibras naturais</span>: algodão, juta, sisal</li>
+                    </ul>
+
+                    <div class="section-title">🐟 Extrativismo Animal</div>
+                    <ul>
+                        <li><span class="highlight">Pesca</span>: captura de peixes, crustáceos, moluscos</li>
+                        <li><span class="highlight">Caça</span>: (atualmente regulamentada/proibida na maioria dos casos)</li>
+                        <li><span class="highlight">Apicultura</span>: coleta de mel, cera, própolis</li>
+                        <li><span class="highlight">Aquicultura</span>: criação de organismos aquáticos em ambiente controlado</li>
+                    </ul>
+
                     <div class="warning">
-                        ⚠️ <strong>Problema:</strong> se não for sustentável, causa destruição ambiental.
+                        ⚠️ <strong>Impactos Ambientais:</strong> Quando não sustentável, o extrativismo causa desmatamento, erosão, poluição, perda de biodiversidade e degradação dos ecossistemas. O extrativismo predatório pode levar ao esgotamento dos recursos naturais.
+                    </div>
+
+                    <div class="info-box">
+                        💡 <strong>Extrativismo Sustentável:</strong> Práticas que permitem a exploração dos recursos sem comprometer sua renovação, garantindo a conservação para gerações futuras. Exemplos: manejo florestal, pesca com cotas, rotação de áreas de coleta.
                     </div>
                 </div>
             </div>
 
-            <div class="card" data-keywords="circulação mercadorias fixos fluxos infraestrutura">
+            <div class="card" data-keywords="circulação mercadorias fixos fluxos infraestrutura transporte logística redes">
                 <div class="card-header">
                     <div class="card-number">2</div>
                     <h2>Circulação de Mercadorias</h2>
                 </div>
                 <div class="card-content">
-                    <ul>
-                        <li><span class="highlight">Fixos</span>: infraestrutura que permite a circulação (estradas, ferrovias, portos, aeroportos)</li>
-                        <li><span class="highlight">Fluxos</span>: movimento de mercadorias, pessoas e informações que circulam por esses fixos</li>
-                    </ul>
+                    <p>A circulação de mercadorias é fundamental para o funcionamento da economia global, baseando-se na relação entre <strong>fixos</strong> e <strong>fluxos</strong>.</p>
+
+                    <div class="section-title">🏗️ Fixos (Infraestrutura)</div>
+                    <div class="concept-detail">
+                        <p>São as estruturas físicas permanentes que possibilitam e facilitam a circulação:</p>
+                        <ul>
+                            <li><span class="highlight">Rodoviário</span>: rodovias, estradas, pontes, viadutos</li>
+                            <li><span class="highlight">Ferroviário</span>: ferrovias, estações, pátios de manobra</li>
+                            <li><span class="highlight">Hidroviário</span>: portos, canais, eclusas, terminais fluviais</li>
+                            <li><span class="highlight">Aeroviário</span>: aeroportos, pistas, terminais de carga</li>
+                            <li><span class="highlight">Dutoviário</span>: oleodutos, gasodutos, minerodutos</li>
+                            <li><span class="highlight">Digital</span>: fibras ópticas, antenas, data centers</li>
+                        </ul>
+                    </div>
+
+                    <div class="section-title">🚛 Fluxos (Movimentação)</div>
+                    <div class="concept-detail">
+                        <p>São os movimentos que utilizam a infraestrutura dos fixos:</p>
+                        <ul>
+                            <li><span class="highlight">Fluxos materiais</span>: mercadorias, matérias-primas, produtos acabados</li>
+                            <li><span class="highlight">Fluxos humanos</span>: pessoas, trabalhadores, turistas</li>
+                            <li><span class="highlight">Fluxos imateriais</span>: informações, dados, capital financeiro</li>
+                            <li><span class="highlight">Fluxos de energia</span>: eletricidade, combustíveis</li>
+                        </ul>
+                    </div>
+
+                    <div class="section-title">🌐 Redes Geográficas</div>
+                    <p>A integração entre fixos e fluxos forma redes geográficas que conectam diferentes lugares, criando interdependência econômica e social.</p>
+
                     <div class="example">
-                        👉 <strong>Exemplo:</strong> o porto de Santos (fixo) e a exportação de café (fluxo).
+                        👉 <strong>Exemplos Brasileiros:</strong><br>
+                        • Porto de Santos (fixo) + exportação de soja (fluxo)<br>
+                        • Aeroporto de Guarulhos (fixo) + turismo internacional (fluxo)<br>
+                        • Rodovia BR-101 (fixo) + transporte de mercadorias (fluxo)<br>
+                        • Complexo Petroquímico de Camaçari (fixo) + distribuição de derivados (fluxo)
+                    </div>
+
+                    <div class="info-box">
+                        💡 <strong>Globalização:</strong> A modernização dos fixos e a intensificação dos fluxos são características fundamentais do processo de globalização, permitindo maior integração econômica mundial.
                     </div>
                 </div>
             </div>
 
-            <div class="card" data-keywords="saberes tradicionais indígenas quilombolas sustentável">
+            <div class="card" data-keywords="saberes tradicionais indígenas quilombolas ribeirinhos conhecimento popular sustentabilidade etnografia">
                 <div class="card-header">
                     <div class="card-number">3</div>
                     <h2>Saberes Tradicionais</h2>
                 </div>
                 <div class="card-content">
+                    <p>Os <strong>saberes tradicionais</strong> são conhecimentos, práticas e técnicas desenvolvidas por comunidades tradicionais ao longo de gerações, baseados na observação da natureza e na experiência prática.</p>
+
+                    <div class="section-title">👥 Comunidades Tradicionais</div>
                     <ul>
-                        <li>Conhecimento de comunidades <span class="highlight">indígenas, ribeirinhas, quilombolas</span> etc.</li>
-                        <li>Relacionam-se ao <span class="highlight">extrativismo sustentável</span> (uso da natureza sem esgotá-la)</li>
+                        <li><span class="highlight">Povos indígenas</span>: mais de 300 etnias no Brasil, cada uma com conhecimentos específicos</li>
+                        <li><span class="highlight">Comunidades quilombolas</span>: descendentes de escravos com práticas agrícolas únicas</li>
+                        <li><span class="highlight">Ribeirinhos</span>: populações que vivem às margens de rios na Amazônia</li>
+                        <li><span class="highlight">Caiçaras</span>: comunidades litorâneas com conhecimento pesqueiro</li>
+                        <li><span class="highlight">Seringueiros</span>: coletores de látex com técnicas de manejo florestal</li>
+                        <li><span class="highlight">Quebradeiras de coco</span>: especialistas no aproveitamento do babaçu</li>
                     </ul>
+
+                    <div class="section-title">🌿 Tipos de Conhecimentos</div>
+                    <div class="concept-detail">
+                        <div class="subsection">
+                            <strong>Conhecimento Etnobotânico:</strong>
+                            <ul>
+                                <li>Propriedades medicinais de plantas</li>
+                                <li>Técnicas de cultivo adaptadas ao ambiente local</li>
+                                <li>Calendários agrícolas baseados em ciclos naturais</li>
+                                <li>Sistemas agroflorestais (cultivo consorciado)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="subsection">
+                            <strong>Conhecimento Ecológico:</strong>
+                            <ul>
+                                <li>Comportamento de animais e épocas de reprodução</li>
+                                <li>Ciclos de chuva e seca</li>
+                                <li>Indicadores naturais de mudanças climáticas</li>
+                                <li>Técnicas de pesca sustentável</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="section-title">♻️ Relação com Sustentabilidade</div>
+                    <p>Os saberes tradicionais são fundamentais para o <span class="highlight">desenvolvimento sustentável</span> porque:</p>
+                    <ul>
+                        <li>Promovem o uso racional dos recursos naturais</li>
+                        <li>Mantêm a biodiversidade através de práticas de conservação</li>
+                        <li>Oferecem alternativas ao modelo de exploração predatória</li>
+                        <li>Contribuem para a segurança alimentar e medicinal</li>
+                    </ul>
+
                     <div class="example">
-                        👉 <strong>Exemplo:</strong> manejo da floresta amazônica sem derrubar tudo.
+                        👉 <strong>Exemplos Práticos:</strong><br>
+                        • <strong>Sistema de roça de toco</strong> dos indígenas: agricultura sem queimada que preserva o solo<br>
+                        • <strong>Manejo do açaí</strong> pelos ribeirinhos: coleta que não prejudica a palmeira<br>
+                        • <strong>Pesca com tabus temporais</strong>: respeitam períodos reprodutivos dos peixes<br>
+                        • <strong>Uso medicinal da copaíba</strong>: conhecimento indígena hoje usado pela farmacologia
+                    </div>
+
+                    <div class="warning">
+                        ⚠️ <strong>Ameaças aos Saberes Tradicionais:</strong> Desmatamento, urbanização, globalização cultural, biopirataria (apropriação indevida do conhecimento tradicional por empresas), e conflitos fundiários ameaçam a continuidade desses conhecimentos.
+                    </div>
+
+                    <div class="info-box">
+                        💡 <strong>Importância Atual:</strong> A ciência moderna reconhece cada vez mais o valor dos saberes tradicionais, especialmente nas áreas de medicina, agricultura sustentável, conservação ambiental e adaptação às mudanças climáticas.
                     </div>
                 </div>
             </div>
 
-            <div class="card" data-keywords="tempo clima atmosférico condições">
+            <div class="card" data-keywords="tempo clima atmosférico meteorologia climatologia condições previsão">
                 <div class="card-header">
                     <div class="card-number">4</div>
                     <h2>Tempo e Clima</h2>
                 </div>
                 <div class="card-content">
-                    <ul>
-                        <li><span class="highlight">Tempo</span>: condições atmosféricas momentâneas (ex.: "hoje está chovendo")</li>
-                        <li><span class="highlight">Clima</span>: conjunto das condições de tempo que se repetem ao longo dos anos em um lugar (ex.: "o clima do Nordeste é semiárido")</li>
-                    </ul>
+                    <p>Embora relacionados, <strong>tempo</strong> e <strong>clima</strong> são conceitos distintos fundamentais para a Geografia Física.</p>
+
+                    <div class="section-title">🌤️ Tempo Atmosférico</div>
+                    <div class="concept-detail">
+                        <p><strong>Definição:</strong> Estado momentâneo da atmosfera em um lugar específico e em um momento determinado.</p>
+                        <ul>
+                            <li><span class="highlight">Duração</span>: horas, dias, no máximo algumas semanas</li>
+                            <li><span class="highlight">Variabilidade</span>: muda constantemente e rapidamente</li>
+                            <li><span class="highlight">Previsibilidade</span>: pode ser previsto com alguns dias de antecedência</li>
+                            <li><span class="highlight">Estudo</span>: feito pela <strong>Meteorologia</strong></li>
+                        </ul>
+                        
+                        <p><strong>Elementos do tempo:</strong></p>
+                        <ul>
+                            <li>Temperatura do ar</li>
+                            <li>Umidade relativa</li>
+                            <li>Pressão atmosférica</li>
+                            <li>Vento (velocidade e direção)</li>
+                            <li>Precipitação (chuva, neve, granizo)</li>
+                            <li>Nebulosidade</li>
+                            <li>Visibilidade</li>
+                        </ul>
+                    </div>
+
+                    <div class="section-title">🌡️ Clima</div>
+                    <div class="concept-detail">
+                        <p><strong>Definição:</strong> Conjunto das condições atmosféricas que caracterizam uma região durante um longo período de tempo (no mínimo 30 anos).</p>
+                        <ul>
+                            <li><span class="highlight">Duração</span>: décadas, séculos, milênios</li>
+                            <li><span class="highlight">Estabilidade</span>: padrões relativamente estáveis</li>
+                            <li><span class="highlight">Previsibilidade</span>: tendências de longo prazo</li>
+                            <li><span class="highlight">Estudo</span>: feito pela <strong>Climatologia</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="section-title">📊 Métodos de Estudo</div>
+                    <div class="process-container">
+                        <div class="process-step">
+                            <strong>Estações Meteorológicas:</strong> Coletam dados diários de temperatura, chuva, vento, etc.
+                        </div>
+                        <div class="process-step">
+                            <strong>Análise Estatística:</strong> Cálculo de médias, máximas, mínimas ao longo de décadas
+                        </div>
+                        <div class="process-step">
+                            <strong>Identificação de Padrões:</strong> Reconhecimento de sazonalidade e tendências
+                        </div>
+                        <div class="process-step">
+                            <strong>Classificação Climática:</strong> Definição do tipo climático da região
+                        </div>
+                    </div>
+
+                    <div class="example">
+                        👉 <strong>Exemplos Práticos:</strong><br>
+                        • <strong>TEMPO:</strong> "Hoje está chovendo em São Paulo", "Amanhã fará 30°C no Rio"<br>
+                        • <strong>CLIMA:</strong> "O clima de Manaus é equatorial quente e úmido", "O Nordeste tem clima semiárido"
+                    </div>
+
+                    <div class="info-box">
+                        💡 <strong>Mudanças Climáticas:</strong> Alterações nos padrões climáticos de longo prazo, geralmente causadas por fatores naturais e/ou atividades humanas. Diferem de variações normais do tempo atmosférico.
+                    </div>
+
+                    <div class="warning">
+                        ⚠️ <strong>Confusão Comum:</strong> Não devemos usar eventos pontuais de tempo (como uma onda de frio) para negar ou confirmar mudanças climáticas, que são fenômenos de longo prazo baseados em análises estatísticas de décadas.
+                    </div>
                 </div>
             </div>
 
-            <div class="card" data-keywords="rotação translação terra dia noite estações">
+            <div class="card" data-keywords="rotação translação terra movimentos astronomicos dia noite estações solstício equinócio">
                 <div class="card-header">
                     <div class="card-number">5</div>
                     <h2>Rotação e Translação</h2>
                 </div>
                 <div class="card-content">
-                    <ul>
-                        <li><span class="highlight">Rotação</span>: movimento da Terra em torno do próprio eixo → dura 24h → causa <strong>dia e noite</strong></li>
-                        <li><span class="highlight">Translação</span>: movimento da Terra em torno do Sol → dura 365 dias → causa as <strong>estações do ano</strong></li>
-                    </ul>
-                </div>
-            </div>
+                    <p>A Terra executa dois movimentos principais que determinam a medição do tempo e as variações climáticas sazonais no planeta.</p>
 
-            <div class="card" data-keywords="atmosfera camadas troposfera estratosfera mesosfera">
-                <div class="card-header">
-                    <div class="card-number">6</div>
-                    <h2>Atmosfera (Camadas)</h2>
-                </div>
-                <div class="card-content">
-                    <ul>
-                        <li><span class="highlight">Troposfera</span>: camada mais baixa, onde vivemos e ocorrem os fenômenos do tempo</li>
-                        <li><span class="highlight">Estratosfera</span>: contém a camada de ozônio</li>
-                        <li><span class="highlight">Mesosfera</span>: destrói meteoros que entram na Terra</li>
-                        <li><span class="highlight">Termosfera</span>: onde ocorrem auroras boreais</li>
-                        <li><span class="highlight">Exosfera</span>: camada mais externa, transição para o espaço</li>
-                    </ul>
-                </div>
-            </div>
+                    <div class="section-title">🌍 Movimento de Rotação</div>
+                    <div class="concept-detail">
+                        <p><strong>Definição:</strong> Movimento da Terra em torno de seu próprio eixo (eixo imaginário que passa pelos polos).</p>
+                        
+                        <p><strong>Características:</strong></p>
+                        <ul>
+                            <li><span class="highlight">Duração</span>: 23 horas, 56 minutos e 4 segundos (dia sideral)</li>
+                            <li><span class="highlight">Sentido</span>: Oeste para Leste (anti-horário visto do Polo Norte)</li>
+                            <li><span class="highlight">Velocidade</span>: ~1.670 km/h no Equador</li>
+                            <li><span class="highlight">Inclinação do eixo</span>: 23°27' em relação à perpendicular da órbita</li>
+                        </ul>
 
-            <div class="card" data-keywords="el niño la niña pacífico temperatura chuvas">
-                <div class="card-header">
-                    <div class="card-number">7</div>
-                    <h2>El Niño e La Niña</h2>
-                </div>
-                <div class="card-content">
-                    <ul>
-                        <li><span class="highlight">El Niño</span>: águas do Pacífico ficam mais quentes → provoca secas no Nordeste e chuvas intensas no Sul do Brasil</li>
-                        <li><span class="highlight">La Niña</span>: águas ficam mais frias → efeito contrário (mais chuvas no Norte/Nordeste e seca no Sul)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card" data-keywords="elementos climáticos temperatura umidade pressão">
-                <div class="card-header">
-                    <div class="card-number">8</div>
-                    <h2>Elementos Climáticos</h2>
-                </div>
-                <div class="card-content">
-                    <ul>
-                        <li><span class="highlight">Temperatura</span>: nível de calor do ar</li>
-                        <li><span class="highlight">Umidade</span>: quantidade de vapor d'água</li>
-                        <li><span class="highlight">Pressão</span>: peso do ar sobre a superfície (baixa pressão → chuvas; alta pressão → tempo seco)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card" data-keywords="fatores climáticos latitude altitude relevo maritimidade">
-                <div class="card-header">
-                    <div class="card-number">9</div>
-                    <h2>Fatores Climáticos</h2>
-                </div>
-                <div class="card-content">
-                    <p>Explicam por que o clima varia de um lugar para outro:</p>
-                    <ul>
-                        <li><span class="highlight">Latitude</span>: quanto mais perto do Equador → mais quente</li>
-                        <li><span class="highlight">Altitude</span>: quanto mais alto → mais frio</li>
-                        <li><span class="highlight">Relevo</span>: pode bloquear massas de ar (chuva de relevo)</li>
-                        <li><span class="highlight">Vegetação</span>: retém umidade, regula temperatura</li>
-                        <li><span class="highlight">Maritimidade</span>: áreas próximas ao mar → clima mais úmido</li>
-                        <li><span class="highlight">Continentalidade</span>: áreas distantes do mar → clima seco</li>
-                        <li><span class="highlight">Correntes marítimas</span>: podem aquecer ou esfriar o clima</li>
-                        <li><span class="highlight">Massas de ar</span>: grandes porções de ar quente/frio que se deslocam e afetam o clima</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card" data-keywords="circulação atmosfera células hadley ferrel polar">
-                <div class="card-header">
-                    <div class="card-number">10</div>
-                    <h2>Circulação Geral da Atmosfera</h2>
-                </div>
-                <div class="card-content">
-                    <p>O ar circula em "células" no planeta:</p>
-                    <ul>
-                        <li><span class="highlight">Hadley</span>: próximo ao Equador</li>
-                        <li><span class="highlight">Ferrel</span>: médias latitudes</li>
-                        <li><span class="highlight">Polar</span>: regiões frias</li>
-                    </ul>
-                    <div class="example">
-                        👉 Isso ajuda a explicar ventos e chuvas pelo mundo.
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" data-keywords="brisa marítima terrestre vento continente mar">
-                <div class="card-header">
-                    <div class="card-number">11</div>
-                    <h2>Brisa Marítima e Terrestre</h2>
-                </div>
-                <div class="card-content">
-                    <ul>
-                        <li><span class="highlight">Durante o dia</span>: o continente esquenta mais rápido → ar sobe → puxa vento do mar para a terra (<strong>brisa marítima</strong>)</li>
-                        <li><span class="highlight">Durante a noite</span>: o mar fica mais quente → vento vai da terra para o mar (<strong>brisa terrestre</strong>)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card" data-keywords="climogramas tipos climáticos polar temperado tropical">
-                <div class="card-header">
-                    <div class="card-number">12</div>
-                    <h2>Climogramas e Tipos Climáticos</h2>
-                </div>
-                <div class="card-content">
-                    <ul>
-                        <li><span class="highlight">Climograma</span>: gráfico que mostra temperatura e chuva de um lugar</li>
-                        <li><strong>Tipos climáticos:</strong>
-                            <ul style="margin-top: 10px;">
-                                <li><span class="highlight">Polar</span> (frio extremo)</li>
-                                <li><span class="highlight">Temperado</span> (estações bem definidas)</li>
-                                <li><span class="highlight">Tropical</span> (quente e chuvoso no verão, seco no inverno)</li>
-                                <li><span class="highlight">Equatorial</span> (quente e úmido o ano todo)</li>
-                                <li><span class="highlight">Desértico</span> (quase sem chuvas)</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card" data-keywords="fenômenos urbanos ilha calor inversão térmica chuva ácida">
-                <div class="card-header">
-                    <div class="card-number">13</div>
-                    <h2>Fenômenos Atmosféricos Urbanos</h2>
-                </div>
-                <div class="card-content">
-                    <ul>
-                        <li><span class="highlight">Ilha de calor</span>: cidades ficam mais quentes que áreas rurais devido ao asfalto e poluição</li>
-                        <li><span class="highlight">Inversão térmica</span>: camada de ar frio presa sob ar quente → retém poluição</li>
-                        <li><span class="highlight">Chuva ácida</span>: causada por poluentes que reagem na atmosfera e caem com a chuva</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>📖 Bons estudos! Este guia contém todos os tópicos essenciais de Geografia.</p>
-            <p style="margin-top: 10px; opacity: 0.7;">Criado para facilitar seu aprendizado 🎯</p>
-        </div>
-    </div>
-
-    <script>
-        // Busca interativa
-        const searchBox = document.getElementById('searchBox');
-        const cards = document.querySelectorAll('.card');
-
-        searchBox.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            
-            cards.forEach(card => {
-                const keywords = card.getAttribute('data-keywords').toLowerCase();
-                const content = card.textContent.toLowerCase();
-                
-                if (keywords.includes(searchTerm) || content.includes(searchTerm) || searchTerm === '') {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeInUp 0.4s ease-out';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Efeito de hover suave
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Scroll suave quando clicar em um card
-        cards.forEach(card => {
-            card.addEventListener('click', function() {
-                this.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center' 
-                });
-            });
-        });
-
-        // Adicionar cursor pointer aos cards
-        cards.forEach(card => {
-            card.style.cursor = 'pointer';
-        });
-    </script>
-</body>
-</html>
+                        <p><strong>Consequências:</strong></p>
+                        <ul>
+                            <li><strong>Sucessão dos dias e noites:</strong> A rotação expõe alternadamente cada face da Terra ao Sol</li>
+                            <li><strong>Diferença de horários:</strong> Criação dos fusos horários (24 fusos de 15° cada)</li>
+                            <li><strong>Movimento aparente do Sol:</strong> O Sol "nasce" a leste e "se põe" a oeste</li>
+                            <li><strong>Força de Coriolis:</strong> Desvio de correntes de ar e água devido à rotação</li>
+                            <li><strong>Achatamento polar:</strong> A Terra é ligeiramente achatada nos polos</li>
+                        </ul
