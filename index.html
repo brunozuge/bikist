@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para Bianca ❤️</title>
+    <title>BioCelular - Aprendizado Interativo</title>
     <style>
         * {
             margin: 0;
@@ -12,514 +12,1187 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
 
-        .header {
-            text-align: center;
-            padding: 60px 20px;
-            animation: fadeInUp 2s ease-out;
-        }
-
-        .header h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            color: #8b0000;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .hearts {
-            font-size: 2rem;
-            animation: pulse 2s infinite;
-        }
-
-        .section {
-            background: rgba(255, 255, 255, 0.9);
-            margin: 30px 0;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        header {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            animation: fadeInUp 1s ease-out;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .love-message {
-            text-align: center;
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
-            line-height: 1.8;
-            color: #2c3e50;
-            margin-bottom: 30px;
+        nav {
+            padding: 1rem 0;
         }
 
-        .proposal-section {
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .nav-menu li a:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 0;
             text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .content-section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .topic-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .topic-content {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .topic-content.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; height: 0; }
+            to { opacity: 1; height: auto; }
+        }
+
+        .example-box {
+            background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #fff;
+        }
+
+        .activity-box {
+            background: linear-gradient(45deg, #43e97b 0%, #38f9d7 100%);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .quiz-question {
+            background: white;
+            color: #333;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .quiz-option {
+            padding: 0.8rem;
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 10px;
+            border-radius: 5px;
+            margin: 1rem 0;
             overflow: hidden;
         }
 
-        .proposal-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="20" fill="rgba(255,255,255,0.1)">💍</text></svg>') repeat;
-            animation: float 20s infinite linear;
-        }
-
-        .proposal-text {
-            position: relative;
-            z-index: 2;
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin-bottom: 30px;
-        }
-
-        .ring-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 40px 0;
-            position: relative;
-            z-index: 2;
-        }
-
-        .ring {
-            width: 120px;
-            height: 120px;
-            border: 8px solid #ffd700;
-            border-radius: 50%;
-            position: relative;
-            animation: rotate 3s infinite linear;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-        }
-
-        .diamond {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #ffffff, #e8e8e8);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            animation: sparkle 2s infinite;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-yes {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
-        }
-
-        .btn-yes:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
-        }
-
-        .btn-no {
-            background: linear-gradient(135deg, #f44336, #d32f2f);
-            color: white;
-            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
-        }
-
-        .btn-no:hover {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        .celebration {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        .progress {
             height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
         }
 
-        .celebration-content {
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
+        .diagram {
             text-align: center;
-            max-width: 90%;
-            animation: celebrationPop 0.5s ease-out;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px dashed #667eea;
         }
 
-        .celebration h2 {
-            font-size: clamp(2rem, 6vw, 3rem);
-            color: #ff6b6b;
-            margin-bottom: 20px;
+        .cell-diagram {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
         }
 
-        .celebration p {
-            font-size: 1.3rem;
-            color: #2c3e50;
-            margin-bottom: 30px;
+        .organelle {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        .fireworks {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 999;
+        .organelle:hover {
+            transform: scale(1.05);
         }
 
-        .firework {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            animation: fireworkAnimation 2s ease-out infinite;
+        .dna-structure {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .dna-strand {
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            min-width: 200px;
+            text-align: center;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
-            50% { opacity: 0.7; transform: translateX(-50%) scale(1.2); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        @keyframes float {
-            from { transform: translateX(-100px) translateY(-100px); }
-            to { transform: translateX(100px) translateY(100px); }
-        }
-
-        @keyframes celebrationPop {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes fireworkAnimation {
-            0% { opacity: 1; transform: scale(0); }
-            15% { opacity: 1; }
-            100% { opacity: 0; transform: scale(1); }
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
         }
 
         @media (max-width: 768px) {
-            .section {
-                padding: 30px 20px;
-                margin: 20px 0;
+            .hero h1 {
+                font-size: 2rem;
             }
-            
-            .buttons {
+
+            .nav-menu {
+                display: none;
                 flex-direction: column;
-                align-items: center;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             }
-            
-            .btn {
-                width: 80%;
-                max-width: 250px;
+
+            .nav-menu.show {
+                display: flex;
             }
-            
-            .ring {
-                width: 100px;
-                height: 100px;
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .cell-diagram {
+                grid-template-columns: 1fr;
+            }
+
+            .dna-structure {
+                flex-direction: column;
             }
         }
 
-        @media (max-width: 480px) {
-            .header {
-                padding: 40px 20px;
-            }
-            
-            .celebration-content {
-                padding: 30px 20px;
-            }
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 1rem 0;
+            color: white;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="nav-container">
+                    <a href="#" class="logo">🧬 BioCelular</a>
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#" onclick="showSection('home')">Início</a></li>
+                        <li><a href="#" onclick="showSection('metabolism')">Metabolismo</a></li>
+                        <li><a href="#" onclick="showSection('nucleus')">Núcleo</a></li>
+                        <li><a href="#" onclick="showSection('division')">Divisão Celular</a></li>
+                        <li><a href="#" onclick="showSection('activities')">Atividades</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Biologia Celular Interativa</h1>
+            <p>Explore o fascinante mundo das células através de conteúdo didático e atividades práticas</p>
+            <div class="progress-bar">
+                <div class="progress" id="overallProgress"></div>
+            </div>
+        </div>
+    </section>
+
     <div class="container">
-        <div class="header">
-            <h1>Para Minha Amada Bianca</h1>
-            <div class="hearts">💖 💕 💖</div>
-        </div>
-
-        <div class="section">
-            <div class="love-message">
-              Desde o momento em que tu entrou na minha vida, tudo mudou para melhor. 
-                Seus sorrisos iluminam os meus dias, tua risada é a música mais doce que já ouvi, 
-                e teu amor me fez descobrir a pessoa que eu sempre quis ser.
-                <br><br>
-            Bi, tu não é apenas minha namorada, tu é minha melhor amiga, 
-                minha inspiração e meu amor verdadeiro, além de ser MINHAAA METAAAADE.
-                <br><br>
-              Quero acordar todos os dias ao teu lado, compartilhar cada alegria, 
-                superar cada desafio juntos e construir uma história de amor que durará para sempre.
-            </div>
-        </div>
-
-        <div class="section proposal-section">
-            <div class="proposal-text">
-                Bianca Zuge,<br>
-                TUUU ACEIIIIIIITA NAMOOOORA MOOOO?
-            </div>
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+            <h2>🏠 Bem-vindo ao BioCelular</h2>
+            <p>Este site foi desenvolvido para facilitar o aprendizado de biologia celular através de conteúdo interativo, exemplos práticos e atividades envolventes.</p>
             
-            <div class="ring-container">
-                <div class="ring">
-                    <div class="diamond"></div>
+            <div class="topic-card" onclick="toggleContent('intro-content')">
+                <h3>📚 O que você vai aprender</h3>
+            </div>
+            <div id="intro-content" class="topic-content">
+                <ul>
+                    <li><strong>Metabolismo Energético:</strong> Respiração celular aeróbica e anaeróbica</li>
+                    <li><strong>Metabolismo Autotrófico:</strong> Fotossíntese e quimiossíntese</li>
+                    <li><strong>Núcleo Celular:</strong> Estrutura do DNA, transcrição e tradução</li>
+                    <li><strong>Divisões Celulares:</strong> Mitose e meiose</li>
+                    <li><strong>Atividades Práticas:</strong> Exercícios e quizzes interativos</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Metabolism Section -->
+        <section id="metabolism" class="content-section">
+            <h2>⚡ Metabolismo Energético</h2>
+            
+            <div class="topic-card" onclick="toggleContent('respiration-content')">
+                <h3>🫁 Respiração Celular</h3>
+                <p>Processo de obtenção de energia a partir da glicose</p>
+            </div>
+            <div id="respiration-content" class="topic-content">
+                <h4>Respiração Aeróbica</h4>
+                <p>A respiração aeróbica ocorre na presença de oxigênio e é dividida em três etapas principais:</p>
+                
+                <div class="example-box">
+                    <h5>💡 Exemplo Prático</h5>
+                    <p><strong>Glicólise:</strong> C₆H₁₂O₆ + 2 ADP + 2 Pi → 2 C₃H₄O₃ + 2 ATP</p>
+                    <p>Uma molécula de glicose é quebrada em duas moléculas de piruvato, produzindo 2 ATP.</p>
+                </div>
+
+                <div class="diagram">
+                    <h4>🔄 Etapas da Respiração Aeróbica</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div class="organelle">
+                            <h5>1. Glicólise</h5>
+                            <p>Local: Citoplasma</p>
+                            <p>Produz: 2 ATP</p>
+                        </div>
+                        <div class="organelle">
+                            <h5>2. Ciclo de Krebs</h5>
+                            <p>Local: Mitocôndria</p>
+                            <p>Produz: 2 ATP</p>
+                        </div>
+                        <div class="organelle">
+                            <h5>3. Cadeia Respiratória</h5>
+                            <p>Local: Cristas mitocondriais</p>
+                            <p>Produz: 34 ATP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Respiração Anaeróbica</h4>
+                <p>Ocorre na ausência de oxigênio, através da fermentação:</p>
+                
+                <div class="example-box">
+                    <h5>🍞 Fermentação Alcoólica</h5>
+                    <p>C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ + 2 ATP</p>
+                    <p>Usada na produção de pães e bebidas alcoólicas</p>
+                </div>
+
+                <div class="example-box">
+                    <h5>🥛 Fermentação Láctica</h5>
+                    <p>C₆H₁₂O₆ → 2 C₃H₆O₃ + 2 ATP</p>
+                    <p>Ocorre nos músculos durante exercício intenso e na produção de iogurte</p>
                 </div>
             </div>
 
-            <div style="margin: 20px 0; position: relative; z-index: 2;">
-                <button class="btn" onclick="playMusic()" style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e); color: white; margin-bottom: 20px;">
-                    🎵 Tocar Música Romântica
-                </button>
+            <div class="topic-card" onclick="toggleContent('photosynthesis-content')">
+                <h3>🌱 Fotossíntese</h3>
+                <p>Processo de conversão de energia luminosa em energia química</p>
             </div>
+            <div id="photosynthesis-content" class="topic-content">
+                <h4>Equação Geral da Fotossíntese</h4>
+                <div class="example-box">
+                    <p><strong>6 CO₂ + 6 H₂O + energia luminosa → C₆H₁₂O₆ + 6 O₂</strong></p>
+                </div>
+
+                <h4>Fases da Fotossíntese</h4>
+                
+                <div class="diagram">
+                    <h5>☀️ Fase Fotoquímica (Reações de Hill)</h5>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1rem 0;">
+                        <div class="organelle">
+                            <h6>Fotossistema II</h6>
+                            <p>• Absorve luz</p>
+                            <p>• Quebra H₂O</p>
+                            <p>• Libera O₂</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Fotossistema I</h6>
+                            <p>• Produz NADPH</p>
+                            <p>• Gera ATP</p>
+                            <p>• Cadeia transportadora</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diagram">
+                    <h5>🔄 Fase Química (Ciclo de Calvin)</h5>
+                    <p>Ocorre no estroma dos cloroplastos, independente da luz</p>
+                    <div class="organelle" style="margin: 1rem auto; max-width: 300px;">
+                        <p>CO₂ + RuBP → compostos intermediários → glicose</p>
+                        <p>Consome: ATP e NADPH</p>
+                    </div>
+                </div>
+
+                <h4>Quimiossíntese</h4>
+                <p>Processo realizado por bactérias que obtêm energia através da oxidação de compostos inorgânicos:</p>
+                
+                <div class="example-box">
+                    <h5>🦠 Bactérias Nitrificantes</h5>
+                    <p>NH₃ + O₂ → NO₂⁻ + H₂O + energia</p>
+                    <p>NO₂⁻ + O₂ → NO₃⁻ + energia</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nucleus Section -->
+        <section id="nucleus" class="content-section">
+            <h2>🧬 Núcleo Celular e Síntese Proteica</h2>
             
-            <div class="buttons">
-                <button class="btn btn-yes" onclick="celebrate()">SIM! 💍</button>
-                <button class="btn btn-no" onclick="noResponse()">Não... 💔</button>
+            <div class="topic-card" onclick="toggleContent('dna-content')">
+                <h3>🧬 Estrutura do DNA</h3>
+                <p>Material genético e sua organização</p>
             </div>
-        </div>
+            <div id="dna-content" class="topic-content">
+                <h4>Estrutura da Dupla Hélice</h4>
+                
+                <div class="dna-structure">
+                    <div class="dna-strand">
+                        <h5>Fita 1</h5>
+                        <p>5' → 3'</p>
+                        <p>A - T</p>
+                        <p>T - A</p>
+                        <p>G - C</p>
+                        <p>C - G</p>
+                    </div>
+                    <div style="display: flex; align-items: center; font-size: 2rem;">↔️</div>
+                    <div class="dna-strand">
+                        <h5>Fita 2</h5>
+                        <p>3' → 5'</p>
+                        <p>T - A</p>
+                        <p>A - T</p>
+                        <p>C - G</p>
+                        <p>G - C</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h5>🔗 Pareamento de Bases</h5>
+                    <p><strong>Adenina (A)</strong> sempre pareia com <strong>Timina (T)</strong> - 2 pontes de hidrogênio</p>
+                    <p><strong>Guanina (G)</strong> sempre pareia com <strong>Citosina (C)</strong> - 3 pontes de hidrogênio</p>
+                </div>
+
+                <h4>Replicação do DNA</h4>
+                <div class="diagram">
+                    <h5>🔄 Processo Semiconservativo</h5>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0;">
+                        <div class="organelle">
+                            <h6>1. Desenrolamento</h6>
+                            <p>Helicase quebra pontes de H</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>2. Síntese</h6>
+                            <p>DNA polimerase adiciona nucleotídeos</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>3. Religação</h6>
+                            <p>Ligase conecta fragmentos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="topic-card" onclick="toggleContent('transcription-content')">
+                <h3>📝 Transcrição e Tradução</h3>
+                <p>Do DNA à proteína</p>
+            </div>
+            <div id="transcription-content" class="topic-content">
+                <h4>Transcrição (DNA → RNA)</h4>
+                
+                <div class="example-box">
+                    <h5>🧬→📄 Exemplo de Transcrição</h5>
+                    <p><strong>DNA:</strong> 5'-ATGCGATCC-3'</p>
+                    <p><strong>RNA:</strong> 5'-UACGCUAGG-3'</p>
+                    <p>Nota: Timina (T) é substituída por Uracila (U) no RNA</p>
+                </div>
+
+                <div class="diagram">
+                    <h5>🏭 Etapas da Transcrição</h5>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                        <div class="organelle">
+                            <h6>Iniciação</h6>
+                            <p>RNA polimerase se liga ao promotor</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Elongação</h6>
+                            <p>Síntese do RNA mensageiro</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Terminação</h6>
+                            <p>Finalização da transcrição</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Tradução (RNA → Proteína)</h4>
+                
+                <div class="example-box">
+                    <h5>🧬 Código Genético</h5>
+                    <p><strong>Códon AUG:</strong> Metionina (códon de início)</p>
+                    <p><strong>Códon UAG:</strong> Stop (códon de parada)</p>
+                    <p><strong>Códon UUU:</strong> Fenilalanina</p>
+                </div>
+
+                <div class="diagram">
+                    <h5>🏭 Ribossomo em Ação</h5>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+                        <div class="organelle">
+                            <h6>RNA mensageiro</h6>
+                            <p>Carrega a informação genética</p>
+                            <p>Sequência de códons</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>RNA transportador</h6>
+                            <p>Traz aminoácidos específicos</p>
+                            <p>Anticódon complementar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Division Section -->
+        <section id="division" class="content-section">
+            <h2>🔄 Divisões Celulares</h2>
+            
+            <div class="topic-card" onclick="toggleContent('mitosis-content')">
+                <h3>➗ Mitose</h3>
+                <p>Divisão que produz células idênticas</p>
+            </div>
+            <div id="mitosis-content" class="topic-content">
+                <h4>Fases da Mitose</h4>
+                
+                <div class="diagram">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div class="organelle">
+                            <h6>Prófase</h6>
+                            <p>• Cromossomos se condensam</p>
+                            <p>• Desaparece a carioteca</p>
+                            <p>• Forma-se o fuso</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Metáfase</h6>
+                            <p>• Cromossomos no equador</p>
+                            <p>• Placa metafásica</p>
+                            <p>• Checkpoint do fuso</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Anáfase</h6>
+                            <p>• Separação das cromátides</p>
+                            <p>• Migração para os polos</p>
+                            <p>• Encurtamento do fuso</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Telófase</h6>
+                            <p>• Descondensação cromossômica</p>
+                            <p>• Reforma da carioteca</p>
+                            <p>• Citocinese</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h5>🧮 Resultado da Mitose</h5>
+                    <p><strong>Célula mãe:</strong> 2n = 46 cromossomos</p>
+                    <p><strong>Células filhas:</strong> 2 células com 2n = 46 cromossomos cada</p>
+                    <p><strong>Função:</strong> Crescimento e regeneração</p>
+                </div>
+            </div>
+
+            <div class="topic-card" onclick="toggleContent('meiosis-content')">
+                <h3>🧬 Meiose</h3>
+                <p>Divisão que produz gametas</p>
+            </div>
+            <div id="meiosis-content" class="topic-content">
+                <h4>Características da Meiose</h4>
+                
+                <div class="example-box">
+                    <h5>🎯 Objetivo da Meiose</h5>
+                    <p>• Produção de gametas (células sexuais)</p>
+                    <p>• Redução do número de cromossomos pela metade</p>
+                    <p>• Aumenta variabilidade genética</p>
+                </div>
+
+                <h4>Meiose I (Divisão Reducional)</h4>
+                <div class="diagram">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem;">
+                        <div class="organelle">
+                            <h6>Prófase I</h6>
+                            <p>• Pareamento (sinapse)</p>
+                            <p>• Crossing-over</p>
+                            <p>• Quiasmas</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Metáfase I</h6>
+                            <p>• Pares no equador</p>
+                            <p>• Bivalentes</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Anáfase I</h6>
+                            <p>• Separação de homólogos</p>
+                            <p>• Redução cromossômica</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Telófase I</h6>
+                            <p>• Células haploides</p>
+                            <p>• Citocinese</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>Meiose II (Divisão Equacional)</h4>
+                <div class="example-box">
+                    <h5>🔄 Similar à Mitose</h5>
+                    <p>• Separação das cromátides irmãs</p>
+                    <p>• 4 células haploides no final</p>
+                    <p>• Cada célula com n cromossomos</p>
+                </div>
+
+                <div class="diagram">
+                    <h5>📊 Comparação: Mitose vs Meiose</h5>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div class="organelle">
+                            <h6>Mitose</h6>
+                            <p>• 1 divisão</p>
+                            <p>• 2 células filhas</p>
+                            <p>• Células diploides (2n)</p>
+                            <p>• Idênticas à mãe</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Meiose</h6>
+                            <p>• 2 divisões</p>
+                            <p>• 4 células filhas</p>
+                            <p>• Células haploides (n)</p>
+                            <p>• Diferentes da mãe</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h5>🧬 Crossing-over</h5>
+                    <p><strong>O que é:</strong> Troca de segmentos entre cromossomos homólogos</p>
+                    <p><strong>Quando ocorre:</strong> Prófase I da meiose</p>
+                    <p><strong>Importância:</strong> Aumenta a variabilidade genética</p>
+                </div>
+            </div>
+
+            <div class="topic-card" onclick="toggleContent('cell-cycle-content')">
+                <h3>⏰ Ciclo Celular</h3>
+                <p>Regulação e controle da divisão</p>
+            </div>
+            <div id="cell-cycle-content" class="topic-content">
+                <h4>Fases do Ciclo Celular</h4>
+                
+                <div class="diagram">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div class="organelle">
+                            <h6>Interfase (90%)</h6>
+                            <p><strong>G1:</strong> Crescimento</p>
+                            <p><strong>S:</strong> Síntese de DNA</p>
+                            <p><strong>G2:</strong> Preparação</p>
+                        </div>
+                        <div class="organelle">
+                            <h6>Fase M (10%)</h6>
+                            <p><strong>Mitose:</strong> Divisão nuclear</p>
+                            <p><strong>Citocinese:</strong> Divisão citoplasmática</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h5>🔍 Checkpoints do Ciclo</h5>
+                    <p><strong>G1/S:</strong> Verifica integridade do DNA</p>
+                    <p><strong>G2/M:</strong> Confirma replicação completa</p>
+                    <p><strong>M:</strong> Verifica ligação dos cromossomos ao fuso</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activities Section -->
+        <section id="activities" class="content-section">
+            <h2>🎯 Atividades Interativas</h2>
+            <div class="score-display">
+                <h3>Pontuação Total: <span id="totalScore">0</span></h3>
+                <p>Complete os quizzes para aumentar sua pontuação!</p>
+            </div>
+
+            <div class="activity-box">
+                <h3>Quiz 1: Respiração Celular</h3>
+                <div id="quiz1" class="quiz-question">
+                    <p><strong>Pergunta 1:</strong> Quantas moléculas de ATP são produzidas na respiração aeróbica completa?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz1')">2 ATP</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz1')">30 ATP</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 'quiz1')">38 ATP</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz1')">40 ATP</div>
+                    </div>
+                    <div id="quiz1-explanation" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 5px;">
+                        <p><strong>Explicação:</strong> Na respiração aeróbica completa são produzidas aproximadamente 38 moléculas de ATP: 2 na glicólise, 2 no ciclo de Krebs e 34 na cadeia respiratória.</p>
+                    </div>
+                </div>
+
+                <div id="quiz2" class="quiz-question">
+                    <p><strong>Pergunta 2:</strong> Em qual organela ocorre o ciclo de Krebs?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz2')">Citoplasma</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 'quiz2')">Mitocôndria</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz2')">Ribossomo</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz2')">Núcleo</div>
+                    </div>
+                    <div id="quiz2-explanation" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 5px;">
+                        <p><strong>Explicação:</strong> O ciclo de Krebs ocorre na matriz mitocondrial, onde o piruvato é completamente oxidado, produzindo CO₂, NADH, FADH₂ e ATP.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-box">
+                <h3>Quiz 2: Fotossíntese</h3>
+                <div id="quiz3" class="quiz-question">
+                    <p><strong>Pergunta 3:</strong> Qual é o produto da fase fotoquímica da fotossíntese?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz3')">Glicose</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 'quiz3')">ATP e NADPH</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz3')">CO₂</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz3')">Amido</div>
+                    </div>
+                    <div id="quiz3-explanation" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 5px;">
+                        <p><strong>Explicação:</strong> A fase fotoquímica (reações de Hill) produz ATP e NADPH, que serão utilizados na fase química para a síntese de glicose.</p>
+                    </div>
+                </div>
+
+                <div id="quiz4" class="quiz-question">
+                    <p><strong>Pergunta 4:</strong> Onde ocorre o ciclo de Calvin?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz4')">Tilacoides</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 'quiz4')">Estroma</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz4')">Citoplasma</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz4')">Mitocôndria</div>
+                    </div>
+                    <div id="quiz4-explanation" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 5px;">
+                        <p><strong>Explicação:</strong> O ciclo de Calvin ocorre no estroma dos cloroplastos, onde o CO₂ é fixado e convertido em glicose usando ATP e NADPH.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-box">
+                <h3>Quiz 3: DNA e Síntese Proteica</h3>
+                <div id="quiz5" class="quiz-question">
+                    <p><strong>Pergunta 5:</strong> Qual base nitrogenada substitui a timina no RNA?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz5')">Adenina</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz5')">Citosina</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz5')">Guanina</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 'quiz5')">Uracila</div>
+                    </div>
+                    <div id="quiz5-explanation" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 5px;">
+                        <p><strong>Explicação:</strong> No RNA, a base nitrogenada uracila (U) substitui a timina (T) do DNA, pareando com a adenina.</p>
+                    </div>
+                </div>
+
+                <div id="quiz6" class="quiz-question">
+                    <p><strong>Pergunta 6:</strong> Onde ocorre a tradução?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz6')">Núcleo</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 'quiz6')">Ribossomo</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz6')">Mitocôndria</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz6')">Retículo endoplasmático</div>
+                    </div>
+                    <div id="quiz6-explanation" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 5px;">
+                        <p><strong>Explicação:</strong> A tradução ocorre nos ribossomos, onde o RNA mensageiro é decodificado para formar proteínas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-box">
+                <h3>Quiz 4: Divisões Celulares</h3>
+                <div id="quiz7" class="quiz-question">
+                    <p><strong>Pergunta 7:</strong> Quantas células são produzidas na meiose?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz7')">2 diploides</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz7')">2 haploides</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 'quiz7')">4 haploides</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz7')">4 diploides</div>
+                    </div>
+                    <div id="quiz7-explanation" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 5px;">
+                        <p><strong>Explicação:</strong> A meiose produz 4 células haploides (n) a partir de uma célula diploide (2n), sendo essencial para a reprodução sexual.</p>
+                    </div>
+                </div>
+
+                <div id="quiz8" class="quiz-question">
+                    <p><strong>Pergunta 8:</strong> Em qual fase da mitose os cromossomos se alinham no equador?</p>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz8')">Prófase</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true, 'quiz8')">Metáfase</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz8')">Anáfase</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false, 'quiz8')">Telófase</div>
+                    </div>
+                    <div id="quiz8-explanation" style="display: none; margin-top: 1rem; padding: 1rem; background: #e3f2fd; border-radius: 5px;">
+                        <p><strong>Explicação:</strong> Na metáfase, os cromossomos se alinham na região equatorial da célula, formando a placa metafásica.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-box">
+                <h3>🧩 Atividade Prática: Monte a Sequência</h3>
+                <p>Arraste os processos na ordem correta da síntese proteica:</p>
+                <div id="sequence-game" style="margin: 1rem 0;">
+                    <div class="sequence-items">
+                        <div class="sequence-item" draggable="true" data-order="1">1. Transcrição no núcleo</div>
+                        <div class="sequence-item" draggable="true" data-order="3">3. Tradução no ribossomo</div>
+                        <div class="sequence-item" draggable="true" data-order="2">2. Saída do mRNA para citoplasma</div>
+                        <div class="sequence-item" draggable="true" data-order="4">4. Formação da proteína</div>
+                    </div>
+                    <div class="drop-zone" style="min-height: 200px; border: 2px dashed #ccc; padding: 1rem; margin-top: 1rem; border-radius: 8px;">
+                        <p>Solte os itens aqui na ordem correta</p>
+                    </div>
+                    <button onclick="checkSequence()" style="margin-top: 1rem; padding: 0.8rem 2rem; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer;">Verificar Sequência</button>
+                    <div id="sequence-result" style="margin-top: 1rem;"></div>
+                </div>
+            </div>
+
+            <div class="activity-box">
+                <h3>🔬 Simulador de Processos</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <button onclick="simulateRespiration()" style="padding: 1rem; background: #ff6b6b; color: white; border: none; border-radius: 8px; cursor: pointer;">Simular Respiração</button>
+                    <button onclick="simulatePhotosynthesis()" style="padding: 1rem; background: #4ecdc4; color: white; border: none; border-radius: 8px; cursor: pointer;">Simular Fotossíntese</button>
+                    <button onclick="simulateMitosis()" style="padding: 1rem; background: #45b7d1; color: white; border: none; border-radius: 8px; cursor: pointer;">Simular Mitose</button>
+                    <button onclick="simulateMeiosis()" style="padding: 1rem; background: #96ceb4; color: white; border: none; border-radius: 8px; cursor: pointer;">Simular Meiose</button>
+                </div>
+                <div id="simulation-result" style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; display: none;">
+                </div>
+            </div>
+        </section>
     </div>
 
-    <div class="celebration" id="celebration">
-        <div class="celebration-content">
-            <h2>🎉 ELA DISSE SIM! 🎉</h2>
-            <p>Parabéns ao casal! Que esta seja apenas o começo de uma vida inteira de felicidade juntos!</p>
-            <div style="font-size: 3rem; margin: 20px 0;">💍 👰‍♀️ 🤵‍♂️ 💍</div>
-            <button class="btn btn-yes" onclick="closeCelebration()" style="margin-top: 20px;">Celebrar! 🥂</button>
-        </div>
-    </div>
-
-    <div class="fireworks" id="fireworks"></div>
+    <button class="floating-btn" onclick="scrollToTop()" title="Voltar ao topo">↑</button>
 
     <script>
-        let audio = null;
-        let musicPlaying = false;
+        let totalScore = 0;
+        let answeredQuestions = new Set();
 
-        function playMusic() {
-            if (!audio) {
-                // Lista de músicas românticas que devem funcionar
-                const musicUrls = [
-                    'https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Simon_Panrucker/Chillout_Meditation_Music/Simon_Panrucker_-_02_-_Romantic_Idea.mp3',
-                    'https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3'
-                ];
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
 
-                audio = new Audio(musicUrls[0]);
-                audio.volume = 0.5;
-                audio.loop = true;
-                
-                // Se a primeira URL falhar, tenta a segunda
-                audio.addEventListener('error', function() {
-                    console.log('Primeira música falhou, tentando alternativa...');
-                    audio.src = musicUrls[1];
-                    audio.load();
+            // Close mobile menu if open
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.remove('show');
+
+            // Update progress
+            updateProgress();
+        }
+
+        function toggleContent(contentId) {
+            const content = document.getElementById(contentId);
+            content.classList.toggle('show');
+        }
+
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('show');
+        }
+
+        function checkAnswer(element, isCorrect, quizId) {
+            const options = element.parentNode.querySelectorAll('.quiz-option');
+            const explanation = document.getElementById(quizId + '-explanation');
+            
+            // Disable all options
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                if (!answeredQuestions.has(quizId)) {
+                    totalScore += 10;
+                    answeredQuestions.add(quizId);
+                    updateScore();
+                }
+            } else {
+                element.classList.add('incorrect');
+                // Show correct answer
+                options.forEach(option => {
+                    if (option.getAttribute('onclick').includes('true')) {
+                        option.classList.add('correct');
+                    }
                 });
             }
 
-            if (!musicPlaying) {
-                audio.play()
-                    .then(() => {
-                        musicPlaying = true;
-                        document.querySelector('button[onclick="playMusic()"]').innerHTML = '🎵 Música Tocando ✨';
-                        console.log('Música iniciada com sucesso!');
-                    })
-                    .catch(e => {
-                        console.log('Erro ao reproduzir:', e);
-                        
-                    });
-            } else {
-                audio.pause();
-                musicPlaying = false;
-                document.querySelector('button[onclick="playMusic()"]').innerHTML = '🎵 Tocar Música Romântica';
-            }
+            // Show explanation
+            explanation.style.display = 'block';
         }
 
-        function celebrate() {
-            document.getElementById('celebration').style.display = 'flex';
-            createFireworks();
-            
-            // Se não está tocando música ainda, tenta tocar
-            if (!musicPlaying) {
-                playMusic();
-            }
-            
-            // Efeito sonoro adicional de celebração (som sintético que sempre funciona)
-            playSuccessSound();
+        function updateScore() {
+            document.getElementById('totalScore').textContent = totalScore;
+            updateProgress();
         }
 
-        function playSuccessSound() {
-            // Cria um som de sucesso usando Web Audio API (sempre funciona!)
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            
-            // Sequência de notas para celebração
-            const notes = [523.25, 659.25, 783.99, 1046.5]; // Dó, Mi, Sol, Dó alto
-            let noteIndex = 0;
+        function updateProgress() {
+            const maxQuestions = 8;
+            const progress = (answeredQuestions.size / maxQuestions) * 100;
+            document.getElementById('overallProgress').style.width = progress + '%';
+        }
 
-            function playNote() {
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.value = notes[noteIndex % notes.length];
-                oscillator.type = 'sine';
-                
-                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-                
-                oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.5);
-                
-                noteIndex++;
-                if (noteIndex < 8) { // Toca 8 notas
-                    setTimeout(playNote, 150);
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Simulation functions
+        function simulateRespiration() {
+            const result = document.getElementById('simulation-result');
+            result.style.display = 'block';
+            result.innerHTML = `
+                <h4>🫁 Simulação: Respiração Celular</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0;">
+                    <div style="background: #ffe6e6; padding: 1rem; border-radius: 5px; text-align: center;">
+                        <strong>Entrada</strong><br>
+                        C₆H₁₂O₆ + 6O₂
+                    </div>
+                    <div style="background: #e6f3ff; padding: 1rem; border-radius: 5px; text-align: center;">
+                        <strong>Processo</strong><br>
+                        Glicólise → Krebs → Cadeia
+                    </div>
+                    <div style="background: #e6ffe6; padding: 1rem; border-radius: 5px; text-align: center;">
+                        <strong>Saída</strong><br>
+                        38 ATP + 6CO₂ + 6H₂O
+                    </div>
+                </div>
+                <p><strong>Resultado:</strong> A célula produziu 38 moléculas de ATP para suas atividades!</p>
+            `;
+        }
+
+        function simulatePhotosynthesis() {
+            const result = document.getElementById('simulation-result');
+            result.style.display = 'block';
+            result.innerHTML = `
+                <h4>🌱 Simulação: Fotossíntese</h4>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0;">
+                    <div style="background: #fff3e0; padding: 1rem; border-radius: 5px; text-align: center;">
+                        <strong>Entrada</strong><br>
+                        6CO₂ + 6H₂O + Luz
+                    </div>
+                    <div style="background: #e8f5e8; padding: 1rem; border-radius: 5px; text-align: center;">
+                        <strong>Processo</strong><br>
+                        Fase Clara → Fase Escura
+                    </div>
+                    <div style="background: #e1f5fe; padding: 1rem; border-radius: 5px; text-align: center;">
+                        <strong>Saída</strong><br>
+                        C₆H₁₂O₆ + 6O₂
+                    </div>
+                </div>
+                <p><strong>Resultado:</strong> A planta produziu glicose e liberou oxigênio para a atmosfera!</p>
+            `;
+        }
+
+        function simulateMitosis() {
+            const result = document.getElementById('simulation-result');
+            result.style.display = 'block';
+            result.innerHTML = `
+                <h4>➗ Simulação: Mitose</h4>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 1rem 0;">
+                    <div style="background: #fce4ec; padding: 0.8rem; border-radius: 5px; text-align: center; font-size: 0.9rem;">
+                        <strong>Prófase</strong><br>
+                        Cromossomos visíveis
+                    </div>
+                    <div style="background: #e8eaf6; padding: 0.8rem; border-radius: 5px; text-align: center; font-size: 0.9rem;">
+                        <strong>Metáfase</strong><br>
+                        Alinhamento central
+                    </div>
+                    <div style="background: #e0f2f1; padding: 0.8rem; border-radius: 5px; text-align: center; font-size: 0.9rem;">
+                        <strong>Anáfase</strong><br>
+                        Separação
+                    </div>
+                    <div style="background: #fff3e0; padding: 0.8rem; border-radius: 5px; text-align: center; font-size: 0.9rem;">
+                        <strong>Telófase</strong><br>
+                        Duas células
+                    </div>
+                </div>
+                <p><strong>Resultado:</strong> Uma célula 2n gerou duas células filhas idênticas 2n!</p>
+            `;
+        }
+
+        function simulateMeiosis() {
+            const result = document.getElementById('simulation-result');
+            result.style.display = 'block';
+            result.innerHTML = `
+                <h4>🧬 Simulação: Meiose</h4>
+                <div style="margin: 1rem 0;">
+                    <div style="background: #e3f2fd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem;">
+                        <strong>Meiose I:</strong> Separação dos homólogos (2n → n)
+                    </div>
+                    <div style="background: #f3e5f5; padding: 1rem; border-radius: 5px;">
+                        <strong>Meiose II:</strong> Separação das cromátides (n → n)
+                    </div>
+                </div>
+                <p><strong>Resultado:</strong> Uma célula 2n gerou quatro gametas haploides n diferentes!</p>
+            `;
+        }
+
+        // Drag and Drop functionality
+        let draggedElement = null;
+
+        function initializeDragAndDrop() {
+            const sequenceItems = document.querySelectorAll('.sequence-item');
+            const dropZone = document.querySelector('.drop-zone');
+
+            sequenceItems.forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    draggedElement = e.target;
+                    e.target.style.opacity = '0.5';
+                });
+
+                item.addEventListener('dragend', (e) => {
+                    e.target.style.opacity = '1';
+                });
+            });
+
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.style.backgroundColor = '#f0f8ff';
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.style.backgroundColor = '';
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.style.backgroundColor = '';
+                if (draggedElement) {
+                    dropZone.appendChild(draggedElement);
                 }
-            }
-            
-            playNote();
+            });
         }
 
-        function noResponse() {
-            alert("Ah, que pena! 😢 Mas eu sei que no fundo você quer dizer SIM! 💕");
+        function checkSequence() {
+            const dropZone = document.querySelector('.drop-zone');
+            const items = dropZone.querySelectorAll('.sequence-item');
+            const result = document.getElementById('sequence-result');
             
-            // Mover o botão "Não" para uma posição aleatória
-            const noBtn = document.querySelector('.btn-no');
-            const container = document.querySelector('.proposal-section');
-            const containerRect = container.getBoundingClientRect();
-            
-            const maxX = containerRect.width - noBtn.offsetWidth - 40;
-            const maxY = containerRect.height - noBtn.offsetHeight - 40;
-            
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * maxY;
-            
-            noBtn.style.position = 'absolute';
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-        }
+            let isCorrect = true;
+            items.forEach((item, index) => {
+                const expectedOrder = parseInt(item.getAttribute('data-order'));
+                if (expectedOrder !== index + 1) {
+                    isCorrect = false;
+                }
+            });
 
-        function closeCelebration() {
-            document.getElementById('celebration').style.display = 'none';
-            document.getElementById('fireworks').innerHTML = '';
-        }
-
-        function createFireworks() {
-            const fireworksContainer = document.getElementById('fireworks');
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
-            
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    const firework = document.createElement('div');
-                    firework.className = 'firework';
-                    firework.style.left = Math.random() * 100 + '%';
-                    firework.style.top = Math.random() * 100 + '%';
-                    firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    firework.style.animationDelay = Math.random() * 2 + 's';
-                    
-                    fireworksContainer.appendChild(firework);
-                    
-                    setTimeout(() => {
-                        firework.remove();
-                    }, 2000);
-                }, i * 100);
+            if (isCorrect && items.length === 4) {
+                result.innerHTML = `
+                    <div style="background: #d4edda; color: #155724; padding: 1rem; border-radius: 5px;">
+                        <strong>🎉 Parabéns!</strong> Você organizou corretamente a sequência da síntese proteica!
+                    </div>
+                `;
+                if (!answeredQuestions.has('sequence')) {
+                    totalScore += 15;
+                    answeredQuestions.add('sequence');
+                    updateScore();
+                }
+            } else {
+                result.innerHTML = `
+                    <div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 5px;">
+                        <strong>❌ Não está correto.</strong> Tente novamente! A sequência correta é: Transcrição → Saída do mRNA → Tradução → Formação da proteína
+                    </div>
+                `;
             }
         }
 
-        // Efeito de partículas flutuantes
-        function createFloatingHearts() {
-            const heart = document.createElement('div');
-            heart.innerHTML = '💖';
-            heart.style.position = 'fixed';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = '100vh';
-            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-            heart.style.opacity = '0.7';
-            heart.style.pointerEvents = 'none';
-            heart.style.zIndex = '100';
-            heart.style.transition = 'all 3s linear';
+        // Initialize drag and drop when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeDragAndDrop();
             
-            document.body.appendChild(heart);
-            
-            setTimeout(() => {
-                heart.style.top = '-50px';
-                heart.style.transform = 'translateX(' + (Math.random() * 200 - 100) + 'px)';
-            }, 100);
-            
-            setTimeout(() => {
-                heart.remove();
-            }, 3000);
-        }
-
-        // Criar corações flutuantes periodicamente
-        setInterval(createFloatingHearts, 2000);
-
-        // Adicionar efeito de hover nos corações do header
-        document.querySelector('.hearts').addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.2)';
-        });
-
-        document.querySelector('.hearts').addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
+            // Add styles for sequence items
+            const style = document.createElement('style');
+            style.textContent = `
+                .sequence-items {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 1rem;
+                    margin-bottom: 1rem;
+                }
+                
+                .sequence-item {
+                    background: linear-gradient(45deg, #667eea, #764ba2);
+                    color: white;
+                    padding: 1rem;
+                    border-radius: 8px;
+                    cursor: move;
+                    text-align: center;
+                    transition: transform 0.2s ease;
+                    user-select: none;
+                }
+                
+                .sequence-item:hover {
+                    transform: scale(1.05);
+                }
+                
+                .drop-zone {
+                    transition: background-color 0.3s ease;
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
 </body>
