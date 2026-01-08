@@ -1,275 +1,152 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogo da Bianca 🐍</title>
+  <title>Para Meu Amor 💚</title>
   <style>
-    body {
-      background-color: #111;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comic Sans MS', 'Poppins', cursive;
     }
-    h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-    #game-board {
-      position: relative;
-      background-color: #222;
-      border: 2px solid #0f0;
-      display: grid;
-      margin-top: 10px;
-    }
-    .cell {
-      border: 1px solid #333;
-      width: 20px;
-      height: 20px;
-    }
-    .snake {
-      background-color: #22c55e;
-      border-radius: 4px;
-    }
-    .food {
-      background-color: #f43f5e;
-      border-radius: 50%;
-    }
-    #controls {
-      display: grid;
-      grid-template-columns: repeat(3, 60px);
-      gap: 8px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    #controls button {
-      font-size: 22px;
-      padding: 10px;
-      background: linear-gradient(180deg, #34d399, #059669);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    #controls button:hover {
-      transform: scale(1.05);
-    }
-    #overlay {
-      position: absolute;
-      inset: 0;
-      background-color: rgba(0,0,0,0.7);
+
+    body {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      font-size: 24px;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #a8f0b2, #4caf50);
+      color: #fff;
       text-align: center;
+      padding: 25px;
+      transition: background 1s;
+      overflow: hidden;
     }
-    #overlay button {
-      margin-top: 15px;
-      background-color: #16a34a;
+
+    .container {
+      max-width: 700px;
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 25px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 2s ease-in;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    p {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      white-space: pre-line;
+    }
+
+    button {
+      background-color: #a1e887;
+      color: #fff;
       border: none;
-      padding: 10px 20px;
-      color: white;
-      font-size: 18px;
-      border-radius: 8px;
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      border-radius: 25px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      background-color: #85d36b;
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      p { font-size: 1.1rem; }
+      button { font-size: 1rem; padding: 10px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.7rem; }
+      p { font-size: 1rem; }
+    }
+
+    /* Corações flutuando */
+    .heart {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.8); opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-  <h1>JOGO DA BIANCA 🐍</h1>
-  <p id="score">Pontos: 0</p>
-  <div id="game-container" style="position:relative;">
-    <div id="game-board"></div>
-    <div id="overlay" style="display:flex;">
-      <p>🐍 Bem-vindo!</p>
-      <button id="start-btn">INICIAR</button>
-    </div>
+  <div class="container">
+    <h1>💚 Para o Amor da Minha Vida 💚</h1>
+    <p>
+      Amor, eu não sei se já te disse isso o suficiente, mas você é o melhor presente que o universo poderia ter colocado no meu caminho. 💫  
+      
+      Quando penso em você, tudo fica mais leve. O mundo parece mais bonito, o ar fica mais doce e até os dias ruins ganham cor. 🌿  
+      
+      Eu amo o seu sorriso, o jeito que você fala, as pequenas manias que só eu percebo… tudo em você me encanta.  
+      Você é o meu refúgio, o meu porto seguro e o motivo de eu querer ser uma pessoa melhor todos os dias. 💞  
+      
+      Às vezes eu paro e penso: como tive tanta sorte de te encontrar? E a resposta vem simples — era pra ser.  
+      O destino escreveu nós dois na mesma linha, e eu não quero sair dela nunca. 💚  
+      
+      Obrigado por ser quem você é, por me dar amor, carinho e risadas sinceras.  
+      Eu te prometo que, aconteça o que acontecer, o meu coração vai continuar sendo seu — hoje, amanhã e sempre. 💫
+    </p>
+
+    <button id="surpresa">Clique aqui, meu amor 💚</button>
   </div>
-
-  <div id="controls">
-    <button id="up">↑</button>
-    <button id="pause">⏸</button>
-    <button id="left">←</button>
-    <button id="right">→</button>
-    <button id="down">↓</button>
-  </div>
-
-  <p>Use as setas, toque ou arraste na tela</p>
-
-  <audio id="eat-sound" src="https://actions.google.com/sounds/v1/cartoon/pop.ogg" preload="auto"></audio>
-  <audio id="gameover-sound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg" preload="auto"></audio>
-  <audio id="bg-music" src="https://cdn.pixabay.com/audio/2022/11/03/audio_1d4b1efb27.mp3" preload="auto" loop></audio>
 
   <script>
-    const GRID_SIZE = 20;
-    const CELL_SIZE = 20;
-    const GAME_SPEED = 150;
+    const button = document.getElementById('surpresa');
 
-    const board = document.getElementById('game-board');
-    const overlay = document.getElementById('overlay');
-    const scoreEl = document.getElementById('score');
-    const startBtn = document.getElementById('start-btn');
-    const pauseBtn = document.getElementById('pause');
-
-    const eatSound = document.getElementById('eat-sound');
-    const gameoverSound = document.getElementById('gameover-sound');
-    const bgMusic = document.getElementById('bg-music');
-
-    board.style.width = GRID_SIZE * CELL_SIZE + 'px';
-    board.style.height = GRID_SIZE * CELL_SIZE + 'px';
-    board.style.gridTemplateColumns = `repeat(${GRID_SIZE}, ${CELL_SIZE}px)`;
-    board.style.gridTemplateRows = `repeat(${GRID_SIZE}, ${CELL_SIZE}px)`;
-
-    let snake, direction, nextDirection, food, gameOver, isPaused, gameStarted, score;
-    let gameLoop;
-    let touchStart = null;
-
-    function resetGame() {
-      snake = [{x: 10, y: 10}];
-      direction = {x: 1, y: 0};
-      nextDirection = {x: 1, y: 0};
-      food = {x: 15, y: 15};
-      score = 0;
-      gameOver = false;
-      isPaused = false;
-      gameStarted = true;
-      overlay.style.display = 'none';
-      scoreEl.textContent = 'Pontos: ' + score;
-      clearInterval(gameLoop);
-      gameLoop = setInterval(update, GAME_SPEED);
-      bgMusic.currentTime = 0;
-      bgMusic.play();
-      render();
-    }
-
-    function generateFood() {
-      let newFood;
-      do {
-        newFood = {
-          x: Math.floor(Math.random() * GRID_SIZE),
-          y: Math.floor(Math.random() * GRID_SIZE)
-        };
-      } while (snake.some(s => s.x === newFood.x && s.y === newFood.y));
-      return newFood;
-    }
-
-    function changeDirection(newDir) {
-      if (gameOver || isPaused || !gameStarted) return;
-      if ((newDir.x !== 0 && direction.y !== 0) || (newDir.y !== 0 && direction.x !== 0)) {
-        nextDirection = newDir;
-      }
-    }
-
-    function update() {
-      if (gameOver || isPaused || !gameStarted) return;
-
-      direction = nextDirection;
-      const head = {...snake[0]};
-      head.x += direction.x;
-      head.y += direction.y;
-
-      if (head.x < 0 || head.x >= GRID_SIZE || head.y < 0 || head.y >= GRID_SIZE ||
-          snake.some(s => s.x === head.x && s.y === head.y)) {
-        gameOver = true;
-        clearInterval(gameLoop);
-        bgMusic.pause();
-        gameoverSound.play();
-        overlay.innerHTML = `<p>💀 GAME OVER</p><p>Pontuação: ${score}</p><button onclick="resetGame()">JOGAR NOVAMENTE</button>`;
-        overlay.style.display = 'flex';
-        return;
-      }
-
-      snake.unshift(head);
-
-      if (head.x === food.x && head.y === food.y) {
-        score += 10;
-        scoreEl.textContent = 'Pontos: ' + score;
-        food = generateFood();
-        eatSound.currentTime = 0;
-        eatSound.play();
-      } else {
-        snake.pop();
-      }
-
-      render();
-    }
-
-    function render() {
-      board.innerHTML = '';
-      for (let y = 0; y < GRID_SIZE; y++) {
-        for (let x = 0; x < GRID_SIZE; x++) {
-          const cell = document.createElement('div');
-          cell.className = 'cell';
-          if (snake.some(s => s.x === x && s.y === y)) cell.classList.add('snake');
-          if (food.x === x && food.y === y) cell.classList.add('food');
-          board.appendChild(cell);
-        }
-      }
-    }
-
-    document.addEventListener('keydown', e => {
-      if (!gameStarted && e.key === ' ') {
-        resetGame();
-        return;
-      }
-      if (e.key === ' ' && gameStarted) {
-        isPaused = !isPaused;
-        pauseBtn.textContent = isPaused ? '▶' : '⏸';
-        if (isPaused) bgMusic.pause(); else bgMusic.play();
-        return;
-      }
-      switch (e.key) {
-        case 'ArrowUp': changeDirection({x: 0, y: -1}); break;
-        case 'ArrowDown': changeDirection({x: 0, y: 1}); break;
-        case 'ArrowLeft': changeDirection({x: -1, y: 0}); break;
-        case 'ArrowRight': changeDirection({x: 1, y: 0}); break;
-      }
+    button.addEventListener('click', () => {
+      alert("Te amo mais do que palavras podem explicar 💚✨");
     });
 
-    // Toque mobile
-    board.addEventListener('touchstart', e => {
-      const touch = e.touches[0];
-      touchStart = {x: touch.clientX, y: touch.clientY};
-    });
-    board.addEventListener('touchend', e => {
-      if (!touchStart) return;
-      const touch = e.changedTouches[0];
-      const dx = touch.clientX - touchStart.x;
-      const dy = touch.clientY - touchStart.y;
-      const absX = Math.abs(dx);
-      const absY = Math.abs(dy);
-      if (absX > 30 || absY > 30) {
-        if (absX > absY) {
-          changeDirection(dx > 0 ? {x: 1, y: 0} : {x: -1, y: 0});
-        } else {
-          changeDirection(dy > 0 ? {x: 0, y: 1} : {x: 0, y: -1});
-        }
-      }
-      touchStart = null;
-    });
+    // Corações flutuando
+    function criarCoracao() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '💚';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+      document.body.appendChild(heart);
 
-    // Botões
-    document.getElementById('up').onclick = () => changeDirection({x: 0, y: -1});
-    document.getElementById('down').onclick = () => changeDirection({x: 0, y: 1});
-    document.getElementById('left').onclick = () => changeDirection({x: -1, y: 0});
-    document.getElementById('right').onclick = () => changeDirection({x: 1, y: 0});
-    pauseBtn.onclick = () => {
-      if (!gameStarted) return;
-      isPaused = !isPaused;
-      pauseBtn.textContent = isPaused ? '▶' : '⏸';
-      if (isPaused) bgMusic.pause(); else bgMusic.play();
-    };
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
 
-    startBtn.onclick = resetGame;
+    setInterval(criarCoracao, 400);
   </script>
+
 </body>
 </html>
