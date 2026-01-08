@@ -4,69 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Para Meu Amor 💚</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Comic Sans MS', 'Poppins', cursive;
+      font-family: 'Quicksand', sans-serif;
     }
 
     body {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: linear-gradient(135deg, #a8f0b2, #4caf50);
-      color: #fff;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #b6f5b0, #48b36c);
+      color: #ffffff;
       text-align: center;
-      padding: 25px;
+      padding: 30px;
       transition: background 1s;
       overflow: hidden;
     }
 
     .container {
-      max-width: 700px;
-      background-color: rgba(255, 255, 255, 0.15);
-      padding: 25px 30px;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px 35px;
       border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
       animation: fadeIn 2s ease-in;
+      backdrop-filter: blur(8px);
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      animation: pulse 2s infinite;
+      font-size: 2.6rem;
+      margin-bottom: 25px;
+      font-weight: 600;
+      animation: pulse 2.5s infinite;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     }
 
     p {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      margin-bottom: 30px;
+      font-size: 1.25rem;
+      line-height: 1.8;
+      margin-bottom: 35px;
       white-space: pre-line;
+      color: #eafbea;
     }
 
     button {
-      background-color: #a1e887;
+      background-color: #91e68a;
       color: #fff;
       border: none;
-      padding: 12px 30px;
-      font-size: 1.2rem;
+      padding: 14px 35px;
+      font-size: 1.1rem;
       border-radius: 25px;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      font-weight: 600;
     }
 
     button:hover {
-      background-color: #85d36b;
+      background-color: #75d874;
       transform: scale(1.1);
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -76,29 +81,38 @@
       100% { transform: scale(1); }
     }
 
-    /* Responsivo */
-    @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      p { font-size: 1.1rem; }
-      button { font-size: 1rem; padding: 10px 20px; }
-    }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 1.7rem; }
-      p { font-size: 1rem; }
-    }
-
-    /* Corações flutuando */
+    /* Corações */
     .heart {
       position: absolute;
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.7);
       font-size: 20px;
       animation: floatUp 6s linear infinite;
+      z-index: 0;
     }
 
     @keyframes floatUp {
       0% { transform: translateY(100vh) scale(0.8); opacity: 1; }
       100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+
+    /* Responsividade */
+    @media (max-width: 1024px) {
+      h1 { font-size: 2.3rem; }
+      p { font-size: 1.15rem; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 25px; }
+      h1 { font-size: 2rem; }
+      p { font-size: 1.05rem; line-height: 1.6; }
+      button { font-size: 1rem; padding: 12px 28px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.7rem; }
+      p { font-size: 1rem; }
+      button { padding: 10px 25px; }
     }
   </style>
 </head>
@@ -107,18 +121,20 @@
   <div class="container">
     <h1>💚 Para o Amor da Minha Vida 💚</h1>
     <p>
-      Amor, eu não sei se já te disse isso o suficiente, mas você é o melhor presente que o universo poderia ter colocado no meu caminho. 💫  
+      Amor, eu queria que você soubesse o quanto é especial pra mim. 💫  
+      Desde que você entrou na minha vida, tudo ganhou cor, leveza e sentido.  
+      Seu sorriso é o meu amanhecer favorito, e o seu abraço é o meu lugar de paz. 🌿  
       
-      Quando penso em você, tudo fica mais leve. O mundo parece mais bonito, o ar fica mais doce e até os dias ruins ganham cor. 🌿  
+      Eu amo cada pedacinho de você — o jeito que fala, o jeito que ri, o modo como se importa.  
+      Você transforma os meus dias, mesmo quando tudo parece difícil.  
       
-      Eu amo o seu sorriso, o jeito que você fala, as pequenas manias que só eu percebo… tudo em você me encanta.  
-      Você é o meu refúgio, o meu porto seguro e o motivo de eu querer ser uma pessoa melhor todos os dias. 💞  
+      Quando penso em nós, eu só consigo agradecer por ter alguém tão incrível ao meu lado.  
+      Você é o meu porto seguro, meu refúgio, meu melhor acaso e o meu maior acerto. 💞  
       
-      Às vezes eu paro e penso: como tive tanta sorte de te encontrar? E a resposta vem simples — era pra ser.  
-      O destino escreveu nós dois na mesma linha, e eu não quero sair dela nunca. 💚  
+      Eu te prometo amor sincero, carinho, paciência e parceria pra vida toda.  
+      Que a gente continue crescendo juntos, sonhando juntos e se amando em cada detalhe. 💚✨  
       
-      Obrigado por ser quem você é, por me dar amor, carinho e risadas sinceras.  
-      Eu te prometo que, aconteça o que acontecer, o meu coração vai continuar sendo seu — hoje, amanhã e sempre. 💫
+      Porque com você, o mundo é mais bonito — e o meu coração é completamente seu. 💫
     </p>
 
     <button id="surpresa">Clique aqui, meu amor 💚</button>
@@ -128,7 +144,7 @@
     const button = document.getElementById('surpresa');
 
     button.addEventListener('click', () => {
-      alert("Te amo mais do que palavras podem explicar 💚✨");
+      alert("Te amo infinitamente 💚 Você é tudo pra mim!");
     });
 
     // Corações flutuando
@@ -137,12 +153,13 @@
       heart.classList.add('heart');
       heart.innerHTML = '💚';
       heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+      heart.style.fontSize = Math.random() * 25 + 10 + 'px';
+      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
       document.body.appendChild(heart);
 
       setTimeout(() => {
         heart.remove();
-      }, 6000);
+      }, 7000);
     }
 
     setInterval(criarCoracao, 400);
