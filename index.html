@@ -55,7 +55,7 @@ body{
   100%{transform:translateY(-10vh);opacity:0}
 }
 
-/* card principal */
+/* card */
 .card{
   position:relative;
   z-index:2;
@@ -81,38 +81,18 @@ h1{
   font-size:clamp(1.8rem,4vw,2.6rem);
 }
 
-.photo{
-  width:120px;
-  height:120px;
-  margin:20px auto;
-  border-radius:50%;
-  border:3px solid #00b8a0;
-  overflow:hidden;
-  animation:glow 2s infinite alternate;
-}
-
-.photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-@keyframes glow{
-  from{box-shadow:0 0 10px rgba(0,184,160,0.3)}
-  to{box-shadow:0 0 25px rgba(0,184,160,0.8)}
-}
-
 .text{
   color:#056d66;
   font-size:clamp(0.95rem,2.5vw,1.1rem);
   line-height:1.7;
-  margin-top:15px;
-  min-height:120px;
+  margin-top:20px;
+  min-height:200px;
+  white-space:pre-line;
 }
 
 .heart{
   font-size:60px;
-  margin-top:20px;
+  margin-top:25px;
   animation:pulse 1.3s infinite;
 }
 
@@ -122,50 +102,10 @@ h1{
   100%{transform:scale(1)}
 }
 
-/* botões */
-.btn{
-  margin-top:20px;
-  padding:12px 20px;
-  border:none;
-  border-radius:12px;
-  background:#00b8a0;
-  color:white;
-  font-weight:600;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.btn:hover{
-  transform:scale(1.05);
-  background:#009e8e;
-}
-
-/* overlay inicial */
-.overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:5;
-}
-
-.overlay button{
-  padding:15px 25px;
-  font-size:1rem;
-  border:none;
-  border-radius:12px;
-  background:#00b8a0;
-  color:white;
-  cursor:pointer;
-}
-
 /* responsivo */
 @media(max-width:600px){
-  .photo{
-    width:90px;
-    height:90px;
+  .text{
+    min-height:260px;
   }
 }
 </style>
@@ -175,31 +115,15 @@ h1{
 
 <div class="particles" id="particles"></div>
 
-<!-- overlay -->
-<div class="overlay" id="overlay">
-  <button onclick="start()">💚 Abrir Mensagem</button>
-</div>
-
 <div class="card">
 
   <h1>Bianca 💚</h1>
-
-  <div class="photo">
-    <img src="https://i.imgur.com/8Km9tLL.jpg" alt="foto">
-  </div>
 
   <div class="text" id="text"></div>
 
   <div class="heart">💚</div>
 
-  <button class="btn" onclick="toggleMusic()">🎵 Música</button>
-
 </div>
-
-<!-- música (placeholder leve) -->
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b7b7b2f3.mp3?filename=soft-piano-ambient-112191.mp3" type="audio/mp3">
-</audio>
 
 <script>
 
@@ -214,52 +138,39 @@ for(let i=0;i<30;i++){
   container.appendChild(s);
 }
 
-// texto digitando
-const msg = `Mo… amor… eu queria te falar algo de coração aberto.
+// mensagem
+const msg = `Mo… amor…
 
-Desde que você se afastou, eu sinto um vazio estranho no meu dia.
-Não é exagero… é só a falta que você faz mesmo.
+Eu não sei exatamente como começar isso sem parecer repetitivo,
+mas eu preciso ser sincero com você.
 
-Eu não estou aqui pra te pressionar.
-Só quero ser sincero com o que eu sinto.
+Desde que você se afastou, meus dias não são mais os mesmos.
+Falta algo… e esse algo é você.
 
-Você foi uma das pessoas mais importantes da minha vida.
-E isso não some, não apaga.
+Não é exagero, não é drama… é sentimento.
 
-Eu sinto sua falta… da gente, das conversas, do jeito leve que tudo era.
+Você foi muito importante pra mim.
+E não existe um botão de desligar isso.
+
+Eu sinto sua falta.
+Da gente, das conversas, do jeito leve que tudo era.
 
 Se ainda existir qualquer chance de recomeço,
 eu queria tentar de novo… com calma, respeito e maturidade.
 
-Mas independente da resposta,
-você vai sempre ser importante pra mim. 💚`;
+Mas independente de qualquer resposta,
+você vai sempre ter um lugar importante em mim. 💚`;
 
 let i=0;
 function type(){
   if(i<msg.length){
     document.getElementById("text").innerHTML += msg.charAt(i);
     i++;
-    setTimeout(type,30);
+    setTimeout(type,28);
   }
 }
 
-function start(){
-  document.getElementById("overlay").style.display="none";
-  type();
-}
-
-// música
-let playing=false;
-function toggleMusic(){
-  const music=document.getElementById("music");
-  if(!playing){
-    music.play();
-    playing=true;
-  }else{
-    music.pause();
-    playing=false;
-  }
-}
+type();
 
 </script>
 
