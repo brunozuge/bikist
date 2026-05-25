@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Bianca 💚</title>
+<title>Bom dia 💚</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
 
 *{
   margin:0;
@@ -16,14 +16,13 @@
 
 body{
   font-family:'Plus Jakarta Sans',sans-serif;
-  min-height:100vh;
-  overflow-x:hidden;
-  background:linear-gradient(-45deg,#a8edea,#d0f7f3,#ffffff,#bffcf6);
-  background-size:400% 400%;
-  animation:bg 12s ease infinite;
+  height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
+  background: linear-gradient(-45deg, #a8edea, #d0f7f3, #ffffff);
+  background-size:400% 400%;
+  animation: bg 10s ease infinite;
 }
 
 @keyframes bg{
@@ -32,147 +31,73 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* partículas */
-.particles{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-  z-index:0;
-}
-
-.particles span{
-  position:absolute;
-  width:8px;
-  height:8px;
-  background:rgba(0,184,160,0.4);
-  border-radius:50%;
-  animation:float linear infinite;
-}
-
-@keyframes float{
-  0%{transform:translateY(100vh);opacity:0}
-  50%{opacity:1}
-  100%{transform:translateY(-10vh);opacity:0}
-}
-
-/* card */
 .card{
-  position:relative;
-  z-index:2;
-  width:92%;
-  max-width:800px;
-  padding:clamp(20px,4vw,50px);
-  border-radius:25px;
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,0.3);
-  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+  width:90%;
+  max-width:500px;
+  padding:35px;
   text-align:center;
+  border-radius:20px;
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,0.3);
+  box-shadow:0 15px 40px rgba(0,0,0,0.1);
   animation:fade 1.2s ease;
 }
 
 @keyframes fade{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1;transform:translateY(0)}
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 h1{
   color:#00a89c;
-  font-size:clamp(1.8rem,4vw,2.6rem);
+  font-size:2rem;
+  margin-bottom:10px;
 }
 
-.text{
+p{
   color:#056d66;
-  font-size:clamp(0.95rem,2.5vw,1.1rem);
-  line-height:1.7;
-  margin-top:20px;
-  min-height:200px;
-  white-space:pre-line;
+  font-size:1.1rem;
+  line-height:1.6;
 }
 
 .heart{
-  font-size:60px;
-  margin-top:25px;
-  animation:pulse 1.3s infinite;
+  font-size:40px;
+  margin-top:15px;
+  animation:pulse 1.5s infinite;
 }
 
 @keyframes pulse{
   0%{transform:scale(1)}
-  50%{transform:scale(1.3)}
+  50%{transform:scale(1.2)}
   100%{transform:scale(1)}
 }
 
-/* responsivo */
-@media(max-width:600px){
-  .text{
-    min-height:260px;
-  }
+small{
+  display:block;
+  margin-top:15px;
+  color:#0a7d75;
+  opacity:0.8;
 }
 </style>
 </head>
 
 <body>
 
-<div class="particles" id="particles"></div>
-
 <div class="card">
+  <h1>Bom dia 💚</h1>
 
-  <h1>Bianca 💚</h1>
-
-  <div class="text" id="text"></div>
+  <p>
+    Bom dia, mo… ☀️<br><br>
+    Espero que o seu dia comece leve, calmo e cheio de coisas boas.<br>
+    Que você sorria hoje mesmo sem motivo e que nada tire sua paz.<br><br>
+    Eu só queria te desejar isso… de coração mesmo.
+  </p>
 
   <div class="heart">💚</div>
 
+  <small>se cuida hoje, tá?</small>
 </div>
-
-<script>
-
-// partículas
-const container = document.getElementById('particles');
-
-for(let i=0;i<30;i++){
-  let s=document.createElement('span');
-  s.style.left=Math.random()*100+'vw';
-  s.style.animationDuration=(5+Math.random()*10)+'s';
-  s.style.width=s.style.height=(5+Math.random()*8)+'px';
-  container.appendChild(s);
-}
-
-// mensagem
-const msg = `Mo… amor…
-
-Eu não sei exatamente como começar isso sem parecer repetitivo,
-mas eu preciso ser sincero com você.
-
-Desde que você se afastou, meus dias não são mais os mesmos.
-Falta algo… e esse algo é você.
-
-Não é exagero, não é drama… é sentimento.
-
-Você foi muito importante pra mim.
-E não existe um botão de desligar isso.
-
-Eu sinto sua falta.
-Da gente, das conversas, do jeito leve que tudo era.
-
-Se ainda existir qualquer chance de recomeço,
-eu queria tentar de novo… com calma, respeito e maturidade.
-
-Mas independente de qualquer resposta,
-você vai sempre ter um lugar importante em mim. 💚`;
-
-let i=0;
-function type(){
-  if(i<msg.length){
-    document.getElementById("text").innerHTML += msg.charAt(i);
-    i++;
-    setTimeout(type,28);
-  }
-}
-
-type();
-
-</script>
 
 </body>
 </html>
