@@ -6,100 +6,262 @@
 <title>Para Bianca 💚</title>
 
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #a8edea, #d0f7f3, #ffffff);
-  }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
 
-  .card {
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(12px);
-    border-radius: 25px;
-    padding: 45px;
-    max-width: 650px;
-    text-align: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-    border: 1px solid rgba(255,255,255,0.3);
-  }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-  h1 {
-    color: #00a8a0;
-    font-size: 2.4em;
-    margin-bottom: 15px;
-  }
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  background:linear-gradient(-45deg,#a8edea,#d0f7f3,#ffffff,#bffcf6);
+  background-size:400% 400%;
+  animation:bg 12s ease infinite;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-  p {
-    color: #056d66;
-    font-size: 1.15em;
-    line-height: 1.7;
-  }
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 
-  .heart {
-    font-size: 55px;
-    margin-top: 20px;
-    animation: pulse 1.6s infinite;
-  }
+/* partículas */
+.particles{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+}
 
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }
+.particles span{
+  position:absolute;
+  width:8px;
+  height:8px;
+  background:rgba(0,184,160,0.4);
+  border-radius:50%;
+  animation:float linear infinite;
+}
 
-  .small {
-    font-size: 0.95em;
-    opacity: 0.8;
-    margin-top: 15px;
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:0}
+  50%{opacity:1}
+  100%{transform:translateY(-10vh);opacity:0}
+}
+
+/* card principal */
+.card{
+  position:relative;
+  z-index:2;
+  width:92%;
+  max-width:800px;
+  padding:clamp(20px,4vw,50px);
+  border-radius:25px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.3);
+  box-shadow:0 20px 60px rgba(0,0,0,0.15);
+  text-align:center;
+  animation:fade 1.2s ease;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+h1{
+  color:#00a89c;
+  font-size:clamp(1.8rem,4vw,2.6rem);
+}
+
+.photo{
+  width:120px;
+  height:120px;
+  margin:20px auto;
+  border-radius:50%;
+  border:3px solid #00b8a0;
+  overflow:hidden;
+  animation:glow 2s infinite alternate;
+}
+
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+@keyframes glow{
+  from{box-shadow:0 0 10px rgba(0,184,160,0.3)}
+  to{box-shadow:0 0 25px rgba(0,184,160,0.8)}
+}
+
+.text{
+  color:#056d66;
+  font-size:clamp(0.95rem,2.5vw,1.1rem);
+  line-height:1.7;
+  margin-top:15px;
+  min-height:120px;
+}
+
+.heart{
+  font-size:60px;
+  margin-top:20px;
+  animation:pulse 1.3s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.3)}
+  100%{transform:scale(1)}
+}
+
+/* botões */
+.btn{
+  margin-top:20px;
+  padding:12px 20px;
+  border:none;
+  border-radius:12px;
+  background:#00b8a0;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+  background:#009e8e;
+}
+
+/* overlay inicial */
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:5;
+}
+
+.overlay button{
+  padding:15px 25px;
+  font-size:1rem;
+  border:none;
+  border-radius:12px;
+  background:#00b8a0;
+  color:white;
+  cursor:pointer;
+}
+
+/* responsivo */
+@media(max-width:600px){
+  .photo{
+    width:90px;
+    height:90px;
   }
+}
 </style>
 </head>
 
 <body>
 
+<div class="particles" id="particles"></div>
+
+<!-- overlay -->
+<div class="overlay" id="overlay">
+  <button onclick="start()">💚 Abrir Mensagem</button>
+</div>
+
 <div class="card">
+
   <h1>Bianca 💚</h1>
 
-  <p>
-    Mo… amor… não sei exatamente como colocar tudo isso em palavras sem parecer repetitivo, 
-    mas eu preciso tentar.
-    <br><br>
+  <div class="photo">
+    <img src="https://i.imgur.com/8Km9tLL.jpg" alt="foto">
+  </div>
 
-    Desde que você se afastou, muita coisa ficou diferente em mim. Não é exagero dizer que 
-    alguns dias parecem mais vazios do que deveriam ser. E em cada um desses dias, você ainda aparece na minha cabeça.
-    <br><br>
-
-    Eu não estou aqui pra te pressionar, nem pra te confundir. Só estou sendo sincero com o que eu sinto.
-    E o que eu sinto por você não foi embora.
-    <br><br>
-
-    Você foi, de verdade, uma das pessoas mais importantes da minha vida. 
-    Não só pelos momentos bons, mas por tudo que a gente construiu, pelas conversas, pelas risadas, 
-    até pelos silêncios.
-    <br><br>
-
-    Eu sinto sua falta… não só de você, mas da gente.
-    Da forma como tudo parecia fazer mais sentido quando você estava por perto.
-    <br><br>
-
-    Se em algum momento você sentir que ainda existe um espaço pra nós dois, 
-    eu gostaria muito de tentar de novo — com mais calma, mais maturidade, e mais cuidado.
-    <br><br>
-
-    Mas independente de qualquer coisa, eu só queria que você soubesse disso de forma clara:
-    você foi e ainda é muito importante pra mim.
-  </p>
+  <div class="text" id="text"></div>
 
   <div class="heart">💚</div>
 
-  <p class="small">
-    escrito com sinceridade, sem pressa, só sentimento.
-  </p>
+  <button class="btn" onclick="toggleMusic()">🎵 Música</button>
+
 </div>
+
+<!-- música (placeholder leve) -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b7b7b2f3.mp3?filename=soft-piano-ambient-112191.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+// partículas
+const container = document.getElementById('particles');
+
+for(let i=0;i<30;i++){
+  let s=document.createElement('span');
+  s.style.left=Math.random()*100+'vw';
+  s.style.animationDuration=(5+Math.random()*10)+'s';
+  s.style.width=s.style.height=(5+Math.random()*8)+'px';
+  container.appendChild(s);
+}
+
+// texto digitando
+const msg = `Mo… amor… eu queria te falar algo de coração aberto.
+
+Desde que você se afastou, eu sinto um vazio estranho no meu dia.
+Não é exagero… é só a falta que você faz mesmo.
+
+Eu não estou aqui pra te pressionar.
+Só quero ser sincero com o que eu sinto.
+
+Você foi uma das pessoas mais importantes da minha vida.
+E isso não some, não apaga.
+
+Eu sinto sua falta… da gente, das conversas, do jeito leve que tudo era.
+
+Se ainda existir qualquer chance de recomeço,
+eu queria tentar de novo… com calma, respeito e maturidade.
+
+Mas independente da resposta,
+você vai sempre ser importante pra mim. 💚`;
+
+let i=0;
+function type(){
+  if(i<msg.length){
+    document.getElementById("text").innerHTML += msg.charAt(i);
+    i++;
+    setTimeout(type,30);
+  }
+}
+
+function start(){
+  document.getElementById("overlay").style.display="none";
+  type();
+}
+
+// música
+let playing=false;
+function toggleMusic(){
+  const music=document.getElementById("music");
+  if(!playing){
+    music.play();
+    playing=true;
+  }else{
+    music.pause();
+    playing=false;
+  }
+}
+
+</script>
 
 </body>
 </html>
