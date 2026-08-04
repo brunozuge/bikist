@@ -1,103 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bom dia 💚</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLARA</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&display=swap" rel="stylesheet">
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background: linear-gradient(-45deg, #a8edea, #d0f7f3, #ffffff);
-  background-size:400% 400%;
-  animation: bg 10s ease infinite;
-}
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #05010f, #14052d, #05010f);
+      position: relative;
+      padding: 20px;
+    }
 
-@keyframes bg{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+    /* Fundo animado */
+    body::before,
+    body::after {
+      content: '';
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123,97,255,0.35), transparent 70%);
+      animation: move 8s ease-in-out infinite alternate;
+    }
 
-.card{
-  width:90%;
-  max-width:500px;
-  padding:35px;
-  text-align:center;
-  border-radius:20px;
-  background:rgba(255,255,255,0.18);
-  backdrop-filter:blur(15px);
-  border:1px solid rgba(255,255,255,0.3);
-  box-shadow:0 15px 40px rgba(0,0,0,0.1);
-  animation:fade 1.2s ease;
-}
+    body::before {
+      top: -100px;
+      left: -100px;
+    }
 
-@keyframes fade{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
+    body::after {
+      bottom: -120px;
+      right: -120px;
+      animation-delay: 4s;
+    }
 
-h1{
-  color:#00a89c;
-  font-size:2rem;
-  margin-bottom:10px;
-}
+    @keyframes move {
+      from {
+        transform: translateY(0) scale(1);
+      }
+      to {
+        transform: translateY(40px) scale(1.15);
+      }
+    }
 
-p{
-  color:#056d66;
-  font-size:1.1rem;
-  line-height:1.6;
-}
+    .card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 900px;
+      padding: 50px 30px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      text-align: center;
+    }
 
-.heart{
-  font-size:40px;
-  margin-top:15px;
-  animation:pulse 1.5s infinite;
-}
+    h1 {
+      font-size: clamp(3.5rem, 12vw, 7rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      background: linear-gradient(90deg, #ff4d6d, #ffd166, #7b61ff, #00e5ff);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 5s linear infinite;
+      margin-bottom: 18px;
+      line-height: 1;
+    }
 
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.2)}
-  100%{transform:scale(1)}
-}
+    @keyframes gradient {
+      from {
+        background-position: 0% center;
+      }
+      to {
+        background-position: 300% center;
+      }
+    }
 
-small{
-  display:block;
-  margin-top:15px;
-  color:#0a7d75;
-  opacity:0.8;
-}
-</style>
+    .message {
+      font-size: clamp(1.3rem, 4vw, 2.3rem);
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 35px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.12);
+      word-break: break-word;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      min-width: 180px;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, #ff4d6d, #7b61ff);
+      color: white;
+      box-shadow: 0 12px 28px rgba(123,97,255,0.35);
+    }
+
+    .primary:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 18px 38px rgba(123,97,255,0.5);
+    }
+
+    .secondary {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .secondary:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* Responsivo para celular */
+    @media (max-width: 600px) {
+      .card {
+        padding: 40px 22px;
+        border-radius: 24px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="card">
-  <h1>Bom dia 💚</h1>
+  <div class="card">
+    <h1>CLARA</h1>
+    <div class="message">vai se fuder</div>
 
-  <p>
-    Bom dia, mo… ☀️<br><br>
-    Espero que o seu dia comece leve, calmo e cheio de coisas boas.<br>
-    Que você sorria hoje mesmo sem motivo e que nada tire sua paz.<br><br>
-    Eu só queria te desejar isso… de coração mesmo.
-  </p>
+    <div class="actions">
+      <button class="primary" id="efeitoBtn">✨ Explodir efeito</button>
+      <button class="secondary" id="shakeBtn">⚡ Tremer tela</button>
+    </div>
+  </div>
 
-  <div class="heart">💚</div>
+  <script>
+    const card = document.querySelector('.card');
 
-  <small>se cuida hoje, tá?</small>
-</div>
+    document.getElementById('efeitoBtn').addEventListener('click', () => {
+      card.animate(
+        [
+          { transform: 'scale(1) rotate(0deg)' },
+          { transform: 'scale(1.04) rotate(1deg)' },
+          { transform: 'scale(0.98) rotate(-1deg)' },
+          { transform: 'scale(1) rotate(0deg)' }
+        ],
+        { duration: 700, easing: 'ease-in-out' }
+      );
+
+      document.body.animate(
+        [
+          { filter: 'hue-rotate(0deg)' },
+          { filter: 'hue-rotate(40deg)' },
+          { filter: 'hue-rotate(0deg)' }
+        ],
+        { duration: 1000 }
+      );
+    });
+
+    document.getElementById('shakeBtn').addEventListener('click', () => {
+      document.body.animate(
+        [
+          { transform: 'translate(0,0)' },
+          { transform: 'translate(-5px,4px)' },
+          { transform: 'translate(5px,-4px)' },
+          { transform: 'translate(-3px,-2px)' },
+          { transform: 'translate(3px,2px)' },
+          { transform: 'translate(0,0)' }
+        ],
+        { duration: 450, iterations: 2 }
+      );
+    });
+  </script>
 
 </body>
 </html>
