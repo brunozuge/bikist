@@ -1,263 +1,241 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CLARA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para a Clara 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa-claro: #ffe3ec;
+    --rosa-medio: #ffb6c9;
+    --rosa-forte: #ff8fab;
+    --pessego: #ffd9c2;
+    --lilas: #d9c9ff;
+    --texto: #7a4b57;
+    --branco: #fffaf9;
+  }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  * { box-sizing: border-box; }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(160deg, var(--rosa-claro) 0%, var(--pessego) 50%, var(--lilas) 100%);
+    background-size: 300% 300%;
+    animation: fundoOnda 12s ease infinite;
+    color: var(--texto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+    position: relative;
+  }
+
+  @keyframes fundoOnda {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* corações flutuantes de fundo */
+  .coracao-flutuante {
+    position: fixed;
+    top: 100%;
+    font-size: 24px;
+    pointer-events: none;
+    opacity: 0.8;
+    user-select: none;
+    animation: subir linear forwards;
+    z-index: 0;
+  }
+
+  @keyframes subir {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.9; }
+    90% { opacity: 0.9; }
+    100% { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+  }
+
+  .cartao {
+    position: relative;
+    z-index: 1;
+    background: var(--branco);
+    border-radius: 32px;
+    padding: 48px 40px 40px;
+    max-width: 460px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(255, 143, 171, 0.35), 0 0 0 6px rgba(255, 255, 255, 0.6) inset;
+    border: 2px dashed var(--rosa-medio);
+    animation: entrada 0.9s cubic-bezier(.2,.9,.3,1.2) both;
+  }
+
+  @keyframes entrada {
+    0% { opacity: 0; transform: translateY(30px) scale(0.92); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .selo {
+    display: inline-block;
+    background: var(--rosa-forte);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 10px rgba(255, 143, 171, 0.4);
+  }
+
+  h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 64px;
+    line-height: 1;
+    margin: 0 0 8px;
+    color: var(--rosa-forte);
+    text-shadow: 2px 2px 0 rgba(255,255,255,0.7);
+  }
+
+  .subtitulo {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--texto);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .coracao-central {
+    font-size: 70px;
+    display: inline-block;
+    cursor: pointer;
+    animation: bater 1.4s ease-in-out infinite;
+    transition: transform 0.15s ease;
+    filter: drop-shadow(0 8px 18px rgba(255,143,171,0.5));
+  }
+
+  .coracao-central:active {
+    transform: scale(1.3);
+  }
+
+  @keyframes bater {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+    60% { transform: scale(1); }
+  }
+
+  .dica {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--rosa-forte);
+    opacity: 0.8;
+    font-weight: 600;
+  }
+
+  .mensagem-extra {
+    margin-top: 20px;
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    color: var(--rosa-forte);
+    min-height: 34px;
+    transition: opacity 0.3s ease;
+  }
+
+  .contador {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--texto);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 48px; }
+    .cartao { padding: 36px 24px 32px; border-radius: 24px; }
+    .coracao-central { font-size: 56px; }
+    .subtitulo { font-size: 15px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, .coracao-central, .cartao, body, .coracao-flutuante {
+      animation: none !important;
     }
-
-    html, body {
-      width: 100%;
-      min-height: 100%;
-      overflow-x: hidden;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: clamp(16px, 4vw, 32px);
-      background: #050505;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* fundo mais moderno */
-    .bg {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-
-    .bg span {
-      position: absolute;
-      width: 40vmax;
-      height: 40vmax;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.22;
-      animation: drift 12s ease-in-out infinite alternate;
-    }
-
-    .bg span:nth-child(1) {
-      top: -10vmax;
-      left: -10vmax;
-      background: #7b61ff;
-    }
-
-    .bg span:nth-child(2) {
-      bottom: -14vmax;
-      right: -8vmax;
-      background: #ff2d55;
-      animation-delay: 4s;
-    }
-
-    @keyframes drift {
-      from {
-        transform: translate(0, 0) scale(1);
-      }
-      to {
-        transform: translate(24px, -28px) scale(1.08);
-      }
-    }
-
-    .card {
-      position: relative;
-      z-index: 1;
-      width: min(100%, 980px);
-      padding: clamp(28px, 5vw, 64px);
-      border-radius: 36px;
-      background: rgba(12, 12, 14, 0.86);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 70px rgba(0,0,0,0.55);
-      text-align: center;
-      backdrop-filter: blur(16px);
-    }
-
-    h1 {
-      font-family: 'Anton', sans-serif;
-      font-size: clamp(3.6rem, 14vw, 8rem);
-      line-height: 0.9;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #ffffff;
-      text-shadow:
-        0 0 18px rgba(255,255,255,0.12),
-        0 0 42px rgba(123,97,255,0.22);
-      margin-bottom: clamp(18px, 4vw, 28px);
-      word-break: break-word;
-    }
-
-    .divider {
-      width: min(120px, 28vw);
-      height: 4px;
-      margin: 0 auto clamp(22px, 5vw, 34px);
-      border-radius: 999px;
-      background: linear-gradient(90deg, #7b61ff, #ff2d55);
-      box-shadow: 0 0 18px rgba(123,97,255,0.35);
-    }
-
-    .message {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      font-weight: 800;
-      text-transform: uppercase;
-      line-height: 0.95;
-      letter-spacing: 0.04em;
-      margin-bottom: clamp(28px, 5vw, 40px);
-    }
-
-    .message .small {
-      font-size: clamp(1rem, 2.8vw, 1.5rem);
-      color: rgba(255,255,255,0.72);
-      letter-spacing: 0.22em;
-    }
-
-    .message .big {
-      font-size: clamp(2.2rem, 9vw, 5.6rem);
-      background: linear-gradient(180deg, #ffffff 0%, #ffd6e5 38%, #ff2d55 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow:
-        0 0 22px rgba(255,45,85,0.28),
-        0 0 46px rgba(255,45,85,0.16);
-      word-break: break-word;
-    }
-
-    .message .underline {
-      width: min(180px, 42vw);
-      height: 6px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #ff2d55, #ff6b8f);
-      box-shadow: 0 0 20px rgba(255,45,85,0.45);
-    }
-
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    button {
-      flex: 1 1 220px;
-      max-width: 300px;
-      border: none;
-      border-radius: 18px;
-      padding: 15px 20px;
-      font-size: clamp(0.95rem, 2.6vw, 1rem);
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-      min-height: 54px;
-    }
-
-    .primary {
-      background: linear-gradient(135deg, #7b61ff, #ff2d55);
-      color: #fff;
-      box-shadow: 0 14px 30px rgba(123,97,255,0.28);
-    }
-
-    .primary:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(123,97,255,0.36);
-    }
-
-    .secondary {
-      background: rgba(255,255,255,0.06);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .secondary:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.1);
-    }
-
-    @media (max-width: 560px) {
-      body {
-        align-items: flex-start;
-      }
-
-      .card {
-        border-radius: 28px;
-      }
-
-      .actions {
-        flex-direction: column;
-      }
-
-      button {
-        width: 100%;
-        max-width: none;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div class="bg" aria-hidden="true">
-    <span></span>
-    <span></span>
+
+  <div class="cartao">
+    <span class="selo">recadinho especial</span>
+    <h1>eu gosto muito<br>da Clara</h1>
+    <p class="subtitulo">é isso mesmo, do fundo do coração 💗<br>toca no coração aí embaixo pra ver</p>
+
+    <div class="coracao-central" id="coracao">💗</div>
+    <p class="dica">toque para mais carinho</p>
+
+    <div class="mensagem-extra" id="mensagemExtra"></div>
+    <p class="contador" id="contador"></p>
   </div>
 
-  <main class="card">
-    <h1>CLARA</h1>
-    <div class="divider"></div>
+<script>
+  const mensagens = [
+    "você é muito especial 🌸",
+    "isso não muda, viu? 💕",
+    "olha só quanto carinho 🥹",
+    "de verdade, muito mesmo ✨",
+    "a Clara merece o mundo 🌷",
+    "continua sendo assim, incrível 💗"
+  ];
 
-    <div class="message">
-      <span class="small">simplesmente</span>
-      <span class="big">vai se fuder</span>
-      <span class="big">MALA</span>
-      <span class="underline"></span>
-    </div>
+  const coracao = document.getElementById('coracao');
+  const mensagemExtra = document.getElementById('mensagemExtra');
+  const contadorEl = document.getElementById('contador');
+  let cliques = 0;
 
-    <div class="actions">
-      <button class="primary" id="flashBtn">✨ ACENDER</button>
-      <button class="secondary" id="glitchBtn">⚡ GLITCH</button>
-    </div>
-  </main>
+  coracao.addEventListener('click', () => {
+    cliques++;
+    const msg = mensagens[Math.floor(Math.random() * mensagens.length)];
+    mensagemExtra.style.opacity = 0;
+    setTimeout(() => {
+      mensagemExtra.textContent = msg;
+      mensagemExtra.style.opacity = 1;
+    }, 150);
 
-  <script>
-    const card = document.querySelector('.card');
-    const title = document.querySelector('h1');
+    contadorEl.textContent = cliques === 1
+      ? "1 coraçãozinho enviado"
+      : cliques + " coraçõezinhos enviados";
 
-    document.getElementById('flashBtn').addEventListener('click', () => {
-      card.animate(
-        [
-          { transform: 'scale(1)', boxShadow: '0 24px 70px rgba(0,0,0,.55)' },
-          { transform: 'scale(1.03)', boxShadow: '0 28px 90px rgba(255,45,85,.35)' },
-          { transform: 'scale(1)' }
-        ],
-        { duration: 650, easing: 'ease-in-out' }
-      );
-    });
+    criarCoracaoFlutuante();
+  });
 
-    document.getElementById('glitchBtn').addEventListener('click', () => {
-      title.animate(
-        [
-          { transform: 'translate(0,0)' },
-          { transform: 'translate(-3px,2px)' },
-          { transform: 'translate(3px,-2px)' },
-          { transform: 'translate(-2px,-1px)' },
-          { transform: 'translate(0,0)' }
-        ],
-        { duration: 260, iterations: 3 }
-      );
-    });
-  </script>
+  function criarCoracaoFlutuante() {
+    const emojis = ['💗','💖','💕','✨','🌸'];
+    const el = document.createElement('div');
+    el.className = 'coracao-flutuante';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    const duracao = 4 + Math.random() * 3;
+    el.style.animationDuration = duracao + 's';
+    el.style.fontSize = (18 + Math.random() * 18) + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), duracao * 1000);
+  }
+
+  // uns coraçõezinhos flutuando sozinhos de vez em quando, pra ambientar
+  setInterval(criarCoracaoFlutuante, 1800);
+  criarCoracaoFlutuante();
+</script>
+
 </body>
 </html>
